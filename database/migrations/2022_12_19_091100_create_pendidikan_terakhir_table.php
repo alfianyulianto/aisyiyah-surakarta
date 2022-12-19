@@ -13,9 +13,9 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('ortom', function (Blueprint $table) {
-      $table->string('id_ortom')->primary();
-      $table->string('nama_ortonom');
+    Schema::create('pendidikan_terakhir', function (Blueprint $table) {
+      $table->string('pendidikan_terakhir')->primary();
+      $table->string('pendidikan');
       $table->timestamps();
     });
   }
@@ -27,6 +27,6 @@ return new class extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('ortom');
+    Schema::dropIfExists('pendidikan_terakhir');
   }
 };
