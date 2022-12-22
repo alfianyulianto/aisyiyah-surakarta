@@ -9,12 +9,28 @@
      <ul class="sidebar-menu mt-5">
        <hr class="mb-2">
        <li class="menu-header">Dashboard</li>
+       <li class="nav-item">
+         <a href="#" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
+       </li>
+       <hr class="my-2">
+       <li class="menu-header">Admin</li>
+       <li class="nav-item active rounded-pill shadow-sm mx-1">
+         <a href="#" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
+       </li>
+       <li class="nav-item">
+         <a href="#" class="nav-link"><i class="fas fa-th"></i><span>Data Jabatan</span></a>
+       </li>
        <li class="nav-item dropdown">
-         <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-server"></i></i>
+           <span>Data Master</span></a>
          <ul class="dropdown-menu">
-           <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-           <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
+           <li class="active"><a class="nav-link" href="">Data Daerah</a></li>
+           <li><a class="nav-link" href="">Data Cabang</a></li>
+           <li><a class="nav-link" href="">Data Ranting</a></li>
          </ul>
+       </li>
+       <li class="nav-item">
+         <a href="#" class="nav-link"><i class="fas fa-cogs"></i></i><span>Setting</span></a>
        </li>
      </ul>
 

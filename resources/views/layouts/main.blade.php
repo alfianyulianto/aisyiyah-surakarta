@@ -11,10 +11,17 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
   <!-- CSS Libraries -->
+  <link rel="stylesheet"
+    href="{{ url('') }}/library/stisla/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet"
+    href="{{ url('') }}/library/stisla/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/selectric/public/selectric.css">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css">
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css">
+
 </head>
 
 <body>
@@ -42,13 +49,26 @@
   </div>
 
   <!-- General JS Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> --}}
+  {{-- <script src="https://code.jquery.com/jquery-3.6.3.js"></script> --}}
+  {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> --}}
+  <script src="{{ url('') }}/library/stisla/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script>
   <script src="{{ url('') }}/library/stisla/assets/js/stisla.js"></script>
 
+  {{-- My Script --}}
+  <script src="{{ url('') }}/js/my-scripts.js"></script>
+
   <!-- JS Libraies -->
+  <script src="{{ url('') }}/library/stisla/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="{{ url('') }}/library/stisla/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js">
+  </script>
+  <script src="{{ url('') }}/library/stisla/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js">
+  </script>
+  <script src="{{ url('') }}/library/stisla/node_modules/select2/dist/js/select2.full.min.js"></script>
+  <script src="{{ url('') }}/library/stisla/node_modules/selectric/public/jquery.selectric.min.js"></script>
 
   <!-- Template JS File -->
   <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script>

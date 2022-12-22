@@ -77,8 +77,7 @@
   </div>
 
   <!-- General JS Scripts -->
-  {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> --}}
-  <script src="{{ url('') }}/library/stisla/js/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script>

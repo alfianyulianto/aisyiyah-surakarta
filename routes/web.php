@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDataCabangController;
+use App\Http\Controllers\Admin\AdminDataJabatanController;
+use App\Http\Controllers\Admin\AdminDataProfileKaderController;
+use App\Http\Controllers\Admin\AdminDataRantingController;
+use App\Http\Controllers\Admin\AdminSettingsController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -15,5 +21,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// dashboard
+Route::get('/', [AdminDashboardController::class, 'index']);
+
+// auth
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
+
+// admin
+// Route::get('/admin', )
+Route::resource('/profile/kader', AdminDataProfileKaderController::class);
+Route::resource('/data/jabatan', AdminDataJabatanController::class);
+Route::resource('/data/cabang', AdminDataCabangController::class);
+Route::resource('/data/ranting', AdminDataRantingController::class);
+Route::resource('/settings', AdminSettingsController::class);

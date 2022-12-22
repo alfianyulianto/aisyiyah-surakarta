@@ -45,7 +45,7 @@
                     <div class="d-block">
                       <label for="password" class="control-label">Password</label>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password">
+                    <input id="password" type="password" class="form-control" name="password" autocomplete="pager">
                   </div>
 
                   {{-- <div class="form-group">
@@ -79,7 +79,6 @@
 
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="{{ url('') }}/library/stisla/js/jquery-3.6.0.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script>
