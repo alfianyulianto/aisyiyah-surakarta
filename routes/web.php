@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::get('/', [AdminDashboardController::class, 'index']);
 // auth
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/change/password', [ChangePasswordController::class, 'edit']);
 
 // admin
 // Route::get('/admin', )

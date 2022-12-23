@@ -22,6 +22,9 @@
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css">
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css">
 
+  {{-- My CSS --}}
+  <link rel="stylesheet" href="{{ url('') }}/css/my-style.css">
+
 </head>
 
 <body>
