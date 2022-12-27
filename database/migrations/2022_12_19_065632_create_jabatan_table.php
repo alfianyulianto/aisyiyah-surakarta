@@ -19,7 +19,6 @@ return new class extends Migration
   {
     Schema::create('jabatan', function (Blueprint $table) {
       $table->string('id_jabatan')->primary();
-      $table->foreignIdFor(Kader::class);
       $table->foreignIdFor(Daerah::class);
       $table->foreignIdFor(Cabang::class);
       $table->foreignIdFor(Ranting::class);

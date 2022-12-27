@@ -57,7 +57,7 @@
         <div class="col-12 col-md-6 col-lg-6">
           <div class="card">
             <div class="card-header">
-              <h4 class="text-center">Organisasi Otonom Muhammadiyah</h4>
+              <h4 class="text-center">Jenis Potensi Kader</h4>
             </div>
             <div class="card-body">
               <form action="">

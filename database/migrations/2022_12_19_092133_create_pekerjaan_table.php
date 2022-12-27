@@ -14,8 +14,8 @@ return new class extends Migration
   public function up()
   {
     Schema::create('pekerjaan', function (Blueprint $table) {
-      $table->string('pekerjaan')->primary();
-      $table->string('jenis_pekerjaan');
+      $table->string('id_pekerjaan')->primary();
+      $table->string('nama_pekerjaan');
       $table->timestamps();
     });
   }

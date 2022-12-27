@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Jabatan;
+use App\Models\Kader;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +15,10 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('potensi_kader', function (Blueprint $table) {
-      $table->string('id_potensi_kader')->primary();
-      $table->string('potensi');
+    Schema::create('kader_jabatan', function (Blueprint $table) {
+      $table->string('id_kader_jabatan')->primary();
+      $table->foreignIdFor(Kader::class);
+      $table->foreignIdFor(Jabatan::class);
       $table->timestamps();
     });
   }
@@ -27,6 +30,6 @@ return new class extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('potensi_kader');
+    Schema::dropIfExists('kader_jabatan');
   }
 };
