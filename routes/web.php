@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDataCabangController;
+use App\Http\Controllers\Admin\AdminDataDaerahController;
 use App\Http\Controllers\Admin\AdminDataJabatanController;
 use App\Http\Controllers\Admin\AdminDataProfileKaderController;
 use App\Http\Controllers\Admin\AdminDataRantingController;
@@ -9,6 +10,9 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\Kader\KaderDashboardController;
+use App\Http\Controllers\Kader\KaderOrtomController;
+use App\Http\Controllers\Kader\KaderPotensiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +38,12 @@ Route::get('/change/password', [ChangePasswordController::class, 'edit']);
 // Route::get('/admin', )
 Route::resource('/profile/kader', AdminDataProfileKaderController::class);
 Route::resource('/data/jabatan', AdminDataJabatanController::class);
+Route::resource('/data/daerah', AdminDataDaerahController::class);
 Route::resource('/data/cabang', AdminDataCabangController::class);
 Route::resource('/data/ranting', AdminDataRantingController::class);
 Route::resource('/settings', AdminSettingsController::class);
+
+// kader
+Route::get('/kader', [KaderDashboardController::class, 'index']);
+Route::resource('/kader/ortom', KaderOrtomController::class);
+Route::resource('/kader/potensi', KaderPotensiController::class);

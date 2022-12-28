@@ -155,7 +155,7 @@
                         </div> --}}
                         <div class="mb-3">
                           <label for="status_pernikahan" class="form-label"><b>Status Pernikahan</b></label>
-                          <select class="form-control form-control-lg">
+                          <select class="form-control form-control-lg selectric">
                             <option selected disabled>-- Pilih Status --</option>
                             <option value="Menikah">Menikah</option>
                             <option value="Belum Menikah">Belum Menikah</option>

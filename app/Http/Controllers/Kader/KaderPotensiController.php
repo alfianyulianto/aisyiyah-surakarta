@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kader;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminDataDaerahController extends Controller
+class KaderPotensiController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -14,7 +14,7 @@ class AdminDataDaerahController extends Controller
    */
   public function index()
   {
-    return view('admin.daerah.index');
+    return view('kader.potensi.index');
   }
 
   /**
@@ -24,7 +24,7 @@ class AdminDataDaerahController extends Controller
    */
   public function create()
   {
-    abort(404);
+    return view('kader.potensi.create');
   }
 
   /**
@@ -35,7 +35,7 @@ class AdminDataDaerahController extends Controller
    */
   public function store(Request $request)
   {
-    abort(404);
+    //
   }
 
   /**

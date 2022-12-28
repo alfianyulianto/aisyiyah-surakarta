@@ -4,10 +4,16 @@ $(document).ready(function () {
         scrollX: true,
     });
 
-    // Select Option
-    $("#kota").select2({
-        placeholder: "Select an option",
-    });
+    // Select2
+    // $("#kota").select2({
+    //     placeholder: "Select an option",
+    // });
+    // $("#ortom").select2({
+    //     placeholder: "Select an option",
+    // });
+
+    // Summernote (editor)
+    $("#summernote").summernote("insertUnorderedList");
 
     // change password
     var password_baru = "";

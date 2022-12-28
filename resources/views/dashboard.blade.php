@@ -146,7 +146,7 @@
               <div class="row mb-3">
                 <div class="col-lg-2 mb-3">
                   <img src="{{ url('') }}/img/avatar-3.png" class="rounded mx-auto d-block" alt=""
-                    width="155">
+                    width="160">
                 </div>
                 <div class="col-lg-10">
                   <div class="d-inline py-3">
