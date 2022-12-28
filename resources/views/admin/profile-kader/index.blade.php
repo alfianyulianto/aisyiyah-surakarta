@@ -30,7 +30,7 @@
                       <th>Alamat Rumah (Tinggal)</th>
                       <th>Status Pernikahan</th>
                       <th>Pekerjaan</th>
-                      <th>No. Handphone</th>
+                      <th>Nomer Handphone</th>
                       <th>Email</th>
                       <th>Pendidikan Terakhir</th>
                       <th>Action</th>

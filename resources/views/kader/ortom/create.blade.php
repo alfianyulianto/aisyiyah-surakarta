@@ -26,8 +26,8 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="status_pernikahan" class="form-label"><b>Nama Ortom</b></label>
-                          <select class="form-control form-control-lg select2">
+                          <label for="nama_ortom" class="form-label"><b>Nama Ortom</b></label>
+                          <select class="form-control form-control-lg select2" id="nama_ortom" name="nama_ortom">
                             <option selected disabled>-- Pilih Ortom --</option>
                             <option value="Hizbul Wathan">Hizbul Wathan</option>
                             <option value="Nasyiatul ‘Aisyiyah">Nasyiatul ‘Aisyiyah</option>

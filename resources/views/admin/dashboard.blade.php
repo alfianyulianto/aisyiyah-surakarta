@@ -163,7 +163,7 @@
                       <i class="fas fa-envelope"></i><span class="mx-3">alfianyulianto36@gmail.com</span>
                     </p>
                     <div class="buttons mt-2">
-                      <a href="/images/upload" class="btn btn-icon icon-left btn-primary"><i class="fas fa-upload"></i>
+                      <a href="/upload/foto" class="btn btn-icon icon-left btn-primary"><i class="fas fa-upload"></i>
                         Upload Image</a>
                     </div>
                   </div>

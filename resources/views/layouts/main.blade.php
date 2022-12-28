@@ -80,7 +80,6 @@
   <script src="{{ url('') }}/library/stisla/assets/js/custom.js"></script>
 
   <!-- Page Specific JS File -->
-  <script src="{{ url('') }}/library/stisla/assets/js/page/forms-advanced-forms.js"></script>
 </body>
 
 </html>

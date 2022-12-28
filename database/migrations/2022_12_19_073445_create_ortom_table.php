@@ -15,7 +15,7 @@ return new class extends Migration
   {
     Schema::create('ortom', function (Blueprint $table) {
       $table->string('id_ortom')->primary();
-      $table->string('nama_ortonom');
+      $table->string('nama_ortom');
       $table->timestamps();
     });
   }
