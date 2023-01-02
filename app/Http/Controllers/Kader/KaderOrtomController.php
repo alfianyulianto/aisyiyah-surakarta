@@ -35,7 +35,11 @@ class KaderOrtomController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      'id_kader_has_ortom' => ['required', 'max:9', 'min:9'],
+      'nama_ortom' => ['required'],
+      'ortom_uraian' => ['required', 'min:10'],
+    ]);
   }
 
   /**

@@ -35,7 +35,11 @@ class KaderPotensiController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      'id_kader_has_potensi_kader' => ['required', 'max:9', 'min:9'],
+      'nama_potensi' => ['required'],
+      'potensi_uraian' => ['required', 'min:10'],
+    ]);
   }
 
   /**

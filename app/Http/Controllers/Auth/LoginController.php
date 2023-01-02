@@ -11,4 +11,12 @@ class LoginController extends Controller
   {
     return view('auth.login');
   }
+
+  public function authenticate(Request $request)
+  {
+    $credentials = $request->validate([
+      'no_ponsel' => ['required', 'numeric', 'max:12', 'min:12'],
+      'password' => ['required'],
+    ]);
+  }
 }

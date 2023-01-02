@@ -35,7 +35,12 @@ class AdminDataCabangController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      'id_cabang' => ['required', 'min:9', 'max:9'],
+      'nama_cabang' => ['required', 'min:5'],
+      'alamat_cabang' => ['required', 'min:10'],
+      'sk_pimp_cabang' => ['required', 'file'],
+    ]);
   }
 
   /**

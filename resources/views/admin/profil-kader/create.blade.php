@@ -13,20 +13,34 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-10">
-                  <form action="">
+                  <form action="/profil/kader" method="post">
+                    @csrf
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="nik" class="form-label"><b>NIK</b></label>
-                          <input type="text" class="form-control" name="nik" id="nik"
-                            placeholder="Nomer Induk Kependudukan (cnth:3372******)">
+                          <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik"
+                            id="nik" placeholder="Nomer Induk Kependudukan (cnth:3372******)" autofocus>
+                          @error('nik')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="mb-3">
-                          <label for="kta" class="form-label"><b>No KTA 'Aisyiyah</b></label>
-                          <input type="text" class="form-control" name="kta" id="kta"
-                            placeholder="Kartu Tanda Anggota 'Aisyiyah">
+                          <label for="no_kta" class="form-label"><b>No KTA 'Aisyiyah</b></label>
+                          <input type="text"
+                            class="form-control @error('no_kta')
+                              is-invalid
+                          @enderror"
+                            name="no_kta" id="no_kta" placeholder="Kartu Tanda Anggota 'Aisyiyah">
+                          @error('no_kta')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
 
                       </div>
@@ -34,16 +48,21 @@
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="mb-3">
-                          <label for="ktm" class="form-label"><b>No KTA Muhammadiyah</b></label>
-                          <input type="text" class="form-control" name="ktm" id="ktm"
-                            placeholder="Kartu Tanda Anggota Muhammadiyah">
+                          <label for="no_ktm" class="form-label"><b>No KTA Muhammadiyah</b></label>
+                          <input type="text" class="form-control @error('no_ktm') is-invalid @enderror" name="no_ktm"
+                            id="no_ktm" placeholder="Kartu Tanda Anggota Muhammadiyah">
+                          @error('no_ktm')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="nama" class="form-label"><b>Nama Lengkap</b></label>
-                          <input type="text" class="form-control" name="nama" id="nama"
-                            placeholder="Nama Lengkap (cnth: Budi Doremi)">
+                          <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                            id="nama" placeholder="Nama Lengkap (cnth: Budi Doremi)">
                         </div>
                       </div>
                     </div>
@@ -51,8 +70,13 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="email" class="form-label"><b>Email</b></label>
-                          <input type="email" class="form-control" name="email" id="email"
-                            placeholder="Email (cnth:budidoremi@gmail.com)">
+                          <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                            id="email" placeholder="Email (cnth:budidoremi@gmail.com)">
+                          @error('email')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-6">
@@ -83,7 +107,9 @@
                           <div class="col-lg-5">
                             <div class="mb-3">
                               <label for="tempat_lahir" class="form-label"><b>Tempat Lahir</b></label>
-                              <select class="form-control form-control-lg select2">
+                              <select
+                                class="form-control form-control-lg select2 @error('tempat_lahir') is-invalid @enderror"
+                                name="tempat_lahir" id="tempat_lahir">
                                 <option selected disabled>-- Pilih Kota --</option>
                                 <option value="Jakarta">Jakarta</option>
                                 <option value="Bogor">Bogor</option>
@@ -95,13 +121,24 @@
                                 <option value="Yogyakarta">Yogyakarta</option>
                                 <option value="Surabaya">Surabaya</option>
                               </select>
+                              @error('tempat_lahir')
+                                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                                  {{ $message }}
+                                </div>
+                              @enderror
                             </div>
                           </div>
                           <div class="col-lg-7">
                             <div class="form-group mb-3">
-                              <label for="tempat_lahir" class="form-label"><b>Tanggal Lahir</b></label>
-                              <input type="date" class="form-control datepicker" name="tanggal_lahir"
-                                id="tanggal_lahir">
+                              <label for="tanggal_lahir" class="form-label"><b>Tanggal Lahir</b></label>
+                              <input type="date"
+                                class="form-control datepicker @error('tanggal_lahir') is-invalid @enderror"
+                                name="tanggal_lahir" id="tanggal_lahir">
+                              @error('tanggal_lahir')
+                                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                                  {{ $message }}
+                                </div>
+                              @enderror
                             </div>
                           </div>
                         </div>
@@ -111,8 +148,13 @@
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="alamat_ktp" class="form-label"><b>Alamat KTP</b></label>
-                          <input type="text" class="form-control" name="alamat_ktp" id="alamat_ktp"
-                            placeholder="Alamat Asal">
+                          <input type="text" class="form-control @error('alamat_ktp') is-invalid @enderror"
+                            name="alamat_ktp" id="alamat_ktp" placeholder="Alamat Sesuai KTP">
+                          @error('alamat_ktp')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>
@@ -120,62 +162,53 @@
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="alamat_rumah" class="form-label"><b>Alamat Rumah</b></label>
-                          <input type="text" class="form-control" name="alamat_rumah" id="alamat_rumah"
-                            placeholder="Alamat Domisili">
+                          <input type="text" class="form-control @error('alamat_rumah') is-invalid @enderror"
+                            name="alamat_rumah" id="alamat_rumah" placeholder="Alamat Domisili">
+                          @error('alamat_rumah')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-6">
-                        {{-- <div class="mb-3">
-                          <label for="status_pernikahan" class="form-label"><b>Status Pernikahan</b></label>
-                          <div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="status_pernikahan" id="menikah"
-                                value="Menikah" checked>
-                              <label class="form-check-label" for="menikah">
-                                Menikah
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="status_pernikahan"
-                                id="belum_menikah" value="Belum Menikah">
-                              <label class="form-check-label" for="belum_menikah">
-                                Belum Menikah
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="status_pernikahan" id="janda"
-                                value="Janda">
-                              <label class="form-check-label" for="janda">
-                                Janda
-                              </label>
-                            </div>
-                          </div>
-                        </div> --}}
                         <div class="mb-3">
                           <label for="status_pernikahan" class="form-label"><b>Status Pernikahan</b></label>
-                          <select class="form-control form-control-lg selectric">
+                          <select class="form-control form-control-lg selectric" name="status_pernikahan"
+                            id="status_pernikahan">
                             <option selected disabled>-- Pilih Status --</option>
                             <option value="Menikah">Menikah</option>
                             <option value="Belum Menikah">Belum Menikah</option>
                             <option value="Janda">Janda</option>
                           </select>
+                          @error('status_pernikahan')
+                            <div style="width: 100%;margin-top: 0.25rem;font-size: 80%;color: #dc3545;}">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="pekerjaan" class="form-label"><b>Pekerjaan</b></label>
-                          <input type="text" class="form-control" name="pekerjaan" id="pekerjaan"
-                            placeholder="Pekerjaan Anda">
+                          <input type="text" class="form-control @error('pekerjaan') is-invalid @enderror"
+                            name="pekerjaan" id="pekerjaan" placeholder="Pekerjaan Anda">
+                          @error('pekerjaan')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="mb-3">
-                          <label for="status_pernikahan" class="form-label"><b>Pendidikan Terakhir</b></label>
-                          <select class="form-control form-control-lg selectric">
+                          <label for="pendidikan_terakhir" class="form-label"><b>Pendidikan Terakhir</b></label>
+                          <select class="form-control form-control-lg selectric" name="pendidikan_terakhir"
+                            id="pendidikan_terakhir">
                             <option selected disabled>-- Pilih Pendidikan Terakhir --</option>
                             <option value="SD">SD</option>
                             <option value="SMP">SMP</option>
@@ -187,13 +220,23 @@
                             <option value="S2">S2</option>
                             <option value="S3">S3</option>
                           </select>
+                          @error('pendidikan_terakhir')
+                            <div style="width: 100%;margin-top: 0.25rem;font-size: 80%;color: #dc3545;}">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="no_ponsel" class="form-label"><b>Nomer Handphone</b></label>
-                          <input type="text" class="form-control" name="no_ponsel" id="no_ponsel"
-                            placeholder="Nomer Handphone (cnth: 081*****)">
+                          <input type="text" class="form-control @error('no_ponsel') is-invalid @enderror"
+                            name="no_ponsel" id="no_ponsel" placeholder="Nomer Handphone (cnth: 081*****)">
+                          @error('no_ponsel')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>

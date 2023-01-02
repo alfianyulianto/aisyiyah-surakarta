@@ -13,7 +13,13 @@ $(document).ready(function () {
     // });
 
     // Summernote (editor)
-    $("#summernote").summernote("insertUnorderedList");
+    $("#summernote").summernote({
+        toolbar: [
+            // [groupName, [list of button]]
+            ["style", ["bold", "italic", "underline"]],
+            ["para", ["ul", "ol", "paragraph"]],
+        ],
+    });
 
     // change password
     var password_baru = "";

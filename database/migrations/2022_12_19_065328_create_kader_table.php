@@ -3,6 +3,7 @@
 use App\Models\Cabang;
 use App\Models\Daerah;
 use App\Models\Ranting;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,7 @@ return new class extends Migration
       $table->foreignIdFor(Daerah::class)->default(false);
       $table->foreignIdFor(Cabang::class)->default(false);
       $table->foreignIdFor(Ranting::class)->default(false);
+      $table->foreignIdFor(User::class);
       $table->string('no_kta');
       $table->string('no_ktm');
       $table->string('nama');

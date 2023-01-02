@@ -13,13 +13,20 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-8">
-                  <form action="">
+                  <form action="/kader/ortom" method="post">
+                    @csrf
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="id_cabang" class="form-label"><b>Id Ortom</b></label>
-                          <input type="text" class="form-control" name="id_cabang" id="id_cabang"
+                          <label for="id_kader_has_ortom" class="form-label"><b>Id Ortom</b></label>
+                          <input type="text" class="form-control @error('id_kader_has_ortom') is-invalid @enderror"
+                            name="id_kader_has_ortom" id="id_kader_has_ortom"
                             value="{{ 'ORTM-' . Str::lower(Str::random(4)) }}" readonly>
+                          @error('nik')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>
@@ -27,7 +34,8 @@
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="nama_ortom" class="form-label"><b>Nama Ortom</b></label>
-                          <select class="form-control form-control-lg select2" id="nama_ortom" name="nama_ortom">
+                          <select class="form-control form-control-lg select2 @error('nama_ortom') is-invalid @enderror"
+                            id="nama_ortom" name="nama_ortom">
                             <option selected disabled>-- Pilih Ortom --</option>
                             <option value="Hizbul Wathan">Hizbul Wathan</option>
                             <option value="Nasyiatul ‘Aisyiyah">Nasyiatul ‘Aisyiyah</option>
@@ -35,13 +43,25 @@
                             <option value="Ikatan Mahasiswa Muhammadiyah">Ikatan Mahasiswa Muhammadiyah</option>
                             <option value="Tapak Suci Putra Muhammadiyah">Tapak Suci Putra Muhammadiyah</option>
                           </select>
+                          @error('nama_ortom')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <textarea id="summernote" name="editordata" style="height: 1876px"></textarea>
+                          <label for="ortom_uraian" class="form-label"><b>Uraian Ortom</b></label>
+                          <textarea class=" @error('ortom_uraian') is-invalid @enderror" id="summernote" name="ortom_uraian"
+                            style="height: 1876px"></textarea>
+                          @error('ortom_uraian')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>

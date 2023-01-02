@@ -10,4 +10,9 @@ class ChangePasswordController extends Controller
   {
     return view('change_password');
   }
+
+  public function update(Request $request)
+  {
+    $validated = $request->validate([]);
+  }
 }

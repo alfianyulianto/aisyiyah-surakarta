@@ -18,8 +18,8 @@
        </li>
        <hr class="my-2">
        <li class="menu-header">Admin</li>
-       <li class="nav-item {{ Request::is('profile/kader') ? 'active rounded-pill shadow-sm' : '' }}">
-         <a href="/profile/kader" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
+       <li class="nav-item {{ Request::is('profil/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="/profil/kader" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
        </li>
        <li class="nav-item {{ Request::is('data/jabatan') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/data/jabatan" class="nav-link"><i class="fas fa-th"></i><span>Data Jabatan</span></a>
@@ -41,20 +41,9 @@
          </ul>
        </li>
        <li
-         class="nav-item dropdown {{ Request::is('tambah/admin/daerah') || Request::is('tambah/admin/cabang') || Request::is('tambah/admin/ranting') ? 'active rounded-pill shadow-sm' : '' }}">
-         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user-cog"></i>
-           <span>Tambah Admin</span></a>
-         <ul class="dropdown-menu">
-           <li class="{{ Request::is('tambah/admin/daerah') ? 'active' : '' }}">
-             <a class="nav-link" href="/tambah/admin/daerah">Admin Daerah</a>
-           </li>
-           <li class="{{ Request::is('tambah/admin/cabang') ? 'active' : '' }}">
-             <a class="nav-link" href="/tambah/admin/cabang">Admin Cabang</a>
-           </li>
-           <li class="{{ Request::is('tambah/admin/ranting') ? 'active' : '' }}">
-             <a class="nav-link" href="/tambah/admin/ranting">Admin Ranting</a>
-           </li>
-         </ul>
+         class="nav-item {{ Request::is('tambah/admin') || Request::is('tambah/admin/daerah') || Request::is('tambah/admin/cabang') || Request::is('tambah/admin/ranting') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="/tambah/admin" class="nav-link"><i class="fas fa-user-cog"></i>
+           <span>Tambah Admin</a>
        </li>
        <li class="nav-item {{ Request::is('settings') ? 'active' : '' }}">
          <a href="/settings" class="nav-link"><i class="fas fa-cogs"></i></i><span>Setting</span></a>

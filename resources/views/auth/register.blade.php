@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Register &mdash; Stisla</title>
+  <title>Aisyiyah Surakarta</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -35,25 +35,50 @@
               </div>
 
               <div class="card-body">
-                <form method="post">
+                <form action="/register" method="post">
+                  @csrf
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="no_ponsel">Nomer Ponsel</label>
-                      <input id="no_ponsel" type="text" class="form-control" name="no_ponsel" autofocus>
+                      <input type="text" class="form-control @error('no_ponsel') is-invalid @enderror"
+                        name="no_ponsel" id="no_ponsel" autofocus>
+                      @error('no_ponsel')
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="nama">Nama Lengkap</label>
-                      <input id="nama" type="text" class="form-control" name="nama">
+                      <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                        id="nama">
+                      @error('nama')
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="password">Password</label>
-                      <input id="password" type="text" class="form-control" name="password" autofocus>
+                      <input type="text" class="form-control @error('password') is-invalid @enderror" name="password"
+                        id="password" autofocus>
+                      @error('password')
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="password2">Konfrimasi Password</label>
-                      <input id="password2" type="text" class="form-control" name="password2">
+                      <input type="text" class="form-control @error('password2') is-invalid @enderror"
+                        name="password2" id="password2">
+                      @error('password2')
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                   </div>
                   <div class="form-group">

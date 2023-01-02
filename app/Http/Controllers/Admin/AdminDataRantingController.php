@@ -35,7 +35,12 @@ class AdminDataRantingController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      'id_ranting' => ['required', 'max:9', 'min:9'],
+      'nama_ranting' => ['required', 'min:5'],
+      'alamat_ranting' => ['required', 'min:10'],
+      'sk_pimp_ranting' => ['required', 'file'],
+    ]);
   }
 
   /**

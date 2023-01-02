@@ -11,8 +11,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <a href="/profile/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i
-                  class="fas fa-user-plus"></i>
+              <a href="/profil/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-user-plus"></i>
                 Tambah Kader</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x">

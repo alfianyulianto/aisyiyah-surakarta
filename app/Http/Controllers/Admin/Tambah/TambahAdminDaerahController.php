@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Tambah;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminMenambahAdminCabangController extends Controller
+class TambahAdminDaerahController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -14,7 +14,7 @@ class AdminMenambahAdminCabangController extends Controller
    */
   public function index()
   {
-    return view('admin.tambah_admin_cabang.index');
+    return view('admin.tambah_admin.tambah_admin_daerah.index');
   }
 
   /**
