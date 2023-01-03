@@ -14,4 +14,19 @@ class Ranting extends Model
 
   public $incrementing = false;
   protected $keyType = 'string';
+
+  public function kader()
+  {
+    return $this->belongsTo(Kader::class, 'ranting_id_ranting', 'nik');
+  }
+
+  public function daerah()
+  {
+    return $this->belongsTo(Daerah::class, 'daerah_id_daerah', 'id_daerah');
+  }
+
+  public function cabang()
+  {
+    return $this->belongsTo(Cabang::class, 'cabang_id_cabang', 'id_cabang');
+  }
 }

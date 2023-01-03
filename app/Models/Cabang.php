@@ -14,4 +14,19 @@ class Cabang extends Model
 
   public $incrementing = false;
   protected $keyType = 'string';
+
+  public function kader()
+  {
+    return $this->belongsTo(Kader::class, 'cabang_id_cabang', 'nik');
+  }
+
+  public function daerah()
+  {
+    return $this->belongsTo(Daerah::class, 'daerah_id_daerah', 'id_daerah');
+  }
+
+  public function ranting()
+  {
+    return $this->hasMany(Ranting::class);
+  }
 }

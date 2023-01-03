@@ -14,4 +14,9 @@ class Potensi extends Model
 
   public $incrementing = false;
   protected $keyType = 'string';
+
+  public function potensi_milik_kader()
+  {
+    return $this->hasMany(KaderPotensi::class);
+  }
 }

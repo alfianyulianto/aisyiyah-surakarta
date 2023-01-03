@@ -17,6 +17,8 @@ class RegisterController extends Controller
     $validated = $request->validate([
       'no_ponsel' => ['required', 'numeric', 'max:12', 'min:12'],
       'nama' => ['required', 'string'],
+      'cabang_id_cabang' => ['required'],
+      'ranting_id_ranting' => ['required'],
       'password' => ['required', 'min:8'],
       'password2' => ['required', 'min:8', 'same:password'],
     ]);

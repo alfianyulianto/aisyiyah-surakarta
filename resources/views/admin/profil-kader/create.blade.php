@@ -63,6 +63,53 @@
                           <label for="nama" class="form-label"><b>Nama Lengkap</b></label>
                           <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
                             id="nama" placeholder="Nama Lengkap (cnth: Budi Doremi)">
+                          @error('nama')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <label for="cabang_id_cabang" class="form-label"><b>Cabang Aisyiyah</b></label>
+                          <select
+                            class="form-control form-control-lg select2 @error('cabang_id_cabang') is-invalid @enderror"
+                            name="cabang_id_cabang" id="cabang_id_cabang">
+                            <option selected disabled>-- Pilih Cabang --</option>
+                            <option value="Jebres">Jebres</option>
+                            <option value="Kota Bengawan">Kota Bengawan</option>
+                            <option value="Kota Barat">Kota Barat</option>
+                            <option value="Laweyan">Laweyan</option>
+                            <option value="Solo Selatan">Solo Selatan</option>
+                            <option value="Solo Utara">Solo Utara</option>
+                          </select>
+                          @error('cabang_id_cabang')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <label for="ranting_id_ranting" class="form-label"><b>Ranting Aisyiyah</b></label>
+                          <select
+                            class="form-control form-control-lg select2 @error('ranting_id_ranting') is-invalid @enderror"
+                            name="ranting_id_ranting" id="ranting_id_ranting">
+                            <option selected disabled>-- Pilih Ranting --</option>
+                            <option value="Sumber Barat">Sumber Barat</option>
+                            <option value="Sumber Timur">Sumber Timur</option>
+                            <option value="Badran">Badran</option>
+                            <option value="Timuran">Timuran</option>
+                          </select>
+                          @error('ranting_id_ranting')
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>

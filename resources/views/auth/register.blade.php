@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/selectric/public/selectric.css">
+  <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/select2/dist/css/select2.min.css">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css">
@@ -53,6 +53,44 @@
                       <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
                         id="nama">
                       @error('nama')
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label for="cabang_id_cabang" class="form-label">Cabang Aisyiyah</label>
+                      <select
+                        class="form-control form-control-lg select2 @error('cabang_id_cabang') is-invalid @enderror"
+                        name="cabang_id_cabang" id="cabang_id_cabang">
+                        <option selected disabled>-- Pilih Cabang --</option>
+                        <option value="Jebres">Jebres</option>
+                        <option value="Kota Bengawan">Kota Bengawan</option>
+                        <option value="Kota Barat">Kota Barat</option>
+                        <option value="Laweyan">Laweyan</option>
+                        <option value="Solo Selatan">Solo Selatan</option>
+                        <option value="Solo Utara">Solo Utara</option>
+                      </select>
+                      @error('cabang_id_cabang')
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label for="ranting_id_ranting" class="form-label">Ranting Aisyiyah</label>
+                      <select
+                        class="form-control form-control-lg select2 @error('ranting_id_ranting') is-invalid @enderror"
+                        name="ranting_id_ranting" id="ranting_id_ranting">
+                        <option selected disabled>-- Pilih Ranting --</option>
+                        <option value="Sumber Barat">Sumber Barat</option>
+                        <option value="Sumber Timur">Sumber Timur</option>
+                        <option value="Badran">Badran</option>
+                        <option value="Timuran">Timuran</option>
+                      </select>
+                      @error('ranting_id_ranting')
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -110,7 +148,8 @@
 
   <!-- JS Libraies -->
   <script src="{{ url('') }}/library/stisla/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-  <script src="{{ url('') }}/library/stisla/node_modules/selectric/public/jquery.selectric.min.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/node_modules/selectric/public/jquery.selectric.min.js"></script> --}}
+  <script src="{{ url('') }}/library/stisla/node_modules/select2/dist/js/select2.full.min.js"></script>
 
   <!-- Template JS File -->
   <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script>

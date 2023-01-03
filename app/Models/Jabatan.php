@@ -14,4 +14,14 @@ class Jabatan extends Model
 
   public $incrementing = false;
   protected $keyType = 'string';
+
+  public function kader()
+  {
+    return $this->belongsTo(Kader::class, 'nik');
+  }
+
+  public function jabatan_milik_kader()
+  {
+    return $this->hasMany(KaderJabatan::class);
+  }
 }

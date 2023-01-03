@@ -40,6 +40,8 @@ class AdminDataProfileKaderController extends Controller
       'no_kta' => ['required', 'numeric', 'unique:App\Models\Kader,no_kta'],
       'no_ktm' => ['required', 'numeric', 'unique:App\Models\Kader,no_ktm'],
       'nama' => ['required', 'string', 'min:5'],
+      'cabang_id_cabang' => ['required'],
+      'ranting_id_ranting' => ['required'],
       'email' => ['required', 'email:dns'],
       'jenis_kelamin' => ['required'],
       'tempat_lahir' => ['required', 'string'],

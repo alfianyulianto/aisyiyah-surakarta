@@ -13,6 +13,10 @@ class ChangePasswordController extends Controller
 
   public function update(Request $request)
   {
-    $validated = $request->validate([]);
+    $validated = $request->validate([
+      'password' => ['required', 'current_password:api'],
+      'password_baru' => ['required', 'min:8'],
+      'konfirmasi_password' => ['required', 'min:8', 'same:password_baru']
+    ]);
   }
 }

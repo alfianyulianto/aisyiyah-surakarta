@@ -14,4 +14,33 @@ class Kader extends Model
 
   public $incrementing = false;
   protected $keyType = 'string';
+
+  public function daerah()
+  {
+    return $this->hasOne(Daerah::class);
+  }
+
+  public function cabang()
+  {
+    return $this->hasOne(Cabang::class);
+  }
+  public function ranting()
+  {
+    return $this->hasOne(Ranting::class);
+  }
+
+  public function kader_memiliki_jabatan()
+  {
+    return $this->hasMany(KaderJabatan::class);
+  }
+
+  public function kader_memiliki_ortom()
+  {
+    return $this->hasMany(KaderOrtom::class);
+  }
+
+  public function kader_mimiliki_potensi()
+  {
+    return $this->hasMany(KaderPotensi::class);
+  }
 }
