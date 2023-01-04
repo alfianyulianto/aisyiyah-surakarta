@@ -15,7 +15,7 @@
                   class="fas fa-user-plus"></i>
                 Tambah Potensi Yang Dimiliki</a>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x">
+                <table class="table table-bordered table-hover" id="scroll-x-potensi">
                   <thead>
                     <tr>
                       <th class="text-center">
@@ -23,7 +23,7 @@
                       </th>
                       <th>Nama Potensi</th>
                       <th>Uraian Potensi</th>
-                      <th>Action</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -34,8 +34,9 @@
                       <td>Bidang Kesehatan</td>
                       <td>Pernah menjadi dokter di RS. Moewardi Surakarta</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning">Edit</a>
-                        <a href="" class="btn btn-icon icon-left btn-danger">Hapus</a>
+                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i> Edit</a>
+                        <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
+                          Hapus</a>
                       </td>
                     </tr>
                   </tbody>

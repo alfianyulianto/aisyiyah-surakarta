@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Admin</h1>
+      <h1>Tambahk Pimpinan</h1>
     </div>
 
     <div class="section-body">
@@ -11,7 +11,7 @@
         <div class="col-12 col-md-6 col-lg-6">
           <div class="card">
             <div class="card-header">
-              <h4 class="text-center">Tambah Admin Daerah</h4>
+              <h4 class="text-center">Tambah Pimpinan Daerah</h4>
             </div>
             <div class="card-body">
               <table class="table table-bordered table-hover table-responsive" id="scroll-x-tambah-pimpinan-daerah">
@@ -27,7 +27,7 @@
                       <td>{{ $d->nama_daerah }}</td>
                       <td>
                         <a href="" class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
-                          Admin</a>
+                          Pimpinan</a>
                       </td>
                     </tr>
                   @endforeach
@@ -37,10 +37,10 @@
           </div>
           <div class="card">
             <div class="card-header">
-              <h4 class="text-center">Tambah Admin Ranting</h4>
+              <h4 class="text-center">Tambah Pimpinan Ranting</h4>
             </div>
             <div class="card-body">
-              <table class="table table-bordered table-hover table-responsive" id="scroll-x-tambah-admin-ranting">
+              <table class="table table-bordered table-hover table-responsive" id="scroll-x-tambah-pimpinan-ranting">
                 <thead>
                   <tr>
                     <th>Nama Ranting</th>
@@ -53,7 +53,7 @@
                       <td>{{ $r->nama_ranting }}</td>
                       <td>
                         <a href="" class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
-                          Admin</a>
+                          Pimpinan</a>
                       </td>
                     </tr>
                   @endforeach
@@ -65,7 +65,7 @@
         <div class="col-12 col-md-6 col-lg-6">
           <div class="card">
             <div class="card-header">
-              <h4 class="text-center">Tambah Admin Cabang</h4>
+              <h4 class="text-center">Tambah Pimpinan Cabang</h4>
             </div>
             <div class="card-body">
               <table class="table table-bordered table-hover table-responsive" id="scroll-x-tambah-pimpinan-cabang">
@@ -81,7 +81,7 @@
                       <td>{{ $c->nama_cabang }}</td>
                       <td>
                         <a href="" class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
-                          Admin</a>
+                          Pimpinan</a>
                       </td>
                     </tr>
                   @endforeach

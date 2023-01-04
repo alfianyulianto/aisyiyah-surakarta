@@ -1,16 +1,126 @@
 $(document).ready(function () {
     // DataTables
-    $("#scroll-x").DataTable({
+    $("#scroll-x-profil-kader").DataTable({
         scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 105, targets: 1 },
+            { width: 100, targets: 2 },
+            { width: 100, targets: 3 },
+            { width: 175, targets: 4 },
+            { width: 140, targets: 5 },
+            { width: 200, targets: 6 },
+            { width: 70, targets: 7 },
+            { width: 235, targets: 8 },
+        ],
     });
 
-    // Select2
-    // $("#kota").select2({
-    //     placeholder: "Select an option",
-    // });
-    // $("#ortom").select2({
-    //     placeholder: "Select an option",
-    // });
+    // tampilan daerah
+    $("#scroll-x-daerah").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 105, targets: 1 },
+            { width: 395, targets: 2 },
+            { width: 145, targets: 3 },
+            { width: 60, targets: 4 },
+        ],
+    });
+    // tampilan cabang
+    $("#scroll-x-cabang").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 105, targets: 1 },
+            { width: 375, targets: 2 },
+            { width: 145, targets: 3 },
+            { width: 160, targets: 4 },
+        ],
+    });
+    // tampilan ranting
+    $("#scroll-x-ranting").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 105, targets: 1 },
+            { width: 375, targets: 2 },
+            { width: 145, targets: 3 },
+            { width: 215, targets: 4 },
+            { width: 160, targets: 5 },
+        ],
+    });
+    // tampilan ortom kader
+    $("#scroll-x-ortom").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 220, targets: 1 },
+            { width: 425, targets: 2 },
+            { width: 180, targets: 3 },
+        ],
+    });
+    // tampilan potensi kader
+    $("#scroll-x-potensi").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 220, targets: 1 },
+            { width: 425, targets: 2 },
+            { width: 180, targets: 3 },
+        ],
+    });
+    // tampilan ortom kader
+    $("#scroll-x-ortom").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 220, targets: 1 },
+            { width: 425, targets: 2 },
+            { width: 180, targets: 3 },
+        ],
+    });
+    $("#scroll-x-tambah-admin-daerah").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 285, targets: 0 },
+            { width: 100, targets: 1 },
+        ],
+    });
+    $("#scroll-x-tambah-admin-cabang").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 285, targets: 0 },
+            { width: 100, targets: 1 },
+        ],
+    });
+    $("#scroll-x-tambah-admin-ranting").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 285, targets: 0 },
+            { width: 100, targets: 1 },
+        ],
+    });
+    $("#scroll-x-tambah-pimpinan-daerah").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 285, targets: 0 },
+            { width: 100, targets: 1 },
+        ],
+    });
+    $("#scroll-x-tambah-pimpinan-cabang").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 285, targets: 0 },
+            { width: 100, targets: 1 },
+        ],
+    });
+    $("#scroll-x-tambah-pimpinan-ranting").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 285, targets: 0 },
+            { width: 100, targets: 1 },
+        ],
+    });
 
     // Summernote (editor)
     $("#summernote").summernote({

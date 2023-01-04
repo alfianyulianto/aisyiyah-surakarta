@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ortom;
+use App\Models\Potensi;
 use Illuminate\Http\Request;
 
 class AdminSettingsController extends Controller
 {
   public function index()
   {
-    return view('admin.settings.index');
+    return view('admin.settings.index', [
+      'ortom' => Ortom::orderBy('nama_ortom', 'asc')->get(),
+      'potensi' => Potensi::orderBy('potensi', 'asc')->get()
+    ]);
   }
 
   public function ortom_store(Request $request)

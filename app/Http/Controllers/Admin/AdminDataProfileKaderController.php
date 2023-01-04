@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kader;
 use Illuminate\Http\Request;
 
 class AdminDataProfileKaderController extends Controller
@@ -14,7 +15,9 @@ class AdminDataProfileKaderController extends Controller
    */
   public function index()
   {
-    return view('admin.profil-kader.index');
+    return view('admin.profil-kader.index', [
+      'kader' => Kader::orderBy('created_at', 'desc')->get()
+    ]);
   }
 
   /**
@@ -35,6 +38,7 @@ class AdminDataProfileKaderController extends Controller
    */
   public function store(Request $request)
   {
+    return $request;
     $validated = $request->validate([
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
       'no_kta' => ['required', 'numeric', 'unique:App\Models\Kader,no_kta'],

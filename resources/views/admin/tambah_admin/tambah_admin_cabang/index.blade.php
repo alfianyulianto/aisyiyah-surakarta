@@ -36,25 +36,25 @@
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="NIK" class="form-label"><b>NIK</b></label>
-                          <input type="text" class="form-control" name="nik" id="nik">
+                          <input type="text" class="form-control" name="nik" id="nik" readonly>
                         </div>
                       </div>
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="no_kta" class="form-label"><b>No KTA Aisyiyah</b></label>
-                          <input type="text" class="form-control" name="no_kta" id="no_kta">
+                          <input type="text" class="form-control" name="no_kta" id="no_kta" readonly>
                         </div>
                       </div>
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="no_ktm" class="form-label"><b>No KTA Muhammadiyah</b></label>
-                          <input type="text" class="form-control" name="no_ktm" id="no_ktm">
+                          <input type="text" class="form-control" name="no_ktm" id="no_ktm" readonly>
                         </div>
                       </div>
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="nama" class="form-label"><b>Nama Kader</b></label>
-                          <input type="text" class="form-control" name="nama" id="nama">
+                          <input type="text" class="form-control" name="nama" id="nama" readonly>
                         </div>
                       </div>
                     </div>

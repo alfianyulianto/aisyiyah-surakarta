@@ -14,47 +14,44 @@
               <a href="/profil/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-user-plus"></i>
                 Tambah Kader</a>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x">
+                <table class="table table-bordered table-hover" id="scroll-x-profil-kader">
                   <thead>
                     <tr>
-                      <th class="text-center">
+                      <th class="text-center align-top">
                         #
                       </th>
-                      <th>NIK</th>
-                      <th>No KTA Aisyiyah</th>
-                      <th>No KTA Muhammadiyah</th>
-                      <th>Nama</th>
-                      <th>Tempat Tanggal Lahir</th>
-                      <th>Alamat Asal (KTP)</th>
-                      <th>Alamat Rumah (Tinggal)</th>
-                      <th>Status Pernikahan</th>
-                      <th>Pekerjaan</th>
-                      <th>Nomer Handphone</th>
-                      <th>Email</th>
-                      <th>Pendidikan Terakhir</th>
-                      <th>Action</th>
+                      <th class="text-center align-top">NIK</th>
+                      <th class="text-center align-top">No KTA Aisyiyah</th>
+                      <th class="text-center align-top">No KTA Muhammadiyah</th>
+                      <th class="text-center align-top">Nama</th>
+                      <th class="text-center align-top">Tempat Tanggal Lahir</th>
+                      <th class="text-center align-top">Alamat Rumah (Tinggal)</th>
+                      <th class="text-center align-top">Nomer Handphone</th>
+                      <th class="text-center align-top">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>3372010107000002</td>
-                      <td>334455</td>
-                      <td>554433</td>
-                      <td>Alfian Yulianto</td>
-                      <td>Surakarta, 01 Juli 2000</td>
-                      <td>Bratan rt 003 / rw 006 Kelurahan Pajang Kecamatan Laweyan Kota Surakarta</td>
-                      <td>Ngenden rt 005 rw 008 euraan gentan Kecamatan Baki Kabupaten Sukoharjo</td>
-                      <td>Belum Menikah</td>
-                      <td>Mahasiswa</td>
-                      <td>081217432366</td>
-                      <td>alfian@gmail.com</td>
-                      <td>S1</td>
-                      <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning">Edit</a>
-                        <a href="" class="btn btn-icon icon-left btn-danger">Hapus</a>
-                      </td>
-                    </tr>
+                    @foreach ($kader as $k)
+                      <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $k->nik }}</td>
+                        <td>{{ $k->no_kta }}</td>
+                        <td>{{ $k->no_ktm }}</td>
+                        <td>{{ $k->nama }}</td>
+                        <td>{{ $k->tempat_lahir }}, {{ Str::of($k->tanggal_lahir)->explode('-')->reverse()->join('-') }}
+                        </td>
+                        <td>{{ $k->alamat_rumah_tinggal }}</td>
+                        <td>{{ $k->no_ponsel }}</td>
+                        <td>
+                          <a href="" class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i>
+                            Detail</a>
+                          <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
+                            Edit</a>
+                          <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
+                            Hapus</a>
+                        </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

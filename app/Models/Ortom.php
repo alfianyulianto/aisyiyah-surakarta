@@ -15,6 +15,8 @@ class Ortom extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
+  protected $guarded = ['id_ortom'];
+
   public function ortom_milik_kader()
   {
     return $this->hasOne(KaderOrtom::class);

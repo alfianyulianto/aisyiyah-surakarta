@@ -21,8 +21,17 @@
        <li class="nav-item {{ Request::is('profil/kader') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/profil/kader" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
        </li>
-       <li class="nav-item {{ Request::is('data/jabatan') ? 'active rounded-pill shadow-sm' : '' }}">
-         <a href="/data/jabatan" class="nav-link"><i class="fas fa-th"></i><span>Data Jabatan</span></a>
+       <li class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+             class="fas fa-th"></i><span>Jabatan</span></a>
+         <ul class="dropdown-menu">
+           <li class="{{ Request::is('data/jabatan') ? 'active' : '' }}">
+             <a class="nav-link" href="/data/jabatan">Data Jabatan</a>
+           </li>
+           <li class="{{ Request::is('jabatan/kader') ? 'active' : '' }}">
+             <a class="nav-link" href="/jabatan/kader">Jabatan Kader</a>
+           </li>
+         </ul>
        </li>
        <li
          class="nav-item dropdown {{ Request::is('data/daerah') || Request::is('data/cabang') || Request::is('data/ranting') ? 'active rounded-pill shadow-sm' : '' }}">

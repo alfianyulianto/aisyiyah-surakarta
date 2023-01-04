@@ -15,6 +15,8 @@ class KaderJabatan extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
+  protected $guarded = ['id_kader_jabatan'];
+
   public function kader()
   {
     return $this->belongsTo(Kader::class, 'kader_nik', 'nik');

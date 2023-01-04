@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cabang;
 use Illuminate\Http\Request;
 
 class AdminDataCabangController extends Controller
@@ -14,7 +15,9 @@ class AdminDataCabangController extends Controller
    */
   public function index()
   {
-    return view('admin.cabang.index');
+    return view('admin.cabang.index', [
+      'cabang' => Cabang::orderByRaw('created_at DESC')->get()
+    ]);
   }
 
   /**

@@ -15,6 +15,8 @@ class KaderOrtom extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
+  protected $guarded = ['id_kader_has_ortom'];
+
   public function kader()
   {
     return $this->belongsTo(Kader::class, 'kader_nik', 'nik');

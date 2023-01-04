@@ -21,8 +21,8 @@
                         #
                       </th>
                       <th>Nama Jabatan</th>
-                      <th>Periode</th>
-                      <th>Action</th>
+                      <th>Jabatan di Tingkat</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -31,10 +31,11 @@
                         1
                       </td>
                       <td>Ketua</td>
-                      <td>Periode</td>
+                      <td>Cabang Laweyan</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning">Edit</a>
-                        <a href="" class="btn btn-icon icon-left btn-danger">Hapus</a>
+                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i> Edit</a>
+                        <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
+                          Hapus</a>
                       </td>
                     </tr>
                   </tbody>

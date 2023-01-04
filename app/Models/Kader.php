@@ -15,6 +15,8 @@ class Kader extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
+  protected $guarded = ['nik'];
+
   public function daerah()
   {
     return $this->hasOne(Daerah::class);

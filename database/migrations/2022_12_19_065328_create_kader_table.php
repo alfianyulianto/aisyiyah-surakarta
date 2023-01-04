@@ -2,6 +2,8 @@
 
 use App\Models\Cabang;
 use App\Models\Daerah;
+use App\Models\KaderOrtom;
+use App\Models\KaderPotensi;
 use App\Models\Ranting;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -23,6 +25,8 @@ return new class extends Migration
       $table->foreignIdFor(Cabang::class)->default(false);
       $table->foreignIdFor(Ranting::class)->default(false);
       $table->foreignIdFor(User::class);
+      $table->foreignIdFor(KaderOrtom::class)->default(false);
+      $table->foreignIdFor(KaderPotensi::class)->default(false);
       $table->string('no_kta');
       $table->string('no_ktm');
       $table->string('nama');
@@ -33,12 +37,8 @@ return new class extends Migration
       $table->string('status_pernikahan');
       $table->string('pekerjaan');
       $table->string('email');
+      $table->string('no_ponsel');
       $table->string('pendidikan_terakhir');
-      $table->string('pendidikan_non_formal_uraian');
-      $table->string('ortom');
-      $table->string('ortom_uraian');
-      $table->string('potensi_kader');
-      $table->string('potensi_kader_uraian');
       $table->string('foto');
       $table->timestamps();
     });

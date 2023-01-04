@@ -9,11 +9,13 @@ class Cabang extends Model
 {
   use HasFactory;
 
-  protected $table = "cabang";
+  protected $table = 'cabang';
   protected $primaryKey = "id_cabang";
 
   public $incrementing = false;
   protected $keyType = 'string';
+
+  protected $guarded = ['id_cabang'];
 
   public function kader()
   {

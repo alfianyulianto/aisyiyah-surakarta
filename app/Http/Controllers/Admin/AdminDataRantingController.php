@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ranting;
 use Illuminate\Http\Request;
 
 class AdminDataRantingController extends Controller
@@ -14,7 +15,9 @@ class AdminDataRantingController extends Controller
    */
   public function index()
   {
-    return view('admin.ranting.index');
+    return view('admin.ranting.index', [
+      'ranting' => Ranting::orderByRaw('cabang_id_cabang ASC')->get()
+    ]);
   }
 
   /**

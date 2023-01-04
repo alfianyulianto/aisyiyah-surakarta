@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Daerah;
 use Illuminate\Http\Request;
 
 class AdminDataDaerahController extends Controller
@@ -14,7 +15,9 @@ class AdminDataDaerahController extends Controller
    */
   public function index()
   {
-    return view('admin.daerah.index');
+    return view('admin.daerah.index', [
+      'daerah' => Daerah::where('id_daerah', 'ska-1')->get()
+    ]);
   }
 
   /**
@@ -80,6 +83,6 @@ class AdminDataDaerahController extends Controller
    */
   public function destroy($id)
   {
-    //
+    abort(403);
   }
 }

@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Admin Ranting</h1>
+      <h1>Tambah Jabatan Kader di Cabang Banjarsari</h1>
     </div>
 
     <div class="section-body">
@@ -59,7 +59,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mb-5">
-                      <button type="submit" class="btn btn-primary">Add Admin Ranting</button>
+                      <button type="submit" class="btn btn-primary">Add Admin Cabang</button>
                     </div>
                   </div>
                 </div>

@@ -14,15 +14,15 @@
               <a href="/kader/ortom/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-user-plus"></i>
                 Tambah Kegiatan Ortom</a>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x">
+                <table class="table table-bordered table-hover" id="scroll-x-ortom">
                   <thead>
                     <tr>
                       <th class="text-center">
                         #
                       </th>
-                      <th>Nama Ortom</th>
-                      <th>Uraian Ortom</th>
-                      <th>Action</th>
+                      <th class="text-center">Nama Ortom</th>
+                      <th class="text-center">Uraian Ortom</th>
+                      <th class="text-center">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -33,8 +33,9 @@
                       <td>Ikatan Mahasiswa Muhammadiyah</td>
                       <td>Ketua IMM Adam Malik FKI UMS periode 2020</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning">Edit</a>
-                        <a href="" class="btn btn-icon icon-left btn-danger">Hapus</a>
+                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i> Edit</a>
+                        <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
+                          Hapus</a>
                       </td>
                     </tr>
                   </tbody>
