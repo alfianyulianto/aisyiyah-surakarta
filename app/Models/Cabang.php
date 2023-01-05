@@ -15,8 +15,6 @@ class Cabang extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_cabang'];
-
   public function kader()
   {
     return $this->belongsTo(Kader::class, 'cabang_id_cabang', 'nik');

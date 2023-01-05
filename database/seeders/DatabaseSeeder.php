@@ -21,12 +21,14 @@ class DatabaseSeeder extends Seeder
     DB::table('users')->insert([
       'id' => '1',
       'nama' => 'Alfian Yulianto',
+      'no_ponsel' => '081217432366',
       'password' => Hash::make('password'),
       'kategori_user' => '1',
     ]);
     DB::table('users')->insert([
       'id' => '2',
       'nama' => 'Budi Doremi',
+      'no_ponsel' => '085432657890',
       'password' => Hash::make('password'),
       'kategori_user' => '2',
     ]);
@@ -37,6 +39,7 @@ class DatabaseSeeder extends Seeder
       'daerah_id_daerah' => 'ska-1',
       'cabang_id_cabang' => 'cbng-banjarsari',
       'ranting_id_ranting' => 'rntng-mangkubumen',
+      'pendidikan_terakhir_id_pendidikan_terakhir' => 'pndk-98',
       'user_id' => '1',
       'no_kta' => '54321',
       'no_ktm' => '12345',
@@ -49,7 +52,6 @@ class DatabaseSeeder extends Seeder
       'pekerjaan' => 'Mahasiswa',
       'email' => 'alfianyulianto36@gmail.com',
       'no_ponsel' => '081217432366',
-      'pendidikan_terakhir' => 'SMA/SMK',
       'foto' => 'avatar-3.png'
     ]);
     DB::table('kader')->insert([
@@ -57,9 +59,10 @@ class DatabaseSeeder extends Seeder
       'daerah_id_daerah' => 'ska-1',
       'cabang_id_cabang' => 'cbng-banjarsari',
       'ranting_id_ranting' => 'rntng-sumber_barat',
+      'pendidikan_terakhir_id_pendidikan_terakhir' => 'pndk-98',
       'user_id' => '2',
-      'no_kta' => '54321',
-      'no_ktm' => '12345',
+      'no_kta' => '23456',
+      'no_ktm' => '65432',
       'nama' => 'Budi Doremi',
       'tempat_lahir' => 'Surakarta',
       'tanggal_lahir' => '2000-12-11',
@@ -70,7 +73,6 @@ class DatabaseSeeder extends Seeder
       'pekerjaan' => 'Pekerja',
       'email' => 'budi.doremi36@gmail.com',
       'no_ponsel' => '085432657890',
-      'pendidikan_terakhir' => 'SMA/SMK',
       'foto' => 'avatar-3.png'
     ]);
 
@@ -353,6 +355,52 @@ class DatabaseSeeder extends Seeder
     DB::table('potensi_kader')->insert([
       'id_potensi_kader' => 'ptns-eknm',
       'potensi' => 'Bidang Ekonomi',
+    ]);
+
+    // pendidikan
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-1' . Str::random(3),
+      'pendidikan' => 'Sekolah Dasar'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-2' . Str::random(3),
+      'pendidikan' => 'Madrasah Ibtidaiyah'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-3' . Str::random(3),
+      'pendidikan' => 'Sekolah Menengah Pertama'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-4' . Str::random(3),
+      'pendidikan' => 'Madrasah Tsanawiyah'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-5' . Str::random(3),
+      'pendidikan' => 'Sekolah Menengah Atas'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-6' . Str::random(3),
+      'pendidikan' => 'Sekolah Menengah Kejuruan'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-7' . Str::random(3),
+      'pendidikan' => 'Madrasah Aliyah Negeri'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-8' . Str::random(3),
+      'pendidikan' => 'Doploma'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-9' . Str::random(3),
+      'pendidikan' => 'Sarjana'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-98' . Str::random(3),
+      'pendidikan' => 'Magister'
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-99' . Str::random(2),
+      'pendidikan' => 'Doktor'
     ]);
   }
 }

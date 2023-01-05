@@ -11,7 +11,18 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <a href="/profil/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-user-plus"></i>
+              @if (session('message_kader'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_kader') }}
+                  </div>
+                </div>
+              @endif
+              <a href="/profil/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i
+                  class="fas fa-user-plus"></i>
                 Tambah Kader</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-profil-kader">

@@ -49,36 +49,23 @@ $(document).ready(function () {
             { width: 160, targets: 5 },
         ],
     });
-    // tampilan ortom kader
-    $("#scroll-x-ortom").DataTable({
-        scrollX: true,
-        columnDefs: [
-            { width: 5, targets: 0 },
-            { width: 220, targets: 1 },
-            { width: 425, targets: 2 },
-            { width: 180, targets: 3 },
-        ],
-    });
     // tampilan potensi kader
     $("#scroll-x-potensi").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 5, targets: 0 },
-            { width: 220, targets: 1 },
-            { width: 425, targets: 2 },
-            { width: 180, targets: 3 },
+            { width: 250, targets: 0 },
+            { width: 180, targets: 1 },
         ],
     });
     // tampilan ortom kader
     $("#scroll-x-ortom").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 5, targets: 0 },
-            { width: 220, targets: 1 },
-            { width: 425, targets: 2 },
-            { width: 180, targets: 3 },
+            { width: 250, targets: 0 },
+            { width: 180, targets: 1 },
         ],
     });
+    // tampilan tambah daerah di admin
     $("#scroll-x-tambah-admin-daerah").DataTable({
         scrollX: true,
         columnDefs: [
@@ -86,6 +73,7 @@ $(document).ready(function () {
             { width: 100, targets: 1 },
         ],
     });
+    // tampilan tambah daerah di cabang
     $("#scroll-x-tambah-admin-cabang").DataTable({
         scrollX: true,
         columnDefs: [
@@ -93,6 +81,7 @@ $(document).ready(function () {
             { width: 100, targets: 1 },
         ],
     });
+    // tampilan tambah daerah di ranting
     $("#scroll-x-tambah-admin-ranting").DataTable({
         scrollX: true,
         columnDefs: [

@@ -15,7 +15,7 @@ class Potensi extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_potensi_kader'];
+  protected $fillable = ['id_potensi_kader', 'potensi'];
 
   public function potensi_milik_kader()
   {

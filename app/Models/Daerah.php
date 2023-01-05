@@ -15,8 +15,6 @@ class Daerah extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_daerah'];
-
   public function kader()
   {
     return $this->belongsTo(Kader::class, 'daerah_id_daerah', 'nik');

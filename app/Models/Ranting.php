@@ -15,8 +15,6 @@ class Ranting extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_ranting'];
-
   public function kader()
   {
     return $this->belongsTo(Kader::class, 'ranting_id_ranting', 'nik');

@@ -15,7 +15,7 @@ class Kader extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['nik'];
+  protected $fillable = ['nik', 'user_id', 'daerah_id_daerah', 'cabang_id_cabang', 'ranting_id_ranting', 'no_kta', 'no_ktm', 'nama', 'tempat_lahir', 'tanggal_lahir', 'alamat_asal_ktp', 'alamat_rumah_tinggal', 'status_pernikahan', 'pekerjaan', 'email', 'no_ponsel', 'pendidikan_terakhir', 'foto'];
 
   public function daerah()
   {
@@ -44,5 +44,10 @@ class Kader extends Model
   public function kader_mimiliki_potensi()
   {
     return $this->hasMany(KaderPotensi::class);
+  }
+
+  public function pendidikan_terakhir()
+  {
+    return $this->belongsTo(PendidikanTerakhir::class, 'pendidikan_terakhir_id_pendidikan_terakhir', 'id_pendidikan_terakhir');
   }
 }

@@ -35,6 +35,16 @@
               </div>
 
               <div class="card-body">
+                @if (session('message_login'))
+                  <div class="alert alert-success alert-dismissible show fade">
+                    <div class="alert-body">
+                      <button class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                      </button>
+                      {{ session('message_login') }}
+                    </div>
+                  </div>
+                @endif
                 <form action="/login" method="post">
                   @csrf
                   <div class="form-group">

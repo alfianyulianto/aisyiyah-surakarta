@@ -23,6 +23,7 @@ use App\Http\Controllers\Kader\KaderOrtomController;
 use App\Http\Controllers\Kader\KaderPotensiController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UploadFotoController;
+use App\Models\Cabang;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,8 +70,6 @@ Route::resource('/tambah/admin/ranting', TambahAdminRantingController::class);
 Route::get('/settings', [AdminSettingsController::class, 'index']);
 Route::post('/settings/ortom', [AdminSettingsController::class, 'ortom_store']);
 Route::post('/settings/potensi', [AdminSettingsController::class, 'potensi_store']);
-Route::post('/settings/pekerjaan', [AdminSettingsController::class, 'pekerjaan_store']);
-Route::post('/settings/periode', [AdminSettingsController::class, 'periode_store']);
 
 // kader
 Route::get('/kader', [KaderDashboardController::class, 'index']);

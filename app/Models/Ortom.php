@@ -15,7 +15,7 @@ class Ortom extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_ortom'];
+  protected $fillable = ['id_ortom', 'nama_ortom'];
 
   public function ortom_milik_kader()
   {
