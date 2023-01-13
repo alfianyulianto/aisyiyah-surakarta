@@ -9,13 +9,13 @@ class KaderPotensi extends Model
 {
   use HasFactory;
 
-  protected $table = "kader_has_potensi_kader";
-  protected $primaryKey = "id_kader_has_potensi_kader";
+  protected $table = "kader_has_potensi";
+  protected $primaryKey = "id_kader_has_potensi";
 
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_kader_has_potensi_kader'];
+  protected $fillable = ['id_kader_has_potensi', 'kader_nik', 'potensi_id_potensi', 'potensi_kader_uraian'];
 
   public function kader()
   {
@@ -24,6 +24,6 @@ class KaderPotensi extends Model
 
   public function potensi()
   {
-    return $this->belongsTo(Potensi::class, 'potensi_id_potensi_kader', 'id_potensi_kader');
+    return $this->belongsTo(Potensi::class, 'potensi_id_potensi', 'id_potensi');
   }
 }

@@ -11,17 +11,17 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              @if (session('message_potensi_kader'))
+              @if (session('message_potensi_admin'))
                 <div class="alert alert-success alert-dismissible show fade">
                   <div class="alert-body">
                     <button class="close" data-dismiss="alert">
                       <span>&times;</span>
                     </button>
-                    {{ session('message_potensi_kader') }}
+                    {{ session('message_potensi_admin') }}
                   </div>
                 </div>
               @endif
-              <a href="/kader/potensi/create" class="btn btn-icon icon-left btn-primary mb-3"><i
+              <a href="/admin/potensi/create" class="btn btn-icon icon-left btn-primary mb-3"><i
                   class="fas fa-user-plus"></i>
                 Tambah Potensi Yang Dimiliki</a>
               <div class="table-responsive">

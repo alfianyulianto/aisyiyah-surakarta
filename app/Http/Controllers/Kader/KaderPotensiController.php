@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Kader;
 
 use App\Http\Controllers\Controller;
+use App\Models\KaderPotensi;
+use App\Models\Potensi;
 use Illuminate\Http\Request;
 
 class KaderPotensiController extends Controller
@@ -14,7 +16,9 @@ class KaderPotensiController extends Controller
    */
   public function index()
   {
-    return view('kader.potensi.index');
+    return view('kader.potensi.index', [
+      'potensi' => KaderPotensi::orderBy('created_at', 'desc')->get()
+    ]);
   }
 
   /**
@@ -24,7 +28,9 @@ class KaderPotensiController extends Controller
    */
   public function create()
   {
-    return view('kader.potensi.create');
+    // ambil data nama_potensi dan id_cabang pada tabel potensi
+    $nama_potensi = Potensi::pluck('potensi', 'id_potensi')->toArray();
+    return view('kader.potensi.create', compact('nama_potensi'));
   }
 
   /**
@@ -36,10 +42,21 @@ class KaderPotensiController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_kader_has_potensi_kader' => ['required', 'max:9', 'min:9'],
-      'nama_potensi' => ['required'],
-      'potensi_uraian' => ['required', 'min:10'],
+      'id_kader_has_potensi' => ['required', 'max:9', 'min:9'],
+      'potensi_id_potensi' => ['required'],
+      'potensi_kader_uraian' => ['required', 'min:10'],
     ]);
+
+    // tambah nik user
+    $validated['kader_nik'] = '3372010107000002';
+
+    // insert ke tabel kader_has_potensi
+    KaderPotensi::create($validated);
+
+    // select tabel potensi
+    $nama_potensi = Potensi::where('id_potensi', $request->potensi_id_potensi)->first()->potensi;
+
+    return redirect('/kader/potensi')->with('message_potensi_kader', 'Data potensi ' . $nama_potensi . ' berhasil ditambahkan.');
   }
 
   /**

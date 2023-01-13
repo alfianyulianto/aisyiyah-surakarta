@@ -15,7 +15,7 @@ class KaderJabatan extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_kader_jabatan'];
+  protected $fillable = ['id_kader_jabatan', 'kader_nik', 'jabatan_id_jabatan', 'periode'];
 
   public function kader()
   {

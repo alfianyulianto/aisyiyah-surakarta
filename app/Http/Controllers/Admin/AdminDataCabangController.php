@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminDataCabangController extends Controller
 {
@@ -42,8 +43,17 @@ class AdminDataCabangController extends Controller
       'id_cabang' => ['required', 'min:9', 'max:9'],
       'nama_cabang' => ['required', 'min:5'],
       'alamat_cabang' => ['required', 'min:10'],
-      'sk_pimp_cabang' => ['required', 'file'],
+      'sk_pimp_cabang' => ['required'],
     ]);
+
+    $validated['daerah_id_daerah'] = 'ska-1';
+
+    $validated['sk_pimp_cabang'] = $request->file('sk_pimp_cabang')->storeAs('sk-pimpinan', 'SK-Cabang-' . Str::slug($request->nama_cabang) . '-' . date('d-m-Y') . '.png');
+
+    // insert ke table cabang
+    Cabang::create($validated);
+
+    return redirect('/data/cabang')->with('message_cabang', 'Berhasil menambahkan cabang ' . $request->nama_cabang);
   }
 
   /**

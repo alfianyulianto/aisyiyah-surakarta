@@ -16,12 +16,19 @@
        <li class="nav-item {{ Request::is('data/profil') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/data/profil" class="nav-link"><i class="fas fa-user"></i><span>Data Pribadi</span></a>
        </li>
+       <li class="nav-item {{ Request::is('admin/ortom') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="/admin/ortom" class="nav-link"><i class="fas fa-layer-group"></i><span>Daftar Ortom</span></a>
+       </li>
+       <li class="nav-item {{ Request::is('admin/potensi') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="/admin/potensi" class="nav-link"><i class="fas fa-medal"></i><span>Potensi Kader</span></a>
+       </li>
        <hr class="my-2">
        <li class="menu-header">Admin</li>
        <li class="nav-item {{ Request::is('profil/kader') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/profil/kader" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
        </li>
-       <li class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li
+         class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
              class="fas fa-th"></i><span>Jabatan</span></a>
          <ul class="dropdown-menu">
@@ -58,6 +65,34 @@
          <a href="/settings" class="nav-link"><i class="fas fa-cogs"></i></i><span>Setting</span></a>
        </li>
 
+       {{-- Admin Cabang / Ranting --}}
+       <hr class="mb-2">
+       <li class="menu-header">Admin Cabang / Ranting</li>
+       <li class="nav-item {{ Request::is('profil/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="/profil/kader" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
+       </li>
+       <li
+         class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+             class="fas fa-th"></i><span>Jabatan</span></a>
+         <ul class="dropdown-menu">
+           <li class="{{ Request::is('data/jabatan') ? 'active' : '' }}">
+             <a class="nav-link" href="/data/jabatan">Data Jabatan</a>
+           </li>
+           <li class="{{ Request::is('jabatan/kader') ? 'active' : '' }}">
+             <a class="nav-link" href="/jabatan/kader">Jabatan Kader</a>
+           </li>
+         </ul>
+       </li>
+       <li class="nav-item {{ Request::is('data/ranting') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="/data/ranting" class="nav-link"><i class="fas fa-server"></i></i><span>Data Ranting</span></a>
+       </li>
+       <li
+         class="nav-item {{ Request::is('tambah/admin') || Request::is('tambah/admin/daerah') || Request::is('tambah/admin/cabang') || Request::is('tambah/admin/ranting') ? 'active rounded-pill shadow-sm' : '' }}">
+         <a href="/tambah/admin" class="nav-link"><i class="fas fa-user-cog"></i>
+           <span>Tambah Admin</a>
+       </li>
+
        {{-- Anggota Aisyiyah --}}
        <hr class="mb-2">
        <li class="menu-header">Dashboard Kader</li>
@@ -69,10 +104,10 @@
        <li class="nav-item {{ Request::is('profil') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/profil" class="nav-link"><i class="fas fa-user"></i><span>Profil</span></a>
        </li>
-       <li class="nav-item {{ Request::is('ortom') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li class="nav-item {{ Request::is('kader/ortom') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/kader/ortom" class="nav-link"><i class="fas fa-layer-group"></i><span>Daftar Ortom</span></a>
        </li>
-       <li class="nav-item {{ Request::is('potensi') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li class="nav-item {{ Request::is('kader/potensi') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/kader/potensi" class="nav-link"><i class="fas fa-medal"></i><span>Potensi Kader</span></a>
        </li>
      </ul>

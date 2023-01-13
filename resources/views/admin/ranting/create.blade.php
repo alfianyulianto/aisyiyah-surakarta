@@ -13,15 +13,45 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-8">
-                  <form action="/data/ranting" method="post">
+                  <form action="/data/ranting" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="id_ranting" class="form-label"><b>Id Ranting</b></label>
                           <input type="text" class="form-control" name="id_ranting" id="id_ranting"
-                            value="{{ 'RNTNG-' . Str::lower(Str::random(4)) }}" readonly>
+                            value="{{ 'rntng-' . Str::lower(Str::random(4)) }}" readonly>
                           @error('id_ranting')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="mb-3">
+                          <label for="cabang_id_cabang" class="form-label"><b>Cabang Aisyiyah</b></label>
+                          <select class="form-control form-control-lg select2" name="cabang_id_cabang"
+                            id="cabang_id_cabang">
+                            @if (old('cabang_id_cabang'))
+                              <option disabled>-- Pilih Cabang --</option>
+                              @foreach ($nama_cabang as $id_cabang => $nama_cabang)
+                                @if (old('cabang_id_cabang') == $id_cabang)
+                                  <option value="{{ $id_cabang }}" selected>{{ $nama_cabang }}</option>
+                                @else
+                                  <option value="{{ $id_cabang }}">{{ $nama_cabang }}</option>
+                                @endif
+                              @endforeach
+                            @else
+                              <option selected disabled>-- Pilih Cabang --</option>
+                              @foreach ($nama_cabang as $id_cabang => $nama_cabang)
+                                <option value="{{ $id_cabang }}">{{ $nama_cabang }}</option>
+                              @endforeach
+                            @endif
+                          </select>
+                          @error('cabang_id_cabang')
                             <div class="error-message">
                               {{ $message }}
                             </div>
@@ -34,7 +64,7 @@
                         <div class="mb-3">
                           <label for="nama_ranting" class="form-label"><b>Nama Ranting</b></label>
                           <input type="text" class="form-control" name="nama_ranting" id="nama_ranting"
-                            placeholder="Masukan Nama Ranting (cnth: Pajang)" autofocus>
+                            placeholder="Masukan Nama Ranting (cnth: Pajang)" value="{{ old('nama_ranting') }}" autofocus>
                           @error('nama_ranting')
                             <div class="error-message">
                               {{ $message }}
@@ -48,7 +78,7 @@
                         <div class="mb-3">
                           <label for="alamat_ranting" class="form-label"><b>Alamat Ranting</b></label>
                           <input type="text" class="form-control" name="alamat_ranting" id="alamat_ranting"
-                            placeholder="Masukan Alamat Ranting">
+                            placeholder="Masukan Alamat Ranting" value="{{ old('alamat_ranting') }}">
                           @error('alamat_ranting')
                             <div class="error-message">
                               {{ $message }}
@@ -60,7 +90,10 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="sk_pimp_ranting" class="form-label"><b>SK Pimpinan Ranting</b></label>
+                          <label for="sk_pimp_ranting" class="form-label"><b>SK Pimpinan Ranting @error('sk_pimp_ranting')
+                                <div class="text-danger d-inline error-message">*Silahkan upload ulang</div>
+                              @enderror
+                            </b></label>
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" name="sk_pimp_ranting" id="sk_pimp_ranting">
                             <label class="custom-file-label" for="sk_pimp_ranting">Choose file</label>
@@ -85,4 +118,12 @@
       </div>
     </div>
   </section>
+  <script>
+    $('#sk_pimp_ranting').on('change', function(e) {
+      //get the file name
+      var fileName = e.target.files[0].name;
+      //replace the "Choose a file" label
+      $(this).next('.custom-file-label').html(fileName);
+    })
+  </script>
 @endsection

@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Kader;
-use App\Models\Potensi;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,11 +13,9 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('kader_has_potensi_kader', function (Blueprint $table) {
-      $table->string('id_kader_has_potensi_kader')->primary();
-      $table->foreignIdFor(Kader::class);
-      $table->foreignIdFor(Potensi::class);
-      $table->text('potensi_kader_uraian');
+    Schema::create('potensi', function (Blueprint $table) {
+      $table->string('id_potensi')->primary();
+      $table->text('potensi');
       $table->timestamps();
     });
   }
@@ -31,6 +27,6 @@ return new class extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('kader_has_potensi_kader');
+    Schema::dropIfExists('potensi');
   }
 };

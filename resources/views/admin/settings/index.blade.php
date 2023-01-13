@@ -96,9 +96,8 @@
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="potensi" class="form-label"><b>Jenis Potensi Kader</b></label>
-                          <input type="text" class="form-control @error('potensi') is-invalid @enderror"
-                            name="potensi" id="potensi"
-                            placeholder="Masukan Potensi Kader (cnth:Bidang Pendidikan)">
+                          <input type="text" class="form-control @error('potensi') is-invalid @enderror" name="potensi"
+                            id="potensi" placeholder="Masukan Potensi Kader (cnth:Bidang Pendidikan)">
                           @error('potensi')
                             <div id="validationServerUsernameFeedback" class="invalid-feedback">
                               {{ $message }}
@@ -108,7 +107,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mb-5">
-                      <button type="submit" class="btn btn-primary">Add Ranting</button>
+                      <button type="submit" class="btn btn-primary">Add Potensi</button>
                     </div>
                   </div>
                 </div>
@@ -116,7 +115,7 @@
               <table class="table table-bordered table-hover table-responsive" id="scroll-x-potensi">
                 <thead>
                   <tr>
-                    <th>Nama Ortom</th>
+                    <th>Nama Potensi</th>
                     <th>Action</th>
                   </tr>
                 </thead>

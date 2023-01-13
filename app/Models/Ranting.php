@@ -15,6 +15,8 @@ class Ranting extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
+  protected $fillable = ['id_ranting', 'daerah_id_daerah', 'cabang_id_cabang', 'nama_ranting', 'alamat_ranting', 'sk_pimp_ranting'];
+
   public function kader()
   {
     return $this->belongsTo(Kader::class, 'ranting_id_ranting', 'nik');

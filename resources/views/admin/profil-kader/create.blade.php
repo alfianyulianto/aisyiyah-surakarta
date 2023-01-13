@@ -32,8 +32,8 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="mb-3">
-                          <label for="no_kta" class="form-label"><b>No KTA 'Aisyiyah <small
-                                class="text-danger">*Optional</small></b></label>
+                          <label for="no_kta" class="form-label"><b>No KTA 'Aisyiyah <div
+                                class="text-danger d-inline error-message">*Optional</div></b></label>
                           <input type="text" class="form-control" name="no_kta" id="no_kta"
                             placeholder="Kartu Tanda Anggota 'Aisyiyah" value="{{ old('no_kta') }}">
                           @error('no_kta')
@@ -48,8 +48,8 @@
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="mb-3">
-                          <label for="no_ktm" class="form-label"><b>No KTA Muhammadiyah <small
-                                class="text-danger">*Optional</small></b></label>
+                          <label for="no_ktm" class="form-label"><b>No KTA Muhammadiyah <div
+                                class="text-danger d-inline error-message">*Optional</div></b></label>
                           <input type="text" class="form-control" name="no_ktm" id="no_ktm"
                             placeholder="Kartu Tanda Anggota Muhammadiyah" value="{{ old('no_ktm') }}">
                           @error('no_ktm')
@@ -133,8 +133,9 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="email" class="form-label"><b>Email <small
-                                class="text-danger">*Optional</small></b></label>
+                          <label for="email" class="form-label"><b>Email <div
+                                class="text-danger d-inline error-message">
+                                *Optional</div></b></label>
                           <input type="email" class="form-control" name="email" id="email"
                             placeholder="Email (cnth:budidoremi@gmail.com)" value="{{ old('email') }}">
                           @error('email')

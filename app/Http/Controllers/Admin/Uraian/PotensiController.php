@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Uraian;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jabatan;
+use App\Models\KaderPotensi;
+use App\Models\Potensi;
 use Illuminate\Http\Request;
 
-class AdminDataJabatanController extends Controller
+class PotensiController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -15,8 +16,8 @@ class AdminDataJabatanController extends Controller
    */
   public function index()
   {
-    return view('admin.jabatan.index', [
-      'jabatan' => Jabatan::orderBy('created_at', 'asc')->get()
+    return view('admin.uraian_potensi.index', [
+      'potensi' => KaderPotensi::orderBy('created_at', 'desc')->get()
     ]);
   }
 
@@ -27,7 +28,9 @@ class AdminDataJabatanController extends Controller
    */
   public function create()
   {
-    return view('admin.jabatan.create');
+    // ambil data nama_potensi dan id_cabang pada tabel potensi
+    $nama_potensi = Potensi::pluck('potensi', 'id_potensi')->toArray();
+    return view('admin.uraian_potensi.create', compact('nama_potensi'));
   }
 
   /**
@@ -38,7 +41,22 @@ class AdminDataJabatanController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      'id_kader_has_potensi' => ['required', 'max:9', 'min:9'],
+      'potensi_id_potensi' => ['required'],
+      'potensi_kader_uraian' => ['required', 'min:10'],
+    ]);
+
+    // tambah nik user
+    $validated['kader_nik'] = '3372010107000002';
+
+    // insert ke tabel kader_has_potensi
+    KaderPotensi::create($validated);
+
+    // select tabel potensi
+    $nama_potensi = Potensi::where('id_potensi', $request->potensi_id_potensi)->first()->potensi;
+
+    return redirect('/admin/potensi')->with('message_potensi_admin', 'Data potensi ' . $nama_potensi . ' berhasil ditambahkan.');
   }
 
   /**

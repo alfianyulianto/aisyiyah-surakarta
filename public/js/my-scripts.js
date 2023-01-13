@@ -1,5 +1,6 @@
 $(document).ready(function () {
     // DataTables
+
     $("#scroll-x-profil-kader").DataTable({
         scrollX: true,
         columnDefs: [
@@ -12,6 +13,15 @@ $(document).ready(function () {
             { width: 200, targets: 6 },
             { width: 70, targets: 7 },
             { width: 235, targets: 8 },
+        ],
+    });
+
+    $("#scroll-x-data-jabatan").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: "2%", targets: 0 },
+            { width: "63%", targets: 1 },
+            { width: "35%", targets: 2 },
         ],
     });
 
@@ -50,19 +60,23 @@ $(document).ready(function () {
         ],
     });
     // tampilan potensi kader
-    $("#scroll-x-potensi").DataTable({
+    $("#scroll-x-potensi-kader").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 250, targets: 0 },
-            { width: 180, targets: 1 },
+            { width: "2%", targets: 0 },
+            { width: "30%", targets: 1 },
+            { width: "45%", targets: 2 },
+            { width: "20%", targets: 3 },
         ],
     });
     // tampilan ortom kader
-    $("#scroll-x-ortom").DataTable({
+    $("#scroll-x-ortom-kader").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 250, targets: 0 },
-            { width: 180, targets: 1 },
+            { width: "2%", targets: 0 },
+            { width: "30%", targets: 1 },
+            { width: "45%", targets: 2 },
+            { width: "20%", targets: 3 },
         ],
     });
     // tampilan tambah daerah di admin
@@ -109,6 +123,9 @@ $(document).ready(function () {
             { width: 285, targets: 0 },
             { width: 100, targets: 1 },
         ],
+    });
+    $("#scroll-x-tambah-pimpinan-ranting-tampilan-admin-cabang").DataTable({
+        scrollX: true,
     });
 
     // Summernote (editor)

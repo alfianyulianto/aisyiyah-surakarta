@@ -13,7 +13,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-8">
-                  <form action="/kader/potensi" method="post">
+                  <form action="/admin/potensi" method="post">
                     @csrf
                     <div class="row">
                       <div class="col-lg-12">

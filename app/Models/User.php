@@ -39,4 +39,9 @@ class User extends Authenticatable
   ];
 
   protected $guarded = ['id'];
+
+  public function kader()
+  {
+    $this->belongsTo(Kader::class, 'kader_nik', 'nik');
+  }
 }

@@ -19,11 +19,10 @@ return new class extends Migration
   {
     Schema::create('jabatan', function (Blueprint $table) {
       $table->string('id_jabatan')->primary();
-      $table->foreignIdFor(Daerah::class);
-      $table->foreignIdFor(Cabang::class);
-      $table->foreignIdFor(Ranting::class);
+      $table->foreignIdFor(Daerah::class)->nullable();
+      $table->foreignIdFor(Cabang::class)->nullable();
+      $table->foreignIdFor(Ranting::class)->nullable();
       $table->string('nama_jabatan');
-      $table->string('periode');
       $table->timestamps();
     });
   }

@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Potensi Yang Dimiliki</h1>
+      <h1>Tambah Ortom Yang Di Ikuti</h1>
     </div>
 
     <div class="section-body">
@@ -13,15 +13,15 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-8">
-                  <form action="/kader/potensi" method="post">
+                  <form action="/admin/ortom" method="post">
                     @csrf
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="id_kader_has_potensi" class="form-label"><b>Id Ortom</b></label>
-                          <input type="text" class="form-control" name="id_kader_has_potensi" id="id_kader_has_potensi"
-                            value="{{ 'ptns-' . Str::lower(Str::random(4)) }}" readonly>
-                          @error('id_kader_has_potensi')
+                          <label for="id_kader_has_ortom" class="form-label"><b>Id Ortom</b></label>
+                          <input type="text" class="form-control" name="id_kader_has_ortom" id="id_kader_has_ortom"
+                            value="{{ 'kdortm-' . Str::lower(Str::random(4)) }}" readonly>
+                          @error('id_kader_has_ortom')
                             <div class="error-message">
                               {{ $message }}
                             </div>
@@ -32,26 +32,26 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="potensi_id_potensi" class="form-label"><b>Nama Potensi</b></label>
-                          <select class="form-control form-control-lg selectric" name="potensi_id_potensi"
-                            id="potensi_id_potensi">
-                            @if (old('potensi_id_potensi'))
-                              <option selected>-- Pilih Potensi --</option>
-                              @foreach ($nama_potensi as $id_potensi => $nama_potensi)
-                                @if (old('potensi_id_potensi') == $id_potensi)
-                                  <option value="{{ $id_potensi }}" selected>{{ $nama_potensi }}</option>
+                          <label for="ortom_id_ortom" class="form-label"><b>Nama Ortom</b></label>
+                          <select class="form-control form-control-lg selectric" id="ortom_id_ortom"
+                            name="ortom_id_ortom">
+                            @if (old('ortom_id_ortom'))
+                              <option disabled>-- Pilih Ortom --</option>
+                              @foreach ($nama_ortom as $id_ortom => $nama_ortom)
+                                @if (old('ortom_id_ortom') == $id_ortom)
+                                  <option value="{{ $id_ortom }}" selected>{{ $nama_ortom }}</option>
                                 @else
-                                  <option value="{{ $id_potensi }}">{{ $nama_potensi }}</option>
+                                  <option value="{{ $id_ortom }}">{{ $nama_ortom }}</option>
                                 @endif
                               @endforeach
                             @else
-                              <option selected disabled>-- Pilih Potensi --</option>
-                              @foreach ($nama_potensi as $id_potensi => $nama_potensi)
-                                <option value="{{ $id_potensi }}">{{ $nama_potensi }}</option>
+                              <option selected disabled>-- Pilih Ortom --</option>
+                              @foreach ($nama_ortom as $id_ortom => $nama_ortom)
+                                <option value="{{ $id_ortom }}">{{ $nama_ortom }}</option>
                               @endforeach
                             @endif
                           </select>
-                          @error('potensi_id_potensi')
+                          @error('ortom_id_ortom')
                             <div class="error-message">
                               {{ $message }}
                             </div>
@@ -62,9 +62,9 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="potensi_kader_uraian" class="form-label"><b>Uraian Potensi</b></label>
-                          <textarea id="summernote" name="potensi_kader_uraian" style="height: 1876px">{!! old('potensi_kader_uraian') !!}</textarea>
-                          @error('potensi_kader_uraian')
+                          <label for="ortom_uraian" class="form-label"><b>Uraian Ortom</b></label>
+                          <textarea id="summernote" name="ortom_uraian" style="height: 1876px">{!! old('ortom_uraian') !!}</textarea>
+                          @error('ortom_uraian')
                             <div class="error-message">
                               {{ $message }}
                             </div>
@@ -73,7 +73,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mt-2">
-                      <button type="submit" class="btn btn-primary">Add Potensi</button>
+                      <button type="submit" class="btn btn-primary">Add Ortom</button>
                     </div>
                   </form>
                 </div>

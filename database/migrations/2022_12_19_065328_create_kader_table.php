@@ -6,7 +6,6 @@ use App\Models\KaderOrtom;
 use App\Models\KaderPotensi;
 use App\Models\PendidikanTerakhir;
 use App\Models\Ranting;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +24,6 @@ return new class extends Migration
       $table->foreignIdFor(Daerah::class);
       $table->foreignIdFor(Cabang::class);
       $table->foreignIdFor(Ranting::class);
-      $table->foreignIdFor(User::class);
       $table->foreignIdFor(KaderOrtom::class)->default('-');
       $table->foreignIdFor(KaderPotensi::class)->default('-');
       $table->foreignIdFor(PendidikanTerakhir::class)->default('-');

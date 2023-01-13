@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cabang;
 use App\Models\Ranting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminDataRantingController extends Controller
 {
@@ -27,7 +29,9 @@ class AdminDataRantingController extends Controller
    */
   public function create()
   {
-    return view('admin.ranting.create');
+    // ambil data nama_cabang dan id_cabang pada tabel cabang
+    $nama_cabang = Cabang::pluck('nama_cabang', 'id_cabang')->toArray();
+    return view('admin.ranting.create', compact('nama_cabang'));
   }
 
   /**
@@ -39,11 +43,21 @@ class AdminDataRantingController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_ranting' => ['required', 'max:9', 'min:9'],
+      'id_ranting' => ['required', 'min:10', 'max:10'],
+      'cabang_id_cabang' => ['required'],
       'nama_ranting' => ['required', 'min:5'],
       'alamat_ranting' => ['required', 'min:10'],
-      'sk_pimp_ranting' => ['required', 'file'],
+      'sk_pimp_ranting' => ['required'],
     ]);
+
+    $validated['daerah_id_daerah'] = 'ska-1';
+
+    $validated['sk_pimp_ranting'] = $request->file('sk_pimp_ranting')->storeAs('sk-pimpinan', 'SK-Ranting-' . Str::slug($request->nama_cabang) . '-' . date('d-m-Y') . '.png');
+
+    // insert ke table cabang
+    Ranting::create($validated);
+
+    return redirect('/data/ranting')->with('message_cabang', 'Berhasil menambahkan ranting ' . $request->nama_cabang);
   }
 
   /**

@@ -15,10 +15,7 @@ class Jabatan extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  public function kader()
-  {
-    return $this->belongsTo(Kader::class, 'nik');
-  }
+  protected $fillable = ['id_jabatan', 'daerah_id_daerah', 'cabang_id_cabang', 'ranting_id_ranting', 'nama_jabatan'];
 
   public function jabatan_milik_kader()
   {

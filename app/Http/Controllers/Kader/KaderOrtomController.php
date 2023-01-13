@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Kader;
 
 use App\Http\Controllers\Controller;
+use App\Models\KaderOrtom;
+use App\Models\Ortom;
 use Illuminate\Http\Request;
 
 class KaderOrtomController extends Controller
@@ -14,7 +16,9 @@ class KaderOrtomController extends Controller
    */
   public function index()
   {
-    return view('kader.ortom.index');
+    return view('kader.ortom.index', [
+      'ortom' => KaderOrtom::orderBy('created_at', 'desc')->get()
+    ]);
   }
 
   /**
@@ -24,7 +28,9 @@ class KaderOrtomController extends Controller
    */
   public function create()
   {
-    return view('kader.ortom.create');
+    // ambil data nama_ortom dan id_cabang pada tabel ortom
+    $nama_ortom = Ortom::pluck('nama_ortom', 'id_ortom')->toArray();
+    return view('kader.ortom.create', compact('nama_ortom'));
   }
 
   /**
@@ -36,10 +42,20 @@ class KaderOrtomController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_kader_has_ortom' => ['required', 'max:9', 'min:9'],
-      'nama_ortom' => ['required'],
-      'ortom_uraian' => ['required', 'min:10'],
+      'id_kader_has_ortom' => ['required', 'max:11', 'min:11'],
+      'ortom_id_ortom' => ['required'],
+      'ortom_uraian' => ['required', 'min:5'],
     ]);
+    // tambah nik user
+    $validated['kader_nik'] = '3372010107000002';
+
+    // insert ke tabel kader_has_ortom
+    KaderOrtom::create($validated);
+
+    // select tabel ortom
+    $nama_ortom = Ortom::where('id_ortom', $request->ortom_id_ortom)->first()->nama_ortom;
+
+    return redirect('/kader/ortom')->with('message_ortom_kader', 'Data ortom ' . $nama_ortom . ' berhasil ditambahkan.');
   }
 
   /**

@@ -19,6 +19,7 @@ return new class extends Migration
       $table->string('id_kader_jabatan')->primary();
       $table->foreignIdFor(Kader::class);
       $table->foreignIdFor(Jabatan::class);
+      $table->string('periode');
       $table->timestamps();
     });
   }

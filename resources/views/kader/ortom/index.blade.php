@@ -11,10 +11,20 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
+               @if (session('message_ortom_kader'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_ortom_kader') }}
+                  </div>
+                </div>
+              @endif
               <a href="/kader/ortom/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-user-plus"></i>
                 Tambah Kegiatan Ortom</a>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x-ortom">
+                <table class="table table-bordered table-hover" id="scroll-x-ortom-kader">
                   <thead>
                     <tr>
                       <th class="text-center">
@@ -26,18 +36,20 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($ortom as $o)
                     <tr>
-                      <td>
-                        1
+                      <td class="text-center">
+                        {{ $loop->iteration }}
                       </td>
-                      <td>Ikatan Mahasiswa Muhammadiyah</td>
-                      <td>Ketua IMM Adam Malik FKI UMS periode 2020</td>
+                      <td>{{$o->ortom->nama_ortom}}</td>
+                      <td>{!!  $o->ortom_uraian !!}</td>
                       <td>
                         <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i> Edit</a>
                         <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
                           Hapus</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

@@ -15,6 +15,8 @@ class Cabang extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
+  protected $fillable = ['id_cabang', 'daerah_id_daerah', 'nama_cabang', 'alamat_cabang', 'sk_pimp_cabang'];
+
   public function kader()
   {
     return $this->belongsTo(Kader::class, 'cabang_id_cabang', 'nik');
