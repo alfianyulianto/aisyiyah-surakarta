@@ -30,6 +30,9 @@
   {{-- JQuery --}}
   <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
+  {{-- Autocomplate --}}
+  <script src="{{ url('') }}/js/jquery.autocomplete.min.js"></script>
+
 </head>
 
 <body>

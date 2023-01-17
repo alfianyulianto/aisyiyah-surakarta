@@ -27,8 +27,8 @@ class RegisterController extends Controller
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
       'no_ponsel' => ['required', 'numeric', 'max_digits:12', 'min_digits:12'],
       'nama' => ['required', 'string'],
-      'cabang_id_cabang' => ['required'],
-      'ranting_id_ranting' => ['required'],
+      // 'cabang_id_cabang' => ['required'],
+      // 'ranting_id_ranting' => ['required'],
       'password' => ['required', 'min:8'],
       'konfirmasi_password' => ['required', 'min:8', 'same:password'],
     ]);

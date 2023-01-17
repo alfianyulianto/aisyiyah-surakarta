@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     // user
     DB::table('users')->insert([
       'id' => '1',
-      'kader_nik' => '33720101070002',
+      'kader_nik' => '3372010107000002',
       'nama' => 'Alfian Yulianto',
       'no_ponsel' => '081217432366',
       'password' => Hash::make('password'),
@@ -395,23 +395,38 @@ class DatabaseSeeder extends Seeder
     ]);
     DB::table('pendidikan_terakhir')->insert([
       'id_pendidikan_terakhir' => 'pndk-' . Str::random(4),
-      'pendidikan' => 'Doploma',
+      'pendidikan' => 'Diploma Satu',
       'created_at' => date('Y-m-d H:i:08')
     ]);
     DB::table('pendidikan_terakhir')->insert([
       'id_pendidikan_terakhir' => 'pndk-' . Str::random(4),
-      'pendidikan' => 'Sarjana',
+      'pendidikan' => 'Diploma Dua',
       'created_at' => date('Y-m-d H:i:09')
     ]);
     DB::table('pendidikan_terakhir')->insert([
       'id_pendidikan_terakhir' => 'pndk-' . Str::random(4),
-      'pendidikan' => 'Magister',
+      'pendidikan' => 'Diploma Tiga',
       'created_at' => date('Y-m-d H:i:10')
     ]);
     DB::table('pendidikan_terakhir')->insert([
       'id_pendidikan_terakhir' => 'pndk-' . Str::random(4),
-      'pendidikan' => 'Doktor',
+      'pendidikan' => 'Diploma Empat',
       'created_at' => date('Y-m-d H:i:11')
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-' . Str::random(4),
+      'pendidikan' => 'Sarjana',
+      'created_at' => date('Y-m-d H:i:12')
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-' . Str::random(4),
+      'pendidikan' => 'Magister',
+      'created_at' => date('Y-m-d H:i:13')
+    ]);
+    DB::table('pendidikan_terakhir')->insert([
+      'id_pendidikan_terakhir' => 'pndk-' . Str::random(4),
+      'pendidikan' => 'Doktor',
+      'created_at' => date('Y-m-d H:i:14')
     ]);
 
     // jabatan
@@ -726,6 +741,102 @@ class DatabaseSeeder extends Seeder
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => "Kepala RT 'Aisyiyah",
       'created_at' => date('Y-m-d H:i:52')
+    ]);
+
+    // tabel periode
+    DB::table('periode')->insert([
+      'id_periode' => 'prd-' . Str::random(4),
+      'periode' => '2005-2010',
+      'created_at' => date('Y-m-d H:i:01')
+    ]);
+    DB::table('periode')->insert([
+      'id_periode' => 'prd-' . Str::random(4),
+      'periode' => '2010-2015',
+      'created_at' => date('Y-m-d H:i:02')
+    ]);
+    DB::table('periode')->insert([
+      'id_periode' => 'prd-' . Str::random(4),
+      'periode' => '2015-2020',
+      'created_at' => date('Y-m-d H:i:03')
+    ]);
+    DB::table('periode')->insert([
+      'id_periode' => 'prd-' . Str::random(4),
+      'periode' => '2020-2025',
+      'created_at' => date('Y-m-d H:i:04')
+    ]);
+
+    // tabel tempat_lahir
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'nama_kota' => 'Surakarta',
+      'created_at' => date('Y-m-d H:i:01')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'nama_kota' => 'Sukoharjo',
+      'created_at' => date('Y-m-d H:i:02')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'nama_kota' => 'Klaten',
+      'created_at' => date('Y-m-d H:i:03')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'nama_kota' => 'Wonogiri',
+      'created_at' => date('Y-m-d H:i:04')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'nama_kota' => 'Kudus',
+      'created_at' => date('Y-m-d H:i:05')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'nama_kota' => 'Sragen',
+      'created_at' => date('Y-m-d H:i:06')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'nama_kota' => 'Karanganyar',
+      'created_at' => date('Y-m-d H:i:07')
+    ]);
+
+    // tabel pekerjaan
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'nama_pekerjaan' => 'PNS',
+      'created_at' => date('Y-m-d H:i:01')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'nama_pekerjaan' => 'Wirasuwasta',
+      'created_at' => date('Y-m-d H:i:02')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'nama_pekerjaan' => 'Dosen',
+      'created_at' => date('Y-m-d H:i:03')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'nama_pekerjaan' => 'Pelajar',
+      'created_at' => date('Y-m-d H:i:04')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'nama_pekerjaan' => 'Mahasiswa',
+      'created_at' => date('Y-m-d H:i:05')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'nama_pekerjaan' => 'Karyawan Swasta',
+      'created_at' => date('Y-m-d H:i:06')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'nama_pekerjaan' => 'Ibu Rumah Tangga',
+      'created_at' => date('Y-m-d H:i:07')
     ]);
   }
 }

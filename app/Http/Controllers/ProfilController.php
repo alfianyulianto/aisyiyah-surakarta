@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendidikanTerakhir;
 use Illuminate\Http\Request;
 
 class ProfilController extends Controller
 {
   public function edit()
   {
-    return view('profil');
+    return view('profil', [
+      'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get()
+    ]);
   }
 
   public function update(Request $request,)
   {
     $role = [
-      // 'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
-      // 'no_kta' => ['required', 'numeric', 'unique:App\Models\Kader,no_kta'],
-      // 'no_ktm' => ['required', 'numeric', 'unique:App\Models\Kader,no_ktm'],
+      'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
+      'no_kta' => ['nullable', 'numeric', 'unique:App\Models\Kader,no_kta'],
+      'no_ktm' => ['nullable', 'numeric', 'unique:App\Models\Kader,no_ktm'],
       'nama' => ['required', 'string', 'min:5'],
       'cabang_id_cabang' => ['required'],
       'ranting_id_ranting' => ['required'],
       'email' => ['required', 'email:dns'],
-      'jenis_kelamin' => ['required'],
       'tempat_lahir' => ['required', 'string'],
       'tanggal_lahir' => ['required'],
       'status_pernikahan' => ['required'],
@@ -36,11 +38,11 @@ class ProfilController extends Controller
       'cek_alamat' => [],
     ];
     if (!$request->cek_alamat) {
-      $role['alamat_rumah'] = ['required', 'min:5'];
-      $role['provinsi_rumah'] = ['required'];
-      $role['kabupaten_kota_rumah'] = ['required'];
-      $role['kecamatan_rumah'] = ['required'];
-      $role['kelurahan_rumah'] = ['required'];
+      $role['alamat_domisili'] = ['required', 'min:5'];
+      $role['provinsi_domisili'] = ['required'];
+      $role['kabupaten_kota_domisili'] = ['required'];
+      $role['kecamatan_domisili'] = ['required'];
+      $role['kelurahan_domisili'] = ['required'];
     };
     $validated = $request->validate($role);
   }

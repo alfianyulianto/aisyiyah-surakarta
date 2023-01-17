@@ -127,6 +127,19 @@ $(document).ready(function () {
     $("#scroll-x-tambah-pimpinan-ranting-tampilan-admin-cabang").DataTable({
         scrollX: true,
     });
+    $("#scroll-x-tmbah-admin").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 175, targets: 1 },
+            { width: 115, targets: 2 },
+            { width: 100, targets: 3 },
+            { width: 100, targets: 4 },
+            { width: 140, targets: 5 },
+            { width: 90, targets: 6 },
+            { width: 155, targets: 7 },
+        ],
+    });
 
     // Summernote (editor)
     $("#summernote").summernote({
@@ -173,4 +186,85 @@ $(document).ready(function () {
             $("#konfirmasi_password").addClass("is-invalid");
         }
     });
+
+    // autocomplete tempat_lahir
+    function get_tempat_lahir() {
+        return $.ajax({
+            type: "get",
+            url: "/tempat/lahir",
+            dataType: "json",
+            success: (response) => {
+                response;
+            },
+        });
+    }
+    async function tempat_lahir() {
+        let tempat_lahir = await get_tempat_lahir();
+        let nama_kota = [];
+        tempat_lahir.forEach((i) => {
+            nama_kota.push(i.nama_kota);
+        });
+        autocomplete_tempat_lahir(nama_kota);
+    }
+    function autocomplete_tempat_lahir(nama_kota) {
+        console.log(nama_kota);
+        $("#tempat_lahir").autocomplete({
+            lookup: nama_kota,
+        });
+    }
+    tempat_lahir();
+
+    // autocomplete periode
+    function get_periode() {
+        return $.ajax({
+            type: "get",
+            url: "/periode",
+            dataType: "json",
+            success: (response) => {
+                response;
+            },
+        });
+    }
+    async function periode() {
+        let periode = await get_periode();
+        let tahun_periode = [];
+        periode.forEach((i) => {
+            tahun_periode.push(i.periode);
+        });
+        autocomplete_periode(tahun_periode);
+    }
+    function autocomplete_periode(tahun_periode) {
+        console.log(tahun_periode);
+        $("#periode").autocomplete({
+            lookup: tahun_periode,
+        });
+    }
+    periode();
+
+    // autocomplete pekerjaan
+    function get_pekerjaan() {
+        return $.ajax({
+            type: "get",
+            url: "/pekerjaan",
+            dataType: "json",
+            success: (response) => {
+                response;
+            },
+        });
+    }
+    async function pekerjaan() {
+        let pekerjaan = await get_pekerjaan();
+        let nama_pekerjaan = [];
+        pekerjaan.forEach((i) => {
+            nama_pekerjaan.push(i.nama_pekerjaan);
+        });
+        autocomplete_pekerjaan(nama_pekerjaan);
+    }
+    function autocomplete_pekerjaan(nama_pekerjaan) {
+        console.log(nama_pekerjaan);
+        $("#pekerjaan").autocomplete({
+            lookup: nama_pekerjaan,
+        });
+    }
+    pekerjaan();
 });

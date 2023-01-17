@@ -17,7 +17,7 @@
                     <div class="row">
                       <div class="col-lg-5">
                         <div class="mb-3">
-                          <label for="nama" class="form-label"><b>Nama - KTA Aisyiyah</b></label>
+                          <label for="nama" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="nama" name="nama">
                             <option selected disabled>-- Pilih Nama --</option>
                             <option value="Alfian Yulianto - 345678">Alfian Yulianto - 345678</option>
@@ -65,17 +65,17 @@
                 </div>
               </form>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x">
+                <table class="table table-bordered table-hover" id="scroll-x-tmbah-admin">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Nama</th>
-                      <th>NIK</th>
-                      <th>No KTA Aisyiyah</th>
-                      <th>No KTA Muhammadiyah</th>
-                      <th>Tempat Tanggal Lahir</th>
-                      <th>Nomer Handphone</th>
-                      <th>Action</th>
+                      <th class="text-center align-top">#</th>
+                      <th class="text-center align-top">Nama</th>
+                      <th class="text-center align-top">NIK</th>
+                      <th class="text-center">No KTA Aisyiyah</th>
+                      <th class="text-center">No KTA Muhammadiyah</th>
+                      <th class="text-center align-top">Tempat Tanggal Lahir</th>
+                      <th class="text-center align-top">Nomer Handphone</th>
+                      <th class="text-center align-top">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>

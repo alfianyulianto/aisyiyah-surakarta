@@ -24,7 +24,8 @@
        </li>
        <hr class="my-2">
        <li class="menu-header">Admin</li>
-       <li class="nav-item {{ Request::is('profil/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li
+         class="nav-item {{ Request::is('profil/kader') || Request::is('profil/kader/create') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/profil/kader" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
        </li>
        <li
@@ -68,7 +69,8 @@
        {{-- Admin Cabang / Ranting --}}
        <hr class="mb-2">
        <li class="menu-header">Admin Cabang / Ranting</li>
-       <li class="nav-item {{ Request::is('profil/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li
+         class="nav-item {{ Request::is('profil/kader') || Request::is('profil/kader/create') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/profil/kader" class="nav-link"><i class="fas fa-users"></i><span>Profil Kader</span></a>
        </li>
        <li

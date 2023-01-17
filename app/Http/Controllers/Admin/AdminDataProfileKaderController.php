@@ -33,29 +33,63 @@ class AdminDataProfileKaderController extends Controller
    */
   public function create()
   {
-    // ambil data nama_cabang dan id_cabang pada tabel cabang
-    $nama_cabang = Cabang::pluck('nama_cabang', 'id_cabang')->toArray();
-    // ambil data nama_ranting dan id_ranting pada tabel ranting
-    $nama_ranting = Ranting::pluck('nama_ranting', 'id_ranting')->toArray();
+    // ambil data cabang pada tabel cabang
+    $nama_cabang = Cabang::orderBy('nama_cabang', 'asc')->get();
+    // ambil data ranting pada tabel ranting
+    $nama_ranting = Ranting::orderBy('nama_ranting', 'asc')->get();
     // ambil data pendidikan_terakhir pada tabel pendidikan_terakhir
-    $pendidikan_terakhir = PendidikanTerakhir::pluck('pendidikan', 'id_pendidikan_terakhir')->toArray();
+    $pendidikan_terakhir = PendidikanTerakhir::orderBy('created_at', 'asc')->get();
 
-    // $id_provinsi = collect([]);
-    // // mendapatkan semua data provinsi dari api
-    // $response =  Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')->json();
-    // foreach ($response['provinsi'] as $p) {
-    //   $id_provinsi->push($p['id']);
-    // }
-    // // mendapatkan semua nama kota / kabupaten dari api
+    // mendapatkan semua data provinsi dari api
+    $data_provinsi = collect([]);
+    $provinsi =  Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')->json();
+    foreach ($provinsi['provinsi'] as $prov) {
+      $data_provinsi->push(collect(['id' => $prov['id'], 'nama' => $prov['nama']]));
+    }
+
+    // // mendapatkan semua data kota / kabupaten dari api
+    // $id_kota_kabupaten = collect([]);
     // $nama_kota_kabupaten = collect([]);
     // foreach ($id_provinsi as $id) {
     //   $kota_kabupaten =  Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' . $id)->json();
     //   foreach ($kota_kabupaten['kota_kabupaten'] as $k) {
+    //     $id_kota_kabupaten->push($k['id']);
     //     $nama_kota_kabupaten->push($k['nama']);
     //   }
     // }
 
-    return view('admin.profil-kader.create', compact('nama_cabang', 'nama_ranting', 'pendidikan_terakhir'));
+    // // mendapatkan semua data kecamatan dari api
+    // $id_kecamatan = collect([]);
+    // $nama_kecamatan = collect([]);
+    // foreach ($id_kota_kabupaten as $id) {
+    //   $kecamatan =  Http::get('https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' . $id)->json();
+    //   foreach ($kecamatan['kecamatan'] as $kec) {
+    //     $id_kecamatan->push($kec['id']);
+    //     $nama_kecamatan->push($kec['nama']);
+    //   }
+    // }
+
+    // // mendapatkan semua data kelurahan dari api
+    // $id_kelurahan = collect([]);
+    // $nama_kelurahan = collect([]);
+    // foreach ($id_kecamatan as $id) {
+    //   $kelurahan =  Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=' . $id)->json();
+    //   foreach ($kelurahan['kelurahan'] as $kel) {
+    //     $id_kelurahan->push($kel['id']);
+    //     $nama_kelurahan->push($kel['nama']);
+    //   }
+    // }
+
+
+    return view('admin.profil-kader.create', [
+      'nama_cabang' => $nama_cabang,
+      'nama_ranting' => $nama_ranting,
+      'pendidikan_terakhir' => $pendidikan_terakhir,
+      'data_provinsi' => $data_provinsi,
+      // 'nama_kota_kabupaten' => $nama_kota_kabupaten,
+      // 'nama_kecamatan' => $nama_kecamatan,
+      // 'nama_kelurahan' => $nama_kelurahan,
+    ]);
   }
 
   /**
@@ -66,25 +100,36 @@ class AdminDataProfileKaderController extends Controller
    */
   public function store(Request $request)
   {
-    $validated = $request->validate([
+    $role = [
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
       'no_kta' => ['nullable', 'numeric', 'unique:App\Models\Kader,no_kta'],
       'no_ktm' => ['nullable', 'numeric', 'unique:App\Models\Kader,no_ktm'],
       'nama' => ['required', 'string', 'min:5'],
-      'cabang_id_cabang' => ['required'],
-      'ranting_id_ranting' => ['required'],
+      'cabang_id_cabang' => ['nullable'],
+      'ranting_id_ranting' => ['nullable'],
       'email' => ['nullable', 'email:dns'],
       'tempat_lahir' => ['required', 'string'],
       'tanggal_lahir' => ['required'],
-      'alamat_asal_ktp' => ['required', 'min:10'],
-      'alamat_rumah_tinggal' => ['required', 'min:10'],
+      'alamat_ktp' => ['required', 'min:5'],
+      'provinsi_ktp' => ['required'],
+      'kabupaten_kota_ktp' => ['required'],
+      'kecamatan_ktp' => ['required'],
+      'kelurahan_ktp' => ['required'],
       'status_pernikahan' => ['required'],
       'pekerjaan' => ['required', 'min:5'],
       'pendidikan_terakhir_id_pendidikan_terakhir' => ['required'],
       'no_ponsel' => ['required', 'numeric', 'max_digits:12', 'min_digits:12']
-    ]);
-    // tambah id daerah di tabel daerah
-    $validated['daerah_id_daerah'] = 'ska-1';
+    ];
+    if (!$request->cek_alamat) {
+      $role['alamat_domisili'] = ['required', 'min:5'];
+      $role['provinsi_domisili'] = ['required'];
+      $role['kabupaten_kota_domisili'] = ['required'];
+      $role['kecamatan_domisili'] = ['required'];
+      $role['kelurahan_domisili'] = ['required'];
+    };
+
+    // validasi data
+    $validated = $request->validate($role);
 
     // buat user baru ri tabel user
     $user_data = [
@@ -97,13 +142,33 @@ class AdminDataProfileKaderController extends Controller
 
     // cari user
     $id_user = User::where('nama', $request->nama)->where('no_ponsel', $request->no_ponsel)->first();
-
-    $validated['user_id'] = $id_user->id;
+    $validatedData['user_id'] = $id_user->id;
 
     // insert ke tabel kader
-    Kader::create($validated);
+    $validatedData = [
+      'daerah_id_daerah' => 'ska-1',
+      'nik' => $request->nik,
+      'no_kta' => $request->no_kta,
+      'no_ktm' => $request->no_ktm,
+      'nama' => $request->nama,
+      'cabang_id_cabang' => $request->cabang_id_cabang,
+      'ranting_id_ranting' => $request->ranting_id_ranting,
+      'email' => $request->email,
+      'tempat_lahir' => $request->tempat_lahir,
+      'tanggal_lahir' => $request->tanggal_lahir,
+      'status_pernikahan' => $request->status_pernikahan,
+      'pekerjaan' => $request->pekerjaan,
+      'pendidikan_terakhir_id_pendidikan_terakhir' => $request->pendidikan_terakhir_id_pendidikan_terakhir,
+      'no_ponsel' => $request->no_ponsel,
+      'alamat_asal_ktp' => $request->alamat_ktp . ' ' . $request->kelurahan_ktp . ' ' . $request->kabupaten_kota_ktp . ' ' . $request->provinsi_ktp,
+    ];
+    if (!$request->cek_alamat) {
+      $validatedData['alamat_rumah_tinggal'] = $request->alamat_domisili . ' ' . $request->kelurahan_domisili . ' ' . $request->kabupaten_kota_domisili . ' ' . $request->provinsi_domisili;
+    }
 
-    return redirect('/profil/kader')->with('message_kader', 'Data kader ' . $request->nama . ' berhasil ditambahkan.');
+    Kader::create($validatedData);
+
+    return redirect('/profil/kader')->with('message_kader', 'Data ' . $request->nama . ' berhasil ditambahkan sebagai kader.');
   }
 
   /**
@@ -149,5 +214,29 @@ class AdminDataProfileKaderController extends Controller
   public function destroy($id)
   {
     //
+  }
+
+  public function ranting(Ranting $ranting)
+  {
+    $nama_ranting = Ranting::where('cabang_id_cabang', $ranting->cabang_id_cabang)->orderBy('nama_ranting', 'asc')->get();
+    return $nama_ranting;
+  }
+
+  public function kota_kabupaten(Request $request)
+  {
+    $kota_kabupaten = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' . $request->id)->json();
+    return $kota_kabupaten;
+  }
+
+  public function kecamatan(Request $request)
+  {
+    $kecamatan = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' . $request->id)->json();
+    return $kecamatan;
+  }
+
+  public function kelurahan(Request $request)
+  {
+    $kelurahan = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=' . $request->id)->json();
+    return $kelurahan;
   }
 }

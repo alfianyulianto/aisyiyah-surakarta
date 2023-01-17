@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Tambah;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kader;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TambahAdminCabangController extends Controller
@@ -14,7 +16,13 @@ class TambahAdminCabangController extends Controller
    */
   public function index()
   {
-    return view('admin.tambah_admin.tambah_admin_cabang.index');
+    return view('admin.tambah_admin.tambah_admin_cabang.create', [
+      'kader' => Kader::where('cabang_id_cabang', 'cbng-banjarsari')->orderBy('nama', 'asc')->get(),
+      // ambil data di tabel user dengan kategori_user 3
+      'admin_cabang' => User::where('kategori_user', 3)->get()->each(function ($user) {
+        Kader::where('nik', $user->nik)->where('cabang_id_cabang', 'cbng-banjarsari')->orderBy('nama', 'asc')->get();
+      })
+    ]);
   }
 
   /**
@@ -35,7 +43,12 @@ class TambahAdminCabangController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      'nik' => ['required'],
+      'nama' => ['required'],
+      'no_kta' => ['required'],
+      'no_ktm' => ['required'],
+    ]);
   }
 
   /**
@@ -81,5 +94,12 @@ class TambahAdminCabangController extends Controller
   public function destroy($id)
   {
     //
+  }
+
+  public function get_kader($nik)
+  {
+    $kader = Kader::where('nik', $nik)->first();
+
+    return response()->json(['result' => $kader]);
   }
 }

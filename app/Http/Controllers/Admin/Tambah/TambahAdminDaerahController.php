@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Tambah;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kader;
 use Illuminate\Http\Request;
 
 class TambahAdminDaerahController extends Controller
@@ -14,7 +15,9 @@ class TambahAdminDaerahController extends Controller
    */
   public function index()
   {
-    return view('admin.tambah_admin.tambah_admin_daerah.index');
+    return view('admin.tambah_admin.tambah_admin_daerah.create', [
+      'kader' => Kader::where('daerah_id_daerah', 'cbng-banjarsari')->orderBy('nama', 'asc')->get()
+    ]);
   }
 
   /**

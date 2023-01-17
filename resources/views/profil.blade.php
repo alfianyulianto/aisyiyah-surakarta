@@ -22,9 +22,9 @@
                           <label for="nik" class="form-label"><b>NIK</b></label>
                           <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik"
                             id="nik" placeholder="Nomer Induk Kependudukan (cnth:3372******)"
-                            value="3372010107000002" autofocus>
+                            value="{{ old('nik') }}" autofocus>
                           @error('nik')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -34,9 +34,9 @@
                         <div class="mb-3">
                           <label for="no_kta" class="form-label"><b>No KTA 'Aisyiyah</b></label>
                           <input type="text" class="form-control @error('no_kta') is-invalid @enderror" name="no_kta"
-                            id="no_kta" placeholder="Kartu Tanda Anggota 'Aisyiyah" value="345678">
+                            id="no_kta" placeholder="Kartu Tanda Anggota 'Aisyiyah" value="{{ old('no_kta') }}">
                           @error('no_kta')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -48,9 +48,9 @@
                         <div class="mb-3">
                           <label for="no_ktm" class="form-label"><b>No KTA Muhammadiyah</b></label>
                           <input type="text" class="form-control @error('no_ktm') is-invalid @enderror" name="no_ktm"
-                            id="no_ktm" placeholder="Kartu Tanda Anggota Muhammadiyah" value="876543">
+                            id="no_ktm" placeholder="Kartu Tanda Anggota Muhammadiyah" value="{{ old('no_ktm') }}">
                           @error('no_ktm')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -60,9 +60,9 @@
                         <div class="mb-3">
                           <label for="nama" class="form-label"><b>Nama Lengkap</b></label>
                           <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                            id="nama" placeholder="Nama Lengkap (cnth: Budi Doremi)" value="Alfian Yulianto">
+                            id="nama" placeholder="Nama Lengkap (cnth:Alfian Yulianto)" value="{{ old('nama') }}">
                           @error('nama')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -85,7 +85,7 @@
                             <option value="Solo Utara">Solo Utara</option>
                           </select>
                           @error('cabang_id_cabang')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -104,7 +104,7 @@
                             <option value="Timuran">Timuran</option>
                           </select>
                           @error('ranting_id_ranting')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -112,38 +112,17 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-lg-6">
+                      <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="email" class="form-label"><b>Email</b></label>
                           <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                            id="email" placeholder="Email (cnth:budidoremi@gmail.com)"
+                            id="email" placeholder="Email (cnth:alfianyulianto36@gmail.com)"
                             value="alfianyulianto36@gmail.com">
                           @error('email')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="jenis_kelamin" class="form-label"><b>Jenis Kelamin</b></label>
-                          <div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki-laki"
-                                value="Laki-Laki" checked>
-                              <label class="form-check-label" for="laki-laki">
-                                Laki-Laki
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan"
-                                value="Perempuan">
-                              <label class="form-check-label" for="perempuan">
-                                Perempuan
-                              </label>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -153,23 +132,10 @@
                           <div class="col-lg-5">
                             <div class="mb-3">
                               <label for="tempat_lahir" class="form-label"><b>Tempat Lahir</b></label>
-                              <select
-                                class="form-control form-control-lg select2 @error('tempat_lahir') is-invalid @enderror"
-                                name="tempat_lahir" id="tempat_lahir">
-                                <option selected disabled>-- Pilih Kota --</option>
-                                <option value="Surakarta" selected>Surakarta</option>
-                                <option value="Jakarta">Jakarta</option>
-                                <option value="Bogor">Bogor</option>
-                                <option value="Depok">Depok</option>
-                                <option value="Tangerang">Tangerang</option>
-                                <option value="Bekasi">Bekasi</option>
-                                <option value="Bandung">Bandung</option>
-                                <option value="Semarang">Semarang</option>
-                                <option value="Yogyakarta">Yogyakarta</option>
-                                <option value="Surabaya">Surabaya</option>
-                              </select>
+                              <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir"
+                                placeholder="Tempat lahir (cnth:Surakarta)" value="{{ old('tempat_lahir') }}">
                               @error('tempat_lahir')
-                                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                                <div class="error-message">
                                   {{ $message }}
                                 </div>
                               @enderror
@@ -182,7 +148,7 @@
                                 class="form-control datepicker @error('tanggal_lahir') is-invalid @enderror"
                                 name="tanggal_lahir" id="tanggal_lahir" value="2000-07-01">
                               @error('tanggal_lahir')
-                                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                                <div class="error-message">
                                   {{ $message }}
                                 </div>
                               @enderror
@@ -204,7 +170,7 @@
                             <option value="Janda">Janda</option>
                           </select>
                           @error('status_penikahan')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -216,7 +182,7 @@
                           <input type="text" class="form-control @error('pekerjaan') is-invalid @enderror"
                             name="pekerjaan" id="pekerjaan" placeholder="Pekerjaan Anda" value="Mahasiswa">
                           @error('pekerjaan')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -226,23 +192,18 @@
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="mb-3">
-                          <label for="status_pernikahan" class="form-label"><b>Pendidikan Terakhir</b></label>
-                          <select
-                            class="form-control form-control-lg selectric @error('pendidikan_terakhir') is-invalid @enderror"
-                            name="pendidikan_terakhir" id="pendidikan_terakhir">
+                          <label for="pendidikan_terakhir_id_pendidikan_terakhir" class="form-label"><b>Pendidikan
+                              Terakhir</b></label>
+                          <select class="form-control form-control-lg selectric"
+                            name="pendidikan_terakhir_id_pendidikan_terakhir"
+                            id="pendidikan_terakhir_id_pendidikan_terakhir">
                             <option selected disabled>-- Pilih Pendidikan Terakhir --</option>
-                            <option value="SD">SD</option>
-                            <option value="SMP">SMP</option>
-                            <option value="SMA">SMA</option>
-                            <option value="D1">D1</option>
-                            <option value="D2">D2</option>
-                            <option value="D3">D3</option>
-                            <option value="S1">S1</option>
-                            <option value="S2">S2</option>
-                            <option value="S3">S3</option>
+                            @foreach ($pendidikan_terakhir as $pk)
+                              <option value="{{ $pk->id_pendidikan_terakhir }}">{{ $pk->pendidikan }}</option>
+                            @endforeach
                           </select>
-                          @error('pendidikan_terakhir')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          @error('pendidikan_terakhir_id_pendidikan_terakhir')
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -252,10 +213,10 @@
                         <div class="mb-3">
                           <label for="no_ponsel" class="form-label"><b>Nomer Handphone</b></label>
                           <input type="text" class="form-control @error('no_ponsel') is-invalid @enderror"
-                            name="no_ponsel" id="no_ponsel" placeholder="Nomer Handphone (cnth: 081*****)"
-                            value="081217432366">
+                            name="no_ponsel" id="no_ponsel"
+                            placeholder="Nomer Handphone (cnth: 081*****)"value="{{ old('no_ponsel') }}">
                           @error('no_ponsel')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -270,7 +231,7 @@
                             name="alamat_ktp" id="alamat_ktp"
                             placeholder="Masukan nama jalan atau nama kampung beserta RT / RW">
                           @error('alamat_ktp')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -290,7 +251,7 @@
                             <option value="Jawa Timur">Jawa Timur</option>
                           </select>
                           @error('provinsi_ktp')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -309,7 +270,7 @@
                             <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
                           </select>
                           @error('kabupaten_kota_ktp')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -329,8 +290,8 @@
                             <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
                             <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
                           </select>
-                          @error('provinsi_ktp')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          @error('kecamatan_ktp')
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -349,7 +310,7 @@
                             <option value="Laweyan">Laweyan</option>
                           </select>
                           @error('kelurahan_ktp')
-                            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            <div class="error-message">
                               {{ $message }}
                             </div>
                           @enderror
@@ -380,7 +341,7 @@
                               name="alamat_rumah" id="alamat_rumah"
                               placeholder="Masukan nama jalan atau nama kampung beserta RT / RW">
                             @error('alamat_rumah')
-                              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              <div class="error-message">
                                 {{ $message }}
                               </div>
                             @enderror
@@ -400,7 +361,7 @@
                               <option value="Jawa Timur">Jawa Timur</option>
                             </select>
                             @error('provinsi_rumah')
-                              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              <div class="error-message">
                                 {{ $message }}
                               </div>
                             @enderror
@@ -419,7 +380,7 @@
                               <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
                             </select>
                             @error('kabupaten_kota_rumah')
-                              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              <div class="error-message">
                                 {{ $message }}
                               </div>
                             @enderror
@@ -439,8 +400,8 @@
                               <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
                               <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
                             </select>
-                            @error('provinsi_rumah')
-                              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            @error('kecamatan_rumah')
+                              <div class="error-message">
                                 {{ $message }}
                               </div>
                             @enderror
@@ -459,7 +420,7 @@
                               <option value="Laweyan">Laweyan</option>
                             </select>
                             @error('kelurahan_rumah')
-                              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              <div class="error-message">
                                 {{ $message }}
                               </div>
                             @enderror
