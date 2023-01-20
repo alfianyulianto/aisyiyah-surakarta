@@ -21,7 +21,7 @@
                   </div>
                 </div>
               @endif
-              <a href="/profil/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i
+              <a href="/data/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i
                   class="fas fa-user-plus"></i>
                 Tambah Kader</a>
               <div class="table-responsive">
@@ -54,12 +54,19 @@
                         <td>{{ $k->alamat_rumah_tinggal }}</td>
                         <td>{{ $k->no_ponsel }}</td>
                         <td>
-                          <a href="" class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i>
+                          <a href="/data/kader/{{ $k->nik }}" class="btn btn-icon icon-left btn-primary"
+                            target="blank"><i class="far fa-eye"></i>
                             Detail</a>
-                          <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
+                          <a href="/data/kader/{{ $k->nik }}/edit" class="btn btn-icon icon-left btn-warning"><i
+                              class="far fa-edit"></i>
                             Edit</a>
-                          <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
-                            Hapus</a>
+                          <form action="/data/kader/{{ $k->nik }}" method="post" class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                                class="far fa-trash-alt"></i>
+                              Hapus</button>
+                          </form>
                         </td>
                       </tr>
                     @endforeach

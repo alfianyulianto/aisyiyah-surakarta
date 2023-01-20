@@ -19,7 +19,7 @@ class Cabang extends Model
 
   public function kader()
   {
-    return $this->belongsTo(Kader::class, 'cabang_id_cabang', 'nik');
+    return $this->hasOne(Kader::class);
   }
 
   public function daerah()

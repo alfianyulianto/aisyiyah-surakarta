@@ -15,5 +15,5 @@ class Periode extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_periode'];
+  protected $fillable = ['id_periode', 'periode'];
 }

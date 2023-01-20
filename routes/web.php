@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDataCabangController;
 use App\Http\Controllers\Admin\AdminDataDaerahController;
 use App\Http\Controllers\Admin\AdminDataJabatanController;
-use App\Http\Controllers\Admin\AdminDataProfileKaderController;
+use App\Http\Controllers\Admin\AdminDataKaderController;
 use App\Http\Controllers\Admin\AdminDataRantingController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderController;
@@ -65,13 +65,13 @@ Route::get('/periode', [PeriodeController::class, 'index']);
 Route::get('/pekerjaan', [PekerjaanController::class, 'index']);
 
 // admin
-Route::get('/data/profil', [ProfilController::class, 'edit']);
-Route::put('/data/profil/update', [ProfilController::class, 'update']);
-Route::resource('/profil/kader', AdminDataProfileKaderController::class);
-Route::get('/get/ranting/{ranting:cabang_id_cabang}', [AdminDataProfileKaderController::class, 'ranting']);
-Route::get('/data/kota/kabupaten/', [AdminDataProfileKaderController::class, 'kota_kabupaten']);
-Route::get('/data/kecamatan/', [AdminDataProfileKaderController::class, 'kecamatan']);
-Route::get('/data/kelurahan/', [AdminDataProfileKaderController::class, 'kelurahan']);
+Route::get('/profil', [ProfilController::class, 'edit']);
+Route::put('/profil/update', [ProfilController::class, 'update']);
+Route::resource('/data/kader', AdminDataKaderController::class);
+Route::get('/get/ranting/{ranting:cabang_id_cabang}', [AdminDataKaderController::class, 'ranting']);
+Route::get('/data/kota/kabupaten/', [AdminDataKaderController::class, 'kota_kabupaten']);
+Route::get('/data/kecamatan/', [AdminDataKaderController::class, 'kecamatan']);
+Route::get('/data/kelurahan/', [AdminDataKaderController::class, 'kelurahan']);
 Route::resource('/admin/ortom', OrtomController::class);
 Route::resource('/admin/potensi', PotensiController::class);
 Route::resource('/data/jabatan', AdminDataJabatanController::class);
@@ -80,8 +80,11 @@ Route::resource('/tambah/pimpinan/daerah', TambahPimpinanDaerahController::class
 Route::resource('/tambah/pimpinan/cabang', TambahPimpinanCabangController::class);
 Route::resource('/tambah/pimpinan/ranting', TambahPimpinanRantingController::class);
 Route::resource('/data/daerah', AdminDataDaerahController::class);
+Route::get('/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'download']);
 Route::resource('/data/cabang', AdminDataCabangController::class);
+Route::get('/sk/pimpinan/cabang/{cabang:id_cabang}', [AdminDataCabangController::class, 'download']);
 Route::resource('/data/ranting', AdminDataRantingController::class);
+Route::get('/sk/pimpinan/ranting/{ranting:id_ranting}', [AdminDataRantingController::class, 'download']);
 Route::get('/tambah/admin', [TambahAdminController::class, 'index']);
 Route::resource('/tambah/admin/daerah', TambahAdminDaerahController::class);
 Route::resource('/tambah/admin/cabang', TambahAdminCabangController::class);
@@ -90,10 +93,13 @@ Route::resource('/tambah/admin/ranting', TambahAdminRantingController::class);
 Route::get('/settings', [AdminSettingsController::class, 'index']);
 Route::post('/settings/ortom', [AdminSettingsController::class, 'ortom_store']);
 Route::post('/settings/potensi', [AdminSettingsController::class, 'potensi_store']);
+Route::post('/settings/tempat/lahir', [AdminSettingsController::class, 'tempat_lahir_store']);
+Route::post('/settings/pekerjaan', [AdminSettingsController::class, 'pekerjaan_store']);
+Route::post('/settings/periode', [AdminSettingsController::class, 'periode_store']);
 
 // kader
 Route::get('/kader', [KaderDashboardController::class, 'index']);
 Route::get('/profil', [ProfilController::class, 'edit']);
-Route::put('/data/profil/update', [ProfilController::class, 'update']);
+Route::put('/profil/update', [ProfilController::class, 'update']);
 Route::resource('/kader/ortom', KaderOrtomController::class);
 Route::resource('/kader/potensi', KaderPotensiController::class);

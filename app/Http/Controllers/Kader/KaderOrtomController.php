@@ -28,9 +28,9 @@ class KaderOrtomController extends Controller
    */
   public function create()
   {
-    // ambil data nama_ortom dan id_cabang pada tabel ortom
-    $nama_ortom = Ortom::pluck('nama_ortom', 'id_ortom')->toArray();
-    return view('kader.ortom.create', compact('nama_ortom'));
+    return view('kader.ortom.create', [
+      'ortom' => Ortom::orderBy('created_at', 'asc')->get()
+    ]);
   }
 
   /**
@@ -66,7 +66,7 @@ class KaderOrtomController extends Controller
    */
   public function show($id)
   {
-    //
+    abort(404);
   }
 
   /**
@@ -75,9 +75,11 @@ class KaderOrtomController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit($id)
+  public function edit(KaderOrtom $kader_ortom)
   {
-    //
+    return view('kader.ortom.edit', [
+      'kader_ortom' => $kader_ortom
+    ]);
   }
 
   /**

@@ -9,7 +9,7 @@ class PekerjaanController extends Controller
 {
   public function index()
   {
-    $pekerjaan = Pekerjaan::orderBy('nama_pekerjaan', 'asc')->get();
+    $pekerjaan = Pekerjaan::orderBy('pekerjaan', 'asc')->get();
     return $pekerjaan;
   }
 }

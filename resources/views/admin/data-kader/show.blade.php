@@ -1,9 +1,10 @@
+{{-- @dd($kader->kader_mimiliki_potensi); --}}
 @extends('layouts.main')
 
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Dashboard</h1>
+      <h1>Profil Kader {{ $kader->nama }}</h1>
     </div>
     <div class="section-body">
       <div class="row">
@@ -13,7 +14,7 @@
               <div class="row mb-3 pr-0">
                 <div class="col-lg-3 mb-3">
                   <img src="{{ url('') }}/img/avatar-3.png" class="rounded mx-auto d-block" alt=""
-                    width="200">
+                    width="170">
                 </div>
                 <div class="col-lg-9">
                   <div class="d-inline py-3">
@@ -39,14 +40,6 @@
                         </span>
                       </p>
                     @endif
-                    @if (!$kader->kader_memiliki_jabatan->isEmpty())
-                      <p class="mb-0">
-                        <i class="fas fa-user-tag"></i>
-                        <span class="mx-2">Jabatan -
-                          {{ DB::table('jabatan')->where('id_jabatan', $kader->kader_memiliki_jabatan->first()->jabatan_id_jabatan)->first()->nama_jabatan }}
-                        </span>
-                      </p>
-                    @endif
                     <p class="mb-0">
                       <i class="fas fa-phone"></i><span class="mx-3">{{ $kader->no_ponsel }}</span>
                     </p>
@@ -55,10 +48,6 @@
                         <i class="fas fa-envelope"></i><span class="mx-3">{{ $kader->email }}</span>
                       </p>
                     @endif
-                    <div class="buttons mt-2">
-                      <a href="/upload/foto" class="btn btn-icon icon-left btn-primary"><i class="fas fa-upload"></i>
-                        Upload Image</a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -106,10 +95,100 @@
               </div>
               <div class="row mt-3">
                 <div class="col-lg-12">
-                  <a href="/profil" class="btn btn-icon rounded-pill icon-left btn-warning btn-width mx-auto"><i
-                      class="fas fa-edit"></i>Edit Profile</a>
+                  <a href="/data/kader/{{ $kader->nik }}/edit"
+                    class="btn btn-icon rounded-pill icon-left btn-warning btn-width mx-auto"><i
+                      class="fas fa-edit"></i>Edit Data Kader</a>
                 </div>
               </div>
+              @if ($kader->kader_memiliki_jabatan != null)
+                <div class="row mt-5">
+                  <div class="col-lg-12">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              #
+                            </th>
+                            <th class="text-center">Jabatan</th>
+                            <th class="text-center">Periode</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($kader->kader_memiliki_jabatan as $kj)
+                            <tr>
+                              <td class="text-center">{{ $loop->iteration }}</td>
+                              <td>
+                                {{ DB::table('jabatan')->where('id_jabatan', $kj->jabatan_id_jabatan)->first()->nama_jabatan }}
+                              </td>
+                              <td>{{ $kj->periode }}</td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if ($kader->kader_memiliki_ortom != null)
+                <div class="row mt-4">
+                  <div class="col-lg-12">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              #
+                            </th>
+                            <th class="text-center">Ortom</th>
+                            <th class="text-center">Uraian Ortom</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($kader->kader_memiliki_ortom as $ko)
+                            <tr>
+                              <td class="text-center">{{ $loop->iteration }}</td>
+                              <td>{{ DB::table('ortom')->where('id_ortom', $ko->ortom_id_ortom)->first()->nama_ortom }}
+                              </td>
+                              <td>{!! $ko->ortom_uraian !!}</td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if ($kader->kader_mimiliki_potensi != null)
+                <div class="row mt-4">
+                  <div class="col-lg-12">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th class="text-center">
+                              #
+                            </th>
+                            <th class="text-center">Potensi</th>
+                            <th class="text-center">Uraian Potensi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($kader->kader_mimiliki_potensi as $ko)
+                            <tr>
+                              <td class="text-center">{{ $loop->iteration }}</td>
+                              <td>
+                                {{ DB::table('potensi')->where('id_potensi', $ko->potensi_id_potensi)->first()->potensi }}
+                              </td>
+                              <td>{!! $ko->potensi_kader_uraian !!}</td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              @endif
             </div>
           </div>
         </div>

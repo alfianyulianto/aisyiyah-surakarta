@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>My Profile</h1>
+      <h1>Update Profile</h1>
     </div>
 
     <div class="section-body">
@@ -11,18 +11,28 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
+              @if (session('message_kader'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_kader') }}
+                  </div>
+                </div>
+              @endif
               <div class="row">
                 <div class="col-lg-10">
-                  <form action="/data/profil/update" method="post">
+                  <form action="/profil/update" method="post">
                     @csrf
                     @method('put')
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="nik" class="form-label"><b>NIK</b></label>
-                          <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik"
-                            id="nik" placeholder="Nomer Induk Kependudukan (cnth:3372******)"
-                            value="{{ old('nik') }}" autofocus>
+                          <input type="text" class="form-control" name="nik" id="nik"
+                            placeholder="Nomer Induk Kependudukan (cnth:3372******)" value="{{ old('nik', $kader->nik) }}"
+                            autofocus>
                           @error('nik')
                             <div class="error-message">
                               {{ $message }}
@@ -33,8 +43,8 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="no_kta" class="form-label"><b>No KTA 'Aisyiyah</b></label>
-                          <input type="text" class="form-control @error('no_kta') is-invalid @enderror" name="no_kta"
-                            id="no_kta" placeholder="Kartu Tanda Anggota 'Aisyiyah" value="{{ old('no_kta') }}">
+                          <input type="text" class="form-control" name="no_kta" id="no_kta"
+                            placeholder="Kartu Tanda Anggota 'Aisyiyah" value="{{ old('no_kta', $kader->no_kta) }}">
                           @error('no_kta')
                             <div class="error-message">
                               {{ $message }}
@@ -47,8 +57,8 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="no_ktm" class="form-label"><b>No KTA Muhammadiyah</b></label>
-                          <input type="text" class="form-control @error('no_ktm') is-invalid @enderror" name="no_ktm"
-                            id="no_ktm" placeholder="Kartu Tanda Anggota Muhammadiyah" value="{{ old('no_ktm') }}">
+                          <input type="text" class="form-control" name="no_ktm" id="no_ktm"
+                            placeholder="Kartu Tanda Anggota Muhammadiyah" value="{{ old('no_ktm', $kader->no_ktm) }}">
                           @error('no_ktm')
                             <div class="error-message">
                               {{ $message }}
@@ -59,8 +69,9 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="nama" class="form-label"><b>Nama Lengkap</b></label>
-                          <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                            id="nama" placeholder="Nama Lengkap (cnth:Alfian Yulianto)" value="{{ old('nama') }}">
+                          <input type="text" class="form-control" name="nama" id="nama"
+                            placeholder="Nama Lengkap (cnth:Alfian Yulianto)"
+                            value="{{ old('nama', $kader->nama), $kader->nama }}">
                           @error('nama')
                             <div class="error-message">
                               {{ $message }}
@@ -73,16 +84,23 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="cabang_id_cabang" class="form-label"><b>Cabang Aisyiyah</b></label>
-                          <select
-                            class="form-control form-control-lg select2 @error('cabang_id_cabang') is-invalid @enderror"
-                            name="cabang_id_cabang" id="cabang_id_cabang">
-                            <option selected disabled>-- Pilih Cabang --</option>
-                            <option value="Jebres">Jebres</option>
-                            <option value="Kota Bengawan">Kota Bengawan</option>
-                            <option value="Kota Barat">Kota Barat</option>
-                            <option value="Laweyan">Laweyan</option>
-                            <option value="Solo Selatan">Solo Selatan</option>
-                            <option value="Solo Utara">Solo Utara</option>
+                          <select class="form-control form-control-lg select2" name="cabang_id_cabang"
+                            id="cabang_id_cabang">
+                            @if (old('cabang_id_cabang', $kader->cabang_id_cabang))
+                              <option disabled>-- Pilih Cabang --</option>
+                              @foreach ($nama_cabang as $nc)
+                                @if (old('cabang_id_cabang', $kader->cabang_id_cabang) == $nc->id_cabang)
+                                  <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
+                                @else
+                                  <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
+                                @endif
+                              @endforeach
+                            @else
+                              <option selected disabled>-- Pilih Cabang --</option>
+                              @foreach ($nama_cabang as $nc)
+                                <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
+                              @endforeach
+                            @endif
                           </select>
                           @error('cabang_id_cabang')
                             <div class="error-message">
@@ -94,14 +112,23 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="ranting_id_ranting" class="form-label"><b>Ranting Aisyiyah</b></label>
-                          <select
-                            class="form-control form-control-lg select2 @error('ranting_id_ranting') is-invalid @enderror"
-                            name="ranting_id_ranting" id="ranting_id_ranting">
-                            <option selected disabled>-- Pilih Ranting --</option>
-                            <option value="Sumber Barat">Sumber Barat</option>
-                            <option value="Sumber Timur">Sumber Timur</option>
-                            <option value="Badran">Badran</option>
-                            <option value="Timuran">Timuran</option>
+                          <select class="form-control form-control-lg select2" name="ranting_id_ranting"
+                            id="ranting_id_ranting">
+                            @if (old('ranting_id_ranting', $kader->ranting_id_ranting))
+                              <option disabled>-- Pilih Ranting --</option>
+                              @foreach ($nama_ranting as $nr)
+                                @if (old('ranting_id_ranting', $kader->ranting_id_ranting) == $nr->id_ranting)
+                                  <option value="{{ $nr->id_ranting }}" selected>{{ $nr->nama_ranting }}</option>
+                                @else
+                                  <option value="{{ $nr->id_ranting }}">{{ $nr->nama_ranting }}</option>
+                                @endif
+                              @endforeach
+                            @else
+                              <option selected disabled>-- Pilih Ranting --</option>
+                              @foreach ($nama_ranting as $nr)
+                                <option value="{{ $nr->id_ranting }}">{{ $nr->nama_ranting }}</option>
+                              @endforeach
+                            @endif
                           </select>
                           @error('ranting_id_ranting')
                             <div class="error-message">
@@ -115,9 +142,9 @@
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="email" class="form-label"><b>Email</b></label>
-                          <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                            id="email" placeholder="Email (cnth:alfianyulianto36@gmail.com)"
-                            value="alfianyulianto36@gmail.com">
+                          <input type="email" class="form-control" name="email" id="email"
+                            placeholder="Email (cnth:alfianyulianto36@gmail.com)"
+                            value="{{ old('email', $kader->email) }}">
                           @error('email')
                             <div class="error-message">
                               {{ $message }}
@@ -133,7 +160,8 @@
                             <div class="mb-3">
                               <label for="tempat_lahir" class="form-label"><b>Tempat Lahir</b></label>
                               <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir"
-                                placeholder="Tempat lahir (cnth:Surakarta)" value="{{ old('tempat_lahir') }}">
+                                placeholder="Tempat lahir (cnth:Surakarta)"
+                                value="{{ old('tempat_lahir', $kader->tempat_lahir) }}">
                               @error('tempat_lahir')
                                 <div class="error-message">
                                   {{ $message }}
@@ -144,9 +172,8 @@
                           <div class="col-lg-7">
                             <div class="form-group mb-3">
                               <label for="tempat_lahir" class="form-label"><b>Tanggal Lahir</b></label>
-                              <input type="date"
-                                class="form-control datepicker @error('tanggal_lahir') is-invalid @enderror"
-                                name="tanggal_lahir" id="tanggal_lahir" value="2000-07-01">
+                              <input type="date" class="form-control datepicker" name="tanggal_lahir"
+                                id="tanggal_lahir" value="{{ old('tanggal_lahir', $kader->tanggal_lahir) }}">
                               @error('tanggal_lahir')
                                 <div class="error-message">
                                   {{ $message }}
@@ -161,13 +188,32 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="status_pernikahan" class="form-label"><b>Status Pernikahan</b></label>
-                          <select
-                            class="form-control form-control-lg selectric @error('status_pernikahan') is-invalid @enderror"
-                            name="status_pernikahan" id="status_pernikahan">
-                            <option selected disabled>-- Pilih ProvinStatussi --</option>
-                            <option value="Belum Menikah" selected>Belum Menikah</option>
-                            <option value="Menikah">Menikah</option>
-                            <option value="Janda">Janda</option>
+                          <select class="form-control form-control-lg selectric " name="status_pernikahan"
+                            id="status_pernikahan">
+                            @if (old('status_pernikahan', $kader->status_pernikahan) == 'Belum Menikah')
+                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option value="Belum Menikah" selected>Belum Menikah</option>
+                              <option value="Menikah">Menikah</option>
+                              <option value="Janda">Janda</option>
+                            @endif
+                            @if (old('status_pernikahan', $kader->status_pernikahan) == 'Menikah')
+                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option value="Belum Menikah">Belum Menikah</option>
+                              <option value="Menikah" selected>Menikah</option>
+                              <option value="Janda">Janda</option>
+                            @endif
+                            @if (old('status_pernikahan', $kader->status_pernikahan) == 'Janda')
+                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option value="Belum Menikah">Belum Menikah</option>
+                              <option value="Menikah">Menikah</option>
+                              <option value="Janda" selected>Janda</option>
+                            @endif
+                            @if (!old('status_pernikahan', $kader->status_pernikahan))
+                              <option selected disabled>-- Pilih ProvinStatussi --</option>
+                              <option value="Belum Menikah">Belum Menikah</option>
+                              <option value="Menikah">Menikah</option>
+                              <option value="Janda">Janda</option>
+                            @endif
                           </select>
                           @error('status_penikahan')
                             <div class="error-message">
@@ -179,8 +225,8 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="pekerjaan" class="form-label"><b>Pekerjaan</b></label>
-                          <input type="text" class="form-control @error('pekerjaan') is-invalid @enderror"
-                            name="pekerjaan" id="pekerjaan" placeholder="Pekerjaan Anda" value="Mahasiswa">
+                          <input type="text" class="form-control" name="pekerjaan" id="pekerjaan"
+                            placeholder="Pekerjaan Anda" value="{{ old('pekerjaan', $kader->pekerjaan) }}">
                           @error('pekerjaan')
                             <div class="error-message">
                               {{ $message }}
@@ -194,13 +240,26 @@
                         <div class="mb-3">
                           <label for="pendidikan_terakhir_id_pendidikan_terakhir" class="form-label"><b>Pendidikan
                               Terakhir</b></label>
-                          <select class="form-control form-control-lg selectric"
+                          <select class="form-control form-control-lg selectric "
                             name="pendidikan_terakhir_id_pendidikan_terakhir"
                             id="pendidikan_terakhir_id_pendidikan_terakhir">
-                            <option selected disabled>-- Pilih Pendidikan Terakhir --</option>
-                            @foreach ($pendidikan_terakhir as $pk)
-                              <option value="{{ $pk->id_pendidikan_terakhir }}">{{ $pk->pendidikan }}</option>
-                            @endforeach
+                            @if (old('pendidikan_terakhir_id_pendidikan_terakhir', $kader->pendidikan_terakhir_id_pendidikan_terakhir))
+                              <option disabled>-- Pilih Pendidikan Terakhir --</option>
+                              @foreach ($pendidikan_terakhir as $pk)
+                                @if (old('pendidikan_terakhir_id_pendidikan_terakhir', $kader->pendidikan_terakhir_id_pendidikan_terakhir) ==
+                                        $pk->id_pendidikan_terakhir)
+                                  <option value="{{ $pk->id_pendidikan_terakhir }}" selected>{{ $pk->pendidikan }}
+                                  </option>
+                                @else
+                                  <option value="{{ $pk->id_pendidikan_terakhir }}">{{ $pk->pendidikan }}</option>
+                                @endif
+                              @endforeach
+                            @else
+                              <option selected disabled>-- Pilih Pendidikan Terakhir --</option>
+                              @foreach ($pendidikan_terakhir as $pk)
+                                <option value="{{ $pk->id_pendidikan_terakhir }}">{{ $pk->pendidikan }}</option>
+                              @endforeach
+                            @endif
                           </select>
                           @error('pendidikan_terakhir_id_pendidikan_terakhir')
                             <div class="error-message">
@@ -212,9 +271,9 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="no_ponsel" class="form-label"><b>Nomer Handphone</b></label>
-                          <input type="text" class="form-control @error('no_ponsel') is-invalid @enderror"
-                            name="no_ponsel" id="no_ponsel"
-                            placeholder="Nomer Handphone (cnth: 081*****)"value="{{ old('no_ponsel') }}">
+                          <input type="text" class="form-control" name="no_ponsel" id="no_ponsel"
+                            placeholder="Nomer Handphone (cnth: 081*****)"
+                            value="{{ old('no_ponsel', $kader->no_ponsel) }}">
                           @error('no_ponsel')
                             <div class="error-message">
                               {{ $message }}
@@ -226,90 +285,11 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="alamat_ktp" class="form-label"><b>Alamat KTP</b></label>
-                          <input type="text" class="form-control @error('alamat_ktp') is-invalid @enderror"
-                            name="alamat_ktp" id="alamat_ktp"
-                            placeholder="Masukan nama jalan atau nama kampung beserta RT / RW">
-                          @error('alamat_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="provinsi_ktp" class="form-label"><b>Provinsi</b></label>
-                          <select
-                            class="form-control form-control-lg select2 @error('provinsi_ktp') is-invalid @enderror"
-                            name="provinsi_ktp" id="provinsi_ktp">
-                            <option selected disabled>-- Pilih Provinsi --</option>
-                            <option value="Jawa Tengah">Jawa Tengah</option>
-                            <option value="Jawa Barat">Jawa Barat</option>
-                            <option value="Jawa Timur">Jawa Timur</option>
-                          </select>
-                          @error('provinsi_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="kabupaten_kota_ktp" class="form-label"><b>Kabupaten/Kota</b></label>
-                          <select
-                            class="form-control form-control-lg select2 @error('kabupaten_kota_ktp') is-invalid @enderror"
-                            name="kabupaten_kota_ktp" id="kabupaten_kota_ktp">
-                            <option selected disabled>-- Pilih Kabupaten/Kota --</option>
-                            <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                            <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                            <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                            <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                          </select>
-                          @error('kabupaten_kota_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="kecamatan_ktp" class="form-label"><b>Kecamatan</b></label>
-                          <select
-                            class="form-control form-control-lg select2 @error('kecamatan_ktp') is-invalid @enderror"
-                            name="kecamatan_ktp" id="kecamatan_ktp">
-                            <option selected disabled>-- Pilih Kecamatan --</option>
-                            <option value="Kecamatan Laweyan">Kecamatan Laweyan</option>
-                            <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
-                            <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
-                            <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
-                          </select>
-                          @error('kecamatan_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="kelurahan_ktp" class="form-label"><b>Kelurahan</b></label>
-                          <select
-                            class="form-control form-control-lg select2 @error('kelurahan_ktp') is-invalid @enderror"
-                            name="kelurahan_ktp" id="kelurahan_ktp">
-                            <option selected disabled>-- Pilih Kelurahan --</option>
-                            <option value="Pajang">Pajang</option>
-                            <option value="Sondakan">Sondakan</option>
-                            <option value="Bumi">Bumi</option>
-                            <option value="Laweyan">Laweyan</option>
-                          </select>
-                          @error('kelurahan_ktp')
+                          <label for="alamat_asal_ktp" class="form-label"><b>Alamat KTP</b></label>
+                          <input type="text" class="form-control" name="alamat_asal_ktp" id="alamat_asal_ktp"
+                            placeholder="Masukan alamat sesuai ktp"
+                            value="{{ old('alamat_asal_ktp', $kader->alamat_asal_ktp) }}">
+                          @error('alamat_asal_ktp')
                             <div class="error-message">
                               {{ $message }}
                             </div>
@@ -323,103 +303,25 @@
                           <div class="form-group">
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" id="cek_alamat" name="cek_alamat" on
-                                {{ old('cek_alamat') ? 'checked' : '' }}>
+                                {{ old('cek_alamat') || $kader->alamat_asal_ktp == $kader->alamat_rumah_tinggal ? 'checked' : '' }}>
                               <label for="cek_alamat" class="form-label"><b> Ceklist jika alamat domisili anda sesuai
-                                  dengan ktp!</b></label>
+                                  dengan alamat pada ktp!</b></label>
                               </label>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="alamat_rumah {{ old('cek_alamat') ? 'd-none' : '' }}">
+                    <div
+                      class="alamat_domisili {{ old('cek_alamat') || $kader->alamat_asal_ktp == $kader->alamat_rumah_tinggal ? 'd-none' : '' }}">
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="mb-3">
-                            <label for="alamat_rumah" class="form-label"><b>Alamat Domisili</b></label>
-                            <input type="text" class="form-control @error('alamat_rumah') is-invalid @enderror"
-                              name="alamat_rumah" id="alamat_rumah"
-                              placeholder="Masukan nama jalan atau nama kampung beserta RT / RW">
-                            @error('alamat_rumah')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="provinsi_rumah" class="form-label"><b>Domisili Provinsi</b></label>
-                            <select
-                              class="form-control form-control-lg select2 @error('provinsi_rumah') is-invalid @enderror"
-                              name="provinsi_rumah" id="provinsi_rumah">
-                              <option selected disabled>-- Pilih Provinsi --</option>
-                              <option value="Jawa Tengah">Jawa Tengah</option>
-                              <option value="Jawa Barat">Jawa Barat</option>
-                              <option value="Jawa Timur">Jawa Timur</option>
-                            </select>
-                            @error('provinsi_rumah')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="kabupaten_kota_rumah" class="form-label"><b>Domisili Kabupaten/Kota</b></label>
-                            <select
-                              class="form-control form-control-lg select2 @error('kabupaten_kota_rumah') is-invalid @enderror"
-                              name="kabupaten_kota_rumah" id="kabupaten_kota_rumah">
-                              <option selected disabled>-- Pilih Kabupaten/Kota --</option>
-                              <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                              <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                              <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                              <option value="Kabupaten Sukoharjo">Kabupaten Sukoharjo</option>
-                            </select>
-                            @error('kabupaten_kota_rumah')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="kecamatan_rumah" class="form-label"><b>Domisili Kecamatan</b></label>
-                            <select
-                              class="form-control form-control-lg select2 @error('kecamatan_rumah') is-invalid @enderror"
-                              name="kecamatan_rumah" id="kecamatan_rumah">
-                              <option selected disabled>-- Pilih Kecamatan --</option>
-                              <option value="Kecamatan Laweyan">Kecamatan Laweyan</option>
-                              <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
-                              <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
-                              <option value="Kecamatan Banjarsari">Kecmatan Banjarsari"</option>
-                            </select>
-                            @error('kecamatan_rumah')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="kelurahan_rumah" class="form-label"><b>Domisili Kelurahan</b></label>
-                            <select
-                              class="form-control form-control-lg select2 @error('kelurahan_rumah') is-invalid @enderror"
-                              name="kelurahan_rumah" id="kelurahan_rumah">
-                              <option selected disabled>-- Pilih Kelurahan --</option>
-                              <option value="Pajang">Pajang</option>
-                              <option value="Sondakan">Sondakan</option>
-                              <option value="Bumi">Bumi</option>
-                              <option value="Laweyan">Laweyan</option>
-                            </select>
-                            @error('kelurahan_rumah')
+                            <label for="alamat_rumah_tinggal" class="form-label"><b>Alamat Domisili</b></label>
+                            <input type="text" class="form-control" name="alamat_rumah_tinggal"
+                              id="alamat_rumah_tinggal" placeholder="Masukan alamat domisili rumah tinggal"
+                              value="{{ old('alamat_rumah_tinggal', $kader->alamat_rumah_tinggal) }}">
+                            @error('alamat_rumah_tinggal')
                               <div class="error-message">
                                 {{ $message }}
                               </div>
@@ -429,7 +331,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mt-2">
-                      <button type="submit" class="btn btn-primary">Update Profil</button>
+                      <button type="submit" class="btn btn-primary">Update Kader</button>
                     </div>
                   </form>
                 </div>
@@ -440,17 +342,23 @@
       </div>
     </div>
   </section>
-  <script>
-    $("#cek_alamat").on("change", function() {
-      if ($("#cek_alamat:checked").val()) {
-        $("div.alamat_rumah").addClass('d-none');
-        console.log(1)
-        $("#cek_alamat:checked").val()
-      } else {
-        $("div.alamat_rumah").removeClass('d-none');;
-        console.log(0)
-        $("#cek_alamat:checked").val()
-      }
-    });
-  </script>
+  {{-- select cabang --}}
+  {{-- @if (old('cabang_id_cabang') && !old('ranting_id_ranting'))
+    <script>
+      let id_cabang = $("select#cabang_id_cabang").val();
+      $.ajax({
+        type: "get",
+        url: "/get/ranting/" + id_cabang,
+        dataType: "json",
+        success: (response) => {
+          console.log(response);
+          let ranting = "<option selected disabled>-- Pilih Ranting --</option>";
+          response.forEach(i => {
+            ranting += `<option value="${i.ranting}">${ i.nama_ranting }</option>`;
+          })
+          $("select#ranting_id_ranting").html(ranting);
+        }
+      });
+    </script>
+  @endif --}}
 @endsection

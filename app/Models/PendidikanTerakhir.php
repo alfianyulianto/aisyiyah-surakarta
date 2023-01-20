@@ -17,6 +17,6 @@ class PendidikanTerakhir extends Model
 
   public function kader()
   {
-    return $this->hasMany(Kader::class);
+    return $this->hasOne(Kader::class);
   }
 }

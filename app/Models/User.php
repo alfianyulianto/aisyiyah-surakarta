@@ -42,6 +42,11 @@ class User extends Authenticatable
 
   public function kader()
   {
-    $this->belongsTo(Kader::class, 'kader_nik', 'nik');
+    return $this->belongsTo(Kader::class, 'kader_nik', 'nik');
+  }
+
+  public function kategori_user()
+  {
+    return $this->belongsTo(KategoriUser::class, 'kategori_user_id', 'id');
   }
 }

@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pekerjaan extends Model
+class KategoriUser extends Model
 {
   use HasFactory;
 
-  protected $table = "pekerjaan";
-  protected $primaryKey = "id_pekerjaan";
+  protected $table = "kategori_user";
+  protected $primaryKey = "id";
 
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $fillable = ['id_pekerjaan', 'pekerjaan'];
+  protected $guarded = ['id'];
+
+  public function user()
+  {
+    return $this->hasMany(User::class);
+  }
 }

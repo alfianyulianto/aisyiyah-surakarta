@@ -23,7 +23,7 @@
                       <th class="text-center">Nama Ranting</th>
                       <th class="text-center">Alamat Ranting</th>
                       <th class="text-center">SK Pimpinan Ranting</th>
-                      <th class="text-center">Cabang Ranting</th>
+                      <th class="text-center">Nama Cabang</th>
                       <th class="text-center">Aksi</th>
                     </tr>
                   </thead>
@@ -35,13 +35,24 @@
                         </td>
                         <td>{{ $r->nama_ranting }}</td>
                         <td>{{ $r->alamat_ranting }}</td>
-                        <td>{{ $r->sk_pimp_ranting }}</td>
+                        <td>
+                          <a href="/sk/pimpinan/ranting/{{ $r->id_ranting }}" class="text-decoration-none">
+                            <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
+                              <i class="fas fa-download"></i> download
+                            </div>
+                          </a>
+                        </td>
                         <td>{{ $r->cabang->nama_cabang }}</td>
                         <td>
-                          <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
-                            Edit</a>
-                          <a href="" class="btn btn-icon icon-left btn-danger"><i
-                              class="far fa-trash-alt"></i>Hapus</a>
+                          <a href="/data/ranting/{{ $r->id_ranting }}/edit" class="btn btn-icon icon-left btn-warning"><i
+                              class="far fa-edit"></i> Edit
+                          </a>
+                          <form action="/data/ranting/{{ $r->id_ranting }}" method="post" class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                                class="far fa-trash-alt"></i> Hapus</button>
+                          </form>
                         </td>
                       </tr>
                     @endforeach

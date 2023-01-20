@@ -3,13 +3,9 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>My Profile</h1>
+      <h1>Tambah Kader 'Aisyiyah Surakarta'</h1>
     </div>
 
-    {{-- {{ old('provinsi_ktp') }}
-    {{ old('kabupaten_kota_ktp') }}
-    {{ old('kecamatan_ktp') }}
-    {{ old('kelurahan_ktp') }} --}}
     <div class="section-body">
       <div class="row">
         <div class="col-lg-12">
@@ -17,7 +13,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-10">
-                  <form action="/profil/kader" method="post">
+                  <form action="/data/kader" method="post">
                     @csrf
                     <div class="row">
                       <div class="col-lg-6">
@@ -379,7 +375,7 @@
                               <input class="form-check-input" type="checkbox" id="cek_alamat" name="cek_alamat" on
                                 {{ old('cek_alamat') ? 'checked' : '' }}>
                               <label for="cek_alamat" class="form-label"><b> Ceklist jika alamat domisili anda sesuai
-                                  dengan ktp!</b></label>
+                                  dengan alamat pada ktp!</b></label>
                               </label>
                             </div>
                           </div>
@@ -440,6 +436,10 @@
                               <option selected disabled>-- Pilih Kabupaten/Kota --</option>
                               <option disabled>Silahkan pilih comisili provinsi dahulu</option>
                             </select>
+                            @if (old('kabupaten_kota_domisili'))
+                              <input type="text" name="old_kabupaten_kota_domisili" id="old_kabupaten_kota_domisili"
+                                value="{{ old('kabupaten_kota_domisili') }}" hidden>
+                            @endif
                             @error('kabupaten_kota_domisili')
                               <div class="error-message">
                                 {{ $message }}
@@ -457,6 +457,10 @@
                               <option selected disabled>-- Pilih Kecamatan --</option>
                               <option disabled>Silahkan pilih domisili kabupaten/kota dahulu</option>
                             </select>
+                            @if (old('kecamatan_domisili'))
+                              <input type="text" name="old_kecamatan_domisili" id="old_kecamatan_domisili"
+                                value="{{ old('kecamatan_domisili') }}" hidden>
+                            @endif
                             @error('kecamatan_domisili')
                               <div class="error-message">
                                 {{ $message }}
@@ -472,6 +476,10 @@
                               <option selected disabled>-- Pilih Kelurahan --</option>
                               <option disabled>Silahkan pilih domisili kecamatan dahulu</option>
                             </select>
+                            @if (old('kelurahan_domisili'))
+                              <input type="text" name="old_kelurahan_domisili" id="old_kelurahan_domisili"
+                                value="{{ old('kelurahan_domisili') }}" hidden>
+                            @endif
                             @error('kelurahan_domisili')
                               <div class="error-message">
                                 {{ $message }}
@@ -493,6 +501,7 @@
       </div>
     </div>
   </section>
+  {{-- select cabang --}}
   @if (old('cabang_id_cabang') && !old('ranting_id_ranting'))
     <script>
       let id_cabang = $("select#cabang_id_cabang").val();
@@ -511,29 +520,31 @@
       });
     </script>
   @endif
+
+  {{-- alamat ktp --}}
   @if (old('provinsi_ktp'))
     <script>
       let old_kabupaten_kota_ktp = $("#old_kabupaten_kota_ktp").val();
-      let id_provinsi = $("select#provinsi_ktp").val();
+      let id_provinsi_ktp = $("select#provinsi_ktp").val();
       $.ajax({
         type: "get",
         url: "/data/kota/kabupaten/",
         data: {
-          id: id_provinsi
+          id: id_provinsi_ktp
         },
         dataType: "json",
         success: (response) => {
           console.log(response);
-          let tag_kabupaten_kota = `<option selected disabled>-- Pilih Kabupaten/Kota --</option>`;
-          let kota_kabupaten = response.kota_kabupaten;
-          kota_kabupaten.forEach(i => {
+          let tag_kabupaten_kota_ktp = `<option selected disabled>-- Pilih Kabupaten/Kota --</option>`;
+          let kota_kabupaten_ktp = response.kota_kabupaten;
+          kota_kabupaten_ktp.forEach(i => {
             if (old_kabupaten_kota_ktp == i.id) {
-              tag_kabupaten_kota += `<option value="${i.id}" selected>${ i.nama }</option>`;
+              tag_kabupaten_kota_ktp += `<option value="${i.id}" selected>${ i.nama }</option>`;
             } else {
-              tag_kabupaten_kota += `<option value="${i.id}">${ i.nama }</option>`;
+              tag_kabupaten_kota_ktp += `<option value="${i.id}">${ i.nama }</option>`;
             }
           });
-          $("#kabupaten_kota_ktp").html(tag_kabupaten_kota);
+          $("#kabupaten_kota_ktp").html(tag_kabupaten_kota_ktp);
         }
       });
     </script>
@@ -541,27 +552,27 @@
   @if (old('kabupaten_kota_ktp'))
     <script>
       let old_kecamatan_ktp = $("#old_kecamatan_ktp").val();
-      let id_kabupaten_kota = $("#old_kabupaten_kota_ktp").val();
+      let id_kabupaten_kota_ktp = $("#old_kabupaten_kota_ktp").val();
 
       $.ajax({
         type: "get",
         url: "/data/kecamatan/",
         data: {
-          id: id_kabupaten_kota
+          id: id_kabupaten_kota_ktp
         },
         dataType: "json",
         success: (response) => {
           console.log(response);
-          let tag_kecamatan = "<option selected disabled>-- Pilih Kecamatan --</option>";
-          let kecamatan = response.kecamatan;
-          kecamatan.forEach(i => {
+          let tag_kecamatan_ktp = "<option selected disabled>-- Pilih Kecamatan --</option>";
+          let kecamatan_ktp = response.kecamatan;
+          kecamatan_ktp.forEach(i => {
             if (old_kecamatan_ktp == i.id) {
-              tag_kecamatan += `<option value="${i.id}" selected>${ i.nama }</option>`;
+              tag_kecamatan_ktp += `<option value="${i.id}" selected>${ i.nama }</option>`;
             } else {
-              tag_kecamatan += `<option value="${i.id}">${ i.nama }</option>`;
+              tag_kecamatan_ktp += `<option value="${i.id}">${ i.nama }</option>`;
             }
           });
-          $("#kecamatan_ktp").html(tag_kecamatan);
+          $("#kecamatan_ktp").html(tag_kecamatan_ktp);
         }
       });
     </script>
@@ -569,32 +580,118 @@
   @if (old('kecamatan_ktp'))
     <script>
       let old_kelurahan_ktp = $("#old_kelurahan_ktp").val();
-      let id_kecamatan = $("#old_kecamatan_ktp").val();
+      let id_kecamatan_ktp = $("#old_kecamatan_ktp").val();
 
       $.ajax({
         type: "get",
         url: "/data/kelurahan/",
         data: {
-          id: id_kecamatan
+          id: id_kecamatan_ktp
         },
         dataType: "json",
         success: (response) => {
           console.log(response);
-          let tag_kelurahan = "<option selected disabled>-- Pilih Kelurahan --</option>";
-          let kelurahan = response.kelurahan;
-          kelurahan.forEach(i => {
+          let tag_kelurahan_ktp = "<option selected disabled>-- Pilih Kelurahan --</option>";
+          let kelurahan_ktp = response.kelurahan;
+          kelurahan_ktp.forEach(i => {
             if (old_kelurahan_ktp == i.id) {
-              tag_kelurahan += `<option value="${i.id}" selected>${ i.nama }</option>`;
+              tag_kelurahan_ktp += `<option value="${i.id}" selected>${ i.nama }</option>`;
             } else {
-              tag_kelurahan += `<option value="${i.id}">${ i.nama }</option>`;
+              tag_kelurahan_ktp += `<option value="${i.id}">${ i.nama }</option>`;
             }
           });
-          $("#kelurahan_ktp").html(tag_kelurahan);
+          $("#kelurahan_ktp").html(tag_kelurahan_ktp);
         }
       });
     </script>
   @endif
-  <script>
+
+  {{-- alamat domisili --}}
+  @if (old('provinsi_domisili'))
+    <script>
+      let old_kabupaten_kota_domisili = $("#old_kabupaten_kota_domisili").val();
+      let id_provinsi_domisili = $("select#provinsi_domisili").val();
+      $.ajax({
+        type: "get",
+        url: "/data/kota/kabupaten/",
+        data: {
+          id: id_provinsi_domisili
+        },
+        dataType: "json",
+        success: (response) => {
+          console.log(response);
+          let tag_kabupaten_kota_domisili = `<option selected disabled>-- Pilih Kabupaten/Kota --</option>`;
+          let kota_kabupaten_domisili = response.kota_kabupaten;
+          kota_kabupaten_domisili.forEach(i => {
+            if (old_kabupaten_kota_domisili == i.id) {
+              tag_kabupaten_kota_domisili += `<option value="${i.id}" selected>${ i.nama }</option>`;
+            } else {
+              tag_kabupaten_kota_domisili += `<option value="${i.id}">${ i.nama }</option>`;
+            }
+          });
+          $("#kabupaten_kota_domisili").html(tag_kabupaten_kota_domisili);
+        }
+      });
+    </script>
+  @endif
+  @if (old('kabupaten_kota_domisili'))
+    <script>
+      let old_kecamatan_domisili = $("#old_kecamatan_domisili").val();
+      let id_kabupaten_kota_domisili = $("#old_kabupaten_kota_domisili").val();
+
+      $.ajax({
+        type: "get",
+        url: "/data/kecamatan/",
+        data: {
+          id: id_kabupaten_kota_domisili
+        },
+        dataType: "json",
+        success: (response) => {
+          console.log(response);
+          let tag_kecamatan_domisili = "<option selected disabled>-- Pilih Kecamatan --</option>";
+          let kecamatan_domisili = response.kecamatan;
+          kecamatan_domisili.forEach(i => {
+            if (old_kecamatan_domisili == i.id) {
+              tag_kecamatan_domisili += `<option value="${i.id}" selected>${ i.nama }</option>`;
+            } else {
+              tag_kecamatan_domisili += `<option value="${i.id}">${ i.nama }</option>`;
+            }
+          });
+          $("#kecamatan_domisili").html(tag_kecamatan_domisili);
+        }
+      });
+    </script>
+  @endif
+  @if (old('kecamatan_domisili'))
+    <script>
+      let old_kelurahan_domisili = $("#old_kelurahan_domisili").val();
+      let id_kecamatan_domisili = $("#old_kecamatan_domisili").val();
+      console.log(old_kelurahan_domisili);
+      console.log(old_kelurahan_domisili);
+      $.ajax({
+        type: "get",
+        url: "/data/kelurahan/",
+        data: {
+          id: id_kecamatan_domisili
+        },
+        dataType: "json",
+        success: (response) => {
+          console.log(response);
+          let tag_kelurahan_domisili = "<option selected disabled>-- Pilih Kelurahan --</option>";
+          let kelurahan_domisili = response.kelurahan;
+          kelurahan_domisili.forEach(i => {
+            if (old_kelurahan_domisili == i.id) {
+              tag_kelurahan_domisili += `<option value="${i.id}" selected>${ i.nama } aaa</option>`;
+            } else {
+              tag_kelurahan_domisili += `<option value="${i.id}">${ i.nama }</option>`;
+            }
+          });
+          $("#kelurahan_domisili").html(tag_kelurahan_domisili);
+        }
+      });
+    </script>
+  @endif
+  {{-- <script>
     $("select#cabang_id_cabang").on("change", function() {
       let id_cabang = $(this).val();
       $.ajax({
@@ -751,5 +848,5 @@
         $("#cek_alamat:checked").val()
       }
     });
-  </script>
+  </script> --}}
 @endsection

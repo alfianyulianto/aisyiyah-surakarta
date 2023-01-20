@@ -13,7 +13,7 @@
           <div class="card">
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x-daerah">
+                <table class="table table-bordered" id="scroll-x-daerah">
                   <thead>
                     <tr>
                       <th class="text-center">Nama Daerah</th>
@@ -23,17 +23,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($daerah as $d)
-                      <tr>
-                        <td>{{ $d->nama_daerah }}</td>
-                        <td>{{ $d->alamat_daerah }}</td>
-                        <td>{{ $d->sk_pimp_daerah }}</td>
-                        <td>
-                          <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
-                            Edit</a>
-                        </td>
-                      </tr>
-                    @endforeach
+                    <tr>
+                      <td>{{ $daerah->nama_daerah }}</td>
+                      <td>{{ $daerah->alamat_daerah }}</td>
+                      <td>
+                        <a href="/sk/pimpinan/daerah/{{ $daerah->id_daerah }}" class="text-decoration-none">
+                          <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
+                            <i class="fas fa-download"></i> download
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="/data/daerah/{{ $daerah->id_daerah }}/edit" class="btn btn-icon icon-left btn-warning"><i
+                            class="far fa-edit"></i> Edit
+                        </a>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>

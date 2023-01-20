@@ -15,5 +15,5 @@ class TempatLahir extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $guarded = ['id_tempat_lahir'];
+  protected $fillable = ['id_tempat_lahir', 'tempat_lahir'];
 }

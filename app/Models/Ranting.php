@@ -19,7 +19,7 @@ class Ranting extends Model
 
   public function kader()
   {
-    return $this->belongsTo(Kader::class, 'ranting_id_ranting', 'nik');
+    return $this->hasOne(Kader::class);
   }
 
   public function daerah()

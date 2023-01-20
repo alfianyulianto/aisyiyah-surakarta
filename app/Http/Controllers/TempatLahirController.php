@@ -9,7 +9,7 @@ class TempatLahirController extends Controller
 {
   public function index()
   {
-    $tempat_lahir = TempatLahir::orderBy('nama_kota', 'asc')->get();
+    $tempat_lahir = TempatLahir::orderBy('tempat_lahir', 'asc')->get();
     return $tempat_lahir;
   }
 }

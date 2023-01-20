@@ -34,12 +34,24 @@
                         </td>
                         <td>{{ $c->nama_cabang }}</td>
                         <td>{{ $c->alamat_cabang }}</td>
-                        <td>{{ $c->sk_pimp_cabang }}</td>
                         <td>
-                          <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
+                          <a href="/sk/pimpinan/cabang/{{ $c->id_cabang }}" class="text-decoration-none">
+                            <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
+                              <i class="fas fa-download"></i> download
+                            </div>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="/data/cabang/{{ $c->id_cabang }}/edit" class="btn btn-icon icon-left btn-warning"><i
+                              class="far fa-edit"></i>
                             Edit</a>
-                          <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
-                            Hapus</a>
+                          <form action="/data/cabang" method="post" class="d-inline">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                                class="far fa-trash-alt"></i>
+                              Hapus</button>
+                          </form>
                         </td>
                       </tr>
                     @endforeach

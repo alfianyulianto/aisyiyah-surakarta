@@ -29,11 +29,10 @@ $(document).ready(function () {
     $("#scroll-x-daerah").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 5, targets: 0 },
-            { width: 105, targets: 1 },
-            { width: 395, targets: 2 },
-            { width: 145, targets: 3 },
-            { width: 60, targets: 4 },
+            { width: 150, targets: 0 },
+            { width: 495, targets: 1 },
+            { width: 145, targets: 2 },
+            { width: 60, targets: 3 },
         ],
     });
     // tampilan cabang
@@ -57,6 +56,46 @@ $(document).ready(function () {
             { width: 145, targets: 3 },
             { width: 215, targets: 4 },
             { width: 160, targets: 5 },
+        ],
+    });
+    // tampilan setting ortom
+    $("#scroll-x-ortom").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 240, targets: 0 },
+            { width: 150, targets: 1 },
+        ],
+    });
+    // tampilan setting potensi
+    $("#scroll-x-potensi").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 240, targets: 0 },
+            { width: 150, targets: 1 },
+        ],
+    });
+    // tampilan setting tempatLahir
+    $("#scroll-x-tempat_lahir").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 240, targets: 0 },
+            { width: 150, targets: 1 },
+        ],
+    });
+    // tampilan setting pekerjaan
+    $("#scroll-x-pekerjaan").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 240, targets: 0 },
+            { width: 150, targets: 1 },
+        ],
+    });
+    // tampilan setting periode
+    $("#scroll-x-periode").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 240, targets: 0 },
+            { width: 150, targets: 1 },
         ],
     });
     // tampilan potensi kader
@@ -200,16 +239,16 @@ $(document).ready(function () {
     }
     async function tempat_lahir() {
         let tempat_lahir = await get_tempat_lahir();
-        let nama_kota = [];
+        let nama_tempat_lahir = [];
         tempat_lahir.forEach((i) => {
-            nama_kota.push(i.nama_kota);
+            nama_tempat_lahir.push(i.tempat_lahir);
         });
-        autocomplete_tempat_lahir(nama_kota);
+        autocomplete_tempat_lahir(nama_tempat_lahir);
     }
-    function autocomplete_tempat_lahir(nama_kota) {
-        console.log(nama_kota);
+    function autocomplete_tempat_lahir(nama_tempat_lahir) {
+        console.log(nama_tempat_lahir);
         $("#tempat_lahir").autocomplete({
-            lookup: nama_kota,
+            lookup: nama_tempat_lahir,
         });
     }
     tempat_lahir();
@@ -256,7 +295,7 @@ $(document).ready(function () {
         let pekerjaan = await get_pekerjaan();
         let nama_pekerjaan = [];
         pekerjaan.forEach((i) => {
-            nama_pekerjaan.push(i.nama_pekerjaan);
+            nama_pekerjaan.push(i.pekerjaan);
         });
         autocomplete_pekerjaan(nama_pekerjaan);
     }
@@ -267,4 +306,170 @@ $(document).ready(function () {
         });
     }
     pekerjaan();
+
+    // select cabang
+    $("select#cabang_id_cabang").on("change", function () {
+        let id_cabang = $(this).val();
+        $.ajax({
+            type: "get",
+            url: "/get/ranting/" + id_cabang,
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                let ranting =
+                    "<option selected disabled>-- Pilih Ranting --</option>";
+                response.forEach((i) => {
+                    ranting += `<option value="${i.ranting}">${i.nama_ranting}</option>`;
+                });
+                $("select#ranting_id_ranting").html(ranting);
+            },
+        });
+    });
+
+    // alamat ktp
+    $("#provinsi_ktp").on("change", function () {
+        let id_provinsi = $(this).val();
+        $.ajax({
+            type: "get",
+            url: "/data/kota/kabupaten/",
+            data: {
+                id: id_provinsi,
+            },
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                let tag_provinsi =
+                    "<option selected disabled>-- Pilih Kabupaten/Kota --</option>";
+                let kota_kabupaten = response.kota_kabupaten;
+                kota_kabupaten.forEach((i) => {
+                    tag_provinsi += `<option value="${i.id}">${i.nama}</option>`;
+                });
+                $("#kabupaten_kota_ktp").html(tag_provinsi);
+            },
+        });
+    });
+    $("#kabupaten_kota_ktp").on("change", function () {
+        let id_kabupaten_kota = $(this).val();
+
+        $.ajax({
+            type: "get",
+            url: "/data/kecamatan/",
+            data: {
+                id: id_kabupaten_kota,
+            },
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                let tag_kecamatan =
+                    "<option selected disabled>-- Pilih Kecamatan --</option>";
+                let kecamatan = response.kecamatan;
+                kecamatan.forEach((i) => {
+                    tag_kecamatan += `<option value="${i.id}">${i.nama}</option>`;
+                });
+                $("#kecamatan_ktp").html(tag_kecamatan);
+            },
+        });
+    });
+    $("#kecamatan_ktp").on("change", function () {
+        let id_kecamatan = $(this).val();
+
+        $.ajax({
+            type: "get",
+            url: "/data/kelurahan/",
+            data: {
+                id: id_kecamatan,
+            },
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                let tag_kelurahan =
+                    "<option selected disabled>-- Pilih Kelurahan --</option>";
+                let kelurahan = response.kelurahan;
+                kelurahan.forEach((i) => {
+                    tag_kelurahan += `<option value="${i.id}">${i.nama}</option>`;
+                });
+                $("#kelurahan_ktp").html(tag_kelurahan);
+            },
+        });
+    });
+
+    // alamat domisili
+    $("#provinsi_domisili").on("change", function () {
+        let id_provinsi = $(this).val();
+        $.ajax({
+            type: "get",
+            url: "/data/kota/kabupaten/",
+            data: {
+                id: id_provinsi,
+            },
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                let tag_provinsi =
+                    "<option selected disabled>-- Pilih Kabupaten/Kota --</option>";
+                let kota_kabupaten = response.kota_kabupaten;
+                kota_kabupaten.forEach((i) => {
+                    tag_provinsi += `<option value="${i.id}">${i.nama}</option>`;
+                });
+                $("#kabupaten_kota_domisili").html(tag_provinsi);
+            },
+        });
+    });
+    $("#kabupaten_kota_domisili").on("change", function () {
+        let id_kabupaten_kota = $(this).val();
+
+        $.ajax({
+            type: "get",
+            url: "/data/kecamatan/",
+            data: {
+                id: id_kabupaten_kota,
+            },
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                let tag_kecamatan =
+                    "<option selected disabled>-- Pilih Kecamatan --</option>";
+                let kecamatan = response.kecamatan;
+                kecamatan.forEach((i) => {
+                    tag_kecamatan += `<option value="${i.id}">${i.nama}</option>`;
+                });
+                $("#kecamatan_domisili").html(tag_kecamatan);
+            },
+        });
+    });
+    $("#kecamatan_domisili").on("change", function () {
+        let id_kecamatan = $(this).val();
+
+        $.ajax({
+            type: "get",
+            url: "/data/kelurahan/",
+            data: {
+                id: id_kecamatan,
+            },
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                let tag_kelurahan =
+                    "<option selected disabled>-- Pilih Kelurahan --</option>";
+                let kelurahan = response.kelurahan;
+                kelurahan.forEach((i) => {
+                    tag_kelurahan += `<option value="${i.id}">${i.nama}</option>`;
+                });
+                $("#kelurahan_domisili").html(tag_kelurahan);
+            },
+        });
+    });
+
+    // combobox jika di ceklist
+    $("#cek_alamat").on("change", function () {
+        if ($("#cek_alamat:checked").val()) {
+            $("div.alamat_domisili").addClass("d-none");
+            // console.log(1);
+            $("#cek_alamat:checked").val();
+        } else {
+            $("div.alamat_domisili").removeClass("d-none");
+            // console.log(0);
+            $("#cek_alamat:checked").val();
+        }
+    });
 });

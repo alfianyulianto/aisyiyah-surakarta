@@ -24,16 +24,16 @@ class Kader extends Model
 
   public function daerah()
   {
-    return $this->hasOne(Daerah::class);
+    return $this->belongsTo(Daerah::class, 'daerah_id_daerah', 'id_daerah');
   }
 
   public function cabang()
   {
-    return $this->hasOne(Cabang::class);
+    return $this->belongsTo(Cabang::class, 'cabang_id_cabang', 'id_cabang');
   }
   public function ranting()
   {
-    return $this->hasOne(Ranting::class);
+    return $this->belongsTo(Ranting::class, 'ranting_id_ranting', 'id_ranting');
   }
 
   public function kader_memiliki_jabatan()

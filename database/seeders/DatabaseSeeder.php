@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
       'nama' => 'Alfian Yulianto',
       'no_ponsel' => '081217432366',
       'password' => Hash::make('password'),
-      'kategori_user' => '1',
+      'kategori_user_id' => '2',
     ]);
     DB::table('users')->insert([
       'id' => '2',
@@ -32,15 +32,37 @@ class DatabaseSeeder extends Seeder
       'nama' => 'Budi Doremi',
       'no_ponsel' => '085432657890',
       'password' => Hash::make('password'),
-      'kategori_user' => '2',
+      'kategori_user_id' => '3',
+    ]);
+
+    // kategori_user
+    DB::table('kategori_user')->insert([
+      'id' => 1,
+      'kategori_user' => 'kader',
+    ]);
+    DB::table('kategori_user')->insert([
+      'id' => 2,
+      'kategori_user' => 'admin',
+    ]);
+    DB::table('kategori_user')->insert([
+      'id' => 3,
+      'kategori_user' => 'admin-daerah',
+    ]);
+    DB::table('kategori_user')->insert([
+      'id' => 4,
+      'kategori_user' => 'admin-cabang',
+    ]);
+    DB::table('kategori_user')->insert([
+      'id' => 5,
+      'kategori_user' => 'admin-ranting',
     ]);
 
     // profile-kader
     DB::table('kader')->insert([
       'nik' => "3372010107000002",
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-banjarsari',
-      'ranting_id_ranting' => 'rntng-mangkubumen',
+      'cabang_id_cabang' => 'cbng-bnjr',
+      'ranting_id_ranting' => 'rntng-mkbm',
       'pendidikan_terakhir_id_pendidikan_terakhir' => 'pndk-Pd7Y',
       'no_kta' => '54321',
       'no_ktm' => '12345',
@@ -58,8 +80,8 @@ class DatabaseSeeder extends Seeder
     DB::table('kader')->insert([
       'nik' => "3372010108199898",
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-banjarsari',
-      'ranting_id_ranting' => 'rntng-sumber_barat',
+      'cabang_id_cabang' => 'cbng-bnjr',
+      'ranting_id_ranting' => 'rntng-sbbr',
       'pendidikan_terakhir_id_pendidikan_terakhir' => 'pndk-Pd7Y',
       'no_kta' => '23456',
       'no_ktm' => '65432',
@@ -86,49 +108,49 @@ class DatabaseSeeder extends Seeder
 
     // cabang
     DB::table('cabang')->insert([
-      'id_cabang' => 'cbng-banjarsari',
+      'id_cabang' => 'cbng-bnjr',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_cabang' => 'Banjarsari',
       'alamat_cabang' => 'Jl. Banjarsari',
       'sk_pimp_cabang' => '-'
     ]);
     DB::table('cabang')->insert([
-      'id_cabang' => 'cbng-jebres',
+      'id_cabang' => 'cbng-jbrs',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_cabang' => 'Jebres',
       'alamat_cabang' => 'Jl. Jebres',
       'sk_pimp_cabang' => '-'
     ]);
     DB::table('cabang')->insert([
-      'id_cabang' => 'cbng-kota_bengawan',
+      'id_cabang' => 'cbng-ktbgw',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_cabang' => 'Kota Bengawan',
       'alamat_cabang' => 'Jl. Kota Bengawan',
       'sk_pimp_cabang' => '-'
     ]);
     DB::table('cabang')->insert([
-      'id_cabang' => 'cbng-kota_barat',
+      'id_cabang' => 'cbng-ktbr',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_cabang' => 'Kota Barat',
       'alamat_cabang' => 'Jl. Kota Barat',
       'sk_pimp_cabang' => '-'
     ]);
     DB::table('cabang')->insert([
-      'id_cabang' => 'cbng-laweyan',
+      'id_cabang' => 'cbng-lwyn',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_cabang' => 'Laweyan',
       'alamat_cabang' => 'Jl. Laweyan',
       'sk_pimp_cabang' => '-'
     ]);
     DB::table('cabang')->insert([
-      'id_cabang' => 'cbng-solo_selatan',
+      'id_cabang' => 'cbng-slsl',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_cabang' => 'Solo Selatan',
       'alamat_cabang' => 'Jl. Solo Selatan',
       'sk_pimp_cabang' => '-'
     ]);
     DB::table('cabang')->insert([
-      'id_cabang' => 'cbng-solo_utara',
+      'id_cabang' => 'cbng-slut',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_cabang' => 'Solo Utara',
       'alamat_cabang' => 'Jl. Solo Utara',
@@ -137,25 +159,25 @@ class DatabaseSeeder extends Seeder
 
     // ranting banjarsari
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-mangkubumen',
+      'id_ranting' => 'rntng-mkbm',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-banjarsari',
+      'cabang_id_cabang' => 'cbng-bnjr',
       'nama_ranting' => 'Mangkubumen',
       'alamat_ranting' => 'Jl. Mangkubumen',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-sumber_barat',
+      'id_ranting' => 'rntng-sbbr',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-banjarsari',
+      'cabang_id_cabang' => 'cbng-bnjr',
       'nama_ranting' => 'Sumber Barat',
       'alamat_ranting' => 'Jl. Sumber Barat',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-sumber_timur',
+      'id_ranting' => 'rntng-sbtm',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-banjarsari',
+      'cabang_id_cabang' => 'cbng-bnjr',
       'nama_ranting' => 'Sumber Timur',
       'alamat_ranting' => 'Jl. Sumber Timur',
       'sk_pimp_ranting' => '-'
@@ -163,25 +185,25 @@ class DatabaseSeeder extends Seeder
 
     // ranting jebres
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-timuran',
+      'id_ranting' => 'rntng-tmrn',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-jebres',
+      'cabang_id_cabang' => 'cbng-jbrs',
       'nama_ranting' => 'Timuran',
       'alamat_ranting' => 'Jl. Timuran',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-keprabon',
+      'id_ranting' => 'rntng-kprb',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-jebres',
+      'cabang_id_cabang' => 'cbng-jbrs',
       'nama_ranting' => 'Keprabon',
       'alamat_ranting' => 'Jl. Keprabon',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-kestelan',
+      'id_ranting' => 'rntng-kstl',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-jebres',
+      'cabang_id_cabang' => 'cbng-jbrs',
       'nama_ranting' => 'Kestelan',
       'alamat_ranting' => 'Jl. Kestelan',
       'sk_pimp_ranting' => '-'
@@ -189,25 +211,25 @@ class DatabaseSeeder extends Seeder
 
     // ranting kota bengawan
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-baluwarti',
+      'id_ranting' => 'rntng-blwr',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-kota_bengawan',
+      'cabang_id_cabang' => 'cbng-ktbgw',
       'nama_ranting' => 'Baluwarti',
       'alamat_ranting' => 'Jl. Baluwarti',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-semanggi',
+      'id_ranting' => 'rntng-smng',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-kota_bengawan',
+      'cabang_id_cabang' => 'cbng-ktbgw',
       'nama_ranting' => 'Semanggi',
       'alamat_ranting' => 'Jl. Semanggi',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-kauman',
+      'id_ranting' => 'rntng-kman',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-kota_bengawan',
+      'cabang_id_cabang' => 'cbng-ktbgw',
       'nama_ranting' => 'Kamuan',
       'alamat_ranting' => 'Jl. Kamuan',
       'sk_pimp_ranting' => '-'
@@ -215,25 +237,25 @@ class DatabaseSeeder extends Seeder
 
     // ranting kota barat
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-kadipiro',
+      'id_ranting' => 'rntng-kdpr',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-kota_barat',
+      'cabang_id_cabang' => 'cbng-ktbr',
       'nama_ranting' => 'Kadipiro',
       'alamat_ranting' => 'Jl. Kadipiro',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-banyuanyar',
+      'id_ranting' => 'rntng-bnyr',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-kota_barat',
+      'cabang_id_cabang' => 'cbng-ktbr',
       'nama_ranting' => 'Banyuanyar',
       'alamat_ranting' => 'Jl. Banyuanyar',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-nusukan',
+      'id_ranting' => 'rntng-nskn',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-kota_barat',
+      'cabang_id_cabang' => 'cbng-ktbr',
       'nama_ranting' => 'Nusukan',
       'alamat_ranting' => 'Jl. Nusukan',
       'sk_pimp_ranting' => '-'
@@ -241,17 +263,17 @@ class DatabaseSeeder extends Seeder
 
     // ranting laweyan
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-purwosari',
+      'id_ranting' => 'rntng-pwsr',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-laweyan',
+      'cabang_id_cabang' => 'cbng-lwyn',
       'nama_ranting' => 'Purwosari',
       'alamat_ranting' => 'Jl. Purwosari',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-pajang',
+      'id_ranting' => 'rntng-pjng',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-laweyan',
+      'cabang_id_cabang' => 'cbng-lwyn',
       'nama_ranting' => 'Pajang',
       'alamat_ranting' => 'Jl. Pajang',
       'sk_pimp_ranting' => '-'
@@ -259,7 +281,7 @@ class DatabaseSeeder extends Seeder
     DB::table('ranting')->insert([
       'id_ranting' => 'rntng-bumi',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-laweyan',
+      'cabang_id_cabang' => 'cbng-lwyn',
       'nama_ranting' => 'Bumi',
       'alamat_ranting' => 'Jl. Bumi',
       'sk_pimp_ranting' => '-'
@@ -267,25 +289,25 @@ class DatabaseSeeder extends Seeder
 
     // ranting solo selatan
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-serangan',
+      'id_ranting' => 'rntng-srng',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-solo_selatan',
+      'cabang_id_cabang' => 'cbng-slsl',
       'nama_ranting' => 'Serengan',
       'alamat_ranting' => 'Jl. Serengan',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-tipes',
+      'id_ranting' => 'rntng-tpes',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-solo_selatan',
+      'cabang_id_cabang' => 'cbng-slsl',
       'nama_ranting' => 'Tipes',
       'alamat_ranting' => 'Jl. Tipes',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-jayengan',
+      'id_ranting' => 'rntng-jyng',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-solo_selatan',
+      'cabang_id_cabang' => 'cbng-slsl',
       'nama_ranting' => 'Jayengan',
       'alamat_ranting' => 'Jl. Jayengan',
       'sk_pimp_ranting' => '-'
@@ -293,25 +315,25 @@ class DatabaseSeeder extends Seeder
 
     // ranting solo utara
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-jagalan',
+      'id_ranting' => 'rntng-jgln',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-solo_utara',
+      'cabang_id_cabang' => 'cbng-slut',
       'nama_ranting' => 'Jagalan',
       'alamat_ranting' => 'Jl. Jagalan',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-mojosongo',
+      'id_ranting' => 'rntng-mjsn',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-solo_utara',
+      'cabang_id_cabang' => 'cbng-slut',
       'nama_ranting' => 'Mojosongo',
       'alamat_ranting' => 'Jl. Mojosongo',
       'sk_pimp_ranting' => '-'
     ]);
     DB::table('ranting')->insert([
-      'id_ranting' => 'rntng-gandekan',
+      'id_ranting' => 'rntng-gndk',
       'daerah_id_daerah' => 'aisyiyah-surakarta',
-      'cabang_id_cabang' => 'cbng-solo_utara',
+      'cabang_id_cabang' => 'cbng-slut',
       'nama_ranting' => 'Gandekan',
       'alamat_ranting' => 'Jl. Gandekan',
       'sk_pimp_ranting' => '-'
@@ -768,74 +790,74 @@ class DatabaseSeeder extends Seeder
     // tabel tempat_lahir
     DB::table('tempat_lahir')->insert([
       'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
-      'nama_kota' => 'Surakarta',
+      'tempat_lahir' => 'Surakarta',
       'created_at' => date('Y-m-d H:i:01')
     ]);
     DB::table('tempat_lahir')->insert([
       'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
-      'nama_kota' => 'Sukoharjo',
+      'tempat_lahir' => 'Sukoharjo',
       'created_at' => date('Y-m-d H:i:02')
     ]);
     DB::table('tempat_lahir')->insert([
       'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
-      'nama_kota' => 'Klaten',
+      'tempat_lahir' => 'Klaten',
       'created_at' => date('Y-m-d H:i:03')
     ]);
     DB::table('tempat_lahir')->insert([
       'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
-      'nama_kota' => 'Wonogiri',
+      'tempat_lahir' => 'Wonogiri',
       'created_at' => date('Y-m-d H:i:04')
     ]);
     DB::table('tempat_lahir')->insert([
       'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
-      'nama_kota' => 'Kudus',
+      'tempat_lahir' => 'Kudus',
       'created_at' => date('Y-m-d H:i:05')
     ]);
     DB::table('tempat_lahir')->insert([
       'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
-      'nama_kota' => 'Sragen',
+      'tempat_lahir' => 'Sragen',
       'created_at' => date('Y-m-d H:i:06')
     ]);
     DB::table('tempat_lahir')->insert([
       'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
-      'nama_kota' => 'Karanganyar',
+      'tempat_lahir' => 'Karanganyar',
       'created_at' => date('Y-m-d H:i:07')
     ]);
 
     // tabel pekerjaan
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'nama_pekerjaan' => 'PNS',
+      'pekerjaan' => 'PNS',
       'created_at' => date('Y-m-d H:i:01')
     ]);
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'nama_pekerjaan' => 'Wirasuwasta',
+      'pekerjaan' => 'Wirasuwasta',
       'created_at' => date('Y-m-d H:i:02')
     ]);
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'nama_pekerjaan' => 'Dosen',
+      'pekerjaan' => 'Dosen',
       'created_at' => date('Y-m-d H:i:03')
     ]);
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'nama_pekerjaan' => 'Pelajar',
+      'pekerjaan' => 'Pelajar',
       'created_at' => date('Y-m-d H:i:04')
     ]);
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'nama_pekerjaan' => 'Mahasiswa',
+      'pekerjaan' => 'Mahasiswa',
       'created_at' => date('Y-m-d H:i:05')
     ]);
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'nama_pekerjaan' => 'Karyawan Swasta',
+      'pekerjaan' => 'Karyawan Swasta',
       'created_at' => date('Y-m-d H:i:06')
     ]);
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'nama_pekerjaan' => 'Ibu Rumah Tangga',
+      'pekerjaan' => 'Ibu Rumah Tangga',
       'created_at' => date('Y-m-d H:i:07')
     ]);
   }

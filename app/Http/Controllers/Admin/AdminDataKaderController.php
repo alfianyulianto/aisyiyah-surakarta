@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
+use App\Models\Daerah;
 use App\Models\Kader;
 use App\Models\PendidikanTerakhir;
 use App\Models\Ranting;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
-class AdminDataProfileKaderController extends Controller
+class AdminDataKaderController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -21,7 +22,7 @@ class AdminDataProfileKaderController extends Controller
    */
   public function index()
   {
-    return view('admin.profil-kader.index', [
+    return view('admin.data-kader.index', [
       'kader' => Kader::orderBy('created_at', 'desc')->get()
     ]);
   }
@@ -81,7 +82,7 @@ class AdminDataProfileKaderController extends Controller
     // }
 
 
-    return view('admin.profil-kader.create', [
+    return view('admin.data-kader.create', [
       'nama_cabang' => $nama_cabang,
       'nama_ranting' => $nama_ranting,
       'pendidikan_terakhir' => $pendidikan_terakhir,
@@ -146,7 +147,7 @@ class AdminDataProfileKaderController extends Controller
 
     // insert ke tabel kader
     $validatedData = [
-      'daerah_id_daerah' => 'ska-1',
+      'daerah_id_daerah' => Daerah::first()->get()->id_daerah,
       'nik' => $request->nik,
       'no_kta' => $request->no_kta,
       'no_ktm' => $request->no_ktm,
@@ -166,9 +167,10 @@ class AdminDataProfileKaderController extends Controller
       $validatedData['alamat_rumah_tinggal'] = $request->alamat_domisili . ' ' . $request->kelurahan_domisili . ' ' . $request->kabupaten_kota_domisili . ' ' . $request->provinsi_domisili;
     }
 
+    // insert ke tabel kader
     Kader::create($validatedData);
 
-    return redirect('/profil/kader')->with('message_kader', 'Data ' . $request->nama . ' berhasil ditambahkan sebagai kader.');
+    return redirect('/data/kader')->with('message_kader', 'Data ' . $request->nama . ' berhasil ditambahkan sebagai kader.');
   }
 
   /**
@@ -177,9 +179,11 @@ class AdminDataProfileKaderController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Kader $kader)
   {
-    //
+    return view('admin.data-kader.show', [
+      'kader' => $kader
+    ]);
   }
 
   /**
