@@ -42,7 +42,7 @@ class KaderOrtomController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_kader_has_ortom' => ['required', 'max:11', 'min:11'],
+      'id_kader_has_ortom' => ['required', 'max:11', 'min:11', 'unique:App\Models\KaderOrtom,id_kader_has_ortom'],
       'ortom_id_ortom' => ['required'],
       'ortom_uraian' => ['required', 'min:5'],
     ]);
@@ -75,10 +75,11 @@ class KaderOrtomController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit(KaderOrtom $kader_ortom)
+  public function edit($id)
   {
     return view('kader.ortom.edit', [
-      'kader_ortom' => $kader_ortom
+      'kader_ortom' => KaderOrtom::where('id_kader_has_ortom', $id)->first(),
+      'ortom' => Ortom::orderBy('created_at', 'asc')->get()
     ]);
   }
 
@@ -91,7 +92,26 @@ class KaderOrtomController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    $role = [
+      'id_kader_has_ortom' => ['required', 'max:11', 'min:11'],
+      'ortom_id_ortom' => ['required'],
+      'ortom_uraian' => ['required', 'min:5'],
+    ];
+
+    // cek apakah $request->id_kader_has_ortom sama dengan id_kader_has_ortom pada tabel kader_has_ortom
+    if ($request->id_kader_has_ortom != $id) {
+      $role['id_kader_has_ortom'] = ['required', 'max:11', 'min:11', 'unique:App\Models\KaderOrtom,id_kader_has_ortom'];
+    }
+
+    $validated = $request->validate($role);
+
+    // update ke tabel kader_has_ortom
+    KaderOrtom::where('id_kader_has_ortom', $id)->update($validated);
+
+    // select tabel ortom
+    $nama_ortom = Ortom::where('id_ortom', $request->ortom_id_ortom)->first()->nama_ortom;
+
+    return redirect('/kader/ortom')->with('message_ortom_kader', 'Data ortom ' . $nama_ortom . ' berhasil diubah.');
   }
 
   /**

@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Admin Cabang</h1>
+      <h1>Tambah Admin Cabang {{ $nama_cabang }}</h1>
     </div>
 
     <div class="section-body">
@@ -11,33 +11,28 @@
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card">
             <div class="card-body">
-              <form action="/tambah/admin/cabang" method="post">
+              <form action="/tambah/admin/cabang/{{ $id_cabang }}" method="post">
                 @csrf
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="row">
                       <div class="col-lg-5">
                         <div class="mb-3">
-                          <label for="nama_nik" class="form-label"><b>Nama - NIK</b></label>
-                          <select class="form-control form-control-lg select2" id="nama_nik" name="nama_nik">
+                          <label for="kader" class="form-label"><b>Nama - NIK</b></label>
+                          <select class="form-control form-control-lg select2" id="kader" name="kader">
                             <option selected disabled>-- Pilih Nama --</option>
                             @foreach ($kader as $k)
                               <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
                             @endforeach
                           </select>
-                          @if ($errors->all())
+                          @error('kader')
                             <div class="error-message">
-                              Pastikan anda memilih nama kader untuk dijadikan admin!
+                              {{ $message }}
                             </div>
-                          @endif
+                          @enderror
                         </div>
                       </div>
                     </div>
-                    - disini rencananya ketika Super Admin melakukan klik pada select option maka input yang ada di bawah
-                    akan otomatis terisi
-                    - lalu ketika Super Admin melakukan klik "Add" maka data akan tersimpan dan ditampilkan langsung di
-                    table
-                    - gunakan ajax
                     <div class="row">
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
@@ -105,19 +100,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($admin_cabang as $ac)
+                    @foreach ($admin as $a)
                       <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $ac->nama }}</td>
-                        <td>{{ $ac->kader_nik }}</td>
-                        <td>{{ DB::table('kader')->where('nik', $ac->kader_nik)->first()->no_kta }}</td>
-                        <td>{{ DB::table('kader')->where('nik', $ac->kader_nik)->first()->no_ktm }}</td>
-                        <td>{{ DB::table('kader')->where('nik', $ac->kader_nik)->first()->tempat_lahir }},
-                          {{ DB::table('kader')->where('nik', $ac->kader_nik)->first()->tanggal_lahir }}</td>
-                        <td>{{ $ac->no_ponsel }}</td>
+                        <td>{{ $a->kader->nama }}</td>
+                        <td>{{ $a->kader_nik }}</td>
+                        <td>{{ $a->kader->no_kta }}</td>
+                        <td>{{ $a->kader->no_ktm }}</td>
+                        <td>{{ $a->kader->tempat_lahir }}, {{ $a->kader->tanggal_lahir }}</td>
+                        <td>{{ $a->no_ponsel }}</td>
                         <td>
-                          <a href="" class="btn btn-icon icon-left btn-primary">Show</a>
-                          <a href="" class="btn btn-icon icon-left btn-danger">Hapus</a>
+                          <a href="/data/admin/cabang/kader/{{ $a->kader_nik }}"
+                            class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
+                          <form action="" method="post" class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                                class="far fa-trash-alt"></i>Hapus</button>
+                          </form>
                         </td>
                       </tr>
                     @endforeach

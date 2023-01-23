@@ -18,7 +18,7 @@ return new class extends Migration
     Schema::create('users', function (Blueprint $table) {
       $table->id();
       $table->foreignIdFor(Kader::class);
-      $table->foreignIdFor(KategoriUser::class);
+      $table->foreignIdFor(KategoriUser::class)->nullable();
       $table->string('nama');
       $table->string('no_ponsel');
       $table->string('password');

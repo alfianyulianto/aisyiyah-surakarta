@@ -46,7 +46,7 @@
                               @endforeach
                             @else
                               <option selected disabled>-- Pilih Ortom --</option>
-                              @foreach ($o->nama_ortom as $o->id_ortom => $o->nama_ortom)
+                              @foreach ($ortom as $o)
                                 <option value="{{ $o->id_ortom }}">{{ $o->nama_ortom }}</option>
                               @endforeach
                             @endif

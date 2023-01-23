@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
       'nama' => 'Alfian Yulianto',
       'no_ponsel' => '081217432366',
       'password' => Hash::make('password'),
-      'kategori_user_id' => '2',
     ]);
     DB::table('users')->insert([
       'id' => '2',
@@ -32,7 +31,13 @@ class DatabaseSeeder extends Seeder
       'nama' => 'Budi Doremi',
       'no_ponsel' => '085432657890',
       'password' => Hash::make('password'),
-      'kategori_user_id' => '3',
+    ]);
+    DB::table('users')->insert([
+      'id' => '3',
+      'kader_nik' => '3372010108199809',
+      'nama' => 'Indah Larasati',
+      'no_ponsel' => '085432987009',
+      'password' => Hash::make('password'),
     ]);
 
     // kategori_user
@@ -93,8 +98,28 @@ class DatabaseSeeder extends Seeder
       'Karang Turi RT 010 RW 002 Pajang Kecamatan Laweyan Kota Surakarta',
       'status_pernikahan' => 'Menikah',
       'pekerjaan' => 'Pekerja',
-      'email' => 'budi.doremi36@gmail.com',
+      'email' => 'budi.doremi@gmail.com',
       'no_ponsel' => '085432657890',
+      'foto' => 'avatar-3.png'
+    ]);
+    DB::table('kader')->insert([
+      'nik' => "3372010108199809",
+      'daerah_id_daerah' => 'aisyiyah-surakarta',
+      'cabang_id_cabang' => 'cbng-bnjr',
+      'ranting_id_ranting' => 'rntng-sbbr',
+      'pendidikan_terakhir_id_pendidikan_terakhir' => 'pndk-Pd7Y',
+      'no_kta' => '77777',
+      'no_ktm' => '88888',
+      'nama' => 'Indah Larasati',
+      'tempat_lahir' => 'Surakarta',
+      'tanggal_lahir' => '1999-01-11',
+      'alamat_asal_ktp' => 'Sidodadi RT 002 RW 002 Pajang Kecamatan Laweyan Kota Surakarta',
+      'alamat_rumah_tinggal' =>
+      'Sidodadi RT 003 RW 002 Pajang Kecamatan Laweyan Kota Surakarta',
+      'status_pernikahan' => 'Belum Menikah',
+      'pekerjaan' => 'Mahasiswa',
+      'email' => 'indah.larasati@gmail.com',
+      'no_ponsel' => '085432987009',
       'foto' => 'avatar-3.png'
     ]);
 

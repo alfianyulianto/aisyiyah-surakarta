@@ -4,85 +4,40 @@ namespace App\Http\Controllers\Admin\Tambah;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kader;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TambahAdminDaerahController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
+  public function create($id)
   {
     return view('admin.tambah_admin.tambah_admin_daerah.create', [
-      'kader' => Kader::where('daerah_id_daerah', 'cbng-banjarsari')->orderBy('nama', 'asc')->get()
+      'kader' => Kader::all(),
+      'id_daerah' => $id,
+      'admin' => User::where('admin_at', $id)->get()
     ]);
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
+  public function store(Request $request, $id)
   {
-    //
+    $validated = $request->validate([
+      'kader' => ['required'],
+      'nik' => ['required'],
+      'no_kta' => ['required'],
+      'no_ktm' => ['required'],
+      'nama' => ['required', 'string'],
+    ]);
+
+    // update data user di tabel user
+    User::where('kader_nik', $request->nik)->update(['admin_at' => $id]);
+
+    return redirect('/tambah/admin')->with('message_admin_daerah', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin daerah.');
   }
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(Request $request)
+  public function show(Kader $kader)
   {
-    //
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy($id)
-  {
-    //
+    return view('admin.tambah_admin.tambah_admin_daerah.show', [
+      'kader' => $kader
+    ]);
   }
 }

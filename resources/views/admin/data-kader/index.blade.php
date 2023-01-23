@@ -55,7 +55,7 @@
                         <td>{{ $k->no_ponsel }}</td>
                         <td>
                           <a href="/data/kader/{{ $k->nik }}" class="btn btn-icon icon-left btn-primary"
-                            target="blank"><i class="far fa-eye"></i>
+                            target="_blank"><i class="far fa-eye"></i>
                             Detail</a>
                           <a href="/data/kader/{{ $k->nik }}/edit" class="btn btn-icon icon-left btn-warning"><i
                               class="far fa-edit"></i>

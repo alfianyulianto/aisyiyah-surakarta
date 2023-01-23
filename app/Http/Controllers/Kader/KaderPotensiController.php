@@ -28,9 +28,9 @@ class KaderPotensiController extends Controller
    */
   public function create()
   {
-    // ambil data nama_potensi dan id_cabang pada tabel potensi
-    $nama_potensi = Potensi::pluck('potensi', 'id_potensi')->toArray();
-    return view('kader.potensi.create', compact('nama_potensi'));
+    return view('kader.potensi.create', [
+      'potensi' => Potensi::orderBy('created_at', 'asc')->get()
+    ]);
   }
 
   /**
@@ -42,7 +42,7 @@ class KaderPotensiController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_kader_has_potensi' => ['required', 'max:9', 'min:9'],
+      'id_kader_has_potensi' => ['required', 'max:9', 'min:9', 'unique:App\Models\KaderPotensi,id_kader_has_potensi'],
       'potensi_id_potensi' => ['required'],
       'potensi_kader_uraian' => ['required', 'min:10'],
     ]);
@@ -67,7 +67,7 @@ class KaderPotensiController extends Controller
    */
   public function show($id)
   {
-    //
+    abort(404);
   }
 
   /**
@@ -78,7 +78,10 @@ class KaderPotensiController extends Controller
    */
   public function edit($id)
   {
-    //
+    return view('kader.potensi.edit', [
+      'kader_potensi' => KaderPotensi::where('id_kader_has_potensi', $id)->first(),
+      'potensi' => Potensi::orderBy('created_at', 'asc')->get()
+    ]);
   }
 
   /**
@@ -90,7 +93,27 @@ class KaderPotensiController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    $role = [
+      'id_kader_has_potensi' => ['required', 'max:9', 'min:9'],
+      'potensi_id_potensi' => ['required'],
+      'potensi_kader_uraian' => ['required', 'min:10'],
+    ];
+
+
+    // cek apakah $request->id_kader_has_potensi sama dengan id_kader_has_potensi pada tabel kader_has_potensi
+    if ($request->id_kader_has_potensi != $id) {
+      $role['id_kader_has_potensi'] = ['required', 'max:11', 'min:11', 'unique:App\Models\KaderPotensi,id_kader_has_potensi'];
+    }
+
+    $validated = $request->validate($role);
+
+    // update ke tabel kader_has_potensi
+    KaderPotensi::where('id_kader_has_potensi', $id)->update($validated);
+
+    // select tabel potensi
+    $nama_potensi = Potensi::where('id_potensi', $request->potensi_id_potensi)->first()->potensi;
+
+    return redirect('/kader/potensi')->with('message_potensi_kader', 'Data potensi ' . $nama_potensi . ' berhasil diubah.');
   }
 
   /**

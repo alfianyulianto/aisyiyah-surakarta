@@ -122,24 +122,27 @@ $(document).ready(function () {
     $("#scroll-x-tambah-admin-daerah").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 285, targets: 0 },
-            { width: 100, targets: 1 },
+            { width: 250, targets: 0 },
+            { width: 80, targets: 1 },
+            { width: 100, targets: 2 },
         ],
     });
     // tampilan tambah daerah di cabang
     $("#scroll-x-tambah-admin-cabang").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 285, targets: 0 },
-            { width: 100, targets: 1 },
+            { width: 250, targets: 0 },
+            { width: 80, targets: 1 },
+            { width: 100, targets: 2 },
         ],
     });
     // tampilan tambah daerah di ranting
     $("#scroll-x-tambah-admin-ranting").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 285, targets: 0 },
-            { width: 100, targets: 1 },
+            { width: 250, targets: 0 },
+            { width: 80, targets: 1 },
+            { width: 100, targets: 2 },
         ],
     });
     $("#scroll-x-tambah-pimpinan-daerah").DataTable({
@@ -225,6 +228,29 @@ $(document).ready(function () {
             $("#konfirmasi_password").addClass("is-invalid");
         }
     });
+
+    // tambah admin
+   $("#kader").on("change", function () {
+       $.ajax({
+           type: "get",
+           url: "/get/kader/" + $(this).val(),
+           dataType: "json",
+           success: (response) => {
+               $("#nik").val(response.nik);
+               if (response.no_kta) {
+                   $("#no_kta").val(response.no_kta);
+               } else {
+                   $("#no_kta").val("-");
+               }
+               if (response.no_ktm) {
+                   $("#no_ktm").val(response.no_ktm);
+               } else {
+                   $("#no_ktm").val("-");
+               }
+               $("#nama").val(response.nama);
+           },
+       });
+   });
 
     // autocomplete tempat_lahir
     function get_tempat_lahir() {

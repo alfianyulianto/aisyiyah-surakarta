@@ -243,4 +243,9 @@ class AdminDataKaderController extends Controller
     $kelurahan = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=' . $request->id)->json();
     return $kelurahan;
   }
+
+  public function get_kader(Kader $kader)
+  {
+    return $kader;
+  }
 }

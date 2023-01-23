@@ -11,50 +11,71 @@
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card">
             <div class="card-body">
-              <form action="">
+              <form action="/tambah/admin/daerah/{{ $id_daerah }}" method="post">
+                @csrf
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="row">
                       <div class="col-lg-5">
                         <div class="mb-3">
-                          <label for="nama" class="form-label"><b>Nama - NIK</b></label>
-                          <select class="form-control form-control-lg select2" id="nama" name="nama">
+                          <label for="kader" class="form-label"><b>Nama - NIK</b></label>
+                          <select class="form-control form-control-lg select2" id="kader" name="kader">
                             <option selected disabled>-- Pilih Nama --</option>
                             @foreach ($kader as $k)
                               <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
                             @endforeach
                           </select>
+                          @error('kader')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>
-                    - disini rencananya ketika Super Admin melakukan klik pada select option maka input yang ada di bawah
-                    akan otomatis terisi
-                    - lalu ketika Super Admin melakukan klik "Add" maka data akan tersimpan dan ditampilkan langsung di
-                    table
-                    - gunakan ajax
                     <div class="row">
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="NIK" class="form-label"><b>NIK</b></label>
                           <input type="text" class="form-control" name="nik" id="nik" readonly>
+                          @error('nik')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="no_kta" class="form-label"><b>No KTA Aisyiyah</b></label>
                           <input type="text" class="form-control" name="no_kta" id="no_kta" readonly>
+                          @error('no_kta')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="no_ktm" class="form-label"><b>No KTA Muhammadiyah</b></label>
                           <input type="text" class="form-control" name="no_ktm" id="no_ktm" readonly>
+                          @error('no_ktm')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-3">
                         <div class="form-group mb-3">
                           <label for="nama" class="form-label"><b>Nama Kader</b></label>
                           <input type="text" class="form-control" name="nama" id="nama" readonly>
+                          @error('nama')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
                         </div>
                       </div>
                     </div>
@@ -79,20 +100,27 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Alfian Yulianto</td>
-                      <td>3372010107000002</td>
-                      <td>345678</td>
-                      <td>876543</td>
-                      <td>Surakarta, 01 Juli 2000</td>
-                      <td>081217432366</td>
-                      <td>
-                        <a href="" class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                        <a href="" class="btn btn-icon icon-left btn-danger"><i
-                            class="far fa-trash-alt"></i>Hapus</a>
-                      </td>
-                    </tr>
+                    @foreach ($admin as $a)
+                      <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $a->kader->nama }}</td>
+                        <td>{{ $a->kader_nik }}</td>
+                        <td>{{ $a->kader->no_kta ? $a->kader->no_kta : '-' }}</td>
+                        <td>{{ $a->kader->no_ktm ? $a->kader->no_ktm : '-' }}</td>
+                        <td>{{ $a->kader->tempat_lahir }}, {{ $a->tanggal_lahir }}</td>
+                        <td>{{ $a->no_ponsel }}</td>
+                        <td>
+                          <a href="/data/admin/daerah/kader/{{ $a->kader_nik }}" target="blank"
+                            class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
+                          <form action="" method="post" class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                                class="far fa-trash-alt"></i>Hapus</button>
+                          </form>
+                        </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

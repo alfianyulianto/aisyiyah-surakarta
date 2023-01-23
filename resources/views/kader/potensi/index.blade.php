@@ -21,8 +21,7 @@
                   </div>
                 </div>
               @endif
-              <a href="/kader/potensi/create" class="btn btn-icon icon-left btn-primary mb-3"><i
-                  class="fas fa-user-plus"></i>
+              <a href="/kader/potensi/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-plus"></i>
                 Tambah Potensi Yang Dimiliki</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-potensi-kader">
@@ -45,10 +44,17 @@
                         <td>{{ $p->potensi->potensi }}</td>
                         <td>{!! $p->potensi_kader_uraian !!}</td>
                         <td>
-                          <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
+                          <a href="/kader/potensi/{{ $p->id_kader_has_potensi }}/edit"
+                            class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
                             Edit</a>
-                          <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
-                            Hapus</a>
+                          <form action="/kader/potensi/{{ $p->id_kader_has_potensi }}" method="post"
+                            class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                                class="far fa-trash-alt"></i>
+                              Hapus</button>
+                          </form>
                         </td>
                       </tr>
                     @endforeach

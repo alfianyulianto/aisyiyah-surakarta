@@ -21,8 +21,7 @@
                   </div>
                 </div>
               @endif
-              <a href="/kader/ortom/create" class="btn btn-icon icon-left btn-primary mb-3"><i
-                  class="fas fa-user-plus"></i>
+              <a href="/kader/ortom/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-plus"></i>
                 Tambah Kegiatan Ortom</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-ortom-kader">
@@ -45,7 +44,7 @@
                         <td>{{ $o->ortom->nama_ortom }}</td>
                         <td>{!! $o->ortom_uraian !!}</td>
                         <td>
-                          <a href="/kader/ortom/{{ $o->id_kader_has_ortom }}"
+                          <a href="/kader/ortom/{{ $o->id_kader_has_ortom }}/edit"
                             class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i> Edit
                           </a>
                           <form action="/kader/ortom/{{ $o->id_kader_has_ortom }}" method="post" class="d-inline-block">
