@@ -13,9 +13,9 @@ class TambahAdminRantingController extends Controller
   public function create($id)
   {
     $kader = collect([]);
-    $kader_ranting = Kader::where('ranting_id_ranting', $id)->get();
-    foreach ($kader_ranting as $kr) {
-      $kader->push(User::where('kader_nik', $kr->nik)->where('admin_at', null)->get());
+    $user = User::where('kategori_user_id', null)->where('admin_at', null)->get();
+    foreach ($user as $u) {
+      $kader->push(Kader::where('nik', $u->kader_nik)->first());
     }
     return view('admin.tambah_admin.tambah_admin_ranting.create', [
       'kader' => $kader,
@@ -36,9 +36,9 @@ class TambahAdminRantingController extends Controller
     ]);
 
     // update data user di tabel user
-    User::where('kader_nik', $request->nik)->update(['admin_at' => $id]);
+    User::where('kader_nik', $request->nik)->update(['kategori_user_id' => 5, 'admin_at' => $id]);
 
-    return redirect('/tambah/admin')->with('message_admin_ranting', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin ranting.');
+    return redirect('/tambah/admin')->with('message_admin_ranting', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin di ' . $request->ranting . '.');
   }
 
   public function show(Kader $kader)
@@ -46,5 +46,13 @@ class TambahAdminRantingController extends Controller
     return view('admin.tambah_admin.tambah_admin_ranting.show', [
       'kader' => $kader
     ]);
+  }
+
+  public function destroy(Request $request, Kader $kader)
+  {
+    // update data user
+    User::where('kader_nik', $kader->nik)->update(['kategori_user_id' => null, 'admin_at' => null]);
+
+    return redirect('/tambah/admin')->with('message_admin_ranting', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin di ' . $request->ranting . '.');
   }
 }

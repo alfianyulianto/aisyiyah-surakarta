@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Admin Daerah</h1>
+      <h1>Tambah Admin Daerah {{ $nama_daerah }}</h1>
     </div>
 
     <div class="section-body">
@@ -112,9 +112,10 @@
                         <td>
                           <a href="/data/admin/daerah/kader/{{ $a->kader_nik }}" target="blank"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="" method="post" class="d-inline-block">
+                          <form action="/tambah/admin/daerah/{{ $a->kader_nik }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
+                            <input type="hidden" name="daerah" id="daerah" value="{{ $nama_daerah }}">
                             <button type="submit" class="btn btn-icon icon-left btn-danger"><i
                                 class="far fa-trash-alt"></i>Hapus</button>
                           </form>

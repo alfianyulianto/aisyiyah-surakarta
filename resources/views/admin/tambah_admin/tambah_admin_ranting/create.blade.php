@@ -13,6 +13,7 @@
             <div class="card-body">
               <form action="/tambah/admin/ranting/{{ $id_ranting }}" method="post">
                 @csrf
+                <input type="hidden" name="ranting" id="ranting" value="{{ $nama_ranting }}">
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="row">
@@ -80,7 +81,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mb-5">
-                      <button type="submit" class="btn btn-primary">Add Admin Cabang</button>
+                      <button type="submit" class="btn btn-primary">Add Admin Ranting</button>
                     </div>
                   </div>
                 </div>
@@ -104,7 +105,7 @@
                       <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $a->kader->nama }}</td>
-                        <td>{{ $a->kader_nik }}</td>
+                        <td>{{ $a->kadernik }}</td>
                         <td>{{ $a->kader->no_kta }}</td>
                         <td>{{ $a->kader->no_ktm }}</td>
                         <td>{{ $a->kader->tempat_lahir }}, {{ $a->kader->tanggal_lahir }}</td>
@@ -112,9 +113,10 @@
                         <td>
                           <a href="/data/admin/ranting/kader/{{ $a->kader_nik }}"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="" method="post" class="d-inline-block">
+                          <form action="/tambah/admin/ranting/{{ $a->kader_nik }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
+                            <input type="hidden" name="ranting" id="ranting" value="{{ $nama_ranting }}">
                             <button type="submit" class="btn btn-icon icon-left btn-danger"><i
                                 class="far fa-trash-alt"></i>Hapus</button>
                           </form>
@@ -130,21 +132,4 @@
       </div>
     </div>
   </section>
-  {{-- <script>
-    $('select#nama_nik').on('change', function() {
-      let nik = $(this).val();
-      $.ajax({
-        type: "get",
-        url: "/tambah/admin/cabang/getkader/" + nik,
-        dataType: "json",
-        success: (response) => {
-          console.log(response.result);
-          $("#nik").val(response.result.nik);
-          $("#no_kta").val(response.result.no_kta);
-          $("#no_ktm").val(response.result.no_ktm);
-          $("#nama").val(response.result.nama);
-        }
-      });
-    });
-  </script> --}}
 @endsection

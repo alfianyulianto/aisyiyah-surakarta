@@ -13,6 +13,7 @@
             <div class="card-body">
               <form action="/tambah/admin/cabang/{{ $id_cabang }}" method="post">
                 @csrf
+                <input type="hidden" name="cabang" id="cabang" value="{{ $nama_cabang }}">
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="row">
@@ -112,9 +113,10 @@
                         <td>
                           <a href="/data/admin/cabang/kader/{{ $a->kader_nik }}"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="" method="post" class="d-inline-block">
+                          <form action="/tambah/admin/cabang/{{ $a->kader_nik }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
+                            <input type="hidden" name="cabang" id="cabang" value="{{ $nama_cabang }}">
                             <button type="submit" class="btn btn-icon icon-left btn-danger"><i
                                 class="far fa-trash-alt"></i>Hapus</button>
                           </form>
@@ -130,7 +132,7 @@
       </div>
     </div>
   </section>
-  <script>
+  {{-- <script>
     $('select#nama_nik').on('change', function() {
       let nik = $(this).val();
       $.ajax({
@@ -146,5 +148,5 @@
         }
       });
     });
-  </script>
+  </script> --}}
 @endsection

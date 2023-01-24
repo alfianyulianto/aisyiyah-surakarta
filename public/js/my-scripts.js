@@ -230,27 +230,27 @@ $(document).ready(function () {
     });
 
     // tambah admin
-   $("#kader").on("change", function () {
-       $.ajax({
-           type: "get",
-           url: "/get/kader/" + $(this).val(),
-           dataType: "json",
-           success: (response) => {
-               $("#nik").val(response.nik);
-               if (response.no_kta) {
-                   $("#no_kta").val(response.no_kta);
-               } else {
-                   $("#no_kta").val("-");
-               }
-               if (response.no_ktm) {
-                   $("#no_ktm").val(response.no_ktm);
-               } else {
-                   $("#no_ktm").val("-");
-               }
-               $("#nama").val(response.nama);
-           },
-       });
-   });
+    $("#kader").on("change", function () {
+        $.ajax({
+            type: "get",
+            url: "/get/kader/" + $(this).val(),
+            dataType: "json",
+            success: (response) => {
+                $("#nik").val(response.nik);
+                if (response.no_kta) {
+                    $("#no_kta").val(response.no_kta);
+                } else {
+                    $("#no_kta").val("-");
+                }
+                if (response.no_ktm) {
+                    $("#no_ktm").val(response.no_ktm);
+                } else {
+                    $("#no_ktm").val("-");
+                }
+                $("#nama").val(response.nama);
+            },
+        });
+    });
 
     // autocomplete tempat_lahir
     function get_tempat_lahir() {
@@ -345,145 +345,14 @@ $(document).ready(function () {
                 let ranting =
                     "<option selected disabled>-- Pilih Ranting --</option>";
                 response.forEach((i) => {
-                    ranting += `<option value="${i.ranting}">${i.nama_ranting}</option>`;
+                    ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
                 });
                 $("select#ranting_id_ranting").html(ranting);
             },
         });
     });
-
-    // alamat ktp
-    $("#provinsi_ktp").on("change", function () {
-        let id_provinsi = $(this).val();
-        $.ajax({
-            type: "get",
-            url: "/data/kota/kabupaten/",
-            data: {
-                id: id_provinsi,
-            },
-            dataType: "json",
-            success: (response) => {
-                console.log(response);
-                let tag_provinsi =
-                    "<option selected disabled>-- Pilih Kabupaten/Kota --</option>";
-                let kota_kabupaten = response.kota_kabupaten;
-                kota_kabupaten.forEach((i) => {
-                    tag_provinsi += `<option value="${i.id}">${i.nama}</option>`;
-                });
-                $("#kabupaten_kota_ktp").html(tag_provinsi);
-            },
-        });
-    });
-    $("#kabupaten_kota_ktp").on("change", function () {
-        let id_kabupaten_kota = $(this).val();
-
-        $.ajax({
-            type: "get",
-            url: "/data/kecamatan/",
-            data: {
-                id: id_kabupaten_kota,
-            },
-            dataType: "json",
-            success: (response) => {
-                console.log(response);
-                let tag_kecamatan =
-                    "<option selected disabled>-- Pilih Kecamatan --</option>";
-                let kecamatan = response.kecamatan;
-                kecamatan.forEach((i) => {
-                    tag_kecamatan += `<option value="${i.id}">${i.nama}</option>`;
-                });
-                $("#kecamatan_ktp").html(tag_kecamatan);
-            },
-        });
-    });
-    $("#kecamatan_ktp").on("change", function () {
-        let id_kecamatan = $(this).val();
-
-        $.ajax({
-            type: "get",
-            url: "/data/kelurahan/",
-            data: {
-                id: id_kecamatan,
-            },
-            dataType: "json",
-            success: (response) => {
-                console.log(response);
-                let tag_kelurahan =
-                    "<option selected disabled>-- Pilih Kelurahan --</option>";
-                let kelurahan = response.kelurahan;
-                kelurahan.forEach((i) => {
-                    tag_kelurahan += `<option value="${i.id}">${i.nama}</option>`;
-                });
-                $("#kelurahan_ktp").html(tag_kelurahan);
-            },
-        });
-    });
-
-    // alamat domisili
-    $("#provinsi_domisili").on("change", function () {
-        let id_provinsi = $(this).val();
-        $.ajax({
-            type: "get",
-            url: "/data/kota/kabupaten/",
-            data: {
-                id: id_provinsi,
-            },
-            dataType: "json",
-            success: (response) => {
-                console.log(response);
-                let tag_provinsi =
-                    "<option selected disabled>-- Pilih Kabupaten/Kota --</option>";
-                let kota_kabupaten = response.kota_kabupaten;
-                kota_kabupaten.forEach((i) => {
-                    tag_provinsi += `<option value="${i.id}">${i.nama}</option>`;
-                });
-                $("#kabupaten_kota_domisili").html(tag_provinsi);
-            },
-        });
-    });
-    $("#kabupaten_kota_domisili").on("change", function () {
-        let id_kabupaten_kota = $(this).val();
-
-        $.ajax({
-            type: "get",
-            url: "/data/kecamatan/",
-            data: {
-                id: id_kabupaten_kota,
-            },
-            dataType: "json",
-            success: (response) => {
-                console.log(response);
-                let tag_kecamatan =
-                    "<option selected disabled>-- Pilih Kecamatan --</option>";
-                let kecamatan = response.kecamatan;
-                kecamatan.forEach((i) => {
-                    tag_kecamatan += `<option value="${i.id}">${i.nama}</option>`;
-                });
-                $("#kecamatan_domisili").html(tag_kecamatan);
-            },
-        });
-    });
-    $("#kecamatan_domisili").on("change", function () {
-        let id_kecamatan = $(this).val();
-
-        $.ajax({
-            type: "get",
-            url: "/data/kelurahan/",
-            data: {
-                id: id_kecamatan,
-            },
-            dataType: "json",
-            success: (response) => {
-                console.log(response);
-                let tag_kelurahan =
-                    "<option selected disabled>-- Pilih Kelurahan --</option>";
-                let kelurahan = response.kelurahan;
-                kelurahan.forEach((i) => {
-                    tag_kelurahan += `<option value="${i.id}">${i.nama}</option>`;
-                });
-                $("#kelurahan_domisili").html(tag_kelurahan);
-            },
-        });
+    $("select#ranting_id_ranting").on("change", function () {
+        console.log($(this).val());
     });
 
     // combobox jika di ceklist

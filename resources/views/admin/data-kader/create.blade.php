@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Kader 'Aisyiyah Surakarta'</h1>
+      <h1>Tambah Data Kader 'Aisyiyah Surakarta'</h1>
     </div>
 
     <div class="section-body">
@@ -226,7 +226,7 @@
                         <div class="mb-3">
                           <label for="pendidikan_terakhir_id_pendidikan_terakhir" class="form-label"><b>Pendidikan
                               Terakhir</b></label>
-                          <select class="form-control form-control-lg selectric "
+                          <select class="form-control form-control-lg selectric"
                             name="pendidikan_terakhir_id_pendidikan_terakhir"
                             id="pendidikan_terakhir_id_pendidikan_terakhir">
                             @if (old('pendidikan_terakhir_id_pendidikan_terakhir'))
@@ -269,97 +269,10 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="alamat_ktp" class="form-label"><b>Alamat KTP</b></label>
-                          <input type="text" class="form-control" name="alamat_ktp" id="alamat_ktp"
-                            placeholder="Masukan nama jalan atau nama kampung beserta RT / RW"
-                            value="{{ old('alamat_ktp') }}">
-                          @error('alamat_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="provinsi_ktp" class="form-label"><b>Provinsi</b></label>
-                          <select class="form-control form-control-lg select2" name="provinsi_ktp" id="provinsi_ktp">
-                            @if (old('provinsi_ktp'))
-                              <option disabled>-- Pilih Provinsi --</option>
-                              @foreach ($data_provinsi as $dp)
-                                @if (old('provinsi_ktp') == $dp['id'])
-                                  <option value="{{ $dp['id'] }}" selected>{{ $dp['nama'] }}</option>
-                                @else
-                                  <option value="{{ $dp['id'] }}">{{ $dp['nama'] }}</option>
-                                @endif
-                              @endforeach
-                            @else
-                              <option selected disabled>-- Pilih Provinsi --</option>
-                              @foreach ($data_provinsi as $dp)
-                                <option value="{{ $dp['id'] }}">{{ $dp['nama'] }}</option>
-                              @endforeach
-                            @endif
-                          </select>
-                          @error('provinsi_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="kabupaten_kota_ktp" class="form-label"><b>Kabupaten/Kota</b></label>
-                          <select class="form-control form-control-lg select2" name="kabupaten_kota_ktp"
-                            id="kabupaten_kota_ktp">
-                            <option selected disabled>-- Pilih Kabupaten/Kota --</option>
-                            <option disabled>Silahkan pilih provinsi dahulu</option>
-                          </select>
-                          @if (old('kabupaten_kota_ktp'))
-                            <input type="text" name="old_kabupaten_kota_ktp" id="old_kabupaten_kota_ktp"
-                              value="{{ old('kabupaten_kota_ktp') }}" hidden>
-                          @endif
-                          @error('kabupaten_kota_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="kecamatan_ktp" class="form-label"><b>Kecamatan</b></label>
-                          <select class="form-control form-control-lg select2" name="kecamatan_ktp" id="kecamatan_ktp">
-                            <option selected disabled>-- Pilih Kecamatan --</option>
-                            <option disabled>Silahkan pilih kabupaten/kota dahulu</option>
-                          </select>
-                          @if (old('kecamatan_ktp'))
-                            <input type="text" name="old_kecamatan_ktp" id="old_kecamatan_ktp"
-                              value="{{ old('kecamatan_ktp') }}" hidden>
-                          @endif
-                          @error('kecamatan_ktp')
-                            <div class="error-message">
-                              {{ $message }}
-                            </div>
-                          @enderror
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label for="kelurahan_ktp" class="form-label"><b>Kelurahan</b></label>
-                          <select class="form-control form-control-lg select2" name="kelurahan_ktp" id="kelurahan_ktp">
-                            <option selected disabled>-- Pilih Kelurahan --</option>
-                            <option disabled>Silahkan pilih kecamatan dahulu</option>
-                          </select>
-                          @if (old('kelurahan_ktp'))
-                            <input type="text" name="old_kelurahan_ktp" id="old_kelurahan_ktp"
-                              value="{{ old('kelurahan_ktp') }}" hidden>
-                          @endif
-                          @error('kelurahan_ktp')
+                          <label for="alamat_asal_ktp" class="form-label"><b>Alamat KTP</b></label>
+                          <input type="text" class="form-control" name="alamat_asal_ktp" id="alamat_asal_ktp"
+                            placeholder="Masukan alamat sesuai ktp" value="{{ old('alamat_asal_ktp') }}">
+                          @error('alamat_asal_ktp')
                             <div class="error-message">
                               {{ $message }}
                             </div>
@@ -382,105 +295,15 @@
                         </div>
                       </div>
                     </div>
-                    <div class="alamat_domisili {{ old('cek_alamat') ? 'd-none' : '' }}">
+                    <div class="alamat_domisili {{ old('cek_alamat') }}">
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="mb-3">
-                            <label for="alamat_domisili" class="form-label"><b>Alamat Domisili</b></label>
-                            <input type="text" class="form-control" name="alamat_domisili" id="alamat_domisili"
-                              placeholder="Masukan nama jalan atau nama kampung beserta RT / RW"
-                              value="{{ old('alamat_domisili') }}">
-                            @error('alamat_domisili')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="provinsi_domisili" class="form-label"><b>Domisili Provinsi</b></label>
-                            <select class="form-control form-control-lg select2" name="provinsi_domisili"
-                              id="provinsi_domisili">
-                              @if (old('provinsi_domisili'))
-                                <option disabled>-- Pilih Provinsi --</option>
-                                @foreach ($data_provinsi as $dp)
-                                  @if (old('provinsi_domisili') == $dp['id'])
-                                    <option value="{{ $dp['id'] }}" selected>{{ $dp['nama'] }}</option>
-                                  @else
-                                    <option value="{{ $dp['id'] }}">{{ $dp['nama'] }}</option>
-                                  @endif
-                                @endforeach
-                              @else
-                                <option selected disabled>-- Pilih Provinsi --</option>
-                                @foreach ($data_provinsi as $dp)
-                                  <option value="{{ $dp['id'] }}">{{ $dp['nama'] }}</option>
-                                @endforeach
-                              @endif
-                            </select>
-                            @error('provinsi_domisili')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="kabupaten_kota_domisili" class="form-label"><b>Domisili
-                                Kabupaten/Kota</b></label>
-                            <select class="form-control form-control-lg select2" name="kabupaten_kota_domisili"
-                              id="kabupaten_kota_domisili">
-                              <option selected disabled>-- Pilih Kabupaten/Kota --</option>
-                              <option disabled>Silahkan pilih comisili provinsi dahulu</option>
-                            </select>
-                            @if (old('kabupaten_kota_domisili'))
-                              <input type="text" name="old_kabupaten_kota_domisili" id="old_kabupaten_kota_domisili"
-                                value="{{ old('kabupaten_kota_domisili') }}" hidden>
-                            @endif
-                            @error('kabupaten_kota_domisili')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="kecamatan_domisili" class="form-label"><b>Domisili Kecamatan</b></label>
-                            <select class="form-control form-control-lg select2" name="kecamatan_domisili"
-                              id="kecamatan_domisili">
-                              <option selected disabled>-- Pilih Kecamatan --</option>
-                              <option disabled>Silahkan pilih domisili kabupaten/kota dahulu</option>
-                            </select>
-                            @if (old('kecamatan_domisili'))
-                              <input type="text" name="old_kecamatan_domisili" id="old_kecamatan_domisili"
-                                value="{{ old('kecamatan_domisili') }}" hidden>
-                            @endif
-                            @error('kecamatan_domisili')
-                              <div class="error-message">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="kelurahan_domisili" class="form-label"><b>Domisili Kelurahan</b></label>
-                            <select class="form-control form-control-lg select2" name="kelurahan_domisili"
-                              id="kelurahan_domisili">
-                              <option selected disabled>-- Pilih Kelurahan --</option>
-                              <option disabled>Silahkan pilih domisili kecamatan dahulu</option>
-                            </select>
-                            @if (old('kelurahan_domisili'))
-                              <input type="text" name="old_kelurahan_domisili" id="old_kelurahan_domisili"
-                                value="{{ old('kelurahan_domisili') }}" hidden>
-                            @endif
-                            @error('kelurahan_domisili')
+                            <label for="alamat_rumah_tinggal" class="form-label"><b>Alamat Domisili</b></label>
+                            <input type="text" class="form-control" name="alamat_rumah_tinggal"
+                              id="alamat_rumah_tinggal" placeholder="Masukan alamat domisili rumah tinggal"
+                              value="{{ old('alamat_rumah_tinggal') }}">
+                            @error('alamat_rumah_tinggal')
                               <div class="error-message">
                                 {{ $message }}
                               </div>
@@ -501,197 +324,8 @@
       </div>
     </div>
   </section>
-  {{-- select cabang --}}
-  @if (old('cabang_id_cabang') && !old('ranting_id_ranting'))
-    <script>
-      let id_cabang = $("select#cabang_id_cabang").val();
-      $.ajax({
-        type: "get",
-        url: "/get/ranting/" + id_cabang,
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let ranting = "<option selected disabled>-- Pilih Ranting --</option>";
-          response.forEach(i => {
-            ranting += `<option value="${i.ranting}">${ i.nama_ranting }</option>`;
-          })
-          $("select#ranting_id_ranting").html(ranting);
-        }
-      });
-    </script>
-  @endif
-
-  {{-- alamat ktp --}}
-  @if (old('provinsi_ktp'))
-    <script>
-      let old_kabupaten_kota_ktp = $("#old_kabupaten_kota_ktp").val();
-      let id_provinsi_ktp = $("select#provinsi_ktp").val();
-      $.ajax({
-        type: "get",
-        url: "/data/kota/kabupaten/",
-        data: {
-          id: id_provinsi_ktp
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kabupaten_kota_ktp = `<option selected disabled>-- Pilih Kabupaten/Kota --</option>`;
-          let kota_kabupaten_ktp = response.kota_kabupaten;
-          kota_kabupaten_ktp.forEach(i => {
-            if (old_kabupaten_kota_ktp == i.id) {
-              tag_kabupaten_kota_ktp += `<option value="${i.id}" selected>${ i.nama }</option>`;
-            } else {
-              tag_kabupaten_kota_ktp += `<option value="${i.id}">${ i.nama }</option>`;
-            }
-          });
-          $("#kabupaten_kota_ktp").html(tag_kabupaten_kota_ktp);
-        }
-      });
-    </script>
-  @endif
-  @if (old('kabupaten_kota_ktp'))
-    <script>
-      let old_kecamatan_ktp = $("#old_kecamatan_ktp").val();
-      let id_kabupaten_kota_ktp = $("#old_kabupaten_kota_ktp").val();
-
-      $.ajax({
-        type: "get",
-        url: "/data/kecamatan/",
-        data: {
-          id: id_kabupaten_kota_ktp
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kecamatan_ktp = "<option selected disabled>-- Pilih Kecamatan --</option>";
-          let kecamatan_ktp = response.kecamatan;
-          kecamatan_ktp.forEach(i => {
-            if (old_kecamatan_ktp == i.id) {
-              tag_kecamatan_ktp += `<option value="${i.id}" selected>${ i.nama }</option>`;
-            } else {
-              tag_kecamatan_ktp += `<option value="${i.id}">${ i.nama }</option>`;
-            }
-          });
-          $("#kecamatan_ktp").html(tag_kecamatan_ktp);
-        }
-      });
-    </script>
-  @endif
-  @if (old('kecamatan_ktp'))
-    <script>
-      let old_kelurahan_ktp = $("#old_kelurahan_ktp").val();
-      let id_kecamatan_ktp = $("#old_kecamatan_ktp").val();
-
-      $.ajax({
-        type: "get",
-        url: "/data/kelurahan/",
-        data: {
-          id: id_kecamatan_ktp
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kelurahan_ktp = "<option selected disabled>-- Pilih Kelurahan --</option>";
-          let kelurahan_ktp = response.kelurahan;
-          kelurahan_ktp.forEach(i => {
-            if (old_kelurahan_ktp == i.id) {
-              tag_kelurahan_ktp += `<option value="${i.id}" selected>${ i.nama }</option>`;
-            } else {
-              tag_kelurahan_ktp += `<option value="${i.id}">${ i.nama }</option>`;
-            }
-          });
-          $("#kelurahan_ktp").html(tag_kelurahan_ktp);
-        }
-      });
-    </script>
-  @endif
-
-  {{-- alamat domisili --}}
-  @if (old('provinsi_domisili'))
-    <script>
-      let old_kabupaten_kota_domisili = $("#old_kabupaten_kota_domisili").val();
-      let id_provinsi_domisili = $("select#provinsi_domisili").val();
-      $.ajax({
-        type: "get",
-        url: "/data/kota/kabupaten/",
-        data: {
-          id: id_provinsi_domisili
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kabupaten_kota_domisili = `<option selected disabled>-- Pilih Kabupaten/Kota --</option>`;
-          let kota_kabupaten_domisili = response.kota_kabupaten;
-          kota_kabupaten_domisili.forEach(i => {
-            if (old_kabupaten_kota_domisili == i.id) {
-              tag_kabupaten_kota_domisili += `<option value="${i.id}" selected>${ i.nama }</option>`;
-            } else {
-              tag_kabupaten_kota_domisili += `<option value="${i.id}">${ i.nama }</option>`;
-            }
-          });
-          $("#kabupaten_kota_domisili").html(tag_kabupaten_kota_domisili);
-        }
-      });
-    </script>
-  @endif
-  @if (old('kabupaten_kota_domisili'))
-    <script>
-      let old_kecamatan_domisili = $("#old_kecamatan_domisili").val();
-      let id_kabupaten_kota_domisili = $("#old_kabupaten_kota_domisili").val();
-
-      $.ajax({
-        type: "get",
-        url: "/data/kecamatan/",
-        data: {
-          id: id_kabupaten_kota_domisili
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kecamatan_domisili = "<option selected disabled>-- Pilih Kecamatan --</option>";
-          let kecamatan_domisili = response.kecamatan;
-          kecamatan_domisili.forEach(i => {
-            if (old_kecamatan_domisili == i.id) {
-              tag_kecamatan_domisili += `<option value="${i.id}" selected>${ i.nama }</option>`;
-            } else {
-              tag_kecamatan_domisili += `<option value="${i.id}">${ i.nama }</option>`;
-            }
-          });
-          $("#kecamatan_domisili").html(tag_kecamatan_domisili);
-        }
-      });
-    </script>
-  @endif
-  @if (old('kecamatan_domisili'))
-    <script>
-      let old_kelurahan_domisili = $("#old_kelurahan_domisili").val();
-      let id_kecamatan_domisili = $("#old_kecamatan_domisili").val();
-      console.log(old_kelurahan_domisili);
-      console.log(old_kelurahan_domisili);
-      $.ajax({
-        type: "get",
-        url: "/data/kelurahan/",
-        data: {
-          id: id_kecamatan_domisili
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kelurahan_domisili = "<option selected disabled>-- Pilih Kelurahan --</option>";
-          let kelurahan_domisili = response.kelurahan;
-          kelurahan_domisili.forEach(i => {
-            if (old_kelurahan_domisili == i.id) {
-              tag_kelurahan_domisili += `<option value="${i.id}" selected>${ i.nama } aaa</option>`;
-            } else {
-              tag_kelurahan_domisili += `<option value="${i.id}">${ i.nama }</option>`;
-            }
-          });
-          $("#kelurahan_domisili").html(tag_kelurahan_domisili);
-        }
-      });
-    </script>
-  @endif
-  {{-- <script>
+  <script>
+    // select cabang
     $("select#cabang_id_cabang").on("change", function() {
       let id_cabang = $(this).val();
       $.ajax({
@@ -700,153 +334,14 @@
         dataType: "json",
         success: (response) => {
           console.log(response);
-          let ranting = "<option selected disabled>-- Pilih Ranting --</option>";
-          response.forEach(i => {
-            ranting += `<option value="${i.ranting}">${ i.nama_ranting }</option>`;
-          })
+          let ranting =
+            "<option selected disabled>-- Pilih Ranting --</option>";
+          response.forEach((i) => {
+            ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
+          });
           $("select#ranting_id_ranting").html(ranting);
-        }
-      });
-    });
-
-    // alamat ktp
-    $("#provinsi_ktp").on("change", function() {
-      let id_provinsi = $(this).val();
-      $.ajax({
-        type: "get",
-        url: "/data/kota/kabupaten/",
-        data: {
-          id: id_provinsi
         },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_provinsi = "<option selected disabled>-- Pilih Kabupaten/Kota --</option>";
-          let kota_kabupaten = response.kota_kabupaten;
-          kota_kabupaten.forEach(i => {
-            tag_provinsi += `<option value="${i.id}">${ i.nama }</option>`;
-          });
-          $("#kabupaten_kota_ktp").html(tag_provinsi);
-        }
       });
     });
-    $("#kabupaten_kota_ktp").on("change", function() {
-      let id_kabupaten_kota = $(this).val();
-
-      $.ajax({
-        type: "get",
-        url: "/data/kecamatan/",
-        data: {
-          id: id_kabupaten_kota
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kecamatan = "<option selected disabled>-- Pilih Kecamatan --</option>";
-          let kecamatan = response.kecamatan;
-          kecamatan.forEach(i => {
-            tag_kecamatan += `<option value="${i.id}">${ i.nama }</option>`;
-          });
-          $("#kecamatan_ktp").html(tag_kecamatan);
-        }
-      });
-    });
-    $("#kecamatan_ktp").on("change", function() {
-      let id_kecamatan = $(this).val();
-
-      $.ajax({
-        type: "get",
-        url: "/data/kelurahan/",
-        data: {
-          id: id_kecamatan
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kelurahan = "<option selected disabled>-- Pilih Kelurahan --</option>";
-          let kelurahan = response.kelurahan;
-          kelurahan.forEach(i => {
-            tag_kelurahan += `<option value="${i.id}">${ i.nama }</option>`;
-          });
-          $("#kelurahan_ktp").html(tag_kelurahan);
-        }
-      });
-    });
-
-    // alamat domisili
-    $("#provinsi_domisili").on("change", function() {
-      let id_provinsi = $(this).val();
-      $.ajax({
-        type: "get",
-        url: "/data/kota/kabupaten/",
-        data: {
-          id: id_provinsi
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_provinsi = "<option selected disabled>-- Pilih Kabupaten/Kota --</option>";
-          let kota_kabupaten = response.kota_kabupaten;
-          kota_kabupaten.forEach(i => {
-            tag_provinsi += `<option value="${i.id}">${ i.nama }</option>`;
-          });
-          $("#kabupaten_kota_domisili").html(tag_provinsi);
-        }
-      });
-    });
-    $("#kabupaten_kota_domisili").on("change", function() {
-      let id_kabupaten_kota = $(this).val();
-
-      $.ajax({
-        type: "get",
-        url: "/data/kecamatan/",
-        data: {
-          id: id_kabupaten_kota
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kecamatan = "<option selected disabled>-- Pilih Kecamatan --</option>";
-          let kecamatan = response.kecamatan;
-          kecamatan.forEach(i => {
-            tag_kecamatan += `<option value="${i.id}">${ i.nama }</option>`;
-          });
-          $("#kecamatan_domisili").html(tag_kecamatan);
-        }
-      });
-    });
-    $("#kecamatan_domisili").on("change", function() {
-      let id_kecamatan = $(this).val();
-
-      $.ajax({
-        type: "get",
-        url: "/data/kelurahan/",
-        data: {
-          id: id_kecamatan
-        },
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let tag_kelurahan = "<option selected disabled>-- Pilih Kelurahan --</option>";
-          let kelurahan = response.kelurahan;
-          kelurahan.forEach(i => {
-            tag_kelurahan += `<option value="${i.id}">${ i.nama }</option>`;
-          });
-          $("#kelurahan_domisili").html(tag_kelurahan);
-        }
-      });
-    });
-
-    $("#cek_alamat").on("change", function() {
-      if ($("#cek_alamat:checked").val()) {
-        $("div.alamat_domisili").addClass('d-none');
-        console.log(1)
-        $("#cek_alamat:checked").val()
-      } else {
-        $("div.alamat_domisili").removeClass('d-none');;
-        console.log(0)
-        $("#cek_alamat:checked").val()
-      }
-    });
-  </script> --}}
+  </script>
 @endsection

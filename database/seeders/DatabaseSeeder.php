@@ -848,6 +848,41 @@ class DatabaseSeeder extends Seeder
       'tempat_lahir' => 'Karanganyar',
       'created_at' => date('Y-m-d H:i:07')
     ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'tempat_lahir' => 'Boyolali',
+      'created_at' => date('Y-m-d H:i:08')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'tempat_lahir' => 'Bogor',
+      'created_at' => date('Y-m-d H:i:09')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'tempat_lahir' => 'Bekasi',
+      'created_at' => date('Y-m-d H:i:10')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'tempat_lahir' => 'Semarang',
+      'created_at' => date('Y-m-d H:i:11')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'tempat_lahir' => 'Cianjur',
+      'created_at' => date('Y-m-d H:i:12')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'tempat_lahir' => 'Malang',
+      'created_at' => date('Y-m-d H:i:13')
+    ]);
+    DB::table('tempat_lahir')->insert([
+      'id_tempat_lahir' => 'tmptlhr-' . Str::random(4),
+      'tempat_lahir' => 'Magelang',
+      'created_at' => date('Y-m-d H:i:14')
+    ]);
 
     // tabel pekerjaan
     DB::table('pekerjaan')->insert([

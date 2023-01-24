@@ -22,8 +22,8 @@ return new class extends Migration
     Schema::create('kader', function (Blueprint $table) {
       $table->string('nik')->primary();
       $table->foreignIdFor(Daerah::class);
-      $table->foreignIdFor(Cabang::class);
-      $table->foreignIdFor(Ranting::class);
+      $table->foreignIdFor(Cabang::class)->nullable();
+      $table->foreignIdFor(Ranting::class)->nullable();
       $table->foreignIdFor(KaderOrtom::class)->nullable();
       $table->foreignIdFor(KaderPotensi::class)->nullable();
       $table->foreignIdFor(PendidikanTerakhir::class)->nullable();

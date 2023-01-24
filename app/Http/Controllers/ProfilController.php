@@ -16,25 +16,17 @@ class ProfilController extends Controller
 {
   public function edit()
   {
-    // // mendapatkan semua data provinsi dari api
-    // $data_provinsi = collect([]);
-    // $provinsi =  Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')->json();
-    // foreach ($provinsi['provinsi'] as $prov) {
-    //   $data_provinsi->push(collect(['id' => $prov['id'], 'nama' => $prov['nama']]));
-    // }
     return view('profil', [
       // 'kader'=>Kader::where('nik', Auth::user()->kader_id)->first(),
-      'kader' => Kader::where('nik', '3372010107000002')->first(),
+      'kader' => Kader::get()->first(),
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'nama_ranting' => Ranting::orderBy('nama_ranting', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
-      // 'data_provinsi' => $data_provinsi
     ]);
   }
 
   public function update(Request $request)
   {
-    // return $request;
     $role = [
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16'],
       'no_kta' => ['nullable', 'numeric'],
@@ -51,19 +43,23 @@ class ProfilController extends Controller
       'pendidikan_terakhir_id_pendidikan_terakhir' => ['required'],
       'no_ponsel' => ['required', 'numeric', 'max_digits:12', 'min_digits:12']
     ];
-    // cek jika ada request cek_alamat
+    // cek jika tidak ada request cek_alamat
     if (!$request->cek_alamat) {
       $role['alamat_rumah_tinggal'] = ['required', 'min:15'];
     };
 
     // ambil data user dari tabel kader
     // $kader = Kader::where('nik', Auth::user()->kader_nik)->first();
-    $kader = Kader::where('nik', '3372010107000002')->first();
+    // $kader = Kader::where('nik', '3372010107000002')->first();
+    $kader = Kader::get()->first();
     // cek jika user tidak mengganti nik, no_kta, no_ktm
-    if ($kader->nik != $request->nik || $kader->no_kta != $request->no_kta || $kader->no_ktm != $request->no_ktm || $kader->email != $request->email) {
+    if ($kader->nik != $request->nik) {
       $role['nik'] = ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'];
+    } elseif ($kader->no_kta != $request->no_kta) {
       $role['no_kta'] = ['nullable', 'numeric', 'unique:App\Models\Kader,no_kta'];
+    } elseif ($kader->no_ktm != $request->no_ktm) {
       $role['no_ktm'] =  ['nullable', 'numeric', 'unique:App\Models\Kader,no_ktm'];
+    } elseif ($kader->email != $request->email) {
       $role['email'] = ['nullable', 'email:dns', 'unique:App\Models\Kader,email'];
     }
 
@@ -72,7 +68,6 @@ class ProfilController extends Controller
 
     // update ke tabel kader
     $validatedData = [
-      'daerah_id_daerah' => Daerah::first()->get()->id_daerah,
       'nik' => $request->nik,
       'no_kta' => $request->no_kta,
       'no_ktm' => $request->no_ktm,
@@ -90,12 +85,14 @@ class ProfilController extends Controller
     ];
     if (!$request->cek_alamat) {
       $validatedData['alamat_rumah_tinggal'] = $request->alamat_rumah_tinggal;
+    } else {
+      $validatedData['alamat_rumah_tinggal'] = $request->alamat_asal_ktp;
     }
 
     // cari user di tabel user
-    // $id_user = User::where('nama', $request->nama)->where('no_ponsel', $request->no_ponsel)->first();
-    // $id_user = User::where('kader_nik', Auth::user()->kader_nik)->first();
-    $user = User::where('kader_nik', '3372010107000002')->first();
+    // $user = User::where('kader_nik', Auth::user()->kader_nik)->first();
+    // $user = User::where('kader_nik', '3372010107000002')->first();
+    $user = User::get()->first();
 
     // cek jika user mengganti nik, nama, no_ponsel
     if ($user->kader_nik != $request->nik || $user->nama != $request->nama || $user->no_ponsel != $request->no_ponsel) {
@@ -103,11 +100,17 @@ class ProfilController extends Controller
       $data['nama'] = $request->nama;
       $data['no_ponsel'] = $request->no_ponsel;
 
-      User::where('id', 1)->update($data);
+      // update data di tabel user
+      // User::where('kader_nik', Auth::user()->kader_nik)->update($data);
+      // User::where('kader_nik', '3372010107000002')->update($data);
+      User::get()->first()->update($data);
     }
 
-    Kader::where('nik', '3372010107000002')->update($validatedData);
+    // update data di tabel kader
+    // Kader::where('nik', 'Auth::user()->kader_nik')->update($validatedData);
+    // Kader::where('nik', '3372010107000002')->update($validatedData);
+    Kader::get()->first()->update($validatedData);
 
-    return redirect('/profil')->with('message_kader', 'Data kader ' . $request->nama . ' berhasil diupdate.');
+    return redirect('/profil')->with('message_kader', 'Data kader ' . $request->nama . ' berhasil diubah.');
   }
 }

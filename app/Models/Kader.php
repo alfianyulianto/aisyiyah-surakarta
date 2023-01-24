@@ -15,7 +15,7 @@ class Kader extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $fillable = ['nik', 'daerah_id_daerah', 'cabang_id_cabang', 'ranting_id_ranting', 'no_kta', 'no_ktm', 'nama', 'tempat_lahir', 'tanggal_lahir', 'alamat_asal_ktp', 'alamat_rumah_tinggal', 'status_pernikahan', 'pekerjaan', 'email', 'no_ponsel', 'pendidikan_terakhir', 'foto'];
+  protected $fillable = ['nik', 'daerah_id_daerah', 'cabang_id_cabang', 'ranting_id_ranting', 'no_kta', 'no_ktm', 'nama', 'tempat_lahir', 'tanggal_lahir', 'alamat_asal_ktp', 'alamat_rumah_tinggal', 'status_pernikahan', 'pekerjaan', 'email', 'no_ponsel', 'pendidikan_terakhir_id_pendidikan_terakhir', 'foto'];
 
   public function user()
   {
