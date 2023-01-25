@@ -99,10 +99,12 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="mb-3">
+                          <input type="hidden" name="kader_ranting" id="kader_ranting"
+                            value="{{ old('ranting_id_ranting') }}">
                           <label for="ranting_id_ranting" class="form-label"><b>Ranting Aisyiyah</b></label>
                           <select class="form-control form-control-lg select2" name="ranting_id_ranting"
                             id="ranting_id_ranting">
-                            @if (old('ranting_id_ranting'))
+                            {{-- @if (old('ranting_id_ranting'))
                               <option disabled>-- Pilih Ranting --</option>
                               @foreach ($nama_ranting as $nr)
                                 @if (old('ranting_id_ranting') == $nr->id_ranting)
@@ -115,8 +117,10 @@
                               <option selected disabled>-- Pilih Ranting --</option>
                               @foreach ($nama_ranting as $nr)
                                 <option value="{{ $nr->id_ranting }}">{{ $nr->nama_ranting }}</option>
-                              @endforeach
-                            @endif
+                                @endforeach
+                                @endif --}}
+                            <option selected disabled>-- Pilih Ranting --</option>
+                            <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
                           </select>
                           @error('ranting_id_ranting')
                             <div class="error-message">
@@ -325,23 +329,36 @@
     </div>
   </section>
   <script>
-    // select cabang
-    $("select#cabang_id_cabang").on("change", function() {
-      let id_cabang = $(this).val();
-      $.ajax({
-        type: "get",
-        url: "/get/ranting/" + id_cabang,
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let ranting =
-            "<option selected disabled>-- Pilih Ranting --</option>";
-          response.forEach((i) => {
-            ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
-          });
-          $("select#ranting_id_ranting").html(ranting);
-        },
-      });
+    $("#ranting_id_ranting").on("change", function () {
+      console.log($("#ranting_id_ranting").val());
+    });
+    let id_cabang = $("select#cabang_id_cabang").val();
+    $.ajax({
+      type: "get",
+      url: "/get/ranting/" + id_cabang,
+      dataType: "json",
+      success: (response) => {
+        // console.log(response);
+        let ranting;
+        // cek jika id_ranting kosong
+        if (!id_ranting) {
+          ranting = "<option selected disabled>-- Pilih Ranting --</option>";
+        } else {
+          ranting = "<option disabled>-- Pilih Ranting --</option>";
+        }
+        response.forEach(i => {
+          console.log('i.id_ranting ' +
+            i.id_ranting);
+          console.log('id_ranting ' +
+            id_ranting);
+          if (i.id_ranting == id_ranting) {
+            ranting += `<option value="${i.id_ranting}" selected>${ i.nama_ranting }</option>`;
+          } else {
+            ranting += `<option value="${i.id_ranting}">${ i.nama_ranting }</option>`;
+          }
+        })
+        $("select#ranting_id_ranting").html(ranting);
+      }
     });
   </script>
 @endsection

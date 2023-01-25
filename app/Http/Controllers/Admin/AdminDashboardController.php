@@ -68,7 +68,7 @@ class AdminDashboardController extends Controller
     $total_cabang = Cabang::count();
     $total_ranting = Ranting::count();
     return view('admin.dashboard', [
-      'kader' => Kader::where('nik', '3372010107000002')->first(),
+      'kader' => Kader::get()->first(),
       'total_admin' => $total_admin,
       'total_kader' => $total_kader,
       'total_cabang' => $total_cabang,

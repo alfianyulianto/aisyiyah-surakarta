@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Daerah;
 use App\Models\Kader;
+use App\Models\Pekerjaan;
 use App\Models\PendidikanTerakhir;
 use App\Models\Ranting;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
@@ -73,7 +75,24 @@ class AdminDataKaderController extends Controller
     // validasi data
     $validated = $request->validate($role);
 
-    // / buat user baru di tabel user
+    // ambil pekerjaan dari form input dan ubah kata awal menjadi huruf kapital
+    $pekerjaan = $request->pekerjaan;
+    $lower_pekerjaan = Str::lower($pekerjaan);
+    $result_pekerjaan = ucwords($lower_pekerjaan);
+
+    // cek apakah tabel pekerjaan sudah ada pekerjaan
+    $cek_pekerjaan = Pekerjaan::where('pekerjaan', $result_pekerjaan)->first();
+    if (!$cek_pekerjaan) {
+      // insert ke tabel pekerjaan
+      $data_pekerjaan = [
+        'pekerjaan' => $result_pekerjaan,
+        'id_pekerjaan' => 'pkrjn-' . Str::random(4)
+      ];
+      // insert ke tabel pekerjaan
+      Pekerjaan::create($data_pekerjaan);
+    }
+
+    // buat user baru di tabel user
     $user_data = [
       'kader_nik' => $request->nik,
       'nama' => $request->nama,
@@ -105,12 +124,12 @@ class AdminDataKaderController extends Controller
       'no_ponsel' => $request->no_ponsel,
       'alamat_asal_ktp' => $request->alamat_asal_ktp,
     ];
+    // cek jika user melakukan cek list
     if (!$request->cek_alamat) {
       $validatedData['alamat_rumah_tinggal'] = $request->alamat_rumah_tinggal;
     } else {
       $validatedData['alamat_rumah_tinggal'] = $request->alamat_asal_ktp;
     }
-    // return $validatedData['pendidikan_terakhir_id_pendidikan_terakhir'];
 
     // insert ke tabel kader
     Kader::create($validatedData);
@@ -191,6 +210,24 @@ class AdminDataKaderController extends Controller
     // validasi data
     $validated = $request->validate($role);
 
+
+    // ambil pekerjaan dari form input dan ubah kata awal menjadi huruf kapital
+    $pekerjaan = $request->pekerjaan;
+    $lower_pekerjaan = Str::lower($pekerjaan);
+    $result_pekerjaan = ucwords($lower_pekerjaan);
+
+    // cek apakah tabel pekerjaan sudah ada pekerjaan
+    $cek_pekerjaan = Pekerjaan::where('pekerjaan', $result_pekerjaan)->first();
+    if (!$cek_pekerjaan) {
+      // insert ke tabel pekerjaan
+      $data_pekerjaan = [
+        'pekerjaan' => $result_pekerjaan,
+        'id_pekerjaan' => 'pkrjn-' . Str::random(4)
+      ];
+      // insert ke tabel pekerjaan
+      Pekerjaan::create($data_pekerjaan);
+    }
+
     // update ke tabel kader
     $validatedData = [
       'nik' => $request->nik,
@@ -208,6 +245,7 @@ class AdminDataKaderController extends Controller
       'no_ponsel' => $request->no_ponsel,
       'alamat_asal_ktp' => $request->alamat_asal_ktp,
     ];
+    // cek jika user melakukan cek list
     if (!$request->cek_alamat) {
       $validatedData['alamat_rumah_tinggal'] = $request->alamat_rumah_tinggal;
     } else {

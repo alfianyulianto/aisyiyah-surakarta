@@ -21,7 +21,7 @@ class TambahAdminDaerahController extends Controller
       'kader' => $kader,
       'nama_daerah' => Daerah::get()->first()->nama_daerah,
       'id_daerah' => $id,
-      'admin' => User::where('admin_at', $id)->get()
+      'admin' => User::where('kategori_user_id', 3)->where('admin_at', $id)->get()
     ]);
   }
 

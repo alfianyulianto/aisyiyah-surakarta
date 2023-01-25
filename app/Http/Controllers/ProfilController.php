@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Cabang;
 use App\Models\Daerah;
 use App\Models\Kader;
+use App\Models\Pekerjaan;
 use App\Models\PendidikanTerakhir;
 use App\Models\Ranting;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -65,6 +67,23 @@ class ProfilController extends Controller
 
     // validasi data
     $validated = $request->validate($role);
+
+    // ambil pekerjaan dari form input dan ubah kata awal menjadi huruf kapital
+    $pekerjaan = $request->pekerjaan;
+    $lower_pekerjaan = Str::lower($pekerjaan);
+    $result_pekerjaan = ucwords($lower_pekerjaan);
+
+    // cek apakah tabel pekerjaan sudah ada pekerjaan
+    $cek_pekerjaan = Pekerjaan::where('pekerjaan', $result_pekerjaan)->first();
+    if (!$cek_pekerjaan) {
+      // insert ke tabel pekerjaan
+      $data_pekerjaan = [
+        'pekerjaan' => $result_pekerjaan,
+        'id_pekerjaan' => 'pkrjn-' . Str::random(4)
+      ];
+      // insert ke tabel pekerjaan
+      Pekerjaan::create($data_pekerjaan);
+    }
 
     // update ke tabel kader
     $validatedData = [

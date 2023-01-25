@@ -887,7 +887,7 @@ class DatabaseSeeder extends Seeder
     // tabel pekerjaan
     DB::table('pekerjaan')->insert([
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
-      'pekerjaan' => 'PNS',
+      'pekerjaan' => 'Pegawai Negeri Sipil',
       'created_at' => date('Y-m-d H:i:01')
     ]);
     DB::table('pekerjaan')->insert([
@@ -919,6 +919,21 @@ class DatabaseSeeder extends Seeder
       'id_pekerjaan' => 'pkrjn-' . Str::random(4),
       'pekerjaan' => 'Ibu Rumah Tangga',
       'created_at' => date('Y-m-d H:i:07')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'pekerjaan' => 'Aparatur Sipil Negara',
+      'created_at' => date('Y-m-d H:i:08')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'pekerjaan' => 'Kepolisian Negara Republik Indonesia',
+      'created_at' => date('Y-m-d H:i:09')
+    ]);
+    DB::table('pekerjaan')->insert([
+      'id_pekerjaan' => 'pkrjn-' . Str::random(4),
+      'pekerjaan' => 'Tentara Nasional Indonesia',
+      'created_at' => date('Y-m-d H:i:10')
     ]);
   }
 }
