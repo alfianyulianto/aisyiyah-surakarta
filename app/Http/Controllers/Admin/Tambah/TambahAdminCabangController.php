@@ -15,7 +15,7 @@ class TambahAdminCabangController extends Controller
     $kader = collect([]);
     $user = User::where('kategori_user_id', null)->where('admin_at', null)->get();
     foreach ($user as $u) {
-      $kader->push(Kader::where('nik', $u->kader_nik)->first());
+      $kader->push(Kader::where('nik', $u->kader_nik)->where('cabang_id_cabang', $id)->first());
     }
     return view('admin.tambah_admin.tambah_admin_cabang.create', [
       'kader' => $kader,
@@ -38,7 +38,7 @@ class TambahAdminCabangController extends Controller
     // update data user di tabel user
     User::where('kader_nik', $request->nik)->update(['kategori_user_id' => 4, 'admin_at' => $id]);
 
-    return redirect('/tambah/admin')->with('message_admin_cabang', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin di ' . $request->cabang . '.');
+    return redirect('/admin/cabang/' . $id)->with('message_admin_cabang', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin di ' . $request->cabang . '.');
   }
 
   public function show(Kader $kader)
@@ -48,11 +48,11 @@ class TambahAdminCabangController extends Controller
     ]);
   }
 
-  public function destroy(Request $request, Kader $kader)
+  public function destroy(Request $request, Kader $kader, $id)
   {
     // update data user
     User::where('kader_nik', $kader->nik)->update(['kategori_user_id' => null, 'admin_at' => null]);
 
-    return redirect('/tambah/admin')->with('message_admin_cabang', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin di ' . $request->cabang . '.');
+    return redirect('/admin/cabang/' . $id)->with('message_admin_cabang', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin di ' . $request->cabang . '.');
   }
 }

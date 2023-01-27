@@ -49,7 +49,7 @@ class AdminDataRantingController extends Controller
       'cabang_id_cabang' => ['required'],
       'nama_ranting' => ['required', 'min:5'],
       'alamat_ranting' => ['required', 'min:10'],
-      'sk_pimp_ranting' => ['required', 'file'],
+      'sk_pimp_ranting' => ['required', 'mimes:pdf'],
     ]);
 
     $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
@@ -102,7 +102,7 @@ class AdminDataRantingController extends Controller
       'id_ranting' => ['required', 'min:10', 'max:10'],
       'nama_ranting' => ['required', 'min:5'],
       'alamat_ranting' => ['required', 'min:10'],
-      'sk_pimp_ranting' => ['file']
+      'sk_pimp_ranting' => ['mimes:pdf']
     ];
 
     // cek apakah $request->id_ranting sama dengan id_ranting pada tabel ranting
@@ -112,7 +112,7 @@ class AdminDataRantingController extends Controller
 
     // cek jika user mengganti nama ranting
     if ($request->nama_ranting != $ranting->nama_ranting) {
-      $role['sk_pimp_ranting'] = ['required', 'file'];
+      $role['sk_pimp_ranting'] = ['required', 'mimes:pdf'];
     }
 
     // cek validasi

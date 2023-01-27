@@ -329,10 +329,13 @@
     </div>
   </section>
   <script>
-    $("#ranting_id_ranting").on("change", function () {
-      console.log($("#ranting_id_ranting").val());
-    });
+    // ketika user memilih ranting
+    // $("#ranting_id_ranting").on("change", function() {
+    //   $("#kader_ranting").val($("#ranting_id_ranting").val());
+    // });
+
     let id_cabang = $("select#cabang_id_cabang").val();
+    let id_ranting = $("#kader_ranting").val();
     $.ajax({
       type: "get",
       url: "/get/ranting/" + id_cabang,

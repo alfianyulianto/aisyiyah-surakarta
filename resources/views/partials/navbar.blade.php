@@ -8,10 +8,14 @@
     </ul>
   </form>
   <ul class="navbar-nav navbar-right">
-    <li class="dropdown"><a href="#" data-toggle="dropdown"
-        class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-        <img alt="image" src="{{ url('') }}/img/avatar-3.png" class="rounded-circle mr-1">
-        <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+        <figure class="avatar mr-2">
+          <img alt="image"
+            src="{{ asset('storage/' .DB::table('kader')->where('nik', '3372010107000002')->first()->foto) }}"
+            class="rounded-circle mr-1"> <i class="avatar-presence online"></i>
+        </figure>
+        <div class="d-sm-none d-lg-inline-block">Hi,
+          {{ DB::table('kader')->where('nik', '3372010107000002')->first()->nama }}</div>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <a href="/change/password" class="dropdown-item has-icon">

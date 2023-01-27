@@ -9,6 +9,7 @@ use App\Models\Kader;
 use App\Models\Pekerjaan;
 use App\Models\PendidikanTerakhir;
 use App\Models\Ranting;
+use App\Models\TempatLahir;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -38,7 +39,6 @@ class AdminDataKaderController extends Controller
   {
     return view('admin.data-kader.create', [
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
-      'nama_ranting' => Ranting::orderBy('nama_ranting', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
   }
@@ -75,6 +75,23 @@ class AdminDataKaderController extends Controller
     // validasi data
     $validated = $request->validate($role);
 
+    // ambil tempat_lahir dari form input dan ubah kata awal menjadi huruf kapital
+    $tempat_lahir = $request->tempat_lahir;
+    $lower_tempat_lahir = Str::lower($tempat_lahir);
+    $result_tempat_lahir = ucwords($lower_tempat_lahir);
+
+    // cek apakah tabel tempat_lahir sudah ada tempat_lahir
+    $cek_tempat_lahir = TempatLahir::where('tempat_lahir', $result_tempat_lahir)->first();
+    if (!$cek_tempat_lahir) {
+      // insert ke tabel tempat_lahir
+      $data_tempat_lahir = [
+        'tempat_lahir' => $result_tempat_lahir,
+        'id_tempat_lahir' => 'pkrjn-' . Str::random(4)
+      ];
+      // insert ke tabel tempat_lahir
+      TempatLahir::create($data_tempat_lahir);
+    }
+
     // ambil pekerjaan dari form input dan ubah kata awal menjadi huruf kapital
     $pekerjaan = $request->pekerjaan;
     $lower_pekerjaan = Str::lower($pekerjaan);
@@ -98,7 +115,7 @@ class AdminDataKaderController extends Controller
       'nama' => $request->nama,
       'no_ponsel' => $request->no_ponsel,
       'password' => Hash::make($request->no_ponsel),
-      'kategori_user_id' => 0
+      'kategori_user_id' => 1
     ];
     User::create($user_data);
 
@@ -161,7 +178,6 @@ class AdminDataKaderController extends Controller
     return view('admin.data-kader.edit', [
       'kader' => $kader,
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
-      'nama_ranting' => Ranting::orderBy('nama_ranting', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
   }
@@ -210,6 +226,22 @@ class AdminDataKaderController extends Controller
     // validasi data
     $validated = $request->validate($role);
 
+    // ambil tempat_lahir dari form input dan ubah kata awal menjadi huruf kapital
+    $tempat_lahir = $request->tempat_lahir;
+    $lower_tempat_lahir = Str::lower($tempat_lahir);
+    $result_tempat_lahir = ucwords($lower_tempat_lahir);
+
+    // cek apakah tabel tempat_lahir sudah ada tempat_lahir
+    $cek_tempat_lahir = TempatLahir::where('tempat_lahir', $result_tempat_lahir)->first();
+    if (!$cek_tempat_lahir) {
+      // insert ke tabel tempat_lahir
+      $data_tempat_lahir = [
+        'tempat_lahir' => $result_tempat_lahir,
+        'id_tempat_lahir' => 'pkrjn-' . Str::random(4)
+      ];
+      // insert ke tabel tempat_lahir
+      TempatLahir::create($data_tempat_lahir);
+    }
 
     // ambil pekerjaan dari form input dan ubah kata awal menjadi huruf kapital
     $pekerjaan = $request->pekerjaan;

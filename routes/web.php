@@ -8,9 +8,7 @@ use App\Http\Controllers\Admin\AdminDataKaderController;
 use App\Http\Controllers\Admin\AdminDataRantingController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderController;
-use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanCabangController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanDaerahController;
-use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanRantingController;
 use App\Http\Controllers\Admin\Tambah\TambahAdminCabangController;
 use App\Http\Controllers\Admin\Tambah\TambahAdminController;
 use App\Http\Controllers\Admin\Tambah\TambahAdminDaerahController;
@@ -46,6 +44,7 @@ Route::get('/admin', [AdminDashboardController::class, 'index']);
 
 // upload foto
 Route::get('/upload/foto', [UploadFotoController::class, 'index']);
+Route::post('/upload/foto', [UploadFotoController::class, 'upload_foto']);
 
 // auth
 Route::get('/login', [LoginController::class, 'index']);
@@ -75,31 +74,45 @@ Route::get('/data/kecamatan/', [AdminDataKaderController::class, 'kecamatan']);
 Route::get('/data/kelurahan/', [AdminDataKaderController::class, 'kelurahan']);
 Route::resource('/admin/ortom', OrtomController::class);
 Route::resource('/admin/potensi', PotensiController::class);
+// admin {Fitur:Data Jabatan}
 Route::resource('/data/jabatan', AdminDataJabatanController::class);
+// admin {Fitur:Jabatan Kader}
 Route::get('/jabatan/kader', [TambahJabatanKaderController::class, 'index']);
-Route::resource('/tambah/pimpinan/daerah', TambahPimpinanDaerahController::class);
-Route::resource('/tambah/pimpinan/cabang', TambahPimpinanCabangController::class);
-Route::resource('/tambah/pimpinan/ranting', TambahPimpinanRantingController::class);
+Route::get('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahPimpinanDaerahController::class, 'create']);
+Route::post('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahPimpinanDaerahController::class, 'store']);
+Route::get('/data/pimpinan/daerah/{kader:nik}', [TambahPimpinanDaerahController::class, 'show']);
+Route::delete('/jabatan/kader/daerah/{kader:nik}/{daerah:id_daerah}', [TambahPimpinanDaerahController::class, 'destroy']);
+Route::get('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahPimpinanCabangController::class, 'create']);
+Route::post('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahPimpinanCabangController::class, 'store']);
+Route::get('/data/pimpinan/cabang/{kader:nik}', [TambahPimpinanCabangController::class, 'show']);
+Route::delete('/jabatan/kader/cabang/{kader:nik}/{cabang:id_cabang}', [TambahPimpinanCabangController::class, 'destroy']);
+Route::get('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahPimpinanRantingController::class, 'create']);
+Route::post('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahPimpinanRantingController::class, 'store']);
+Route::get('/data/pimpinan/ranting/{kader:nik}', [TambahPimpinanRantingController::class, 'show']);
+Route::delete('/jabatan/kader/ranting/{kader:nik}/{ranting:id_ranting}', [TambahPimpinanRantingController::class, 'destroy']);
+// admin {Fitur:Data Master}
 Route::resource('/data/daerah', AdminDataDaerahController::class);
 Route::get('/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'download']);
 Route::resource('/data/cabang', AdminDataCabangController::class);
 Route::get('/sk/pimpinan/cabang/{cabang:id_cabang}', [AdminDataCabangController::class, 'download']);
 Route::resource('/data/ranting', AdminDataRantingController::class);
 Route::get('/sk/pimpinan/ranting/{ranting:id_ranting}', [AdminDataRantingController::class, 'download']);
+// admin {Fitur:Tambah Admin}
 Route::get('/tambah/admin', [TambahAdminController::class, 'index']);
-Route::get('/tambah/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'create']);
-Route::post('/tambah/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'store']);
+Route::get('/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'create']);
+Route::post('/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'store']);
 Route::get('/data/admin/daerah/kader/{kader:nik}', [TambahAdminDaerahController::class, 'show']);
-Route::delete('/tambah/admin/daerah/{kader:nik}', [TambahAdminDaerahController::class, 'destroy']);
-Route::get('/tambah/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'create']);
-Route::post('/tambah/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'store']);
+Route::delete('/admin/daerah/{kader:nik}/daerah:id_daerah}', [TambahAdminDaerahController::class, 'destroy']);
+Route::get('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'create']);
+Route::post('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'store']);
 Route::get('/data/admin/cabang/kader/{kader:nik}', [TambahAdminCabangController::class, 'show']);
-Route::delete('/tambah/admin/cabang/{kader:nik}', [TambahAdminCabangController::class, 'destroy']);
+Route::delete('/admin/cabang/{kader:nik}/{cabang:id_cabang', [TambahAdminCabangController::class, 'destroy']);
 // Route::get('/tambah/admin/cabang/getkader/{kader}', [TambahAdminCabangController::class, 'get_kader']);
-Route::get('/tambah/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'create']);
-Route::post('/tambah/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'store']);
-Route::get('/data/admin/rantingkader/{kader:nik}', [TambahAdminRantingController::class, 'show']);
-Route::delete('/tambah/admin/ranting/{kader:nik}', [TambahAdminRantingController::class, 'destroy']);
+Route::get('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'create']);
+Route::post('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'store']);
+Route::get('/data/admin/ranting/kader/{kader:nik}', [TambahAdminRantingController::class, 'show']);
+Route::delete('/admin/ranting/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'destroy']);
+// admin {Fitur:Settings}
 Route::get('/settings', [AdminSettingsController::class, 'index']);
 Route::post('/settings/ortom', [AdminSettingsController::class, 'ortom_store']);
 Route::post('/settings/potensi', [AdminSettingsController::class, 'potensi_store']);

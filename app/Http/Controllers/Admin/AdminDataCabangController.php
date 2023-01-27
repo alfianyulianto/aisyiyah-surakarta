@@ -45,7 +45,7 @@ class AdminDataCabangController extends Controller
       'id_cabang' => ['required', 'min:9', 'max:9', 'unique:App\Models\Cabang,id_cabang'],
       'nama_cabang' => ['required', 'min:5'],
       'alamat_cabang' => ['required', 'min:10'],
-      'sk_pimp_cabang' => ['required', 'file']
+      'sk_pimp_cabang' => ['required', 'mimes:pdf']
     ]);
 
     $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
@@ -107,7 +107,7 @@ class AdminDataCabangController extends Controller
 
     // cek jika user mengganti nama cabang
     if ($request->nama_cabang != $cabang->nama_cabang) {
-      $role['sk_pimp_cabang'] = ['required', 'file'];
+      $role['sk_pimp_cabang'] = ['required', 'mimes:pdf'];
     }
 
     // cek validasi

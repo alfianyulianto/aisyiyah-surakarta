@@ -74,6 +74,8 @@
                               @enderror
                             </b>
                           </label>
+                          <small class="d-block mt-0 mb-2" style="font-size:13px;">Pastikan file yang diupload dalam
+                            bentuk PDF</small>
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" name="sk_pimp_cabang" id="sk_pimp_cabang">
                             <label class="custom-file-label" for="sk_pimp_cabang">Choose file</label>

@@ -32,10 +32,16 @@ class AdminSettingsController extends Controller
     ]);
     $validated['id_ortom'] = 'ortm-' . Str::random(4);
 
+    // ambil nama_ortom dari form input dan ubah kata awal menjadi huruf kapital
+    $nama_ortom = $request->nama_ortom;
+    $lower_nama_ortom = Str::lower($nama_ortom);
+    $validated['nama_ortom'] = ucwords($lower_nama_ortom);
+
+
     // insert ke tabel ortom
     Ortom::create($validated);
 
-    return redirect('/settings')->with('message_ortom', 'Data ortom ' . $request->nama_ortom . ' berhasil di tambahkan.');
+    return redirect('/settings')->with('message_ortom', 'Data ortom ' . $validated['nama_ortom'] . ' berhasil di tambahkan.');
   }
 
   public function potensi_store(Request $request)
@@ -45,10 +51,15 @@ class AdminSettingsController extends Controller
     ]);
     $validated['id_potensi'] = 'ptns-' . Str::random(4);
 
+    // ambil potensi dari form input dan ubah kata awal menjadi huruf kapital
+    $potensi = $request->potensi;
+    $lower_potensi = Str::lower($potensi);
+    $validated['potensi'] = ucwords($lower_potensi);
+
     // insert ke tabel ortom
     Potensi::create($validated);
 
-    return redirect('/settings')->with('message_potensi', 'Data potensi ' . $request->potensi . ' berhasil di tambahkan.');
+    return redirect('/settings')->with('message_potensi', 'Data potensi ' . $validated['potensi'] . ' berhasil di tambahkan.');
   }
 
   public function tempat_lahir_store(Request $request)
@@ -58,10 +69,15 @@ class AdminSettingsController extends Controller
     ]);
     $validated['id_tempat_lahir'] = 'tmptlhr-' . Str::random(4);
 
+    // ambil tempat_lahir dari form input dan ubah kata awal menjadi huruf kapital
+    $tempat_lahir = $request->tempat_lahir;
+    $lower_tempat_lahir = Str::lower($tempat_lahir);
+    $validated['tempat_lahir']  = ucwords($lower_tempat_lahir);
+
     // insert ke tabel tempat_lahir
     TempatLahir::create($validated);
 
-    return redirect('/settings')->with('message_tempat_lahir', 'Nama kota ' . $request->tempat_lahir . ' berhasil di tambahkan.');
+    return redirect('/settings')->with('message_tempat_lahir', 'Nama kota ' . $validated['tempat_lahir'] . ' berhasil di tambahkan.');
   }
 
   public function pekerjaan_store(Request $request)
@@ -71,22 +87,29 @@ class AdminSettingsController extends Controller
     ]);
     $validated['id_pekerjaan'] = 'pkrjn-' . Str::random(4);
 
+    // ambil pekerjaan dari form input dan ubah kata awal menjadi huruf kapital
+    $pekerjaan = $request->pekerjaan;
+    $lower_pekerjaan = Str::lower($pekerjaan);
+    $validated['pekerjaan'] = ucwords($lower_pekerjaan);
+
     // insert ke tabel pekerjaan
     Pekerjaan::create($validated);
 
-    return redirect('/settings')->with('message_pekerjaan', 'Data pekerjaan ' . $request->pekerjaan . ' berhasil di tambahkan.');
+    return redirect('/settings')->with('message_pekerjaan', 'Data pekerjaan ' .  $validated['pekerjaan'] . ' berhasil di tambahkan.');
   }
 
   public function periode_store(Request $request)
   {
     $validated = $request->validate([
-      'nama_pekerjaan' => ['required', 'min:5', 'string'],
+      'periode' => ['required', 'min:5', 'string', 'unique:App\Models\Periode,periode'],
     ]);
     $validated['id_periode'] = 'prd-' . Str::random(4);
+
+    $validated['periode'] = Str::replace(' ', '', $request->periode);
 
     // insert ke tabel periode
     Periode::create($validated);
 
-    return redirect('/settings')->with('message_periode', 'Data periode ' . $request->periode . ' berhasil di tambahkan.');
+    return redirect('/settings')->with('message_periode', 'Data periode ' . $validated['periode'] . ' berhasil di tambahkan.');
   }
 }

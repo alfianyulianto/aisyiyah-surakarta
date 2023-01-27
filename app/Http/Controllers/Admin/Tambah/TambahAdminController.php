@@ -14,6 +14,7 @@ class TambahAdminController extends Controller
   public function index()
   {
     // cek kategori user yang terautentikasi
+    // jika seorang super admin atau admin daerah
     // if(Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3){
     return view('admin.tambah_admin.tambah_admin_daerah.tampilan_super_admin_dan_admin_daerah', [
       'daerah' => Daerah::get()->first(),

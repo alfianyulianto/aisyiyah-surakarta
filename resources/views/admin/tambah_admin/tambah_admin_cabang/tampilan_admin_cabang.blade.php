@@ -38,7 +38,7 @@
                       <td class="text-center">{{ DB::table('users')->where('admin_at', $c->id_cabang)->count() ?? 0 }}
                       </td>
                       <td>
-                        <a href="/tambah/admin/cabang/{{ $c->id_cabang }}" class="btn btn-icon icon-left btn-success"><i
+                        <a href="/admin/cabang/{{ $c->id_cabang }}" class="btn btn-icon icon-left btn-success"><i
                             class="fas fa-user-plus"></i>
                           Admin</a>
                       </td>
@@ -77,7 +77,7 @@
                       <td class="text-center">{{ DB::table('users')->where('admin_at', $r->id_ranting)->count() ?? 0 }}
                       </td>
                       <td>
-                        <a href="/tambah/admin/ranting/{{ $r->id_ranting }}" class="btn btn-icon icon-left btn-success"><i
+                        <a href="/admin/ranting/{{ $r->id_ranting }}" class="btn btn-icon icon-left btn-success"><i
                             class="fas fa-user-plus"></i>
                           Admin</a>
                       </td>

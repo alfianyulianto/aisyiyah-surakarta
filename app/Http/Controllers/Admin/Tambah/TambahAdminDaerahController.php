@@ -38,7 +38,7 @@ class TambahAdminDaerahController extends Controller
     // update data user di tabel user
     User::where('kader_nik', $request->nik)->update(['kategori_user_id' => 3, 'admin_at' => $id]);
 
-    return redirect('/tambah/admin')->with('message_admin_daerah', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin daerah.');
+    return redirect('/admin/daerah/' . $id)->with('message_admin_daerah', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin daerah.');
   }
 
   public function show(Kader $kader)
@@ -48,11 +48,11 @@ class TambahAdminDaerahController extends Controller
     ]);
   }
 
-  public function destroy(Kader $kader)
+  public function destroy(Kader $kader, $id)
   {
     // update data user
     User::where('kader_nik', $kader->nik)->update(['kategori_user_id' => null, 'admin_at' => null]);
 
-    return redirect('/tambah/admin')->with('message_admin_daerah', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin daerah.');
+    return redirect('/admin/daerah/' . $id)->with('message_admin_daerah', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin daerah.');
   }
 }

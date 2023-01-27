@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambahk Pimpinan</h1>
+      <h1>Tambah Jabatan Kader</h1>
     </div>
 
     <div class="section-body">
@@ -22,15 +22,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($daerah as $d)
-                    <tr>
-                      <td>{{ $d->nama_daerah }}</td>
-                      <td>
-                        <a href="" class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
-                          Pimpinan</a>
-                      </td>
-                    </tr>
-                  @endforeach
+                  <tr>
+                    <td>{{ $daerah->nama_daerah }}</td>
+                    <td>
+                      <a href="/jabatan/kader/daerah/{{ $daerah->id_daerah }}" target="_blank"
+                        class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
+                        Pimpinan</a>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -52,7 +51,8 @@
                     <tr>
                       <td>{{ $r->nama_ranting }}</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
+                        <a href="/jabatan/kader/ranting/{{ $r->id_ranting }}"
+                          class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
                           Pimpinan</a>
                       </td>
                     </tr>
@@ -80,7 +80,8 @@
                     <tr>
                       <td>{{ $c->nama_cabang }}</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
+                        <a href="/jabatan/kader/cabang/{{ $c->id_cabang }}" class="btn btn-icon icon-left btn-success"><i
+                            class="fas fa-user-plus"></i>
                           Pimpinan</a>
                       </td>
                     </tr>

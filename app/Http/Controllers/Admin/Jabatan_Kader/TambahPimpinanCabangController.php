@@ -3,83 +3,103 @@
 namespace App\Http\Controllers\Admin\Jabatan_Kader;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cabang;
+use App\Models\Jabatan;
+use App\Models\Kader;
+use App\Models\KaderJabatan;
+use App\Models\Periode;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TambahPimpinanCabangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+  public function create($id)
+  {
+    // data kader 
+    $kader = collect([]);
+    // ambil data kader di tabel user berdasarnakn field kader_admin yang bukan sebagai kategori_user_id = 1
+    $user = User::where('kategori_user_id', 1)->where('admin_at', null)->get();
+    foreach ($user as $u) {
+      // cek apakah ada data kader di tabel kader_jabatan
+      if (!KaderJabatan::where('kader_nik', $u->kader_nik)->first()) {
+        $kader->push(Kader::where('nik', $u->kader_nik)->where('cabang_id_cabang', $id)->first());
+      }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    // data jabatan
+    $jabatan_kosong = collect([]);
+    // ambil data jabatan yang ada di daerah
+    $jabatan = Jabatan::where('cabang_id_cabang', $id)->orderBy('created_at', 'asc')->get();
+    foreach ($jabatan as $j) {
+      if (!KaderJabatan::where('jabatan_id_jabatan', $j->id_jabatan)->first()) {
+        $jabatan_kosong->push($j);
+      }
     }
+    // return $jabatan_kosong;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    return view('admin.jabatan_kader.tambah_jabatan_di_cabang.create', [
+      'kader' => $kader,
+      'jabatan' => $jabatan_kosong,
+      'periode' => Periode::orderBy('created_at', 'asc')->get(),
+      'last_periode' => Periode::orderBy('created_at', 'asc')->get()->last(),
+      'nama_cabang' => Cabang::where('id_cabang', $id)->first()->nama_cabang,
+      'id_cabang' => $id,
+      'kader_jabatan' => KaderJabatan::where('jabatan_at', $id)->get()
+    ]);
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+  public function store(Request $request, $id)
+  {
+    $validated = $request->validate([
+      'jabatan' => ['required'],
+      'periode' => ['required'],
+      'kader' => ['required'],
+      'nik' => ['required'],
+      'no_kta' => ['required'],
+      'no_ktm' => ['required'],
+      'nama' => ['required', 'string'],
+    ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    $validated['periode'] = Str::replace(' ', '', $request->periode);
+    // cek apakah sudah ada data kader
+    $cek_periode = Periode::where('periode', $validated['periode'])->first();
+    if (!$cek_periode) {
+      $data_periode = [
+        'periode' => $request->periode,
+        'id_periode' => 'prd-' . Str::random(4)
+      ];
     }
+    $validatedData = [
+      'id_kader_jabatan' => 'kdrjbtn-' . Str::random(4),
+      'jabatan_id_jabatan' => $request->jabatan,
+      'periode' => Str::replace(' ', '', $request->periode),
+      'kader_nik' => $request->kader,
+      'jabatan_at' => $id,
+    ];
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    // insert ke tabel kader_jabatan
+    KaderJabatan::create($validatedData);
+
+    // ambil data jabatan
+    $nama_jabatan = Jabatan::where('id_jabatan', $request->jabatan)->first()->nama_jabatan;
+
+    return redirect('/jabatan/kader/cabang/' . $id)->with('message_pimp_cabang', 'Berhasil menambahkan ' . $request->nama . ' sebagai ' . $nama_jabatan . '.');
+  }
+
+  public function show(Kader $kader)
+  {
+    return view('admin.jabatan_kader.tambah_jabatan_di_cabang.show', [
+      'kader' => $kader
+    ]);
+  }
+
+  public function destroy(Request $request, Kader $kader, $id)
+  {
+    // delete data di tabel kader_jabatan
+    KaderJabatan::where('kader_nik', $kader->nik)->delete();
+
+    return redirect('/jabatan/kader/cabang/' . $id)->with('message_pimp_cabang', 'Berhasil menghapus ' . $kader->nama . ' sebagai ' . $request->jabatan . '.');
+  }
 }

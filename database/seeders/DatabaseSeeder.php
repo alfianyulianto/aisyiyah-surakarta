@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
     DB::table('users')->insert([
       'id' => '1',
       'kader_nik' => '3372010107000002',
+      'kategori_user_id' => 1,
       'nama' => 'Alfian Yulianto',
       'no_ponsel' => '081217432366',
       'password' => Hash::make('password'),
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
     DB::table('users')->insert([
       'id' => '2',
       'kader_nik' => '3372010108199898',
+      'kategori_user_id' => 1,
       'nama' => 'Budi Doremi',
       'no_ponsel' => '085432657890',
       'password' => Hash::make('password'),
@@ -35,6 +37,7 @@ class DatabaseSeeder extends Seeder
     DB::table('users')->insert([
       'id' => '3',
       'kader_nik' => '3372010108199809',
+      'kategori_user_id' => 1,
       'nama' => 'Indah Larasati',
       'no_ponsel' => '085432987009',
       'password' => Hash::make('password'),
@@ -80,7 +83,7 @@ class DatabaseSeeder extends Seeder
       'pekerjaan' => 'Mahasiswa',
       'email' => 'alfianyulianto36@gmail.com',
       'no_ponsel' => '081217432366',
-      'foto' => 'avatar-3.png'
+      'foto' => 'foto profil/avatar-3.png'
     ]);
     DB::table('kader')->insert([
       'nik' => "3372010108199898",
@@ -100,7 +103,7 @@ class DatabaseSeeder extends Seeder
       'pekerjaan' => 'Pekerja',
       'email' => 'budi.doremi@gmail.com',
       'no_ponsel' => '085432657890',
-      'foto' => 'avatar-3.png'
+      'foto' => 'foto profil/avatar-3.png'
     ]);
     DB::table('kader')->insert([
       'nik' => "3372010108199809",
@@ -120,7 +123,7 @@ class DatabaseSeeder extends Seeder
       'pekerjaan' => 'Mahasiswa',
       'email' => 'indah.larasati@gmail.com',
       'no_ponsel' => '085432987009',
-      'foto' => 'avatar-3.png'
+      'foto' => 'foto profil/avatar-3.png'
     ]);
 
     // daerah

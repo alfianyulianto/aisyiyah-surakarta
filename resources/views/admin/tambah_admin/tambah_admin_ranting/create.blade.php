@@ -11,6 +11,13 @@
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card">
             <div class="card-body">
+              @if (session('message_admin_ranting'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <marquee direction="right">{{ session('message_admin_ranting') }}</marquee>
+                  </div>
+                </div>
+              @endif
               <form action="/tambah/admin/ranting/{{ $id_ranting }}" method="post">
                 @csrf
                 <input type="hidden" name="ranting" id="ranting" value="{{ $nama_ranting }}">
@@ -111,9 +118,9 @@
                         <td>{{ $a->kader->tempat_lahir }}, {{ $a->kader->tanggal_lahir }}</td>
                         <td>{{ $a->no_ponsel }}</td>
                         <td>
-                          <a href="/data/admin/ranting/kader/{{ $a->kader_nik }}"
+                          <a href="/data/admin/ranting/kader/{{ $a->kader_nik }}/{{ $id_ranting }}"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="/tambah/admin/ranting/{{ $a->kader_nik }}" method="post" class="d-inline-block">
+                          <form action="/admin/ranting/{{ $a->kader_nik }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
                             <input type="hidden" name="ranting" id="ranting" value="{{ $nama_ranting }}">

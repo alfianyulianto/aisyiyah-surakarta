@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Admin Daerah {{ $nama_daerah }}</h1>
+      <h1>Tambah Jabatan Kader Ranting {{ $nama_ranting }}</h1>
     </div>
 
     <div class="section-body">
@@ -11,19 +11,51 @@
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card">
             <div class="card-body">
-              @if (session('message_admin_daerah'))
+              @if (session('message_pimp_daerah'))
                 <div class="alert alert-success alert-dismissible show fade">
                   <div class="alert-body">
-                    <marquee direction="right">{{ session('message_admin_daerah') }}</marquee>
+                    <marquee direction="right">{{ session('message_pimp_cabang') }}</marquee>
                   </div>
                 </div>
               @endif
-              <form action="/tambah/admin/daerah/{{ $id_daerah }}" method="post">
+              <form action="/jabatan/kader/cabang/{{ $id_cabang }}" method="post">
                 @csrf
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="row">
-                      <div class="col-lg-5">
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <label for="jabatan" class="form-label"><b>Posisi Jabatan</b></label>
+                          <select class="form-control form-control-lg select2" id="jabatan" name="jabatan">
+                            <option selected disabled>-- Pilih Jabatan --</option>
+                            @foreach ($jabatan as $j)
+                              <option value="{{ $j->id_jabatan }}">{{ $j->nama_jabatan }}</option>
+                            @endforeach
+                          </select>
+                          @error('jabatan')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <label for="periode" class="form-label"><b>Periode</b></label>
+                          <input type="text" class="form-control" name="periode" id="periode"
+                            placeholder="Masukan Periode (cnth:{{ $last_periode->periode }})">
+                          @error('periode')
+                            <div class="error-message">
+                              {{ $message }}
+                            </div>
+                          @enderror
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="kader" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="kader" name="kader">
@@ -87,7 +119,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mb-5">
-                      <button type="submit" class="btn btn-primary">Add Admin Daerah</button>
+                      <button type="submit" class="btn btn-primary">Add Jabatan Kader</button>
                     </div>
                   </div>
                 </div>
@@ -98,30 +130,33 @@
                     <tr>
                       <th class="text-center align-top">#</th>
                       <th class="text-center align-top">Nama</th>
+                      <th class="text-center align-top">Jabatan</th>
                       <th class="text-center align-top">NIK</th>
                       <th class="text-center">No KTA Aisyiyah</th>
                       <th class="text-center">No KTA Muhammadiyah</th>
-                      <th class="text-center align-top">Tempat Tanggal Lahir</th>
                       <th class="text-center align-top">Nomer Handphone</th>
                       <th class="text-center align-top">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($admin as $a)
+                    @foreach ($kader_jabatan as $kj)
                       <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $a->kader->nama }}</td>
-                        <td>{{ $a->kader_nik }}</td>
-                        <td>{{ $a->kader->no_kta ? $a->kader->no_kta : '-' }}</td>
-                        <td>{{ $a->kader->no_ktm ? $a->kader->no_ktm : '-' }}</td>
-                        <td>{{ $a->kader->tempat_lahir }}, {{ $a->tanggal_lahir }}</td>
-                        <td>{{ $a->no_ponsel }}</td>
+                        <td>{{ $kj->kader->nama }}</td>
+                        <td>{{ $kj->jabatan->nama_jabatan }}</td>
+                        <td>{{ $kj->kader_nik }}</td>
+                        <td>{{ $kj->kader->no_kta ? $kj->kader->no_kta : '-' }}</td>
+                        <td>{{ $kj->kader->no_ktm ? $kj->kader->no_ktm : '-' }}</td>
+                        <td>{{ $kj->kader->no_ponsel }}</td>
                         <td>
-                          <a href="/data/admin/daerah/kader/{{ $a->kader_nik }}/{{ $id_daerah }}" target="blank"
+                          <a href="/data/pimpinan/ranting/{{ $kj->kader_nik }}" target="_blank"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="/admin/daerah/{{ $a->kader_nik }}" method="post" class="d-inline-block">
+                          <form action="/jabatan/kader/ranting/{{ $kj->kader_nik }}/{{ $id_ranting }}"
+                            method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
+                            <input type="hidden" name="jabatan" id="jabatan"
+                              value="{{ $kj->jabatan->nama_jabatan }}">
                             <button type="submit" class="btn btn-icon icon-left btn-danger"><i
                                 class="far fa-trash-alt"></i>Hapus</button>
                           </form>

@@ -79,7 +79,7 @@ class AdminDataDaerahController extends Controller
       'id_daerah' => ['required'],
       'nama_daerah' => ['required', 'min:5'],
       'alamat_daerah' => ['required', 'min:10'],
-      'sk_pimp_daerah' => ['file']
+      'sk_pimp_daerah' => ['mimes:pdf']
     ];
 
     // cek apakah $request->id_daerah sama dengan id_daerah pada tabel daerah
@@ -89,7 +89,7 @@ class AdminDataDaerahController extends Controller
 
     // cek jika user mengganti nama daerah
     if ($request->nama_daerah != $daerah->nama_daerah) {
-      $role['sk_pimp_daerah'] = ['required', 'file'];
+      $role['sk_pimp_daerah'] = ['required', 'mimes:pdf'];
     }
 
     // cek validasi
