@@ -44,6 +44,26 @@ class AdminSettingsController extends Controller
     return redirect('/settings')->with('message_ortom', 'Data ortom ' . $validated['nama_ortom'] . ' berhasil di tambahkan.');
   }
 
+  public function ortom_update(Request $request)
+  {
+    return $request;
+    $validated = $request->validate([
+      'nama_ortom' => ['required', 'min:5', 'string', 'unique:App\Models\Ortom,nama_ortom'],
+    ]);
+    $validated['id_ortom'] = 'ortm-' . Str::random(4);
+
+    // ambil nama_ortom dari form input dan ubah kata awal menjadi huruf kapital
+    $nama_ortom = $request->nama_ortom;
+    $lower_nama_ortom = Str::lower($nama_ortom);
+    $validated['nama_ortom'] = ucwords($lower_nama_ortom);
+
+
+    // insert ke tabel ortom
+    Ortom::create($validated);
+
+    return redirect('/settings')->with('message_ortom', 'Data ortom ' . $validated['nama_ortom'] . ' berhasil di tambahkan.');
+  }
+
   public function potensi_store(Request $request)
   {
     $validated = $request->validate([

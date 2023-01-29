@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\KaderExport;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Daerah;
@@ -15,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminDataKaderController extends Controller
 {
@@ -326,5 +328,10 @@ class AdminDataKaderController extends Controller
   public function get_kader(Kader $kader)
   {
     return $kader;
+  }
+
+  public function export()
+  {
+    return Excel::download(new KaderExport, 'Data Kader per ' . date('d-m-Y') . '.xlsx');
   }
 }

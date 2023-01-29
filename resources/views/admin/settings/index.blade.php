@@ -60,8 +60,10 @@
                     <tr>
                       <td>{{ $o->nama_ortom }}</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
-                          Edit</a>
+                        <button type="button" class="btn btn-icon icon-left btn-warning" id="btn-edit-ortom"
+                          data-bs-toggle="modal" data-bs-target="#exampleModalOrtom" data-key="{{ $o->nama_ortom }}"
+                          data-message="Organisasi Otonom Muhammadiyah"><i class="far fa-edit"></i>
+                          Edit</button>
                         <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
                           Hapus</a>
                       </td>
@@ -122,8 +124,10 @@
                     <tr>
                       <td>{{ $tl->tempat_lahir }}</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
-                          Edit</a>
+                        <button type="button" class="btn btn-icon icon-left btn-warning" id="btn-edit-tempat_lahir"
+                          data-bs-toggle="modal" data-bs-target="#exampleModalTempatLahir"
+                          data-key="{{ $tl->tempat_lahir }}" data-message="Tempat Lahir"><i class="far fa-edit"></i>
+                          Edit</button>
                         <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
                           Hapus</a>
                       </td>
@@ -184,8 +188,10 @@
                     <tr>
                       <td>{{ $prd->periode }}</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
-                          Edit</a>
+                        <button type="button" class="btn btn-icon icon-left btn-warning" id="btn-edit-periode"
+                          data-bs-toggle="modal" data-bs-target="#exampleModalPeriode" data-key="{{ $prd->periode }}"
+                          data-message="Periode"><i class="far fa-edit"></i>
+                          Edit</button>
                         <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
                           Hapus</a>
                       </td>
@@ -248,8 +254,10 @@
                     <tr>
                       <td>{{ $p->potensi }}</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
-                          Edit</a>
+                        <button type="button" class="btn btn-icon icon-left btn-warning" id="btn-edit-potensi"
+                          data-bs-toggle="modal" data-bs-target="#exampleModalPotensi" data-key="{{ $p->potensi }}"
+                          data-message="Jenis Potensi Kader"><i class="far fa-edit"></i>
+                          Edit</button>
                         <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
                           Hapus</a>
                       </td>
@@ -310,8 +318,10 @@
                     <tr>
                       <td>{{ $pkrjn->pekerjaan }}</td>
                       <td>
-                        <a href="" class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
-                          Edit</a>
+                        <button type="button" class="btn btn-icon icon-left btn-warning" id="btn-edit-pekerjaan"
+                          data-bs-toggle="modal" data-bs-target="#exampleModalPekerjaan"
+                          data-key="{{ $pkrjn->pekerjaan }}" data-message="Pekerjaan"><i class="far fa-edit"></i>
+                          Edit</button>
                         <a href="" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i>
                           Hapus</a>
                       </td>
@@ -324,4 +334,200 @@
         </div>
       </div>
   </section>
+
+  {{-- modal ortom --}}
+  <div class="modal fade" id="exampleModalOrtom" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="message-ortom"></h4>
+        </div>
+        <form action="/settings/ortom" method="post" class="form-ortom">
+          @csrf
+          @method('put')
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="ortom" class="form-label"><b>Ortom</b></label>
+              <input type="text" class="form-control" name="ortom" id="ortom_modal"
+                placeholder="Masukan Nama Ortom">
+              <div class="error-message">
+                {{-- {{ $message }} --}}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btn-update">Update Ortom</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{-- modal tempat_lahir --}}
+  <div class="modal fade" id="exampleModalTempatLahir" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="message-tempat_lahir"></h4>
+        </div>
+        <form action="/settings/tempat/lahir" method="post" class="form-tempat_lahir">
+          @csrf
+          @method('put')
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="tempat_lahir" class="form-label"><b>Tempat Lahir</b></label>
+              <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir_modal"
+                placeholder="Masukan Nama Kota (cnth:Surakarat)">
+              <div class="error-message">
+                {{-- {{ $message }} --}}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btn-update">Update Tempat Lahir</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{-- modal periode --}}
+  <div class="modal fade" id="exampleModalPeriode" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="message-periode"></h4>
+        </div>
+        <form action="/settings/periode" method="post" class="form-periode">
+          @csrf
+          @method('put')
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="periode" class="form-label"><b>Periode</b></label>
+              <input type="text" class="form-control" name="periode" id="periode_modal"
+                placeholder="Masukan periode">
+              <div class="error-message">
+                {{-- {{ $message }} --}}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btn-update">Update Periode</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{-- modal potensi --}}
+  <div class="modal fade" id="exampleModalPotensi" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="message-potensi"></h4>
+        </div>
+        <form action="/settings/potensi" method="post" class="form-potensi">
+          @csrf
+          @method('put')
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="potensi" class="form-label"><b>Potensi</b></label>
+              <input type="text" class="form-control" name="potensi" id="potensi_modal"
+                placeholder="Masukan Potensi Kader(cnth:Bidang Pendidikan)">
+              <div class="error-message-">
+                {{-- {{ $message }} --}}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btn-update">Update Potensi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{-- modal pekerjaan --}}
+  <div class="modal fade" id="exampleModalPekerjaan" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="message-pekerjaan"></h4>
+        </div>
+        <form action="/settings/pekerjaan" method="post" class="form-pekerjaan">
+          @csrf
+          @method('put')
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="pekerjaan" class="form-label"><b>Pekerjaan</b></label>
+              <input type="text" class="form-control" name="pekerjaan" id="pekerjaan_modal"
+                placeholder="Masukan Nama Pekerjaan (cnth:Mahasiswa)">
+              <div class="error-message">
+                {{-- {{ $message }} --}}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btn-update">Update Pekerjaan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    $("button#btn-edit-ortom").each(function(index, element) {
+      $(this).on('click', function() {
+        $("h4#message-ortom").text($(this).data('message'));
+        $("input#ortom_modal").val($(this).data('key'));
+      });
+    });
+    $(".form-ortom").on('submit', function(e) {
+      console.log("OKOK");
+      var form = $(this);
+
+      $.ajax({
+        type: "put",
+        url: form.attr('action'),
+        data: form.serialize(),
+        success: function(data, textStatus, jqXHR) {
+          var data = jqXHR.responseJSON;
+          window.location.href = data.url;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+        }
+      });
+      e.preventDefault();
+    });
+    $("button#btn-edit-tempat_lahir").each(function(index, element) {
+      $(this).on('click', function() {
+        $("h4#message-tempat_lahir").text($(this).data('message'));
+        $("input#tempat_lahir_modal").val($(this).data('key'));
+      });
+    });
+    $("button#btn-edit-periode").each(function(index, element) {
+      $(this).on('click', function() {
+        $("h4#message-periode").text($(this).data('message'));
+        $("input#periode_modal").val($(this).data('key'));
+      });
+    });
+    $("button#btn-edit-potensi").each(function(index, element) {
+      $(this).on('click', function() {
+        $("h4#message-potensi").text($(this).data('message'));
+        $("input#potensi_modal").val($(this).data('key'));
+      });
+    });
+    $("button#btn-edit-pekerjaan").each(function(index, element) {
+      $(this).on('click', function() {
+        $("h4#message-pekerjaan").text($(this).data('message'));
+        $("input#pekerjaan_modal").val($(this).data('key'));
+      });
+    });
+  </script>
 @endsection

@@ -80,6 +80,12 @@
   <script src="{{ url('') }}/library/stisla/node_modules/selectric/public/jquery.selectric.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+  <script src="{{ url('') }}/js/dataTables/dataTables.buttons.min.js"></script>
+  <script src="{{ url('') }}/js/dataTables/pdfmake.min.js"></script>
+  <script src="{{ url('') }}/js/dataTables/jszip.min.js"></script>
+  <script src="{{ url('') }}/js/dataTables/vfs_fonts.js"></script>
+  <script src="{{ url('') }}/js/dataTables/buttons.html5.min.js"></script>
+
   <!-- Template JS File -->
   <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script>
   <script src="{{ url('') }}/library/stisla/assets/js/custom.js"></script>

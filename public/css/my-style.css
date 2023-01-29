@@ -48,3 +48,17 @@ p.lh-none {
     display: block;
     border-bottom: 1px solid #000;
 }
+
+/* button export excel */
+.export-excel-bg {
+    background: #6777ef;
+    padding: 4px 5px;
+    border: 0;
+    color: #ffffff;
+    font-size: larger;
+    border-radius: 4px;
+}
+
+.export-excel-bg:hover {
+    background: #2e44e9;
+}
