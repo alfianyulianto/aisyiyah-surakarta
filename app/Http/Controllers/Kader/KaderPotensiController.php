@@ -29,7 +29,7 @@ class KaderPotensiController extends Controller
   public function create()
   {
     return view('kader.potensi.create', [
-      'potensi' => Potensi::orderBy('created_at', 'asc')->get()
+      'potensi' => Potensi::orderBy('potensi', 'asc')->get()
     ]);
   }
 

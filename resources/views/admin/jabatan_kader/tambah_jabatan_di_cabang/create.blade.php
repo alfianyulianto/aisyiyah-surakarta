@@ -28,9 +28,13 @@
                           <label for="jabatan" class="form-label"><b>Posisi Jabatan</b></label>
                           <select class="form-control form-control-lg select2" id="jabatan" name="jabatan">
                             <option selected disabled>-- Pilih Jabatan --</option>
-                            @foreach ($jabatan as $j)
-                              <option value="{{ $j->id_jabatan }}">{{ $j->nama_jabatan }}</option>
-                            @endforeach
+                            @if (!$jabatan->isEmpty())
+                              @foreach ($jabatan as $j)
+                                <option value="{{ $j->id_jabatan }}">{{ $j->nama_jabatan }}</option>
+                              @endforeach
+                            @else
+                              <option disabled>Tidak Ada Posisi Jabatan di Cabang {{ $nama_cabang }}</option>
+                            @endif
                           </select>
                           @error('jabatan')
                             <div class="error-message">
@@ -60,9 +64,13 @@
                           <label for="kader" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="kader" name="kader">
                             <option selected disabled>-- Pilih Nama --</option>
-                            @foreach ($kader as $k)
-                              <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
-                            @endforeach
+                            @if (!$kader->isEmpty())
+                              @foreach ($kader as $k)
+                                <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
+                              @endforeach
+                            @else
+                              <option disabled>Tidak Ada Data Kader di Cabang {{ $nama_cabang }}</option>
+                            @endif
                           </select>
                           @error('kader')
                             <div class="error-message">

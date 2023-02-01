@@ -8,11 +8,13 @@ $(document).ready(function () {
             { width: 105, targets: 1 },
             { width: 100, targets: 2 },
             { width: 100, targets: 3 },
-            { width: 175, targets: 4 },
-            { width: 140, targets: 5 },
-            { width: 200, targets: 6 },
-            { width: 70, targets: 7 },
-            { width: 235, targets: 8 },
+            { width: 185, targets: 4 },
+            { width: 135, targets: 5 },
+            { width: 135, targets: 6 },
+            { width: 170, targets: 7 },
+            { width: 200, targets: 8 },
+            { width: 70, targets: 9 },
+            { width: 235, targets: 10 },
         ],
     });
 
@@ -56,6 +58,21 @@ $(document).ready(function () {
             { width: 145, targets: 3 },
             { width: 215, targets: 4 },
             { width: 160, targets: 5 },
+        ],
+    });
+    // tampilan data potensi kader {admin}
+    $("#scroll-x-data-potensi-kader").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: 5, targets: 0 },
+            { width: 105, targets: 1 },
+            { width: 100, targets: 2 },
+            { width: 100, targets: 3 },
+            { width: 185, targets: 4 },
+            { width: 135, targets: 5 },
+            { width: 135, targets: 6 },
+            { width: 175, targets: 7 },
+            { width: 490, targets: 8 },
         ],
     });
     // tampilan setting ortom
@@ -103,9 +120,9 @@ $(document).ready(function () {
         scrollX: true,
         columnDefs: [
             { width: "2%", targets: 0 },
-            { width: "30%", targets: 1 },
-            { width: "45%", targets: 2 },
-            { width: "20%", targets: 3 },
+            { width: "21%", targets: 1 },
+            { width: "55%", targets: 2 },
+            { width: "19%", targets: 3 },
         ],
     });
     // tampilan ortom kader

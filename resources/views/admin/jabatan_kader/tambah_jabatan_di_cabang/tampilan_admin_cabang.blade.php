@@ -26,8 +26,8 @@
                     <tr>
                       <td>{{ $c->nama_cabang }}</td>
                       <td>
-                        <a href="/jabatan/kader/cabang/{{ $c->id_cabang }}" class="btn btn-icon icon-left btn-success"><i
-                            class="fas fa-user-plus"></i>
+                        <a href="/jabatan/kader/cabang/{{ $c->id_cabang }}" target="_blank"
+                          class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
                           Pimpinan</a>
                       </td>
                     </tr>
@@ -53,7 +53,7 @@
                     <tr>
                       <td>{{ $r->nama_ranting }}</td>
                       <td>
-                        <a href="/jabatan/kader/ranting/{{ $r->id_ranting }}"
+                        <a href="/jabatan/kader/ranting/{{ $r->id_ranting }}" target="_blank"
                           class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
                           Pimpinan</a>
                       </td>

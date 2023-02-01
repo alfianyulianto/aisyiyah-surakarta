@@ -12,17 +12,18 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize,  WithStyles
+class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize,  WithStyles, WithColumnWidths
 {
   /**
    * @return \Illuminate\Support\Collection
    */
   public function collection()
   {
-    $kader = Kader::all();
+    $kader = Kader::orderBy('cabang_id_cabang', 'asc')->get();
     $data_kader = collect([]);
     foreach ($kader as $key => $value) {
       $arr = [
@@ -72,7 +73,7 @@ class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting,
   public function columnFormats(): array
   {
     return [
-      'A' => NumberFormat::FORMAT_NUMBER,
+      'A' => NumberFormat::FORMAT_TEXT,
       'B' => NumberFormat::FORMAT_NUMBER,
       'C' => NumberFormat::FORMAT_TEXT,
       'D' => NumberFormat::FORMAT_TEXT,
@@ -92,11 +93,37 @@ class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting,
   }
   public function styles(Worksheet $sheet)
   {
-    // // $sheet->setAllBorders('thin');
-    // $sheet->getStyle()->setFont(['family' => 'Times New Roman', 'size' => 12]);
+    $jumlah_kader = Kader::all()->count();
+    $jumlah_kader += 1;
+    $sheet->getStyle('1')->getAlignment()->setHorizontal('center');
+    $sheet->getStyle('B1:B' . $jumlah_kader)->getAlignment()->setHorizontal('left');
+    $sheet->getStyle('A1:A' . $jumlah_kader)->getAlignment()->setHorizontal('center');
+    $sheet->getStyle('1')->getAlignment()->setVertical('middle');
+    $sheet->getStyle('A1:P' . $jumlah_kader)->getBorders()->getAllBorders()->setBorderStyle('thin');
     return [
       1    => ['font' => ['bold' => true, 'alignment' => 'center']],
-      'A' => ['font' => ['family' => 'Times New Roman', 'size' => 12]]
+      'A' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'B' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'C' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'D' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'E' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'F' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'G' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'H' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'I' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'J' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'K' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'L' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'M' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'N' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'O' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+      'P' => ['font' => ['name' => 'Times New Roman', 'size' => 12]],
+    ];
+  }
+  public function columnWidths(): array
+  {
+    return [
+      'A' => 9,
     ];
   }
 }

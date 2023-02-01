@@ -26,7 +26,7 @@
                     <tr>
                       <td>{{ $r->nama_ranting }}</td>
                       <td>
-                        <a href="/jabatan/kader/ranting/{{ $r->id_ranting }}"
+                        <a href="/jabatan/kader/ranting/{{ $r->id_ranting }}" target="_blank"
                           class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
                           Pimpinan</a>
                       </td>

@@ -39,15 +39,15 @@
                               <option disabled>-- Pilih Potensi --</option>
                               @foreach ($potensi as $p)
                                 @if (old('potensi_id_potensi') == $p->id_potensi)
-                                  <option value="{{ $p->id_potensi }}" selected>{{ $p->nama_potensi }}</option>
+                                  <option value="{{ $p->id_potensi }}" selected>{{ $p->potensi }}</option>
                                 @else
-                                  <option value="{{ $p->id_potensi }}">{{ $p->nama_potensi }}</option>
+                                  <option value="{{ $p->id_potensi }}">{{ $p->potensi }}</option>
                                 @endif
                               @endforeach
                             @else
                               <option selected disabled>-- Pilih Potensi --</option>
                               @foreach ($potensi as $p)
-                                <option value="{{ $p->id_potensi }}">{{ $p->nama_potensi }}</option>
+                                <option value="{{ $p->id_potensi }}">{{ $p->potensi }}</option>
                               @endforeach
                             @endif
                           </select>

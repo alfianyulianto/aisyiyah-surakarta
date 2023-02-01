@@ -53,6 +53,7 @@ class AdminDataJabatanController extends Controller
     $validated = $request->validate([
       'id_jabatan' => ['required', 'min:9', 'max:9', 'unique:App\Models\Jabatan,id_jabatan'],
       'nama_jabatan' => ['required', 'string', 'min:5'],
+      'satu_kader' => ['required'],
     ]);
 
     // // cek user apakah seorang super admin atau admin-daerah
@@ -64,10 +65,11 @@ class AdminDataJabatanController extends Controller
     //   $validated['ranting_id_ranting'] = Auth::user()->admin_at;
     // }
 
+    $validated['satu_kader'] = $request->satu_kader == 'true' ? true : false;
     // insert ke tabel jabatan
     Jabatan::create($validated);
 
-    return redirect('/data/jabatan')->with('message_jabatan', 'Data jabatan ' . $request->naam_jabatan . ' berhasil ditambahkan.');
+    return redirect('/data/jabatan')->with('message_jabatan', 'Data jabatan ' . $request->nama_jabatan . ' berhasil ditambahkan.');
   }
 
   /**
@@ -106,6 +108,7 @@ class AdminDataJabatanController extends Controller
     $role = [
       'id_jabatan' => ['required', 'min:9', 'max:9'],
       'nama_jabatan' => ['required', 'string', 'min:5'],
+      'satu_kader' => ['required'],
     ];
 
     // cek apakah $request->id_jabatan sama dengan id_jabatan pada tabel jabatan
@@ -114,6 +117,8 @@ class AdminDataJabatanController extends Controller
     }
 
     $validated = $request->validate($role);
+
+    $validated['satu_kader'] = $request->satu_kader == 'true' ? true : false;
 
     // update data ke tabel jabatan
     $jabatan->update($validated);

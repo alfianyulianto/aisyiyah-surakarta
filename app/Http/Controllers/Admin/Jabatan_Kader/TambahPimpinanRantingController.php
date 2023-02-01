@@ -23,7 +23,7 @@ class TambahPimpinanRantingController extends Controller
     $user = User::where('kategori_user_id', 1)->where('admin_at', null)->get();
     foreach ($user as $u) {
       // cek apakah ada data kader di tabel kader_jabatan
-      if (!KaderJabatan::where('kader_nik', $u->kader_nik)->first()) {
+      if (Kader::where('nik', $u->kader_nik)->where('ranting_id_ranting', $id)->first()) {
         $kader->push(Kader::where('nik', $u->kader_nik)->where('ranting_id_ranting', $id)->first());
       }
     }

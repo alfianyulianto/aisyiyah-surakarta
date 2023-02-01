@@ -39,6 +39,8 @@
                       <th class="text-center align-top">No KTA Aisyiyah</th>
                       <th class="text-center align-top">No KTA Muhammadiyah</th>
                       <th class="text-center align-top">Nama</th>
+                      <th class="text-center align-top">Cabang</th>
+                      <th class="text-center align-top">Ranting</th>
                       <th class="text-center align-top">Tempat Tanggal Lahir</th>
                       <th class="text-center align-top">Alamat Rumah (Tinggal)</th>
                       <th class="text-center align-top">Nomer Handphone</th>
@@ -53,6 +55,8 @@
                         <td>{{ $k->no_kta }}</td>
                         <td>{{ $k->no_ktm }}</td>
                         <td>{{ $k->nama }}</td>
+                        <td>{{ $k->cabang->nama_cabang ?? '-' }}</td>
+                        <td>{{ $k->ranting->nama_ranting ?? '-' }}</td>
                         <td>{{ $k->tempat_lahir }}, {{ Str::of($k->tanggal_lahir)->explode('-')->reverse()->join('-') }}
                         </td>
                         <td>{{ $k->alamat_rumah_tinggal }}</td>

@@ -484,72 +484,84 @@ class DatabaseSeeder extends Seeder
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:01')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Wakil Ketua 1',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:02')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Wakil Ketua 2',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:03')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Wakil Ketua 3',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:04')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:05')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Bendahara 1',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:06')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Bendahara 2',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:07')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Majelis Tabligh_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:08')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Majelis Tabligh_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:09')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Majelis Tabligh_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:10')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Majelis Tabligh_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:11')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Dikdasmen_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:12')
     ]);
     DB::table('jabatan')->insert([
@@ -562,234 +574,273 @@ class DatabaseSeeder extends Seeder
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Dikdasmen_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:14')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Dikdasmen_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:15')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesehatan_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:16')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesehatan_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:17')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesehatan_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:18')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesehatan_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:19')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesejahteraan Sosial_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:20')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesejahteraan Sosial_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:21')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesejahteraan Sosial_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:22')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Kesejahteraan Sosial_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:23')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Ekonomi_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:24')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Ekonomi_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:25')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Ekonomi_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:26')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Ekonomi_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:27')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Pembinaan Kader_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:28')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Pembinaan Kader_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:29')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Pembinaan Kader_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:30')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Pembinaan Kader_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:31')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Hukum dan HAM_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:32')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Hukum dan HAM_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:33')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Hukum dan HAM_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:34')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Hukum dan HAM_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:35')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LPPA_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:36')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LPPA_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:37')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LPPA_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:38')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LPPA_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:39')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Lembaga Kebudayaan_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:40')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Lembaga Kebudayaan_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:41')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Lembaga Kebudayaan_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:42')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'Lembaga Kebudayaan_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:43')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LLHPB_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:44')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LLHPB_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:45')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LLHPB_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:46')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'LLHPB_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:47')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'BPH UNISA_Ketua',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:48')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'BPH UNISA_Sekertaris',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:49')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'BPH UNISA_Bendahara',
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:50')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => 'BPH UNISA_Anggota',
+      'satu_kader' => false,
       'created_at' => date('Y-m-d H:i:51')
     ]);
     DB::table('jabatan')->insert([
       'id_jabatan' => 'jbtn-' . Str::random(4),
       'daerah_id_daerah' => 'aisyiyah-surakarta',
       'nama_jabatan' => "Kepala RT 'Aisyiyah",
+      'satu_kader' => true,
       'created_at' => date('Y-m-d H:i:52')
     ]);
 

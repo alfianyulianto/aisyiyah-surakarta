@@ -28,9 +28,13 @@
                           <label for="kader" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="kader" name="kader">
                             <option selected disabled>-- Pilih Nama --</option>
-                            @foreach ($kader as $k)
-                              <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
-                            @endforeach
+                            @if (!$kader->isEmpty())
+                              @foreach ($kader as $k)
+                                <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
+                              @endforeach
+                            @else
+                              <option disabled>Tidak Ada Data Kader di {{ $nama_daerah }}</option>
+                            @endif
                           </select>
                           @error('kader')
                             <div class="error-message">
