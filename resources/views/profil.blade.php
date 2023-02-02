@@ -110,7 +110,7 @@
                         </div>
                       </div>
                       <div class="col-lg-6">
-                      <div class="mb-3">
+                        <div class="mb-3">
                           <input type="hidden" name="kader_ranting" id="kader_ranting"
                             value="{{ old('ranting_id_ranting', $kader->ranting_id_ranting) }}">
                           <label for="ranting_id_ranting" class="form-label"><b>Ranting Aisyiyah</b></label>
@@ -347,6 +347,29 @@
     </div>
   </section>
   <script>
+    // select cabang
+    $("select#cabang_id_cabang").on("change", function() {
+      let id_cabang = $(this).val();
+      $.ajax({
+        type: "get",
+        url: "/get/ranting/" + id_cabang,
+        dataType: "json",
+        success: (response) => {
+          console.log(response);
+          let ranting =
+            "<option selected disabled>-- Pilih Ranting --</option>";
+          response.forEach((i) => {
+            ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
+          });
+          $("select#ranting_id_ranting").html(ranting);
+        },
+      });
+    });
+    $("select#ranting_id_ranting").on("change", function() {
+      console.log($(this).val());
+    });
+  </script>
+  <script>
     if ($("#cabang_id_cabang").val()) {
       let id_cabang = $("select#cabang_id_cabang").val();
       let id_ranting = $("#kader_ranting").val();
@@ -364,10 +387,6 @@
             ranting = "<option disabled>-- Pilih Ranting --</option>";
           }
           response.forEach(i => {
-            console.log('i.id_ranting ' +
-              i.id_ranting);
-            console.log('id_ranting ' +
-              id_ranting);
             if (i.id_ranting == id_ranting) {
               ranting += `<option value="${i.id_ranting}" selected>${ i.nama_ranting }</option>`;
             } else {

@@ -52,14 +52,21 @@
                       <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $k->nik }}</td>
-                        <td>{{ $k->no_kta }}</td>
-                        <td>{{ $k->no_ktm }}</td>
+                        <td>{{ $k->no_kta ?? '-' }}</td>
+                        <td>{{ $k->no_ktm ?? '-' }}</td>
                         <td>{{ $k->nama }}</td>
                         <td>{{ $k->cabang->nama_cabang ?? '-' }}</td>
                         <td>{{ $k->ranting->nama_ranting ?? '-' }}</td>
-                        <td>{{ $k->tempat_lahir }}, {{ Str::of($k->tanggal_lahir)->explode('-')->reverse()->join('-') }}
-                        </td>
-                        <td>{{ $k->alamat_rumah_tinggal }}</td>
+                        @php
+                          $tempat_lahir = $k->tempat_lahir;
+                          $tanggal_lahir = Str::of($k->tanggal_lahir)
+                              ->explode('-')
+                              ->reverse()
+                              ->join('-');
+                          $tempat_tanggal_lahir = $tempat_lahir . ', ' . $tanggal_lahir;
+                        @endphp
+                        <td>{{ $tempat_tanggal_lahir ?? '-' }}</td>
+                        <td>{{ $k->alamat_rumah_tinggal ?? '-' }}</td>
                         <td>{{ $k->no_ponsel }}</td>
                         <td>
                           <a href="/data/kader/{{ $k->nik }}" class="btn btn-icon icon-left btn-primary"

@@ -27,12 +27,12 @@
       <div class="container mt-5">
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-            <div class="login-brand">
-              <img src="{{url('')}}/img/logo-2.png" alt="logo" width="100"
-                class="shadow-light rounded-circle">
-            </div>
 
             <div class="card card-primary">
+              <div class="login-brand mb-1">
+                <img src="{{ url('') }}/img/logo-2.png" alt="logo" width="100"
+                  class="shadow-light rounded-circle">
+              </div>
               <div class="card-header">
                 <h4>Register</h4>
               </div>
@@ -44,7 +44,7 @@
                     <div class="form-group col-lg-12">
                       <label for="nik">Nomer Induk Kependudukan</label>
                       <input type="text" class="form-control" name="nik" id="nik"
-                        value="{{ old('nik') }}" placeholder="Nomer Induk Kependudukan (cnth:33720******)">
+                        value="{{ old('nik') }}" placeholder="Nomer Induk Kependudukan (cnth:33720******)" autofocus>
                       @error('nik')
                         <div class="error-message">
                           {{ $message }}
@@ -56,7 +56,7 @@
                     <div class="form-group col-lg-6">
                       <label for="no_ponsel">Nomer Ponsel</label>
                       <input type="text" class="form-control" name="no_ponsel" id="no_ponsel"
-                        value="{{ old('no_ponsel') }}" autofocus>
+                        value="{{ old('no_ponsel') }}" placeholder="Nomer Handphone (cnth: 081*****)">
                       @error('no_ponsel')
                         <div class="error-message">
                           {{ $message }}
@@ -66,7 +66,7 @@
                     <div class="form-group col-lg-6">
                       <label for="nama">Nama Lengkap</label>
                       <input type="text" class="form-control" name="nama" id="nama"
-                        value="{{ old('nama') }}">
+                        value="{{ old('nama') }}" placeholder="Nama Lengkap (cnth:Alfian Yulianto)">
                       @error('nama')
                         <div class="error-message">
                           {{ $message }}
@@ -81,17 +81,17 @@
                         id="cabang_id_cabang">
                         @if (old('cabang_id_cabang'))
                           <option disabled>-- Pilih Cabang --</option>
-                          @foreach ($nama_cabang as $id_cabang => $nama_cabang)
-                            @if (old('cabang_id_cabang') == $id_cabang)
-                              <option value="{{ $id_cabang }}" selected>{{ $nama_cabang }}</option>
+                          @foreach ($nama_cabang as $nc)
+                            @if (old('cabang_id_cabang') == $nc->id_cabang)
+                              <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
                             @else
-                              <option value="{{ $id_cabang }}">{{ $nama_cabang }}</option>
+                              <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
                             @endif
                           @endforeach
                         @else
                           <option selected disabled>-- Pilih Cabang --</option>
-                          @foreach ($nama_cabang as $id_cabang => $nama_cabang)
-                            <option value="{{ $id_cabang }}">{{ $nama_cabang }}</option>
+                          @foreach ($nama_cabang as $nc)
+                            <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
                           @endforeach
                         @endif
                       </select>
@@ -102,24 +102,13 @@
                       @enderror
                     </div>
                     <div class="form-group col-lg-6">
+                      <input type="hidden" name="kader_ranting" id="kader_ranting"
+                        value="{{ old('ranting_id_ranting') }}">
                       <label for="ranting_id_ranting" class="form-label">Ranting Aisyiyah</label>
                       <select class="form-control form-control-lg select2" name="ranting_id_ranting"
                         id="ranting_id_ranting">
-                        @if (old('ranting_id_ranting'))
-                          <option disabled>-- Pilih Ranting --</option>
-                          @foreach ($nama_ranting as $id_ranting => $nama_ranting)
-                            @if (old('ranting_id_ranting') == $id_ranting)
-                              <option value="{{ $id_ranting }}" selected>{{ $nama_ranting }}</option>
-                            @else
-                              <option value="{{ $id_ranting }}">{{ $nama_ranting }}</option>
-                            @endif
-                          @endforeach
-                        @else
-                          <option selected disabled>-- Pilih Ranting --</option>
-                          @foreach ($nama_ranting as $id_ranting => $nama_ranting)
-                            <option value="{{ $id_ranting }}">{{ $nama_ranting }}</option>
-                          @endforeach
-                        @endif
+                        <option selected disabled>-- Pilih Ranting --</option>
+                        <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
                       </select>
                       @error('ranting_id_ranting')
                         <div class="error-message">
@@ -175,7 +164,8 @@
   </div>
 
   <!-- General JS Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> --}}
+  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script>
@@ -183,7 +173,6 @@
 
   <!-- JS Libraies -->
   <script src="{{ url('') }}/library/stisla/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/node_modules/selectric/public/jquery.selectric.min.js"></script> --}}
   <script src="{{ url('') }}/library/stisla/node_modules/select2/dist/js/select2.full.min.js"></script>
 
   <!-- Template JS File -->
@@ -192,7 +181,57 @@
 
   <!-- Page Specific JS File -->
   <script src="{{ url('') }}/library/stisla/assets/js/page/auth-register.js"></script>
+  @if (old('cabang_id_cabang'))
+    <script>
+      // ranting
+      let id_cabang = $("select#cabang_id_cabang").val();
+      let id_ranting = $("#kader_ranting").val();
+      $.ajax({
+        type: "get",
+        url: "/get/ranting/" + id_cabang,
+        dataType: "json",
+        success: (response) => {
+          // console.log(response);
+          let ranting;
+          // cek jika id_ranting kosong
+          if (!id_ranting) {
+            ranting = "<option selected disabled>-- Pilih Ranting --</option>";
+          } else {
+            ranting = "<option disabled>-- Pilih Ranting --</option>";
+          }
+          response.forEach(i => {
+            if (i.id_ranting == id_ranting) {
+              ranting += `<option value="${i.id_ranting}" selected>${ i.nama_ranting }</option>`;
+            } else {
+              ranting += `<option value="${i.id_ranting}">${ i.nama_ranting }</option>`;
+            }
+          })
+          $("select#ranting_id_ranting").html(ranting);
+        }
+      });
+    </script>
+  @endif
   <script>
+    // select cabang
+    $("select#cabang_id_cabang").on("change", function() {
+      let id_cabang = $(this).val();
+      $.ajax({
+        type: "get",
+        url: "/get/ranting/" + id_cabang,
+        dataType: "json",
+        success: (response) => {
+          console.log(response);
+          let ranting =
+            "<option selected disabled>-- Pilih Ranting --</option>";
+          response.forEach((i) => {
+            ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
+          });
+          $("select#ranting_id_ranting").html(ranting);
+        },
+      });
+    });
+
+    // password
     var password = "";
     //jika input password berubah
     $("#password").on("change", function() {

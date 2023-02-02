@@ -349,11 +349,13 @@
           <div class="modal-body">
             <div class="mb-3">
               <label for="ortom" class="form-label"><b>Ortom</b></label>
-              <input type="text" class="form-control" name="ortom" id="ortom_modal"
+              <input type="text" class="form-control" name="nama_ortom" id="ortom_modal"
                 placeholder="Masukan Nama Ortom">
-              <div class="error-message">
-                {{-- {{ $message }} --}}
-              </div>
+              @error('nama_ortom')
+                <div class="error-message">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="modal-footer">
@@ -380,9 +382,11 @@
               <label for="tempat_lahir" class="form-label"><b>Tempat Lahir</b></label>
               <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir_modal"
                 placeholder="Masukan Nama Kota (cnth:Surakarat)">
-              <div class="error-message">
-                {{-- {{ $message }} --}}
-              </div>
+              @error('tempat_lahir')
+                <div class="error-message">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="modal-footer">
@@ -409,9 +413,11 @@
               <label for="periode" class="form-label"><b>Periode</b></label>
               <input type="text" class="form-control" name="periode" id="periode_modal"
                 placeholder="Masukan periode">
-              <div class="error-message">
-                {{-- {{ $message }} --}}
-              </div>
+              @error('periode')
+                <div class="error-message">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="modal-footer">
@@ -438,9 +444,11 @@
               <label for="potensi" class="form-label"><b>Potensi</b></label>
               <input type="text" class="form-control" name="potensi" id="potensi_modal"
                 placeholder="Masukan Potensi Kader(cnth:Bidang Pendidikan)">
-              <div class="error-message-">
-                {{-- {{ $message }} --}}
-              </div>
+              @error('potensi')
+                <div class="error-message">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="modal-footer">
@@ -467,9 +475,11 @@
               <label for="pekerjaan" class="form-label"><b>Pekerjaan</b></label>
               <input type="text" class="form-control" name="pekerjaan" id="pekerjaan_modal"
                 placeholder="Masukan Nama Pekerjaan (cnth:Mahasiswa)">
-              <div class="error-message">
-                {{-- {{ $message }} --}}
-              </div>
+              @error('pekerjaan')
+                <div class="error-message">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="modal-footer">
@@ -486,24 +496,6 @@
         $("h4#message-ortom").text($(this).data('message'));
         $("input#ortom_modal").val($(this).data('key'));
       });
-    });
-    $(".form-ortom").on('submit', function(e) {
-      console.log("OKOK");
-      var form = $(this);
-
-      $.ajax({
-        type: "put",
-        url: form.attr('action'),
-        data: form.serialize(),
-        success: function(data, textStatus, jqXHR) {
-          var data = jqXHR.responseJSON;
-          window.location.href = data.url;
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log(jqXHR);
-        }
-      });
-      e.preventDefault();
     });
     $("button#btn-edit-tempat_lahir").each(function(index, element) {
       $(this).on('click', function() {

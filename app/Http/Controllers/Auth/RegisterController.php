@@ -14,11 +14,9 @@ class RegisterController extends Controller
 {
   public function index()
   {
-    // ambil data nama_cabang dan id_cabang pada tabel cabang
-    $nama_cabang = Cabang::pluck('nama_cabang', 'id_cabang')->toArray();
-    // ambil data nama_ranting dan id_ranting pada tabel ranting
-    $nama_ranting = Ranting::pluck('nama_ranting', 'id_ranting')->toArray();
-    return view('auth.register', compact('nama_cabang', 'nama_ranting'));
+    return view('auth.register', [
+      'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get()
+    ]);
   }
 
   public function store(Request $request)
@@ -27,23 +25,24 @@ class RegisterController extends Controller
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
       'no_ponsel' => ['required', 'numeric', 'max_digits:12', 'min_digits:12'],
       'nama' => ['required', 'string'],
-      // 'cabang_id_cabang' => ['required'],
-      // 'ranting_id_ranting' => ['required'],
+      'cabang_id_cabang' => ['nullable'],
+      'ranting_id_ranting' => ['nullable'],
       'password' => ['required', 'min:8'],
       'konfirmasi_password' => ['required', 'min:8', 'same:password'],
     ]);
 
     // insert ke tabel user
     $validatedDataUser = [
+      'kader_nik' => $request->nik,
       'no_ponsel' => $request->no_ponsel,
       'nama' => $request->nama,
       'password' => Hash::make($request->password),
-      'kategori_user' => 0,
+      'kategori_user' => 1,
     ];
     User::create($validatedDataUser);
 
     // ambil data user 
-    $id_user = User::where('nama', $request->nama)->where('no_ponsel', $request->no_ponsel)->first();
+    $id_user = User::where('kader_nik', $request->nik)->where('nama', $request->nama)->where('no_ponsel', $request->no_ponsel)->first()->id;
     // inser ke tabel kader
     $validatedDataKader = [
       'nik' => $request->nik,
@@ -51,10 +50,11 @@ class RegisterController extends Controller
       'daerah_id_daerah' => 'ska-1',
       'cabang_id_cabang' => $request->cabang_id_cabang,
       'ranting_id_ranting' => $request->ranting_id_ranting,
-      'user_id' => $id_user->id,
+      'user_id' => $id_user,
       'no_ponsel' => $request->no_ponsel
     ];
 
+    // insert ke tabel kader
     Kader::create($validatedDataKader);
 
     return redirect('/login')->with('message_login', 'Registrasi berhasil! Silahkan login.');

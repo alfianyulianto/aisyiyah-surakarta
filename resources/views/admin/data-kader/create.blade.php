@@ -329,39 +329,55 @@
     </div>
   </section>
   <script>
-    // ketika user memilih ranting
-    // $("#ranting_id_ranting").on("change", function() {
-    //   $("#kader_ranting").val($("#ranting_id_ranting").val());
-    // });
-
-    let id_cabang = $("select#cabang_id_cabang").val();
-    let id_ranting = $("#kader_ranting").val();
-    $.ajax({
-      type: "get",
-      url: "/get/ranting/" + id_cabang,
-      dataType: "json",
-      success: (response) => {
-        // console.log(response);
-        let ranting;
-        // cek jika id_ranting kosong
-        if (!id_ranting) {
-          ranting = "<option selected disabled>-- Pilih Ranting --</option>";
-        } else {
-          ranting = "<option disabled>-- Pilih Ranting --</option>";
-        }
-        response.forEach(i => {
-          console.log('i.id_ranting ' +
-            i.id_ranting);
-          console.log('id_ranting ' +
-            id_ranting);
-          if (i.id_ranting == id_ranting) {
-            ranting += `<option value="${i.id_ranting}" selected>${ i.nama_ranting }</option>`;
-          } else {
-            ranting += `<option value="${i.id_ranting}">${ i.nama_ranting }</option>`;
-          }
-        })
-        $("select#ranting_id_ranting").html(ranting);
-      }
+    // select cabang
+    $("select#cabang_id_cabang").on("change", function() {
+      let id_cabang = $(this).val();
+      $.ajax({
+        type: "get",
+        url: "/get/ranting/" + id_cabang,
+        dataType: "json",
+        success: (response) => {
+          console.log(response);
+          let ranting =
+            "<option selected disabled>-- Pilih Ranting --</option>";
+          response.forEach((i) => {
+            ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
+          });
+          $("select#ranting_id_ranting").html(ranting);
+        },
+      });
+    });
+    $("select#ranting_id_ranting").on("change", function() {
+      console.log($(this).val());
     });
   </script>
+  @if (old('cabang_id_cabang'))
+    <script>
+      let id_cabang = $("select#cabang_id_cabang").val();
+      let id_ranting = $("#kader_ranting").val();
+      $.ajax({
+        type: "get",
+        url: "/get/ranting/" + id_cabang,
+        dataType: "json",
+        success: (response) => {
+          // console.log(response);
+          let ranting;
+          // cek jika id_ranting kosong
+          if (!id_ranting) {
+            ranting = "<option selected disabled>-- Pilih Ranting --</option>";
+          } else {
+            ranting = "<option disabled>-- Pilih Ranting --</option>";
+          }
+          response.forEach(i => {
+            if (i.id_ranting == id_ranting) {
+              ranting += `<option value="${i.id_ranting}" selected>${ i.nama_ranting }</option>`;
+            } else {
+              ranting += `<option value="${i.id_ranting}">${ i.nama_ranting }</option>`;
+            }
+          })
+          $("select#ranting_id_ranting").html(ranting);
+        }
+      });
+    </script>
+  @endif
 @endsection

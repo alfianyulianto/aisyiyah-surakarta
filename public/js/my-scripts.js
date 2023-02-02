@@ -350,28 +350,6 @@ $(document).ready(function () {
     }
     pekerjaan();
 
-    // select cabang
-    $("select#cabang_id_cabang").on("change", function () {
-        let id_cabang = $(this).val();
-        $.ajax({
-            type: "get",
-            url: "/get/ranting/" + id_cabang,
-            dataType: "json",
-            success: (response) => {
-                console.log(response);
-                let ranting =
-                    "<option selected disabled>-- Pilih Ranting --</option>";
-                response.forEach((i) => {
-                    ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
-                });
-                $("select#ranting_id_ranting").html(ranting);
-            },
-        });
-    });
-    $("select#ranting_id_ranting").on("change", function () {
-        console.log($(this).val());
-    });
-
     // combobox jika di ceklist
     $("#cek_alamat").on("change", function () {
         if ($("#cek_alamat:checked").val()) {

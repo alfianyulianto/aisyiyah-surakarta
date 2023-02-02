@@ -48,13 +48,13 @@
                           {{ $loop->iteration }}
                         </td>
                         <td>{{ $kp->kader_nik }}</td>
-                        <td>{{ $kp->kader->no_kta }}</td>
-                        <td>{{ $kp->kader->no_ktm }}</td>
+                        <td>{{ $kp->kader->no_kta ?? '-' }}</td>
+                        <td>{{ $kp->kader->no_ktm ?? '-' }}</td>
                         <td>
-                          {{ DB::table('cabang')->where('id_cabang', $kp->kader->cabang_id_cabang)->first()->nama_cabang }}
+                          {{ DB::table('cabang')->where('id_cabang', $kp->kader->cabang_id_cabang)->first()->nama_cabang ?? '-' }}
                         </td>
                         <td>
-                          {{ DB::table('ranting')->where('id_ranting', $kp->kader->ranting_id_ranting)->first()->nama_ranting }}
+                          {{ DB::table('ranting')->where('id_ranting', $kp->kader->ranting_id_ranting)->first()->nama_ranting ?? '-' }}
                         </td>
                         <td>{{ $kp->kader->nama }}</td>
                         <td>{{ $kp->potensi->potensi }}</td>
