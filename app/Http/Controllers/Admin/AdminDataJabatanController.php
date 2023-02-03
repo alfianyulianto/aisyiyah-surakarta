@@ -52,7 +52,7 @@ class AdminDataJabatanController extends Controller
   {
     $validated = $request->validate([
       'id_jabatan' => ['required', 'min:9', 'max:9', 'unique:App\Models\Jabatan,id_jabatan'],
-      'nama_jabatan' => ['required', 'string', 'min:5'],
+      'nama_jabatan' => ['required', 'string', 'min:5', 'unique:App\Models\Jabatan,nama_jabatan'],
       'satu_kader' => ['required'],
     ]);
 
@@ -111,9 +111,11 @@ class AdminDataJabatanController extends Controller
       'satu_kader' => ['required'],
     ];
 
-    // cek apakah $request->id_jabatan sama dengan id_jabatan pada tabel jabatan
-    if ($request->id_jabatan == $jabatan->id_jaabtan) {
+    // cek jika user tidak mengganti id_jabatan, nama jabatan
+    if ($request->id_jabatan != $jabatan->id_jabatan) {
       $role['id_jabatan'] = ['required', 'min:9', 'max:9', 'unique:App\Models\Jabatan,id_jabatan'];
+    } elseif ($request->nama_jabatan != $jabatan->nama_jabatan) {
+      $role['nama_jabatan'] = ['required', 'string', 'min:5', 'unique:App\Models\Jabatan,nama_jabatan'];
     }
 
     $validated = $request->validate($role);

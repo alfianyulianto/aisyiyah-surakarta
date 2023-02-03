@@ -180,4 +180,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/autocomplete-ajax.js"></script>
 @endsection

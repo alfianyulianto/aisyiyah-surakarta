@@ -33,6 +33,9 @@
   {{-- Autocomplate --}}
   <script src="{{ url('') }}/js/jquery.autocomplete.min.js"></script>
 
+  {{-- Sweet Alert --}}
+  <script src="{{ url('') }}/library/stisla/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -91,6 +94,7 @@
   <script src="{{ url('') }}/library/stisla/assets/js/custom.js"></script>
 
   <!-- Page Specific JS File -->
+  <script src="{{ url('') }}/library/stisla/assets/js/page/modules-sweetalert.js"></script>
 </body>
 
 </html>

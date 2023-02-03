@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\KaderPotensi;
 use App\Models\Potensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class PotensiController extends Controller
+class PotensiAdminController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -28,9 +29,9 @@ class PotensiController extends Controller
    */
   public function create()
   {
-    // ambil data nama_potensi dan id_cabang pada tabel potensi
-    $nama_potensi = Potensi::pluck('potensi', 'id_potensi')->toArray();
-    return view('admin.uraian_potensi.create', compact('nama_potensi'));
+    return view('admin.uraian_potensi.create', [
+      'potensi' => Potensi::orderBy('potensi', 'asc')->get()
+    ]);
   }
 
   /**
@@ -48,6 +49,7 @@ class PotensiController extends Controller
     ]);
 
     // tambah nik user
+    // $validated['kader_nik'] = Auth::user()->kader_nik;
     $validated['kader_nik'] = '3372010107000002';
 
     // insert ke tabel kader_has_potensi
@@ -67,7 +69,7 @@ class PotensiController extends Controller
    */
   public function show($id)
   {
-    //
+    abort(404);
   }
 
   /**
@@ -78,7 +80,10 @@ class PotensiController extends Controller
    */
   public function edit($id)
   {
-    //
+    return view('kader.potensi.edit', [
+      'kader_potensi' => KaderPotensi::where('id_kader_has_potensi', $id)->first(),
+      'potensi' => Potensi::orderBy('created_at', 'asc')->get()
+    ]);
   }
 
   /**
@@ -90,7 +95,27 @@ class PotensiController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    $role = [
+      'id_kader_has_potensi' => ['required', 'max:9', 'min:9'],
+      'potensi_id_potensi' => ['required'],
+      'potensi_kader_uraian' => ['required', 'min:10'],
+    ];
+
+
+    // cek apakah $request->id_kader_has_potensi sama dengan id_kader_has_potensi pada tabel kader_has_potensi
+    if ($request->id_kader_has_potensi != $id) {
+      $role['id_kader_has_potensi'] = ['required', 'max:11', 'min:11', 'unique:App\Models\KaderPotensi,id_kader_has_potensi'];
+    }
+
+    $validated = $request->validate($role);
+
+    // update ke tabel kader_has_potensi
+    KaderPotensi::where('id_kader_has_potensi', $id)->update($validated);
+
+    // select tabel potensi
+    $nama_potensi = Potensi::where('id_potensi', $request->potensi_id_potensi)->first()->potensi;
+
+    return redirect('/admin/potensi')->with('message_potensi_admin', 'Data potensi ' . $nama_potensi . ' berhasil diubah.');
   }
 
   /**
@@ -101,6 +126,15 @@ class PotensiController extends Controller
    */
   public function destroy($id)
   {
-    //
+    // ambil data di tabel kader_has_potensi
+    $kader_has_potensi = KaderPotensi::where('id_kader_has_potensi', $id)->first();
+
+    // ambil data di tabel ortom
+    $potensi = Potensi::where('id_potensi', $kader_has_potensi->potensi_id_potensi)->first()->potensi;
+
+    // hapus data di tabel kader_has_ortom
+    $kader_has_potensi->delete();
+
+    return redirect('/admin/potensi')->with('message_delete_potensi_admin', 'Data potensi ' . $potensi . ' berhasil dihapus.');
   }
 }

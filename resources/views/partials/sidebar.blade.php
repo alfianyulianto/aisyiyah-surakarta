@@ -16,10 +16,12 @@
        <li class="nav-item {{ Request::is('profil') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/profil" class="nav-link"><i class="fas fa-user"></i><span>Profil</span></a>
        </li>
-       <li class="nav-item {{ Request::is('admin/ortom') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li
+         class="nav-item {{ Request::is('admin/ortom') || Request::is('admin/ortom/*') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/admin/ortom" class="nav-link"><i class="fas fa-layer-group"></i><span>Daftar Ortom</span></a>
        </li>
-       <li class="nav-item {{ Request::is('admin/potensi') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li
+         class="nav-item {{ Request::is('admin/potensi') || Request::is('admin/potensi/*') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/admin/potensi" class="nav-link"><i class="fas fa-medal"></i><span>Potensi Kader</span></a>
        </li>
        <hr class="my-2">
@@ -109,10 +111,12 @@
        <li class="nav-item {{ Request::is('profil') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/profil" class="nav-link"><i class="fas fa-user"></i><span>Profil</span></a>
        </li>
-       <li class="nav-item {{ Request::is('kader/ortom') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li
+         class="nav-item {{ Request::is('kader/ortom') || Request::is('kader/ortom/*') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/kader/ortom" class="nav-link"><i class="fas fa-layer-group"></i><span>Daftar Ortom</span></a>
        </li>
-       <li class="nav-item {{ Request::is('kader/potensi') ? 'active rounded-pill shadow-sm' : '' }}">
+       <li
+         class="nav-item {{ Request::is('kader/potensi') || Request::is('kader/potensi/*') ? 'active rounded-pill shadow-sm' : '' }}">
          <a href="/kader/potensi" class="nav-link"><i class="fas fa-medal"></i><span>Potensi Kader</span></a>
        </li>
      </ul>

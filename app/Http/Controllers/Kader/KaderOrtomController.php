@@ -29,7 +29,7 @@ class KaderOrtomController extends Controller
   public function create()
   {
     return view('kader.ortom.create', [
-      'ortom' => Ortom::orderBy('created_at', 'asc')->get()
+      'ortom' => Ortom::orderBy('nama_ortom', 'asc')->get()
     ]);
   }
 
@@ -79,7 +79,7 @@ class KaderOrtomController extends Controller
   {
     return view('kader.ortom.edit', [
       'kader_ortom' => KaderOrtom::where('id_kader_has_ortom', $id)->first(),
-      'ortom' => Ortom::orderBy('created_at', 'asc')->get()
+      'ortom' => Ortom::orderBy('nama_ortom', 'asc')->get()
     ]);
   }
 

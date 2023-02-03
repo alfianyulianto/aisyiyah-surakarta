@@ -369,23 +369,23 @@ class DatabaseSeeder extends Seeder
 
     // ortom
     DB::table('ortom')->insert([
-      'id_ortom' => 'ortm-hw',
+      'id_ortom' => 'ortm-' . Str::random(4),
       'nama_ortom' => 'Hizbul Wathan',
     ]);
     DB::table('ortom')->insert([
-      'id_ortom' => 'ortm-na',
+      'id_ortom' => 'ortm-' . Str::random(4),
       'nama_ortom' => 'Nasyiatul Aisyiyah',
     ]);
     DB::table('ortom')->insert([
-      'id_ortom' => 'ortm-ipm',
+      'id_ortom' => 'ortm-'  . Str::random(4),
       'nama_ortom' => 'Ikatan Pelajar Mahasiswa',
     ]);
     DB::table('ortom')->insert([
-      'id_ortom' => 'ortm-imm',
+      'id_ortom' => 'ortm-'  . Str::random(4),
       'nama_ortom' => 'Ikatan Mahasiswa Muhammadiyah',
     ]);
     DB::table('ortom')->insert([
-      'id_ortom' => 'ortm-tspm',
+      'id_ortom' => 'ortm-' .  Str::random(4),
       'nama_ortom' => 'Tapak Suci Putra Muhammdiyah',
     ]);
 

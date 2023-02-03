@@ -7,7 +7,7 @@ use App\Models\KaderOrtom;
 use App\Models\Ortom;
 use Illuminate\Http\Request;
 
-class OrtomController extends Controller
+class OrtomAdminController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -28,9 +28,9 @@ class OrtomController extends Controller
    */
   public function create()
   {
-    // ambil data nama_ortom dan id_cabang pada tabel ortom
-    $nama_ortom = Ortom::pluck('nama_ortom', 'id_ortom')->toArray();
-    return view('admin.uraian_ortom.create', compact('nama_ortom'));
+    return view('admin.uraian_ortom.create', [
+      'ortom' => Ortom::orderBy('nama_ortom', 'asc')->get()
+    ]);
   }
 
   /**
@@ -66,7 +66,7 @@ class OrtomController extends Controller
    */
   public function show($id)
   {
-    //
+    abort(404);
   }
 
   /**
@@ -77,7 +77,10 @@ class OrtomController extends Controller
    */
   public function edit($id)
   {
-    //
+    return view('admin.uraian_ortom.edit', [
+      'kader_ortom' => KaderOrtom::where('id_kader_has_ortom', $id)->first(),
+      'ortom' => Ortom::orderBy('nama_ortom', 'asc')->get()
+    ]);
   }
 
   /**
@@ -89,7 +92,26 @@ class OrtomController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    $role = [
+      'id_kader_has_ortom' => ['required', 'max:11', 'min:11'],
+      'ortom_id_ortom' => ['required'],
+      'ortom_uraian' => ['required', 'min:5'],
+    ];
+
+    // cek apakah $request->id_kader_has_ortom sama dengan id_kader_has_ortom pada tabel kader_has_ortom
+    if ($request->id_kader_has_ortom != $id) {
+      $role['id_kader_has_ortom'] = ['required', 'max:11', 'min:11', 'unique:App\Models\KaderOrtom,id_kader_has_ortom'];
+    }
+
+    $validated = $request->validate($role);
+
+    // update ke tabel kader_has_ortom
+    KaderOrtom::where('id_kader_has_ortom', $id)->update($validated);
+
+    // select tabel ortom
+    $nama_ortom = Ortom::where('id_ortom', $request->ortom_id_ortom)->first()->nama_ortom;
+
+    return redirect('/admin/ortom')->with('message_ortom_admin', 'Data ortom ' . $nama_ortom . ' berhasil diubah.');
   }
 
   /**
@@ -100,6 +122,15 @@ class OrtomController extends Controller
    */
   public function destroy($id)
   {
-    //
+    // ambil data di tabel kader_has_ortom
+    $kader_has_ortom = KaderOrtom::where('id_kader_has_ortom', $id)->first();
+
+    // ambil data di tabel ortom
+    $nama_ortom = Ortom::where('id_ortom', $kader_has_ortom->ortom_id_ortom)->first()->nama_ortom;
+
+    // hapus data di tabel kader_has_ortom
+    $kader_has_ortom->delete();
+
+    return redirect('/admin/ortom')->with('message_delete_ortom_admin', 'Data ortom ' . $nama_ortom . ' berhasil dihapus.');
   }
 }

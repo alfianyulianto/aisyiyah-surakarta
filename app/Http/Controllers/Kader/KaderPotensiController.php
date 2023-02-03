@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KaderPotensi;
 use App\Models\Potensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KaderPotensiController extends Controller
 {
@@ -48,6 +49,7 @@ class KaderPotensiController extends Controller
     ]);
 
     // tambah nik user
+    // $validated['kader_nik'] = Auth::user()->kader_nik;
     $validated['kader_nik'] = '3372010107000002';
 
     // insert ke tabel kader_has_potensi

@@ -7,17 +7,22 @@ use App\Http\Controllers\Admin\AdminDataJabatanController;
 use App\Http\Controllers\Admin\AdminDataKaderController;
 use App\Http\Controllers\Admin\AdminDataPotensiKaderController;
 use App\Http\Controllers\Admin\AdminDataRantingController;
-use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanCabangController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanDaerahController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanRantingController;
+use App\Http\Controllers\Admin\Settings\SettingsController;
+use App\Http\Controllers\Admin\Settings\DataOrtomController;
+use App\Http\Controllers\Admin\Settings\DataPekerjaanController;
+use App\Http\Controllers\Admin\Settings\DataPeriodeController;
+use App\Http\Controllers\Admin\Settings\DataPotensiController;
+use App\Http\Controllers\Admin\Settings\DataTempatLahirController;
 use App\Http\Controllers\Admin\Tambah\TambahAdminCabangController;
 use App\Http\Controllers\Admin\Tambah\TambahAdminController;
 use App\Http\Controllers\Admin\Tambah\TambahAdminDaerahController;
 use App\Http\Controllers\Admin\Tambah\TambahAdminRantingController;
-use App\Http\Controllers\Admin\Uraian\OrtomController;
-use App\Http\Controllers\Admin\Uraian\PotensiController;
+use App\Http\Controllers\Admin\Uraian\OrtomAdminController;
+use App\Http\Controllers\Admin\Uraian\PotensiAdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ChangePasswordController;
@@ -29,6 +34,9 @@ use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\TempatLahirController;
 use App\Http\Controllers\UploadFotoController;
+use App\Models\Pekerjaan;
+use App\Models\Periode;
+use App\Models\TempatLahir;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,13 +66,22 @@ Route::get('/change/password', [ChangePasswordController::class, 'edit']);
 Route::put('/change/password', [ChangePasswordController::class, 'update']);
 
 // teempat_lahir
-Route::get('/tempat/lahir', [TempatLahirController::class, 'index']);
+Route::get('/data/tempat/lahir', function () {
+  $tempat_lahir = TempatLahir::orderBy('tempat_lahir', 'asc')->get();
+  return $tempat_lahir;
+});
 
 // periode
-Route::get('/periode', [PeriodeController::class, 'index']);
+Route::get('/data/periode', function () {
+  $periode = Periode::orderBy('created_at', 'asc')->get();
+  return $periode;
+});
 
 // pekerjaan
-Route::get('/pekerjaan', [PekerjaanController::class, 'index']);
+Route::get('/data/pekerjaan', function () {
+  $pekerjaan = Pekerjaan::orderBy('pekerjaan', 'asc')->get();
+  return $pekerjaan;
+});
 
 // admin
 Route::get('/profil', [ProfilController::class, 'edit']);
@@ -73,8 +90,8 @@ Route::resource('/data/kader', AdminDataKaderController::class);
 Route::get('/kader/export', [AdminDataKaderController::class, 'export']);
 Route::get('/get/kader/{kader:nik}', [AdminDataKaderController::class, 'get_kader']);
 Route::get('/get/ranting/{ranting:cabang_id_cabang}', [AdminDataKaderController::class, 'ranting']);
-Route::resource('/admin/ortom', OrtomController::class);
-Route::resource('/admin/potensi', PotensiController::class);
+Route::resource('/admin/ortom', OrtomAdminController::class);
+Route::resource('/admin/potensi', PotensiAdminController::class);
 // admin {Fitur:Data Jabatan}
 Route::resource('/data/jabatan', AdminDataJabatanController::class);
 // admin {Fitur:Jabatan Kader}
@@ -116,17 +133,13 @@ Route::post('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController
 Route::get('/data/admin/ranting/kader/{kader:nik}', [TambahAdminRantingController::class, 'show']);
 Route::delete('/admin/ranting/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'destroy']);
 // admin {Fitur:Settings}
-Route::get('/settings', [AdminSettingsController::class, 'index']);
-Route::post('/settings/ortom', [AdminSettingsController::class, 'ortom_store']);
-Route::put('/settings/ortom', [AdminSettingsController::class, 'ortom_update']);
-Route::post('/settings/potensi', [AdminSettingsController::class, 'potensi_store']);
-Route::put('/settings/potensi', [AdminSettingsController::class, 'potensi_update']);
-Route::post('/settings/tempat/lahir', [AdminSettingsController::class, 'tempat_lahir_store']);
-Route::put('/settings/tempat/lahir', [AdminSettingsController::class, 'tempat_lahir_update']);
-Route::post('/settings/pekerjaan', [AdminSettingsController::class, 'pekerjaan_store']);
-Route::put('/settings/pekerjaan', [AdminSettingsController::class, 'pekerjaan_update']);
-Route::post('/settings/periode', [AdminSettingsController::class, 'periode_store']);
-Route::put('/settings/periode', [AdminSettingsController::class, 'periode_update']);
+Route::get('/settings', [SettingsController::class, 'index']);
+Route::resource('/ortom', DataOrtomController::class);
+Route::resource('/potensi', DataPotensiController::class);
+Route::resource('/pekerjaan', DataPekerjaanController::class);
+Route::resource('/periode', DataPeriodeController::class);
+Route::resource('/tempat/lahir', DataTempatLahirController::class);
+
 
 // kader
 Route::get('/kader', [KaderDashboardController::class, 'index']);

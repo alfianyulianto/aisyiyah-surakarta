@@ -184,25 +184,25 @@
                           <select class="form-control form-control-lg selectric " name="status_pernikahan"
                             id="status_pernikahan">
                             @if (old('status_pernikahan', $kader->status_pernikahan) == 'Belum Menikah')
-                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah" selected>Belum Menikah</option>
                               <option value="Menikah">Menikah</option>
                               <option value="Janda">Janda</option>
                             @endif
                             @if (old('status_pernikahan', $kader->status_pernikahan) == 'Menikah')
-                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah">Belum Menikah</option>
                               <option value="Menikah" selected>Menikah</option>
                               <option value="Janda">Janda</option>
                             @endif
                             @if (old('status_pernikahan', $kader->status_pernikahan) == 'Janda')
-                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah">Belum Menikah</option>
                               <option value="Menikah">Menikah</option>
                               <option value="Janda" selected>Janda</option>
                             @endif
                             @if (!old('status_pernikahan', $kader->status_pernikahan))
-                              <option selected disabled>-- Pilih ProvinStatussi --</option>
+                              <option selected disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah">Belum Menikah</option>
                               <option value="Menikah">Menikah</option>
                               <option value="Janda">Janda</option>
@@ -335,6 +335,7 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/autocomplete-ajax.js"></script>
   <script>
     // select cabang
     $("select#cabang_id_cabang").on("change", function() {
