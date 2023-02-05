@@ -16,4 +16,9 @@ class Periode extends Model
   protected $keyType = 'string';
 
   protected $fillable = ['id_periode', 'periode'];
+
+  public function jabatan_memiliki_periode()
+  {
+    return $this->hasMany(KaderJabatan::class);
+  }
 }

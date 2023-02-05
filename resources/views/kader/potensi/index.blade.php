@@ -21,6 +21,16 @@
                   </div>
                 </div>
               @endif
+              @if (session('message_delete_potensi_kader'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_delete_potensi_kader') }}
+                  </div>
+                </div>
+              @endif
               <a href="/kader/potensi/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-plus"></i>
                 Tambah Potensi Yang Dimiliki</a>
               <div class="table-responsive">
@@ -51,7 +61,7 @@
                             class="d-inline-block">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                            <button type="submit" class="btn btn-icon icon-left btn-danger delete"><i
                                 class="far fa-trash-alt"></i>
                               Hapus</button>
                           </form>
@@ -67,4 +77,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-kader-potensi.js"></script>
 @endsection

@@ -18,7 +18,7 @@ class TambahPimpinanDaerahController extends Controller
   {
     // data kader 
     $kader = collect([]);
-    // ambil data kader di tabel user berdasarnakn field kader_admin yang bukan sebagai kategori_user_id = 1
+    // ambil data kader di tabel user berdasarkan field kader_admin yang bukan sebagai kategori_user_id = 1
     $user = User::where('kategori_user_id', 1)->where('admin_at', null)->get();
     foreach ($user as $u) {
       // cek apakah ada data kader di tabel kader_jabatan

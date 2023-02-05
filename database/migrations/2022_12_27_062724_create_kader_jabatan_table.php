@@ -2,6 +2,7 @@
 
 use App\Models\Jabatan;
 use App\Models\Kader;
+use App\Models\Periode;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ return new class extends Migration
       $table->string('id_kader_jabatan')->primary();
       $table->foreignIdFor(Kader::class);
       $table->foreignIdFor(Jabatan::class);
-      $table->string('periode');
+      $table->foreignIdFor(Periode::class);
       $table->string('jabatan_at')->nullable();
       $table->timestamps();
     });

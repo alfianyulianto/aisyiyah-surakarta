@@ -13,9 +13,11 @@ class TambahAdminCabangController extends Controller
   public function create($id)
   {
     $kader = collect([]);
-    $user = User::where('kategori_user_id', null)->where('admin_at', null)->get();
+    $user = User::where('kategori_user_id', 1)->where('admin_at', null)->get();
     foreach ($user as $u) {
-      $kader->push(Kader::where('nik', $u->kader_nik)->where('cabang_id_cabang', $id)->first());
+      if (Kader::where('nik', $u->kader_nik)->where('cabang_id_cabang', $id)->first()) {
+        $kader->push(Kader::where('nik', $u->kader_nik)->where('cabang_id_cabang', $id)->first());
+      }
     }
     return view('admin.tambah_admin.tambah_admin_cabang.create', [
       'kader' => $kader,
@@ -41,18 +43,25 @@ class TambahAdminCabangController extends Controller
     return redirect('/admin/cabang/' . $id)->with('message_admin_cabang', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin di ' . $request->cabang . '.');
   }
 
-  public function show(Kader $kader)
+  public function show(Kader $kader, $id)
   {
+    // cek apakah kader seorang admin 
+    if (!User::where('kader_nik', $kader->nik)->where('admin_at', $id)->first()) {
+      return abort(404);
+    }
+
     return view('admin.tambah_admin.tambah_admin_cabang.show', [
-      'kader' => $kader
+      'kader' => $kader,
+      'id_cabang' => $id,
+      'nama_cabang' => Cabang::where('id_cabang', $id)->first()->nama_cabang
     ]);
   }
 
   public function destroy(Request $request, Kader $kader, $id)
   {
     // update data user
-    User::where('kader_nik', $kader->nik)->update(['kategori_user_id' => null, 'admin_at' => null]);
+    User::where('kader_nik', $kader->nik)->update(['kategori_user_id' => 1, 'admin_at' => null]);
 
-    return redirect('/admin/cabang/' . $id)->with('message_admin_cabang', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin di ' . $request->cabang . '.');
+    return redirect('/admin/cabang/' . $id)->with('message_delete_admin_cabang', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin di ' . $request->cabang . '.');
   }
 }

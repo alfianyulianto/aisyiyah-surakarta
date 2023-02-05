@@ -11,7 +11,28 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <a href="/data/cabang/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-user-plus"></i>
+              @if (session('message_cabang'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_cabang') }}
+                  </div>
+                </div>
+              @endif
+              @if (session('message_delete_cabang'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_delete_cabang') }}
+                  </div>
+                </div>
+              @endif
+              <a href="/data/cabang/create" class="btn btn-icon icon-left btn-primary mb-3"><i
+                  class="fas fa-user-plus"></i>
                 Tambah Cabang</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-cabang">
@@ -45,10 +66,10 @@
                           <a href="/data/cabang/{{ $c->id_cabang }}/edit" class="btn btn-icon icon-left btn-warning"><i
                               class="far fa-edit"></i>
                             Edit</a>
-                          <form action="/data/cabang" method="post" class="d-inline">
+                          <form action="/data/cabang/{{ $c->id_cabang }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                            <button type="submit" class="btn btn-icon icon-left btn-danger delete"><i
                                 class="far fa-trash-alt"></i>
                               Hapus</button>
                           </form>
@@ -64,4 +85,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-cabang.js"></script>
 @endsection

@@ -14,11 +14,18 @@
               @if (session('message_admin_cabang'))
                 <div class="alert alert-success alert-dismissible show fade">
                   <div class="alert-body">
-                    <marquee direction="right">{{ session('message_admin_cabang') }}</marquee>
+                    <marquee direction="left">{{ session('message_admin_cabang') }}</marquee>
                   </div>
                 </div>
               @endif
-              <form action="/tambah/admin/cabang/{{ $id_cabang }}" method="post">
+              @if (session('message_delete_admin_cabang'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                  <div class="alert-body">
+                    <marquee direction="left">{{ session('message_delete_admin_cabang') }}</marquee>
+                  </div>
+                </div>
+              @endif
+              <form action="/admin/cabang/{{ $id_cabang }}" method="post">
                 @csrf
                 <input type="hidden" name="cabang" id="cabang" value="{{ $nama_cabang }}">
                 <div class="row">
@@ -28,6 +35,7 @@
                         <div class="mb-3">
                           <label for="kader" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="kader" name="kader">
+                            <option selected disabled>-- Pilih Nama --</option>
                             @if (!$kader->isEmpty())
                               @foreach ($kader as $k)
                                 <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
@@ -123,11 +131,12 @@
                         <td>
                           <a href="/data/admin/cabang/kader/{{ $a->kader_nik }}/{{ $id_cabang }}"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="/admin/cabang/{{ $a->kader_nik }}" method="post" class="d-inline-block">
+                          <form action="/admin/cabang/{{ $a->kader_nik }}/{{ $id_cabang }}" method="post"
+                            class="d-inline-block">
                             @csrf
                             @method('delete')
                             <input type="hidden" name="cabang" id="cabang" value="{{ $nama_cabang }}">
-                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                            <button type="submit" class="btn btn-icon icon-left btn-danger delete-cabang"><i
                                 class="far fa-trash-alt"></i>Hapus</button>
                           </form>
                         </td>
@@ -142,21 +151,5 @@
       </div>
     </div>
   </section>
-  {{-- <script>
-    $('select#nama_nik').on('change', function() {
-      let nik = $(this).val();
-      $.ajax({
-        type: "get",
-        url: "/tambah/admin/cabang/getkader/" + nik,
-        dataType: "json",
-        success: (response) => {
-          console.log(response.result);
-          $("#nik").val(response.result.nik);
-          $("#no_kta").val(response.result.no_kta);
-          $("#no_ktm").val(response.result.no_ktm);
-          $("#nama").val(response.result.nama);
-        }
-      });
-    });
-  </script> --}}
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-admin.js"></script>
 @endsection

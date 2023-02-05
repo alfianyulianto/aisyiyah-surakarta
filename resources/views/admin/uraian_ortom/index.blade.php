@@ -77,5 +77,5 @@
       </div>
     </div>
   </section>
-  <script src="{{ url('') }}/js/sweetalert/sweetalert-kader-ortom.js"></script>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-kader-ortom.js"></script>
 @endsection

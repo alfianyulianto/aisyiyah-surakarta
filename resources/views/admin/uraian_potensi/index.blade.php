@@ -77,5 +77,5 @@
       </div>
     </div>
   </section>
-  <script src="{{ url('') }}/js/sweetalert/sweetalert-kader-potensi.js"></script>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-kader-potensi.js"></script>
 @endsection

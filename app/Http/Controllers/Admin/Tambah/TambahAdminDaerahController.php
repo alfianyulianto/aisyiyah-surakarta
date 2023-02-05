@@ -13,7 +13,7 @@ class TambahAdminDaerahController extends Controller
   public function create($id)
   {
     $kader = collect([]);
-    $user = User::where('kategori_user_id', null)->where('admin_at', null)->get();
+    $user = User::where('kategori_user_id', 1)->where('admin_at', null)->get();
     foreach ($user as $u) {
       $kader->push(Kader::where('nik', $u->kader_nik)->first());
     }
@@ -41,18 +41,24 @@ class TambahAdminDaerahController extends Controller
     return redirect('/admin/daerah/' . $id)->with('message_admin_daerah', 'Berhasil menabahkan ' . $request->nama . ' sebagai admin daerah.');
   }
 
-  public function show(Kader $kader)
+  public function show(Kader $kader, $id)
   {
+    // cek apakah kader seorang admin 
+    if (!User::where('kader_nik', $kader->nik)->where('admin_at', $id)->first()) {
+      return abort(404);
+    }
+
     return view('admin.tambah_admin.tambah_admin_daerah.show', [
-      'kader' => $kader
+      'kader' => $kader,
+      'id_daerah' => $id
     ]);
   }
 
   public function destroy(Kader $kader, $id)
   {
     // update data user
-    User::where('kader_nik', $kader->nik)->update(['kategori_user_id' => null, 'admin_at' => null]);
+    User::where('kader_nik', $kader->nik)->update(['kategori_user_id' => 1, 'admin_at' => null]);
 
-    return redirect('/admin/daerah/' . $id)->with('message_admin_daerah', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin daerah.');
+    return redirect('/admin/daerah/' . $id)->with('message_delete_admin_daerah', 'Berhasil menghapus ' . $kader->nama . ' sebagai admin daerah.');
   }
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Daerah;
+use App\Models\Jabatan;
+use App\Models\Kader;
+use App\Models\KaderJabatan;
 use App\Models\Ranting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -139,9 +142,19 @@ class AdminDataRantingController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy(Ranting $ranting)
   {
-    //
+    // update data di tabel kader
+    Kader::where('ranting_id_ranting', $ranting->id_ranting)->update(['ranting_id_ranting' => null]);
+
+    // delete jabatan di ranting dan kader_jabatan di ranting 
+    Jabatan::where('ranting_id_ranting', $ranting->id_ranting)->delete();
+    KaderJabatan::where('jabatan_at', $ranting->id_ranting)->delete();
+
+    // delete data di tabel ranting
+    $ranting->delete();
+
+    return redirect('/data/ranting')->with('message_delete_ranting', 'Data ranting ' . $ranting->nama_ranting . ' berhasil dihapus.');
   }
   public function download(Ranting $ranting)
   {

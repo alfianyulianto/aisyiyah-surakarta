@@ -122,6 +122,14 @@ class KaderOrtomController extends Controller
    */
   public function destroy($id)
   {
-    //
+    $kader_ortom = KaderOrtom::where('id_kader_has_ortom', $id)->first();
+
+    // ambil nama ortom
+    $nama_ortom = Ortom::where('id_ortom', $kader_ortom->ortom_id_ortom)->first()->nama_ortom;
+
+    // delete data di tabel kader_has_ortom
+    $kader_ortom->delete();
+
+    return redirect('/kader/ortom')->with('message_delete_ortom_kader', 'Data ortom ' . $nama_ortom . ' berhasil dihapus.');
   }
 }

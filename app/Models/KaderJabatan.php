@@ -26,4 +26,9 @@ class KaderJabatan extends Model
   {
     return $this->belongsTo(Jabatan::class, 'jabatan_id_jabatan', 'id_jabatan');
   }
+
+  public function periode()
+  {
+    return $this->belongsTo(Periode::class, 'periode_id_periode', 'id_periode');
+  }
 }

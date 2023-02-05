@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\KaderJabatan;
 use App\Models\Periode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -114,6 +115,9 @@ class DataPeriodeController extends Controller
   {
     // ambil tempat_lahir
     $p = $periode->periode;
+
+    // delete data di tabel kader_jabatan
+    KaderJabatan::where('periode_id_periode', $periode->id_periode)->delete();
 
     // delete data di tabel pekerjaan
     $periode->delete();

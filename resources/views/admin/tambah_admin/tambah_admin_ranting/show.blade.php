@@ -1,4 +1,3 @@
-{{-- @dd($kader->kader_mimiliki_potensi); --}}
 @extends('layouts.main')
 
 @section('content')
@@ -115,12 +114,13 @@
               </div>
               <div class="row mt-3">
                 <div class="col-lg-12">
-                  <form action="/admin/cabang/{{ $kader->nik }}/{{ $id_cabang }}" method="post"
+                  <form action="/admin/ranting/{{ $kader->nik }}/{{ $id_ranting }}" method="post"
                     class="d-inline-block btn-width">
                     @csrf
                     @method('delete')
-                    <input type="hidden" name="cabang" id="cabang" value="{{ $nama_cabang }}">
-                    <button type="submit" class="btn btn-icon rounded-pill icon-left btn-danger delete-cabang btn-width mx-auto"><i
+                    <input type="hidden" name="ranting" id="ranting" value="{{ $nama_ranting }}">
+                    <button type="submit"
+                      class="btn btn-icon rounded-pill icon-left btn-danger delete-ranting btn-width mx-auto"><i
                         class="far fa-trash-alt"></i>Hapus Admin</button>
                   </form>
                 </div>

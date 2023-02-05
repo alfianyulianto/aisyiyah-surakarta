@@ -136,11 +136,12 @@ class AdminDataJabatanController extends Controller
    */
   public function destroy(Jabatan $jabatan)
   {
-    // delete data tabel jabatan 
-    $jabatan->delete();
 
     // delete data di tabel kader_jabatan
     KaderJabatan::where('jabatan_id_jabatan', $jabatan->id_jabatan)->delete();
+
+    // delete data tabel jabatan 
+    $jabatan->delete();
 
     return redirect('/data/jabatan')->with('message_jabatan', 'Data jabatan ' . $jabatan->nama_jabatan . ' berhasil dihapus.');
   }

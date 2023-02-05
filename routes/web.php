@@ -121,16 +121,16 @@ Route::get('/data/potensi/kader/export', [AdminDataPotensiKaderController::class
 Route::get('/tambah/admin', [TambahAdminController::class, 'index']);
 Route::get('/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'create']);
 Route::post('/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'store']);
-Route::get('/data/admin/daerah/kader/{kader:nik}', [TambahAdminDaerahController::class, 'show']);
-Route::delete('/admin/daerah/{kader:nik}/daerah:id_daerah}', [TambahAdminDaerahController::class, 'destroy']);
+Route::get('/data/admin/daerah/kader/{kader:nik}/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'show']);
+Route::delete('/admin/daerah/{kader:nik}/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'destroy']);
 Route::get('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'create']);
 Route::post('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'store']);
-Route::get('/data/admin/cabang/kader/{kader:nik}', [TambahAdminCabangController::class, 'show']);
-Route::delete('/admin/cabang/{kader:nik}/{cabang:id_cabang', [TambahAdminCabangController::class, 'destroy']);
+Route::get('/data/admin/cabang/kader/{kader:nik}/{cabang:id_cabang}', [TambahAdminCabangController::class, 'show']);
+Route::delete('/admin/cabang/{kader:nik}/{cabang:id_cabang}', [TambahAdminCabangController::class, 'destroy']);
 // Route::get('/tambah/admin/cabang/getkader/{kader}', [TambahAdminCabangController::class, 'get_kader']);
 Route::get('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'create']);
 Route::post('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'store']);
-Route::get('/data/admin/ranting/kader/{kader:nik}', [TambahAdminRantingController::class, 'show']);
+Route::get('/data/admin/ranting/kader/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'show']);
 Route::delete('/admin/ranting/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'destroy']);
 // admin {Fitur:Settings}
 Route::get('/settings', [SettingsController::class, 'index']);

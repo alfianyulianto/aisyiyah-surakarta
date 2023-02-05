@@ -21,6 +21,16 @@
                   </div>
                 </div>
               @endif
+              @if (session('message_delete_kader'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_delete_kader') }}
+                  </div>
+                </div>
+              @endif
               <a href="/data/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i
                   class="fas fa-user-plus"></i>
                 Tambah Kader</a>
@@ -78,7 +88,7 @@
                           <form action="/data/kader/{{ $k->nik }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                            <button type="submit" class="btn btn-icon icon-left btn-danger delete"><i
                                 class="far fa-trash-alt"></i>
                               Hapus</button>
                           </form>
@@ -94,4 +104,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-kader.js"></script>
 @endsection

@@ -11,7 +11,28 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <a href="/data/ranting/create" class="btn btn-icon icon-left btn-primary mb-3"><i class="fas fa-user-plus"></i>
+              @if (session('message_ranting'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_ranting') }}
+                  </div>
+                </div>
+              @endif
+              @if (session('message_delete_ranting'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_delete_ranting') }}
+                  </div>
+                </div>
+              @endif
+              <a href="/data/ranting/create" class="btn btn-icon icon-left btn-primary mb-3"><i
+                  class="fas fa-user-plus"></i>
                 Tambah Ranting</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-ranting">
@@ -50,7 +71,7 @@
                           <form action="/data/ranting/{{ $r->id_ranting }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                            <button type="submit" class="btn btn-icon icon-left btn-danger delete"><i
                                 class="far fa-trash-alt"></i> Hapus</button>
                           </form>
                         </td>
@@ -65,4 +86,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-ranting.js"></script>
 @endsection

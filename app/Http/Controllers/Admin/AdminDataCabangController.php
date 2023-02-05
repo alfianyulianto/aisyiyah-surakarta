@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Daerah;
+use App\Models\Jabatan;
+use App\Models\Kader;
+use App\Models\KaderJabatan;
+use App\Models\Ranting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -134,9 +138,25 @@ class AdminDataCabangController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy(Cabang $cabang)
   {
-    //
+    // delete data di tabel ranting
+    Ranting::where('cabang_id_cabang', $cabang->id_cabang)->delete();
+
+    // update data di tabel kader
+    Kader::where('cabang_id_cabang', $cabang->id_cabang)->update(['cabang_id_cabang' => null, 'ranting_id_ranting' => null]);
+
+    // delete jabatan di cabang, kader_jabatan di cabang dan kader_jabatan di ranting cabang
+    Jabatan::where('cabang_id_cabang', $cabang->id_cabang)->delete();
+    KaderJabatan::where('jabatan_at', $cabang->id_cabang)->delete();
+    $ranting = Ranting::where('cabang_id_cabang', $cabang->id_cabang)->get();
+    foreach ($ranting as $r) {
+      KaderJabatan::where('jabatan_at', $r->id_ranting)->delete();
+    }
+
+    // delete data di tabel cabang
+    $cabang->delete();
+    return redirect('/data/cabang')->with('message_delete_cabang', 'Data cabang ' . $cabang->nama_cabang . ' berhasil dihapus.');
   }
 
   public function download(Cabang $cabang)

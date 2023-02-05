@@ -126,6 +126,14 @@ class KaderPotensiController extends Controller
    */
   public function destroy($id)
   {
-    //
+    $kader_potensi = KaderPotensi::where('id_kader_has_potensi', $id)->first();
+
+    // ambil nama potensi
+    $potensi = Potensi::where('id_potensi', $kader_potensi->potensi_id_potensi)->first()->potensi;
+
+    // delete data di tabel kader_has_potensi
+    $kader_potensi->delete();
+
+    return redirect('/kader/potensi')->with('message_delete_potensi_kader', 'Data potensi ' . $potensi . ' berhasil dihapus.');
   }
 }

@@ -19,7 +19,27 @@
                 <div class="col-lg-9">
                   <div class="d-inline py-3">
                     <p class="mb-0 px-0 text-primary" style="font-size: 20px; font-weight: bold; line-height: 28px">
-                      <b class="text-uppercase">{{ $kader->nama }}</b> <b>(Admin)</b>
+                      <b class="text-uppercase">{{ $kader->nama }}</b>
+                      @php
+                        $admin_at = DB::table('users')
+                            ->where('kader_nik', $kader->nik)
+                            ->first()->admin_at;
+                        $kategori_user_id = DB::table('users')
+                            ->where('kader_nik', $kader->nik)
+                            ->first()->kategori_user_id;
+                      @endphp
+                      @if ($kategori_user_id == 2)
+                        <b>{{ $admin_at ? '(Super Admin)' : '' }}</b>
+                      @endif
+                      @if ($kategori_user_id == 3)
+                        <b>{{ $admin_at ? '(Admin Daerah)' : '' }}</b>
+                      @endif
+                      @if ($kategori_user_id == 4)
+                        <b>{{ $admin_at? '(Admin Cabang ' .DB::table('cabang')->where('id_cabang', $admin_at)->first()->nama_cabang .')': '' }}</b>
+                      @endif
+                      @if ($kategori_user_id == 5)
+                        <b>{{ $admin_at? '(Admin Ranting ' .DB::table('ranting')->where('id_ranting', $admin_at)->first()->nama_ranting .')': '' }}</b>
+                      @endif
                     </p>
                     @if ($kader->daerah && !$kader->cabang && !$kader->ranting)
                       <p class="mb-0">
@@ -91,6 +111,18 @@
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Pendidikan Terkahir</b></p>
                   <p class="lh-none">{{ $kader->pendidikan_terakhir->pendidikan }}</p>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-12">
+                  <form action="/admin/daerah/{{ $kader->nik }}/{{ $id_daerah }}" method="post"
+                    class="d-inline-block btn-width">
+                    @csrf
+                    @method('delete')
+                    <button type="submit"
+                      class="btn btn-icon rounded-pill icon-left btn-danger delete-daerah btn-width mx-auto"><i
+                        class="far fa-trash-alt"></i>Hapus Admin</button>
+                  </form>
                 </div>
               </div>
               @if (!$kader->kader_memiliki_jabatan->isEmpty())
@@ -188,4 +220,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-admin.js"></script>
 @endsection

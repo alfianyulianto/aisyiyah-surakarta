@@ -49,7 +49,7 @@
                           <form action="/data/jabatan/{{ $nj->id_jabatan }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-icon icon-left btn-danger"><i
+                            <button type="submit" class="btn btn-icon icon-left btn-danger delete"><i
                                 class="far fa-trash-alt"></i> Hapus</button>
                           </form>
                         </td>
@@ -64,4 +64,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-jabatan.js"></script>
 @endsection

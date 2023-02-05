@@ -12,10 +12,14 @@ use App\Models\PendidikanTerakhir;
 use App\Models\Ranting;
 use App\Models\TempatLahir;
 use App\Models\User;
+use App\Models\KaderOrtom;
+use App\Models\KaderPotensi;
+use App\Models\KaderJabatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminDataKaderController extends Controller
@@ -314,9 +318,30 @@ class AdminDataKaderController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy(Kader $kader)
   {
-    //
+    // delete data di tabel kader_has_ortom
+    KaderOrtom::where('kader_nik', $kader->nik)->delete();
+
+    // delete data di tabel kader_has_potensi
+    KaderPotensi::where('kader_nik', $kader->nik)->delete();
+
+    // delete data di tabel kader_jabatan
+    KaderJabatan::where('kader_nik', $kader->nik)->delete();
+
+    // cek apakah foto yang degunakan defult atau bukan
+    if ($kader->foto != 'foto profil/avatar-3.png') {
+      // hapus foto
+      Storage::delete($kader->foto);
+    }
+
+    // delete data di tabel kader
+    $kader->delete();
+
+    // delete data di tabel user
+    User::where('kader_nik', $kader->nik)->delete();
+
+    return redirect('/data/kader')->with('message_delete_kader', 'Data kader ' . $kader->nama . ' berhasil dihapus.');
   }
 
   public function ranting(Ranting $ranting)
