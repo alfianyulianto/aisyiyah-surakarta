@@ -8,9 +8,9 @@ use App\Http\Controllers\Admin\AdminDataKaderController;
 use App\Http\Controllers\Admin\AdminDataPotensiKaderController;
 use App\Http\Controllers\Admin\AdminDataRantingController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderController;
-use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanCabangController;
-use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanDaerahController;
-use App\Http\Controllers\Admin\Jabatan_Kader\TambahPimpinanRantingController;
+use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderCabangController;
+use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderDaerahController;
+use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderRantingController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Admin\Settings\DataOrtomController;
 use App\Http\Controllers\Admin\Settings\DataPekerjaanController;
@@ -73,7 +73,7 @@ Route::get('/data/tempat/lahir', function () {
 
 // periode
 Route::get('/data/periode', function () {
-  $periode = Periode::orderBy('created_at', 'asc')->get();
+  $periode = Periode::orderBy('created_at', 'desc')->get();
   return $periode;
 });
 
@@ -96,18 +96,21 @@ Route::resource('/admin/potensi', PotensiAdminController::class);
 Route::resource('/data/jabatan', AdminDataJabatanController::class);
 // admin {Fitur:Jabatan Kader}
 Route::get('/jabatan/kader', [TambahJabatanKaderController::class, 'index']);
-Route::get('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahPimpinanDaerahController::class, 'create']);
-Route::post('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahPimpinanDaerahController::class, 'store']);
-Route::get('/data/pimpinan/daerah/{kader:nik}', [TambahPimpinanDaerahController::class, 'show']);
-Route::delete('/jabatan/kader/daerah/{kader:nik}/{daerah:id_daerah}', [TambahPimpinanDaerahController::class, 'destroy']);
-Route::get('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahPimpinanCabangController::class, 'create']);
-Route::post('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahPimpinanCabangController::class, 'store']);
-Route::get('/data/pimpinan/cabang/{kader:nik}', [TambahPimpinanCabangController::class, 'show']);
-Route::delete('/jabatan/kader/cabang/{kader:nik}/{cabang:id_cabang}', [TambahPimpinanCabangController::class, 'destroy']);
-Route::get('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahPimpinanRantingController::class, 'create']);
-Route::post('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahPimpinanRantingController::class, 'store']);
-Route::get('/data/pimpinan/ranting/{kader:nik}', [TambahPimpinanRantingController::class, 'show']);
-Route::delete('/jabatan/kader/ranting/{kader:nik}/{ranting:id_ranting}', [TambahPimpinanRantingController::class, 'destroy']);
+Route::get('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'create']);
+Route::get('/get/jabatan/kader/daerah/{periode:id_periode}/{daerah}', [TambahJabatanKaderDaerahController::class, 'get_jabatan']);
+Route::post('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'store']);
+Route::get('/data/jabatan/kader/daerah/{kader:nik}', [TambahJabatanKaderDaerahController::class, 'show']);
+Route::delete('/jabatan/kader/daerah/{kader:nik}/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'destroy']);
+Route::get('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'create']);
+Route::get('/get/jabatan/kader/cabang/{periode:id_periode}/{cabang}', [TambahJabatanKaderCabangController::class, 'get_jabatan']);
+Route::post('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'store']);
+Route::get('/data/jabatan/kader/cabang/{kader:nik}', [TambahJabatanKaderCabangController::class, 'show']);
+Route::delete('/jabatan/kader/cabang/{kader:nik}/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'destroy']);
+Route::get('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'create']);
+Route::get('/get/jabatan/kader/ranting/{periode:id_periode}/{ranting}', [TambahJabatanKaderRantingController::class, 'get_jabatan']);
+Route::post('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'store']);
+Route::get('/data/jabatan/kader/ranting/{kader:nik}', [TambahJabatanKaderRantingController::class, 'show']);
+Route::delete('/jabatan/kader/ranting/{kader:nik}/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'destroy']);
 // admin {Fitur:Data Master}
 Route::resource('/data/daerah', AdminDataDaerahController::class);
 Route::get('/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'download']);

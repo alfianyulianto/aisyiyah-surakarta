@@ -1,5 +1,13 @@
 $(document).ready(function () {
     // DataTables
+    $("#scroll-x").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: "2%", targets: 0 },
+            { width: "40%", targets: 1 },
+            { width: "58%", targets: 2 },
+        ],
+    });
 
     $("#scroll-x-profil-kader").DataTable({
         scrollX: true,
@@ -190,12 +198,12 @@ $(document).ready(function () {
         scrollX: true,
         columnDefs: [
             { width: 5, targets: 0 },
-            { width: 175, targets: 1 },
-            { width: 115, targets: 2 },
+            { width: 105, targets: 1 },
+            { width: 100, targets: 2 },
             { width: 100, targets: 3 },
-            { width: 100, targets: 4 },
-            { width: 140, targets: 5 },
-            { width: 90, targets: 6 },
+            { width: 175, targets: 4 },
+            { width: 170, targets: 5 },
+            { width: 60, targets: 6 },
             { width: 155, targets: 7 },
         ],
     });

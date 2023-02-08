@@ -129,7 +129,7 @@
                 <div class="row mt-5">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -159,7 +159,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -188,7 +188,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">

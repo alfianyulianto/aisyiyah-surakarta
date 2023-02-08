@@ -120,7 +120,8 @@
                     @csrf
                     @method('delete')
                     <input type="hidden" name="cabang" id="cabang" value="{{ $nama_cabang }}">
-                    <button type="submit" class="btn btn-icon rounded-pill icon-left btn-danger delete-cabang btn-width mx-auto"><i
+                    <button type="submit"
+                      class="btn btn-icon rounded-pill icon-left btn-danger delete-cabang btn-width mx-auto"><i
                         class="far fa-trash-alt"></i>Hapus Admin</button>
                   </form>
                 </div>
@@ -129,7 +130,7 @@
                 <div class="row mt-5">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -159,7 +160,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -188,7 +189,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">

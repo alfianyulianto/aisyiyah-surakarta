@@ -23,7 +23,7 @@ return new class extends Migration
       $table->foreignIdFor(Cabang::class)->nullable();
       $table->foreignIdFor(Ranting::class)->nullable();
       $table->string('nama_jabatan');
-      $table->boolean('satu_kader')->default(true);
+      $table->boolean('multiple_kader')->default(false);
       $table->timestamps();
     });
   }

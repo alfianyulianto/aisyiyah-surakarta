@@ -15,7 +15,7 @@ class Jabatan extends Model
   public $incrementing = false;
   protected $keyType = 'string';
 
-  protected $fillable = ['id_jabatan', 'daerah_id_daerah', 'cabang_id_cabang', 'ranting_id_ranting', 'nama_jabatan', 'satu_kader'];
+  protected $fillable = ['id_jabatan', 'daerah_id_daerah', 'cabang_id_cabang', 'ranting_id_ranting', 'nama_jabatan', 'multiple_kader'];
 
   public function jabatan_milik_kader()
   {

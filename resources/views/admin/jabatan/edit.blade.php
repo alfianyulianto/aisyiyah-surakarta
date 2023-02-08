@@ -44,39 +44,38 @@
                         </div>
                       </div>
                     </div>
-                    {{ old('satu_kader') }}
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="satu_kader" class="form-label"><b>Jumlah Kader di Jabatan</b></label>
+                          <label for="multiple_kader" class="form-label"><b>Jumlah Kader di Jabatan</b></label>
                           <div>
-                            @if (old('satu_kader', $jabatan->satu_kader) == 'true')
+                            @if (old('multiple_kader', $jabatan->multiple_kader) == 0)
                               <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline1" name="satu_kader"
-                                  class="custom-control-input" value="true" checked>
+                                <input type="radio" id="customRadioInline1" name="multiple_kader"
+                                  class="custom-control-input" value="false" checked>
                                 <label class="custom-control-label" for="customRadioInline1">Satu orang kader</label>
                               </div>
                               <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="satu_kader"
-                                  class="custom-control-input" value="false">
+                                <input type="radio" id="customRadioInline2" name="multiple_kader"
+                                  class="custom-control-input" value="true">
                                 <label class="custom-control-label" for="customRadioInline2">Lebih dari satu orang
                                   kader (e.g: 2, 3, 4, dst)</label>
                               </div>
                             @else
                               <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline1" name="satu_kader"
-                                  class="custom-control-input" value="true">
+                                <input type="radio" id="customRadioInline1" name="multiple_kader"
+                                  class="custom-control-input" value="false">
                                 <label class="custom-control-label" for="customRadioInline1">Satu orang kader</label>
                               </div>
                               <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="satu_kader"
-                                  class="custom-control-input" value="false" checked>
+                                <input type="radio" id="customRadioInline2" name="multiple_kader"
+                                  class="custom-control-input" value="true" checked>
                                 <label class="custom-control-label" for="customRadioInline2">Lebih dari satu orang
                                   kader (e.g: 2, 3, 4, dst)</label>
                               </div>
                             @endif
                           </div>
-                          @error('satu_kader')
+                          @error('multiple_kader')
                             <div class="error-message">
                               {{ $message }}
                             </div>

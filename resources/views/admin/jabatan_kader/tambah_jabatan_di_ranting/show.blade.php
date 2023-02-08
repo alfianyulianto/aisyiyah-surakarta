@@ -97,7 +97,7 @@
                 <div class="row mt-5">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -127,7 +127,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -141,7 +141,7 @@
                           @foreach ($kader->kader_memiliki_ortom as $ko)
                             <tr>
                               <td class="text-center">{{ $loop->iteration }}</td>
-                              <td>{{ DB::table('ortom')->where('id_ortom', $ko->ortom_id_ortom)->first()->nama_ortom }}
+                              <td>{{ $ko->ortom->nama_ortom }}
                               </td>
                               <td>{!! $ko->ortom_uraian !!}</td>
                             </tr>
@@ -156,7 +156,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover" id="scroll-x">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -167,13 +167,13 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach ($kader->kader_mimiliki_potensi as $ko)
+                          @foreach ($kader->kader_mimiliki_potensi as $kp)
                             <tr>
                               <td class="text-center">{{ $loop->iteration }}</td>
                               <td>
-                                {{ DB::table('potensi')->where('id_potensi', $ko->potensi_id_potensi)->first()->potensi }}
+                                {{ $kp->potensi->potensi }}
                               </td>
-                              <td>{!! $ko->potensi_kader_uraian !!}</td>
+                              <td>{!! $kp->potensi_kader_uraian !!}</td>
                             </tr>
                           @endforeach
                         </tbody>
