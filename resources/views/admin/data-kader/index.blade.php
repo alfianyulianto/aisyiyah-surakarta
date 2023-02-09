@@ -34,10 +34,12 @@
               <a href="/data/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i
                   class="fas fa-user-plus"></i>
                 Tambah Kader</a>
-              <div class="mb-3">
-                <a href="/kader/export" class="btn btn-icon icon-left btn-warning mb-3"><i class='fas fa-file-excel'></i>
-                  Export Excel</a>
-              </div>
+              @can('admin')
+                <div class="mb-3">
+                  <a href="/kader/export" class="btn btn-icon icon-left btn-warning mb-3"><i class='fas fa-file-excel'></i>
+                    Export Excel</a>
+                </div>
+              @endcan
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-profil-kader">
                   <thead>

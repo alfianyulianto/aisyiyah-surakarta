@@ -18,7 +18,7 @@ class KaderPotensiController extends Controller
   public function index()
   {
     return view('kader.potensi.index', [
-      'potensi' => KaderPotensi::orderBy('created_at', 'desc')->get()
+      'potensi' => KaderPotensi::where('kader_nik', Auth::user()->kader_nik)->orderBy('created_at', 'desc')->get()
     ]);
   }
 
@@ -48,9 +48,8 @@ class KaderPotensiController extends Controller
       'potensi_kader_uraian' => ['required', 'min:10'],
     ]);
 
-    // tambah nik user
-    // $validated['kader_nik'] = Auth::user()->kader_nik;
-    $validated['kader_nik'] = '3372010107000002';
+    // tambah nik user sesuai dengan user yang login
+    $validated['kader_nik'] = Auth::user()->kader_nik;
 
     // insert ke tabel kader_has_potensi
     KaderPotensi::create($validated);

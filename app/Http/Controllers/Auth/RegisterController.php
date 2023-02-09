@@ -21,6 +21,7 @@ class RegisterController extends Controller
 
   public function store(Request $request)
   {
+    return $request;
     $validated = $request->validate([
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
       'no_ponsel' => ['required', 'numeric', 'max_digits:12', 'min_digits:12'],

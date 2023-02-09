@@ -7,9 +7,17 @@ use App\Models\KaderOrtom;
 use App\Models\Ortom;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DataOrtomController extends Controller
 {
+  public function __construct()
+  {
+    // cek jika user bukan super admin
+    if (Auth::user()->kategori_user_id != 2) {
+      return abort(404);
+    }
+  }
   /**
    * Display a listing of the resource.
    *

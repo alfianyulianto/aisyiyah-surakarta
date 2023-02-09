@@ -10,6 +10,7 @@ use App\Models\Kader;
 use App\Models\KaderJabatan;
 use App\Models\Ranting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -22,6 +23,13 @@ class AdminDataRantingController extends Controller
    */
   public function index()
   {
+    // cek jika user seorang admin ranting
+    if (Auth::user()->kategori_user_id == 4) {
+      return view('admin.ranting.tampilan_admin_ranting', [
+        'ranting' => Ranting::where('id_ranting', Auth::user()->kategori_user_id)->get(),
+        'nama_ranting' => Ranting::where('id_ranting', Auth::user()->kategori_user_id)->first()->nama_ranting
+      ]);
+    }
     return view('admin.ranting.index', [
       'ranting' => Ranting::orderBy('cabang_id_cabang',  'asc')->get()
     ]);
@@ -34,6 +42,11 @@ class AdminDataRantingController extends Controller
    */
   public function create()
   {
+    // cek jika user seorang admin ranting
+    if (Auth::user()->kategori_user_id == 5) {
+      return abort(404);
+    }
+
     return view('admin.ranting.create', [
       'cabang' => Cabang::orderBy('nama_cabang', 'asc')->get()
     ]);
@@ -47,6 +60,10 @@ class AdminDataRantingController extends Controller
    */
   public function store(Request $request)
   {
+    // cek jika user seorang admin ranting
+    if (Auth::user()->kategori_user_id == 5) {
+      return abort(404);
+    }
     $validated = $request->validate([
       'id_ranting' => ['required', 'min:10', 'max:10'],
       'cabang_id_cabang' => ['required'],
@@ -75,7 +92,7 @@ class AdminDataRantingController extends Controller
    */
   public function show($id)
   {
-    //
+    abort(404);
   }
 
   /**
@@ -144,6 +161,11 @@ class AdminDataRantingController extends Controller
    */
   public function destroy(Ranting $ranting)
   {
+    // cek jika user seorang admin ranting
+    if (Auth::user()->kategori_user_id == 5) {
+      return abort(404);
+    }
+
     // update data di tabel kader
     Kader::where('ranting_id_ranting', $ranting->id_ranting)->update(['ranting_id_ranting' => null]);
 

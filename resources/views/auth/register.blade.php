@@ -6,12 +6,16 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Aisyiyah Surakarta</title>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/select2/dist/css/select2.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css">
@@ -43,7 +47,7 @@
                   <div class="row">
                     <div class="form-group col-lg-12">
                       <label for="nik">Nomer Induk Kependudukan</label>
-                      <input type="text" class="form-control" name="nik" id="nik"
+                      <input type="number" class="form-control" name="nik" id="nik"
                         value="{{ old('nik') }}" placeholder="Nomer Induk Kependudukan (cnth:33720******)" autofocus>
                       @error('nik')
                         <div class="error-message">
@@ -55,7 +59,7 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="no_ponsel">Nomer Ponsel</label>
-                      <input type="text" class="form-control" name="no_ponsel" id="no_ponsel"
+                      <input type="number" class="form-control" name="no_ponsel" id="no_ponsel"
                         value="{{ old('no_ponsel') }}" placeholder="Nomer Handphone (cnth: 081*****)">
                       @error('no_ponsel')
                         <div class="error-message">
@@ -80,7 +84,7 @@
                       <select class="form-control form-control-lg select2" name="cabang_id_cabang"
                         id="cabang_id_cabang">
                         @if (old('cabang_id_cabang'))
-                          <option disabled>-- Pilih Cabang --</option>
+                          <option></option>
                           @foreach ($nama_cabang as $nc)
                             @if (old('cabang_id_cabang') == $nc->id_cabang)
                               <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
@@ -89,7 +93,7 @@
                             @endif
                           @endforeach
                         @else
-                          <option selected disabled>-- Pilih Cabang --</option>
+                          <option></option>
                           @foreach ($nama_cabang as $nc)
                             <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
                           @endforeach
@@ -107,8 +111,7 @@
                       <label for="ranting_id_ranting" class="form-label">Ranting Aisyiyah</label>
                       <select class="form-control form-control-lg select2" name="ranting_id_ranting"
                         id="ranting_id_ranting">
-                        <option selected disabled>-- Pilih Ranting --</option>
-                        <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
+                        <option></option>
                       </select>
                       @error('ranting_id_ranting')
                         <div class="error-message">
@@ -164,16 +167,26 @@
   </div>
 
   <!-- General JS Scripts -->
-  {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> --}}
-  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-  <script src="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  {{-- <script src="https://code.jquery.com/jquery-3.6.3.js"></script> --}}
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+  <script>
+    // select2
+    $("#cabang_id_cabang").select2({
+      placeholder: "--Pilih Cabang--",
+      allowClear: true,
+    });
+    $("#ranting_id_ranting").select2({
+      placeholder: "--Pilih Ranting--",
+      allowClear: true,
+    });
+  </script>
   <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
   <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script>
   <script src="{{ url('') }}/library/stisla/assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
   <script src="{{ url('') }}/library/stisla/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-  <script src="{{ url('') }}/library/stisla/node_modules/select2/dist/js/select2.full.min.js"></script>
 
   <!-- Template JS File -->
   <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script>
@@ -195,9 +208,9 @@
           let ranting;
           // cek jika id_ranting kosong
           if (!id_ranting) {
-            ranting = "<option selected disabled>-- Pilih Ranting --</option>";
+            ranting = "<option></option>";
           } else {
-            ranting = "<option disabled>-- Pilih Ranting --</option>";
+            ranting = "<option></option>";
           }
           response.forEach(i => {
             if (i.id_ranting == id_ranting) {
@@ -222,7 +235,7 @@
         success: (response) => {
           console.log(response);
           let ranting =
-            "<option selected disabled>-- Pilih Ranting --</option>";
+            "<option></option>";
           response.forEach((i) => {
             ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
           });

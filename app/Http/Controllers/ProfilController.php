@@ -20,8 +20,7 @@ class ProfilController extends Controller
   public function edit()
   {
     return view('profil', [
-      // 'kader'=>Kader::where('nik', Auth::user()->kader_id)->first(),
-      'kader' => Kader::get()->first(),
+      'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
@@ -51,9 +50,7 @@ class ProfilController extends Controller
     };
 
     // ambil data user dari tabel kader
-    // $kader = Kader::where('nik', Auth::user()->kader_nik)->first();
-    // $kader = Kader::where('nik', '3372010107000002')->first();
-    $kader = Kader::get()->first();
+    $kader = Kader::where('nik', Auth::user()->kader_nik)->first();
     // cek jika user tidak mengganti nik, no_kta, no_ktm
     if ($kader->nik != $request->nik) {
       $role['nik'] = ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'];
@@ -126,9 +123,7 @@ class ProfilController extends Controller
     }
 
     // cari user di tabel user
-    // $user = User::where('kader_nik', Auth::user()->kader_nik)->first();
-    // $user = User::where('kader_nik', '3372010107000002')->first();
-    $user = User::get()->first();
+    $user = User::where('kader_nik', Auth::user()->kader_nik)->first();
 
     // cek jika user mengganti nik, nama, no_ponsel
     if ($user->kader_nik != $request->nik || $user->nama != $request->nama || $user->no_ponsel != $request->no_ponsel) {
@@ -137,15 +132,11 @@ class ProfilController extends Controller
       $data['no_ponsel'] = $request->no_ponsel;
 
       // update data di tabel user
-      // User::where('kader_nik', Auth::user()->kader_nik)->update($data);
-      // User::where('kader_nik', '3372010107000002')->update($data);
-      User::get()->first()->update($data);
+      User::where('kader_nik', Auth::user()->kader_nik)->update($data);
     }
 
     // update data di tabel kader
-    // Kader::where('nik', 'Auth::user()->kader_nik')->update($validatedData);
-    // Kader::where('nik', '3372010107000002')->update($validatedData);
-    Kader::get()->first()->update($validatedData);
+    Kader::where('nik', Auth::user()->kader_nik)->update($validatedData);
 
     return redirect('/profil')->with('message_kader', 'Data kader ' . $request->nama . ' berhasil diubah.');
   }

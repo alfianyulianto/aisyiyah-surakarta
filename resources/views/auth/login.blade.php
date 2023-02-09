@@ -35,13 +35,13 @@
               </div>
 
               <div class="card-body">
-                @if (session('message_login'))
-                  <div class="alert alert-success alert-dismissible show fade">
+                @if (session('failed'))
+                  <div class="alert alert-danger alert-dismissible show fade">
                     <div class="alert-body">
                       <button class="close" data-dismiss="alert">
                         <span>&times;</span>
                       </button>
-                      {{ session('message_login') }}
+                      {{ session('failed') }}
                     </div>
                   </div>
                 @endif
@@ -49,7 +49,7 @@
                   @csrf
                   <div class="form-group">
                     <label for="no_ponsel">Nomer Ponsel</label>
-                    <input type="text" class="form-control @error('no_ponsel') is-invalid @enderror" name="no_ponsel"
+                    <input type="number" class="form-control @error('no_ponsel') is-invalid @enderror" name="no_ponsel"
                       id="no_ponsel" autofocus>
                     @error('no_ponsel')
                       <div id="validationServerUsernameFeedback" class="invalid-feedback">

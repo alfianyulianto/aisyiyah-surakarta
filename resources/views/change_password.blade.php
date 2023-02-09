@@ -24,35 +24,35 @@
                 <div class="col-lg-6">
                   <form action="/change/password" method="post">
                     @csrf
+                    @method('put')
                     <div class="mb-3">
                       <label for="nik" class="form-label"><b>Password Saat Ini</b></label>
-                      <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
-                        id="password" placeholder="Password Saat Ini" value="{{ old('password') }}" autofocus
-                        autocomplete>
+                      <input type="password" class="form-control" name="password" id="password"
+                        placeholder="Password Saat Ini" autofocus autocomplete>
+                      <span class="fas fa-eye field-icon toggle-password"></span>
                       @error('password')
-                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                        <div class="error-message">
                           {{ $message }}
                         </div>
                       @enderror
                     </div>
                     <div class="mb-3">
                       <label for="password_baru" class="form-label"><b>Password Baru</b></label>
-                      <input type="password" class="form-control @error('password_baru') is-invalid @enderror"
-                        name="password_baru" id="password_baru" placeholder="Password baru (minimal 6 karakter)"
-                        value="{{ old('password_baru') }}" autocomplete>
+                      <input type="password" class="form-control" name="password_baru" id="password_baru"
+                        placeholder="Password baru (minimal 6 karakter)" autocomplete>
+                      <span class="fas fa-eye field-icon toggle-new-password"></span>
                       @error('password_baru')
-                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                        <div class="error-message">
                           {{ $message }}
                         </div>
                       @enderror
                     </div>
                     <div class="mb-3">
                       <label for="konfirmasi_password" class="form-label"><b>Konfirmasi Password Baru</b></label>
-                      <input type="password" class="form-control @error('konfirmasi_password') is-invalid @enderror"
-                        name="konfirmasi_password" id="konfirmasi_password" placeholder="Konfirmasi password baru"
-                        value="{{ old('konfirmasi_password') }}" autocomplete>
+                      <input type="password" class="form-control" name="konfirmasi_password" id="konfirmasi_password"
+                        placeholder="Konfirmasi password baru" autocomplete>
                       @error('konfirmasi_password')
-                        <div id="laravel-error" class="invalid-feedback">
+                        <div id="laravel-error" class="error-message">
                           {{ $message }}
                         </div>
                       @enderror

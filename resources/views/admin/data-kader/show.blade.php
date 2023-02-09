@@ -128,6 +128,17 @@
                       class="fas fa-edit"></i>Edit Data Kader</a>
                 </div>
               </div>
+              <div class="row mt-3">
+                <div class="col-lg-12">
+                  <form action="/data/kader/{{ $kader->nik }}" method="post" class="d-inline-block btn-width">
+                    @csrf
+                    @method('delete')
+                    <button type="submit"
+                      class="btn btn-icon rounded-pill icon-left btn-danger delete-cabang btn-width mx-auto delete"><i
+                        class="far fa-trash-alt"></i> Hapus Data Kader</button>
+                  </form>
+                </div>
+              </div>
               @if (!$kader->kader_memiliki_jabatan->isEmpty())
                 <div class="row mt-5">
                   <div class="col-lg-12">
@@ -223,4 +234,5 @@
       </div>
     </div>
   </section>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-kader.js"></script>
 @endsection

@@ -10,6 +10,7 @@ use App\Models\Kader;
 use App\Models\KaderJabatan;
 use App\Models\Ranting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -22,6 +23,13 @@ class AdminDataCabangController extends Controller
    */
   public function index()
   {
+    // cek jika user seorang admin cabang
+    if (Auth::user()->kategori_user_id == 4) {
+      return view('admin.cabang.tampilan_admin_cabang', [
+        'cabang' => Cabang::where('id_cabang', Auth::user()->kategori_user_id)->get(),
+        'nama_cabang' => Cabang::where('id_cabang', Auth::user()->kategori_user_id)->first()->nama_cabang
+      ]);
+    }
     return view('admin.cabang.index', [
       'cabang' => Cabang::orderBy('created_at', 'desc')->get()
     ]);
@@ -34,6 +42,10 @@ class AdminDataCabangController extends Controller
    */
   public function create()
   {
+    // cek jika user seorang admin cabang
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(404);
+    }
     return view('admin.cabang.create');
   }
 
@@ -45,6 +57,11 @@ class AdminDataCabangController extends Controller
    */
   public function store(Request $request)
   {
+    // cek jika user seorang admin cabang
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(404);
+    }
+
     $validated = $request->validate([
       'id_cabang' => ['required', 'min:9', 'max:9', 'unique:App\Models\Cabang,id_cabang'],
       'nama_cabang' => ['required', 'min:5'],
@@ -140,6 +157,11 @@ class AdminDataCabangController extends Controller
    */
   public function destroy(Cabang $cabang)
   {
+    // cek jika user seorang admin cabang
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(404);
+    }
+
     // delete data di tabel ranting
     Ranting::where('cabang_id_cabang', $cabang->id_cabang)->delete();
 

@@ -26,33 +26,6 @@ $(document).ready(function () {
     }
     tempat_lahir();
 
-    // // autocomplete periode
-    // function get_periode() {
-    //     return $.ajax({
-    //         type: "get",
-    //         url: "/data/periode",
-    //         dataType: "json",
-    //         success: (response) => {
-    //             response;
-    //         },
-    //     });
-    // }
-    // async function periode() {
-    //     let periode = await get_periode();
-    //     let tahun_periode = [];
-    //     periode.forEach((i) => {
-    //         tahun_periode.push(i.periode);
-    //     });
-    //     autocomplete_periode(tahun_periode);
-    // }
-    // function autocomplete_periode(tahun_periode) {
-    //     console.log(tahun_periode);
-    //     $("#periode").autocomplete({
-    //         lookup: tahun_periode,
-    //     });
-    // }
-    // periode();
-
     // autocomplete pekerjaan
     function get_pekerjaan() {
         return $.ajax({

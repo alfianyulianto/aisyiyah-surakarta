@@ -62,3 +62,29 @@ p.lh-none {
 .export-excel-bg:hover {
     background: #2e44e9;
 }
+
+.selectric .label {
+    font-size: 14px;
+}
+
+.selectric .label {
+    margin: 0 38px 0 5px;
+}
+
+.select2-selection__rendered {
+    margin: 0 38px 0 -5px;
+}
+.select2-selection__clear:hover {
+    color: #6777ef;
+}
+
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__clear {
+    margin-right: -10px;
+    font-size: 16px;
+}
+
+.select2-selection__placeholder {
+    margin: 0 38px 0 -5px;
+}

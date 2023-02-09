@@ -18,15 +18,15 @@ class AdminDataJabatanController extends Controller
    */
   public function index()
   {
-    // // cek user apakah seorang super admin atau admin-daerah
-    // if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
-    //   $jabatan = Jabatan::where('daerah_id_daerah', Daerah::get()->first()->id_daerah)->orderBy('created_at', 'asc')->get()
-    // } else if (Auth::user()->ketegori_user_id == 4) { // jika user seorang admin cabang
-    //   $jabatan = Jabatan::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get()
-    // } else if (Auth::user()->ketegoori_user_id == 5) { // jika user seorag admin ranting
-    //   $jabatan = Jabatan::where('ranting_id_ranting', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get()
-    // }
-    $jabatan = Jabatan::orderBy('created_at', 'asc')->get();
+    // cek user apakah seorang super admin atau admin-daerah
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
+      $jabatan = Jabatan::where('daerah_id_daerah', Daerah::get()->first()->id_daerah)->orderBy('created_at', 'asc')->get();
+    } else if (Auth::user()->ketegori_user_id == 4) { // jika user seorang admin cabang
+      $jabatan = Jabatan::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get();
+    } else if (Auth::user()->ketegoori_user_id == 5) { // jika user seorag admin ranting
+      $jabatan = Jabatan::where('ranting_id_ranting', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get();
+    };
+    // $jabatan = Jabatan::orderBy('created_at', 'asc')->get();
     return view('admin.jabatan.index', [
       'nama_jabatan' => $jabatan
     ]);
@@ -56,14 +56,14 @@ class AdminDataJabatanController extends Controller
       'multiple_kader' => ['required'],
     ]);
 
-    // // cek user apakah seorang super admin atau admin-daerah
-    // if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
-    $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
-    // } else if (Auth::user()->ketegori_user_id == 4) { // jika user seorang admin cabang
-    //   $validated['cabang_id_cabang'] = Auth::user()->admin_at;
-    // } else if (Auth::user()->ketegoori_user_id == 5) { // jika user seorag admin ranting
-    //   $validated['ranting_id_ranting'] = Auth::user()->admin_at;
-    // }
+    // cek user apakah seorang super admin atau admin-daerah
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
+      $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
+    } else if (Auth::user()->ketegori_user_id == 4) { // jika user seorang admin cabang
+      $validated['cabang_id_cabang'] = Auth::user()->admin_at;
+    } else if (Auth::user()->ketegoori_user_id == 5) { // jika user seorag admin ranting
+      $validated['ranting_id_ranting'] = Auth::user()->admin_at;
+    }
 
     $validated['multiple_kader'] = $request->multiple_kader == 'true' ? true : false;
     // insert ke tabel jabatan

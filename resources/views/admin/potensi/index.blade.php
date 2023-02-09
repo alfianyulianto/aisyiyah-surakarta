@@ -21,9 +21,11 @@
                   </div>
                 </div>
               @endif
-              <a href="/data/potensi/kader/export" class="btn btn-icon icon-left btn-warning mb-3"><i
-                  class='fas fa-file-excel'></i>
-                Export Excel</a>
+              @can('admin')
+                <a href="/data/potensi/kader/export" class="btn btn-icon icon-left btn-warning mb-3"><i
+                    class='fas fa-file-excel'></i>
+                  Export Excel</a>
+              @endcan
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-data-potensi-kader">
                   <thead>

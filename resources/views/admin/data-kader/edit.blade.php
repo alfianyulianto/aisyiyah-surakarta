@@ -20,7 +20,7 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="nik" class="form-label"><b>NIK</b></label>
-                          <input type="text" class="form-control" name="nik" id="nik"
+                          <input type="number" class="form-control" name="nik" id="nik"
                             placeholder="Nomer Induk Kependudukan (cnth:3372******)" value="{{ old('nik', $kader->nik) }}"
                             autofocus>
                           @error('nik')
@@ -76,7 +76,7 @@
                           <select class="form-control form-control-lg select2" name="cabang_id_cabang"
                             id="cabang_id_cabang">
                             @if (old('cabang_id_cabang', $kader->cabang_id_cabang))
-                              <option disabled>-- Pilih Cabang --</option>
+                              <option value="">-- Pilih Cabang --</option>
                               @foreach ($nama_cabang as $nc)
                                 @if (old('cabang_id_cabang', $kader->cabang_id_cabang) == $nc->id_cabang)
                                   <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
@@ -85,7 +85,7 @@
                                 @endif
                               @endforeach
                             @else
-                              <option selected disabled>-- Pilih Cabang --</option>
+                              <option value="" selected>-- Pilih Cabang --</option>
                               @foreach ($nama_cabang as $nc)
                                 <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
                               @endforeach
@@ -105,22 +105,7 @@
                           <label for="ranting_id_ranting" class="form-label"><b>Ranting Aisyiyah</b></label>
                           <select class="form-control form-control-lg select2" name="ranting_id_ranting"
                             id="ranting_id_ranting">
-                            {{-- @if (old('ranting_id_ranting', $kader->ranting_id_ranting))
-                              <option disabled>-- Pilih Ranting --</option>
-                              @foreach ($nama_ranting as $nr)
-                                @if (old('ranting_id_ranting', $kader->ranting_id_ranting) == $nr->id_ranting)
-                                  <option value="{{ $nr->id_ranting }}" selected>{{ $nr->nama_ranting }}</option>
-                                @else
-                                  <option value="{{ $nr->id_ranting }}">{{ $nr->nama_ranting }}</option>
-                                @endif
-                              @endforeach
-                            @else
-                              <option selected disabled>-- Pilih Ranting --</option>
-                              @foreach ($nama_ranting as $nr)
-                                <option value="{{ $nr->id_ranting }}">{{ $nr->nama_ranting }}</option>
-                                @endforeach
-                                @endif --}}
-                            <option selected disabled>-- Pilih Ranting --</option>
+                            <option value="" selected disabled>-- Pilih Ranting --</option>
                             <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
                           </select>
                           @error('ranting_id_ranting')
@@ -264,7 +249,7 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="no_ponsel" class="form-label"><b>Nomer Handphone</b></label>
-                          <input type="text" class="form-control" name="no_ponsel" id="no_ponsel"
+                          <input type="number" class="form-control" name="no_ponsel" id="no_ponsel"
                             placeholder="Nomer Handphone (cnth: 081*****)"
                             value="{{ old('no_ponsel', $kader->no_ponsel) }}">
                           @error('no_ponsel')
@@ -340,20 +325,27 @@
     // select cabang
     $("select#cabang_id_cabang").on("change", function() {
       let id_cabang = $(this).val();
-      $.ajax({
-        type: "get",
-        url: "/get/ranting/" + id_cabang,
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let ranting =
-            "<option selected disabled>-- Pilih Ranting --</option>";
-          response.forEach((i) => {
-            ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
-          });
-          $("select#ranting_id_ranting").html(ranting);
-        },
-      });
+      if (id_cabang) {
+        $.ajax({
+          type: "get",
+          url: "/get/ranting/" + id_cabang,
+          dataType: "json",
+          success: (response) => {
+            console.log(response);
+            let ranting =
+              "<option value='' selected>-- Pilih Ranting --</option>";
+            response.forEach((i) => {
+              ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
+            });
+            $("select#ranting_id_ranting").html(ranting);
+          },
+        });
+      } else {
+        $("select#ranting_id_ranting").html(`
+          <option value='' selected disabled>-- Pilih Ranting --</option>
+          <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
+        `);
+      }
     });
     $("select#ranting_id_ranting").on("change", function() {
       console.log($(this).val());
@@ -372,9 +364,9 @@
           let ranting;
           // cek jika id_ranting kosong
           if (!id_ranting) {
-            ranting = "<option selected disabled>-- Pilih Ranting --</option>";
+            ranting = "<option value='' selected>-- Pilih Ranting --</option>";
           } else {
-            ranting = "<option disabled>-- Pilih Ranting --</option>";
+            ranting = "<option value=''>-- Pilih Ranting --</option>";
           }
           response.forEach(i => {
             if (i.id_ranting == id_ranting) {

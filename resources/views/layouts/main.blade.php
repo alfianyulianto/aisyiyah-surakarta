@@ -26,9 +26,11 @@
 
   {{-- My CSS --}}
   <link rel="stylesheet" href="{{ url('') }}/css/my-style.css">
+  <link rel="stylesheet" href="{{ url('') }}/css/show-hide-password.css">
 
   {{-- JQuery --}}
   <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> --}}
 
   {{-- Autocomplate --}}
   <script src="{{ url('') }}/js/jquery.autocomplete.min.js"></script>
@@ -72,6 +74,7 @@
 
   {{-- My Script --}}
   <script src="{{ url('') }}/js/my-scripts.js"></script>
+  <script src="{{ url('') }}/js/show-hide-password.js"></script>
 
   <!-- JS Libraies -->
   <script src="{{ url('') }}/library/stisla/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>

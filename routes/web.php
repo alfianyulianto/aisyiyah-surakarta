@@ -51,102 +51,107 @@ use Illuminate\Support\Facades\Route;
 */
 
 // dashboard
-Route::get('/admin', [AdminDashboardController::class, 'index']);
+Route::get('/admin', [AdminDashboardController::class, 'index'])->middleware('auth');
 
 // upload foto
-Route::get('/upload/foto', [UploadFotoController::class, 'index']);
+Route::get('/upload/foto', [UploadFotoController::class, 'index'])->middleware('auth');
 Route::post('/upload/foto', [UploadFotoController::class, 'upload_foto']);
 
 // auth
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
-Route::get('/change/password', [ChangePasswordController::class, 'edit']);
+Route::get('/change/password', [ChangePasswordController::class, 'edit'])->middleware('auth');
 Route::put('/change/password', [ChangePasswordController::class, 'update']);
 
-// teempat_lahir
+// tempat_lahir
 Route::get('/data/tempat/lahir', function () {
   $tempat_lahir = TempatLahir::orderBy('tempat_lahir', 'asc')->get();
   return $tempat_lahir;
-});
+})->middleware('auth');
 
-// periode
-Route::get('/data/periode', function () {
-  $periode = Periode::orderBy('created_at', 'desc')->get();
-  return $periode;
-});
+// // periode
+// Route::get('/data/periode', function () {
+//   $periode = Periode::orderBy('created_at', 'desc')->get();
+//   return $periode;
+// })->middleware('auth');
 
 // pekerjaan
 Route::get('/data/pekerjaan', function () {
   $pekerjaan = Pekerjaan::orderBy('pekerjaan', 'asc')->get();
   return $pekerjaan;
-});
+})->middleware('auth');
 
 // admin
-Route::get('/profil', [ProfilController::class, 'edit']);
-Route::put('/profil/update', [ProfilController::class, 'update']);
-Route::resource('/data/kader', AdminDataKaderController::class);
-Route::get('/kader/export', [AdminDataKaderController::class, 'export']);
-Route::get('/get/kader/{kader:nik}', [AdminDataKaderController::class, 'get_kader']);
-Route::get('/get/ranting/{ranting:cabang_id_cabang}', [AdminDataKaderController::class, 'ranting']);
-Route::resource('/admin/ortom', OrtomAdminController::class);
-Route::resource('/admin/potensi', PotensiAdminController::class);
+Route::get('/profil', [ProfilController::class, 'edit'])->middleware('auth');
+Route::put('/profil/update', [ProfilController::class, 'update'])->middleware('auth');
+Route::resource('/data/kader', AdminDataKaderController::class)->middleware('admin');
+Route::get('/kader/export', [AdminDataKaderController::class, 'export'])->middleware('admin');
+Route::get('/get/kader/{kader:nik}', [AdminDataKaderController::class, 'get_kader'])->middleware('admin');
+Route::get('/get/ranting/{ranting:cabang_id_cabang}', [AdminDataKaderController::class, 'ranting'])->middleware('auth');
+Route::resource('/admin/ortom', OrtomAdminController::class)->middleware('admin');
+Route::resource('/admin/potensi', PotensiAdminController::class)->middleware('admin');
+
 // admin {Fitur:Data Jabatan}
-Route::resource('/data/jabatan', AdminDataJabatanController::class);
+Route::resource('/data/jabatan', AdminDataJabatanController::class)->middleware('admin');
 // admin {Fitur:Jabatan Kader}
-Route::get('/jabatan/kader', [TambahJabatanKaderController::class, 'index']);
-Route::get('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'create']);
-Route::get('/get/jabatan/kader/daerah/{periode:id_periode}/{daerah}', [TambahJabatanKaderDaerahController::class, 'get_jabatan']);
+Route::get('/jabatan/kader', [TambahJabatanKaderController::class, 'index'])->middleware('admin');
+Route::get('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'create'])->middleware('admin');
+Route::get('/get/jabatan/kader/daerah/{periode:id_periode}/{daerah}', [TambahJabatanKaderDaerahController::class, 'get_jabatan'])->middleware('admin');
 Route::post('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'store']);
-Route::get('/data/jabatan/kader/daerah/{kader:nik}', [TambahJabatanKaderDaerahController::class, 'show']);
+Route::get('/data/jabatan/kader/daerah/{kader:nik}', [TambahJabatanKaderDaerahController::class, 'show'])->middleware('admin');
 Route::delete('/jabatan/kader/daerah/{kader:nik}/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'destroy']);
-Route::get('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'create']);
-Route::get('/get/jabatan/kader/cabang/{periode:id_periode}/{cabang}', [TambahJabatanKaderCabangController::class, 'get_jabatan']);
+Route::get('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'create'])->middleware('admin');
+Route::get('/get/jabatan/kader/cabang/{periode:id_periode}/{cabang}', [TambahJabatanKaderCabangController::class, 'get_jabatan'])->middleware('admin');
 Route::post('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'store']);
-Route::get('/data/jabatan/kader/cabang/{kader:nik}', [TambahJabatanKaderCabangController::class, 'show']);
+Route::get('/data/jabatan/kader/cabang/{kader:nik}', [TambahJabatanKaderCabangController::class, 'show'])->middleware('admin');
 Route::delete('/jabatan/kader/cabang/{kader:nik}/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'destroy']);
-Route::get('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'create']);
-Route::get('/get/jabatan/kader/ranting/{periode:id_periode}/{ranting}', [TambahJabatanKaderRantingController::class, 'get_jabatan']);
+Route::get('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'create'])->middleware('admin');
+Route::get('/get/jabatan/kader/ranting/{periode:id_periode}/{ranting}', [TambahJabatanKaderRantingController::class, 'get_jabatan'])->middleware('admin');
 Route::post('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'store']);
-Route::get('/data/jabatan/kader/ranting/{kader:nik}', [TambahJabatanKaderRantingController::class, 'show']);
+Route::get('/data/jabatan/kader/ranting/{kader:nik}', [TambahJabatanKaderRantingController::class, 'show'])->middleware('admin');
 Route::delete('/jabatan/kader/ranting/{kader:nik}/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'destroy']);
+
 // admin {Fitur:Data Master}
-Route::resource('/data/daerah', AdminDataDaerahController::class);
-Route::get('/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'download']);
-Route::resource('/data/cabang', AdminDataCabangController::class);
-Route::get('/sk/pimpinan/cabang/{cabang:id_cabang}', [AdminDataCabangController::class, 'download']);
-Route::resource('/data/ranting', AdminDataRantingController::class);
-Route::get('/sk/pimpinan/ranting/{ranting:id_ranting}', [AdminDataRantingController::class, 'download']);
-Route::get('/data/potensi/kader', [AdminDataPotensiKaderController::class, 'index']);
-Route::get('/data/potensi/kader/export', [AdminDataPotensiKaderController::class, 'export']);
+Route::resource('/data/daerah', AdminDataDaerahController::class)->middleware('admin');
+Route::get('/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'download'])->middleware('admin');
+Route::resource('/data/cabang', AdminDataCabangController::class)->middleware('admin');
+Route::get('/sk/pimpinan/cabang/{cabang:id_cabang}', [AdminDataCabangController::class, 'download'])->middleware('admin');
+Route::resource('/data/ranting', AdminDataRantingController::class)->middleware('admin');
+Route::get('/sk/pimpinan/ranting/{ranting:id_ranting}', [AdminDataRantingController::class, 'download'])->middleware('admin');
+Route::get('/data/potensi/kader', [AdminDataPotensiKaderController::class, 'index'])->middleware('admin');
+Route::get('/data/potensi/kader/export', [AdminDataPotensiKaderController::class, 'export'])->middleware('admin');
+
 // admin {Fitur:Tambah Admin}
-Route::get('/tambah/admin', [TambahAdminController::class, 'index']);
-Route::get('/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'create']);
+Route::get('/tambah/admin', [TambahAdminController::class, 'index'])->middleware('admin');
+Route::get('/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'create'])->middleware('admin');
 Route::post('/admin/daerah/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'store']);
-Route::get('/data/admin/daerah/kader/{kader:nik}/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'show']);
+Route::get('/data/admin/daerah/kader/{kader:nik}/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'show'])->middleware('admin');
 Route::delete('/admin/daerah/{kader:nik}/{daerah:id_daerah}', [TambahAdminDaerahController::class, 'destroy']);
-Route::get('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'create']);
+Route::get('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'create'])->middleware('admin');
 Route::post('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'store']);
-Route::get('/data/admin/cabang/kader/{kader:nik}/{cabang:id_cabang}', [TambahAdminCabangController::class, 'show']);
+Route::get('/data/admin/cabang/kader/{kader:nik}/{cabang:id_cabang}', [TambahAdminCabangController::class, 'show'])->middleware('admin');
 Route::delete('/admin/cabang/{kader:nik}/{cabang:id_cabang}', [TambahAdminCabangController::class, 'destroy']);
 // Route::get('/tambah/admin/cabang/getkader/{kader}', [TambahAdminCabangController::class, 'get_kader']);
-Route::get('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'create']);
+Route::get('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'create'])->middleware('admin');
 Route::post('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'store']);
-Route::get('/data/admin/ranting/kader/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'show']);
+Route::get('/data/admin/ranting/kader/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'show'])->middleware('admin');
 Route::delete('/admin/ranting/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'destroy']);
+
 // admin {Fitur:Settings}
-Route::get('/settings', [SettingsController::class, 'index']);
-Route::resource('/ortom', DataOrtomController::class);
-Route::resource('/potensi', DataPotensiController::class);
-Route::resource('/pekerjaan', DataPekerjaanController::class);
-Route::resource('/periode', DataPeriodeController::class);
-Route::resource('/tempat/lahir', DataTempatLahirController::class);
+Route::get('/settings', [SettingsController::class, 'index'])->middleware('admin');
+Route::resource('/ortom', DataOrtomController::class)->middleware('admin');
+Route::resource('/potensi', DataPotensiController::class)->middleware('admin');
+Route::resource('/pekerjaan', DataPekerjaanController::class)->middleware('admin');
+Route::resource('/periode', DataPeriodeController::class)->middleware('admin');
+Route::resource('/tempat/lahir', DataTempatLahirController::class)->middleware('admin');
 
 
 // kader
-Route::get('/kader', [KaderDashboardController::class, 'index']);
-Route::get('/profil', [ProfilController::class, 'edit']);
-Route::put('/profil/update', [ProfilController::class, 'update']);
-Route::resource('/kader/ortom', KaderOrtomController::class);
-Route::resource('/kader/potensi', KaderPotensiController::class);
+Route::get('/kader', [KaderDashboardController::class, 'index'])->middleware('kader');
+Route::get('/profil', [ProfilController::class, 'edit'])->middleware('auth');
+Route::put('/profil/update', [ProfilController::class, 'update'])->middleware('auth');
+Route::resource('/kader/ortom', KaderOrtomController::class)->middleware('kader');
+Route::resource('/kader/potensi', KaderPotensiController::class)->middleware('kader');

@@ -7,138 +7,153 @@
       <h1>Dashboard</h1>
     </div>
 
-    <h1>Untuk Admin atau Admin Daerah</h1>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-primary">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Admin</h4>
+    {{-- Super Admin dan Admin Daerah --}}
+    @canany(['admin', 'admin-daerah'])
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-primary">
+              <i class="fas fa-user"></i>
             </div>
-            <div class="card-body">
-              {{ $total_admin }}
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Admin</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_admin }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-danger">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Kader</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_kader }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-warning">
+              <i class="fas fa-building"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Cabang</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_cabang }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-success">
+              <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Ranting</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_ranting }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-danger">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Kader</h4>
-            </div>
-            <div class="card-body">
-              {{ $total_kader }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-warning">
-            <i class="fas fa-building"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Cabang</h4>
-            </div>
-            <div class="card-body">
-              {{ $total_cabang }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-success">
-            <i class="fas fa-warehouse"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Ranting</h4>
-            </div>
-            <div class="card-body">
-              {{ $total_ranting }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    @endcanany
 
-    <h1>Untuk Admin Cabang</h1>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-primary">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Admin</h4>
+    {{-- Admin Cabang --}}
+    @can('admin-cabang')
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-primary">
+              <i class="fas fa-user"></i>
             </div>
-            <div class="card-body">
-              {{ $total_admin }}
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Admin</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_admin }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-danger">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Kader</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_kader }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-success">
+              <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Ranting</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_ranting }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-danger">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Kader</h4>
-            </div>
-            <div class="card-body">
-              {{ $total_kader }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-success">
-            <i class="fas fa-warehouse"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Ranting</h4>
-            </div>
-            <div class="card-body">
-              {{ $total_ranting }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    @endcan
 
-    <h1>Untuk Admin Ranting</h1>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-danger">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Kader</h4>
+    {{-- Admin Ranting --}}
+    @can('admin-ranting')
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-danger">
+              <i class="fas fa-users"></i>
             </div>
-            <div class="card-body">
-              {{ $total_kader }}
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Total Kader</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_kader }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
+    @endcan
+    @if (session('message_change_password'))
+      <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+          </button>
+          {{ session('message_change_password') }}
+        </div>
+      </div>
+    @endif
     <div class="section-body">
       <div class="row">
         <div class="col-lg-12">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KaderOrtom;
 use App\Models\Ortom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KaderOrtomController extends Controller
 {
@@ -17,7 +18,7 @@ class KaderOrtomController extends Controller
   public function index()
   {
     return view('kader.ortom.index', [
-      'ortom' => KaderOrtom::orderBy('created_at', 'desc')->get()
+      'ortom' => KaderOrtom::where('kader_nik', Auth::user()->kader_nik)->orderBy('created_at', 'desc')->get()
     ]);
   }
 
@@ -46,8 +47,8 @@ class KaderOrtomController extends Controller
       'ortom_id_ortom' => ['required'],
       'ortom_uraian' => ['required', 'min:5'],
     ]);
-    // tambah nik user
-    $validated['kader_nik'] = '3372010107000002';
+    // tambah nik user sesuai user yang login
+    $validated['kader_nik'] = Auth::user()->kader_nik;
 
     // insert ke tabel kader_has_ortom
     KaderOrtom::create($validated);

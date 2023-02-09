@@ -10,6 +10,16 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
+               @if (session('change_password'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('change_password') }}
+                  </div>
+                </div>
+              @endif
               <div class="row mb-3 pr-0">
                 <div class="col-lg-3 mb-3">
                   <img src="{{ url('') }}/img/avatar-3.png" class="rounded mx-auto d-block" alt=""

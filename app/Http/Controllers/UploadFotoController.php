@@ -20,9 +20,8 @@ class UploadFotoController extends Controller
       'foto' => ['mimes:jpg,png']
     ]);
 
-    // ambil data user
-    // $kader = Kader::where('nik', Auth::user()->kader_nik)->first();
-    $kader = Kader::where('nik', '3372010107000002')->first();
+    // ambil data user sesuai dengan user yang login
+    $kader = Kader::where('nik', Auth::user()->kader_nik)->first();
 
     // cek jika foto awal user merupakan default
     if ($kader->foto !== 'foto profil/avatar-3.png') {

@@ -16,6 +16,7 @@ use App\Models\KaderOrtom;
 use App\Models\KaderPotensi;
 use App\Models\KaderJabatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -31,8 +32,15 @@ class AdminDataKaderController extends Controller
    */
   public function index()
   {
+    // cek jika ada super admin jangan di tampilkan
+    $kader = collect([]);
+    $user = User::where('kategori_user_id', '!=', 2)->orderBy('created_at', 'desc')->get();
+    foreach ($user as $u) {
+      $kader->push(Kader::where('nik', $u->kader->nik)->first());
+    }
+
     return view('admin.data-kader.index', [
-      'kader' => Kader::orderBy('created_at', 'desc')->get()
+      'kader' => $kader
     ]);
   }
 
@@ -168,6 +176,11 @@ class AdminDataKaderController extends Controller
    */
   public function show(Kader $kader)
   {
+    // cek jika ada super admin jangan di tampilkan
+    $user = User::where('kader_nik', $kader->nik)->first();
+    if ($user->kategori_user_id == 2) {
+      return abort(404);
+    }
     return view('admin.data-kader.show', [
       'kader' => $kader,
     ]);
@@ -180,7 +193,12 @@ class AdminDataKaderController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function edit(Kader $kader)
-  {
+  { // cek jika ada super admin jangan di tampilkan
+    $user = User::where('kader_nik', $kader->nik)->first();
+    if ($user->kategori_user_id == 2) {
+      return abort(404);
+    }
+
     return view('admin.data-kader.edit', [
       'kader' => $kader,
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
@@ -197,6 +215,12 @@ class AdminDataKaderController extends Controller
    */
   public function update(Request $request, Kader $kader)
   {
+    // cek jika ada super admin jangan di tampilkan
+    $user = User::where('kader_nik', $kader->nik)->first();
+    if ($user->kategori_user_id == 2) {
+      return abort(404);
+    }
+
     $role = [
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16'],
       'no_kta' => ['nullable', 'numeric'],
@@ -227,6 +251,8 @@ class AdminDataKaderController extends Controller
       $role['no_ktm'] =  ['nullable', 'numeric', 'unique:App\Models\Kader,no_ktm'];
     } elseif ($kader->email != $request->email) {
       $role['email'] = ['nullable', 'email:dns', 'unique:App\Models\Kader,email'];
+    } elseif ($kader->no_ponsel != $request->no_ponsel) {
+      $role['no_ponsel'] = ['required', 'numeric', 'max_digits:12', 'min_digits:12', 'unique:App\Models\User,no_ponsel'];
     }
 
     // validasi data
@@ -301,8 +327,28 @@ class AdminDataKaderController extends Controller
       $data['no_ponsel'] = $request->no_ponsel;
 
       // update data di tabel user
-      // User::where('kader_nik', Auth::user()->kader_nik)->update($data);
       User::where('kader_nik', $kader->nik)->update($data);
+    }
+
+    // cari user di tabel kader_has_ortom
+    $kader_ortom = KaderOrtom::where('kader_nik', $kader->nik)->get();
+    if ($kader_ortom) {
+      // update data di tabel kader_has_ortom
+      KaderOrtom::where('kader_nik', $kader->nik)->update(['kader_nik' => $kader->nik]);
+    }
+
+    // cari user di tabel kader_has_potensi
+    $kader_potensi = KaderPotensi::where('kader_nik', $kader->nik)->get();
+    if ($kader_potensi) {
+      // update data di tabel kader_has_ortom
+      KaderPotensi::where('kader_nik', $kader->nik)->update(['kader_nik' => $kader->nik]);
+    }
+
+    // cari user di tabel kader_jabatan
+    $kader_jabatan = KaderJabatan::where('kader_nik', $kader->nik)->get();
+    if ($kader_jabatan) {
+      // update data di tabel kader_has_ortom
+      KaderJabatan::where('kader_nik', $kader->nik)->update(['kader_nik' => $kader->nik]);
     }
 
     // update data di tabel kader
@@ -320,6 +366,14 @@ class AdminDataKaderController extends Controller
    */
   public function destroy(Kader $kader)
   {
+    return $kader;
+
+    // cek jika ada super admin jangan di tampilkan
+    $user = User::where('kader_nik', $kader->nik)->first();
+    if ($user->kategori_user_id == 2) {
+      return abort(404);
+    }
+
     // delete data di tabel kader_has_ortom
     KaderOrtom::where('kader_nik', $kader->nik)->delete();
 
@@ -357,6 +411,10 @@ class AdminDataKaderController extends Controller
 
   public function export()
   {
+    // cek user apakah seorang super admin dan admin daerah
+    if (Auth::user()->kategori_user_id != 2 || Auth::user()->kategori_user_id != 3) {
+      return redirect('/admin');
+    }
     return Excel::download(new KaderExport, 'Data Kader per ' . date('d-m-Y') . '.xlsx');
   }
 }
