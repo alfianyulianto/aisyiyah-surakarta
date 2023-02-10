@@ -21,9 +21,9 @@ class AdminDataJabatanController extends Controller
     // cek user apakah seorang super admin atau admin-daerah
     if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
       $jabatan = Jabatan::where('daerah_id_daerah', Daerah::get()->first()->id_daerah)->orderBy('created_at', 'asc')->get();
-    } else if (Auth::user()->ketegori_user_id == 4) { // jika user seorang admin cabang
+    } elseif (Auth::user()->kategori_user_id == 4) { // jika user seorang admin cabang
       $jabatan = Jabatan::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get();
-    } else if (Auth::user()->ketegoori_user_id == 5) { // jika user seorag admin ranting
+    } elseif (Auth::user()->ketegori_user_id == 5) { // jika user seorag admin ranting
       $jabatan = Jabatan::where('ranting_id_ranting', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get();
     };
     // $jabatan = Jabatan::orderBy('created_at', 'asc')->get();

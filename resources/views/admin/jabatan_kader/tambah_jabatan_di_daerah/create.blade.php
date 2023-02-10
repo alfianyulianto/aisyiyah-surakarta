@@ -74,7 +74,7 @@
                           <label for="kader" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="kader" name="kader">
                             <option selected disabled>-- Pilih Kader --</option>
-                            <option disabled>Tidak Ada Data Kader di {{ $nama_daerah }}</option>
+                            <option disabled>Tidak Ada Data Kader di Daerah {{ $nama_daerah }}</option>
                           </select>
                           @error('kader')
                             <div class="error-message">
@@ -163,8 +163,8 @@
                         <td>
                           <a href="/data/jabatan/kader/daerah/{{ $kj->kader_nik }}" target="_blank"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="/jabatan/kader/daerah/{{ $kj->kader_nik }}/{{ $id_daerah }}" method="post"
-                            class="d-inline-block">
+                          <form action="/jabatan/kader/daerah/{{ $kj->id_kader_jabatan }}/{{ $id_daerah }}"
+                            method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
                             <input type="hidden" name="jabatan" id="jabatan"
@@ -193,17 +193,17 @@
         url: "/get/jabatan/kader/daerah/" + id_periode + "/" + <?= json_encode($id_daerah) ?>,
         dataType: "json",
         success: function(response) {
-          console.log(response);
-          let jabatan = "<option selected disabled>-- Pilih Jabatan --</option>";
+          // console.log(response);
           let kader = "<option selected disabled>-- Pilih Kader --</option>";
-          response['jabatan'].forEach((j) => {
-            jabatan += `<option value="${j.id_jabatan}">${j.nama_jabatan}</option>`;
-          });
           response['kader'].forEach((k) => {
             kader += `<option value="${k.nik}">${k.nama}</option>`;
           });
-          $("#jabatan").html(jabatan);
           $("#kader").html(kader);
+          let jabatan = "<option selected disabled>-- Pilih Jabatan --</option>";
+          response['jabatan'].forEach((j) => {
+            jabatan += `<option value="${j.id_jabatan}">${j.nama_jabatan}</option>`;
+          });
+          $("#jabatan").html(jabatan);
         }
       });
     });

@@ -33,7 +33,8 @@
                   <tr>
                     <td>{{ $daerah->nama_daerah }}</td>
                     <td class="text-center">
-                      {{ DB::table('users')->where('admin_at', $daerah->id_daerah)->count() ?? 0 }}</td>
+                      {{ DB::table('users')->where('kategori_user_id', 3)->where('admin_at', $daerah->id_daerah)->count() ?? 0 }}
+                    </td>
                     <td>
                       <a href="/admin/daerah/{{ $daerah->id_daerah }}" target="_blank"
                         class="btn btn-icon icon-left btn-success"><i class="fas fa-user-plus"></i>
@@ -68,7 +69,8 @@
                   @foreach ($ranting as $r)
                     <tr>
                       <td>{{ $r->nama_ranting }}</td>
-                      <td class="text-center">{{ DB::table('users')->where('admin_at', $r->id_ranting)->count() ?? 0 }}
+                      <td class="text-center">
+                        {{ DB::table('users')->where('kategori_user_id', 5)->where('admin_at', $r->id_ranting)->count() ?? 0 }}
                       </td>
                       <td>
                         <a href="/admin/ranting/{{ $r->id_ranting }}" target="_blank"
@@ -109,7 +111,8 @@
                   @foreach ($cabang as $c)
                     <tr>
                       <td>{{ $c->nama_cabang }}</td>
-                      <td class="text-center">{{ DB::table('users')->where('admin_at', $c->id_cabang)->count() ?? 0 }}
+                      <td class="text-center">
+                        {{ DB::table('users')->where('kategori_user_id', 4)->where('admin_at', $c->id_cabang)->count() ?? 0 }}
                       </td>
                       <td>
                         <a href="/admin/cabang/{{ $c->id_cabang }}" target="_blank"

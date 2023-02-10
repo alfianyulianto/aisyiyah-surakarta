@@ -11,13 +11,6 @@ use Illuminate\Support\Str;
 
 class DataPotensiController extends Controller
 {
-  public function __construct()
-  {
-    // cek jika user bukan super admin
-    if (Auth::user()->kategori_user_id != 2) {
-      return abort(404);
-    }
-  }
   /**
    * Display a listing of the resource.
    *

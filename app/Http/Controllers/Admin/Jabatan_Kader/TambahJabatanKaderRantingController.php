@@ -17,11 +17,23 @@ class TambahJabatanKaderRantingController extends Controller
 {
   public function create($id)
   {
+    // data kader_jabatan
+    $kader_jabatan = collect([]);
+    $periode = Periode::orderBy('created_at', 'desc')->get();
+    foreach ($periode as $p) {
+      $jabatan = Jabatan::where('ranting_id_ranting', $id)->orderBy('created_at', 'asc')->get();
+      foreach ($jabatan as $j) {
+        $kader = KaderJabatan::where('periode_id_periode', $p->id_periode)->where('jabatan_id_jabatan', $j->id_jabatan)->get();
+        foreach ($kader as $k) {
+          $kader_jabatan->push($k);
+        }
+      }
+    }
     return view('admin.jabatan_kader.tambah_jabatan_di_ranting.create', [
       'periode' => Periode::orderBy('created_at', 'desc')->get(),
       'nama_ranting' => Ranting::where('id_ranting', $id)->first()->nama_ranting,
       'id_ranting' => $id,
-      'kader_jabatan' => KaderJabatan::where('jabatan_at', $id)->get()
+      'kader_jabatan' => $kader_jabatan
     ]);
   }
 
@@ -51,7 +63,10 @@ class TambahJabatanKaderRantingController extends Controller
     // ambil data jabatan
     $nama_jabatan = Jabatan::where('id_jabatan', $request->jabatan)->first()->nama_jabatan;
 
-    return redirect('/jabatan/kader/ranting/' . $id)->with('message_pimp_ranting', 'Berhasil menambahkan ' . $request->nama . ' sebagai ' . $nama_jabatan . '.');
+    // ambil data periode
+    $periode = Periode::where('id_periode', $request->periode)->first()->periode;
+
+    return redirect('/jabatan/kader/ranting/' . $id)->with('message_pimp_ranting', 'Berhasil menambahkan ' . $request->nama . ' sebagai ' . $nama_jabatan . ' periode ' . $periode . '.');
   }
 
   public function show(Kader $kader)
@@ -61,12 +76,18 @@ class TambahJabatanKaderRantingController extends Controller
     ]);
   }
 
-  public function destroy(Request $request, Kader $kader, $id)
+  public function destroy(Request $request, KaderJabatan $kader_jabatan, $id)
   {
-    // delete data di tabel kader_jabatan
-    KaderJabatan::where('kader_nik', $kader->nik)->delete();
+    // ambil data kader
+    $kader = Kader::where('nik', $kader_jabatan->kader_nik)->first();
 
-    return redirect('/jabatan/kader/cabang/' . $id)->with('message_delete_pimp_ranting', 'Berhasil menghapus ' . $kader->nama . ' sebagai ' . $request->jabatan . '.');
+    // ambil data periode
+    $periode = Periode::where('id_periode', $kader_jabatan->periode_id_periode)->first()->periode;
+
+    // delete data di tabel kader_jabatan
+    $kader_jabatan->delete();
+
+    return redirect('/jabatan/kader/cabang/' . $id)->with('message_delete_pimp_ranting', 'Berhasil menghapus ' . $kader->nama . ' sebagai ' . $request->jabatan . ' periode ' . $periode . '.');
   }
 
   public function get_jabatan(Periode $periode, Ranting $ranting)
@@ -84,7 +105,7 @@ class TambahJabatanKaderRantingController extends Controller
     // data jabatan
     $jabatan_kosong = collect([]);
     // ambil semua jabatan
-    $jabatan = Jabatan::orderBy('created_at', 'asc')->get();
+    $jabatan = Jabatan::where('ranting_id_ranting', $ranting->id_ranting)->orderBy('created_at', 'asc')->get();
     foreach ($jabatan as $j) {
       if (!KaderJabatan::where('periode_id_periode', $periode->id_periode)->where('jabatan_id_jabatan', $j->id_jabatan)->first() || $j->multiple_kader == true) {
         $jabatan_kosong->push($j);

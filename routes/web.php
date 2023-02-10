@@ -51,7 +51,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // dashboard
-Route::get('/admin', [AdminDashboardController::class, 'index'])->middleware('auth');
+Route::get('/admin', [AdminDashboardController::class, 'index'])->middleware('admin');
 
 // upload foto
 Route::get('/upload/foto', [UploadFotoController::class, 'index'])->middleware('auth');
@@ -102,17 +102,17 @@ Route::get('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahJabatanKaderDaerah
 Route::get('/get/jabatan/kader/daerah/{periode:id_periode}/{daerah}', [TambahJabatanKaderDaerahController::class, 'get_jabatan'])->middleware('admin');
 Route::post('/jabatan/kader/daerah/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'store']);
 Route::get('/data/jabatan/kader/daerah/{kader:nik}', [TambahJabatanKaderDaerahController::class, 'show'])->middleware('admin');
-Route::delete('/jabatan/kader/daerah/{kader:nik}/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'destroy']);
+Route::delete('/jabatan/kader/daerah/{kader_jabatan:id_kader_jabatan}/{daerah:id_daerah}', [TambahJabatanKaderDaerahController::class, 'destroy']);
 Route::get('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'create'])->middleware('admin');
 Route::get('/get/jabatan/kader/cabang/{periode:id_periode}/{cabang}', [TambahJabatanKaderCabangController::class, 'get_jabatan'])->middleware('admin');
 Route::post('/jabatan/kader/cabang/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'store']);
 Route::get('/data/jabatan/kader/cabang/{kader:nik}', [TambahJabatanKaderCabangController::class, 'show'])->middleware('admin');
-Route::delete('/jabatan/kader/cabang/{kader:nik}/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'destroy']);
+Route::delete('/jabatan/kader/cabang//{kader_jabatan:id_kader_jabatan}/{cabang:id_cabang}', [TambahJabatanKaderCabangController::class, 'destroy']);
 Route::get('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'create'])->middleware('admin');
 Route::get('/get/jabatan/kader/ranting/{periode:id_periode}/{ranting}', [TambahJabatanKaderRantingController::class, 'get_jabatan'])->middleware('admin');
 Route::post('/jabatan/kader/ranting/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'store']);
 Route::get('/data/jabatan/kader/ranting/{kader:nik}', [TambahJabatanKaderRantingController::class, 'show'])->middleware('admin');
-Route::delete('/jabatan/kader/ranting/{kader:nik}/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'destroy']);
+Route::delete('/jabatan/kader/ranting//{kader_jabatan:id_kader_jabatan}/{ranting:id_ranting}', [TambahJabatanKaderRantingController::class, 'destroy']);
 
 // admin {Fitur:Data Master}
 Route::resource('/data/daerah', AdminDataDaerahController::class)->middleware('admin');
@@ -134,7 +134,6 @@ Route::get('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::cla
 Route::post('/admin/cabang/{cabang:id_cabang}', [TambahAdminCabangController::class, 'store']);
 Route::get('/data/admin/cabang/kader/{kader:nik}/{cabang:id_cabang}', [TambahAdminCabangController::class, 'show'])->middleware('admin');
 Route::delete('/admin/cabang/{kader:nik}/{cabang:id_cabang}', [TambahAdminCabangController::class, 'destroy']);
-// Route::get('/tambah/admin/cabang/getkader/{kader}', [TambahAdminCabangController::class, 'get_kader']);
 Route::get('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'create'])->middleware('admin');
 Route::post('/admin/ranting/{ranting:id_ranting}', [TambahAdminRantingController::class, 'store']);
 Route::get('/data/admin/ranting/kader/{kader:nik}/{ranting:id_ranting}', [TambahAdminRantingController::class, 'show'])->middleware('admin');

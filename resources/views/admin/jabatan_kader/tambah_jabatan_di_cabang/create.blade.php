@@ -57,7 +57,7 @@
                           <label for="jabatan" class="form-label"><b>Posisi Jabatan</b></label>
                           <select class="form-control form-control-lg select2" id="jabatan" name="jabatan">
                             <option selected disabled>-- Pilih Jabatan --</option>
-                            <option disabled>Tidak Ada Posisi Jabatan di Daerah {{ $nama_daerah }}</option>
+                            <option disabled>Tidak Ada Posisi Jabatan di Cabang {{ $nama_cabang }}</option>
                           </select>
                           @error('jabatan')
                             <div class="error-message">
@@ -73,7 +73,7 @@
                           <label for="kader" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="kader" name="kader">
                             <option selected disabled>-- Pilih Kader --</option>
-                            <option disabled>Tidak Ada Data Kader di {{ $nama_daerah }}</option>
+                            <option disabled>Tidak Ada Data Kader di Cabang {{ $nama_cabang }}</option>
                           </select>
                           @error('kader')
                             <div class="error-message">
@@ -160,10 +160,10 @@
                         <td>{{ $kj->jabatan->nama_jabatan }}</td>
                         <td>{{ $kj->periode->periode }}</td>
                         <td>
-                          <a href="/data/jabatan/kader/ranting/{{ $kj->kader_nik }}" target="_blank"
+                          <a href="/data/jabatan/kader/cabang/{{ $kj->kader_nik }}" target="_blank"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="/jabatan/kader/ranting/{{ $kj->kader_nik }}/{{ $id_ranting }}"
-                            method="post" class="d-inline-block">
+                          <form action="/jabatan/kader/cabang/{{ $kj->id_kader_jabatan }}/{{ $id_cabang }}" method="post"
+                            class="d-inline-block">
                             @csrf
                             @method('delete')
                             <input type="hidden" name="jabatan" id="jabatan"
@@ -192,17 +192,17 @@
         url: "/get/jabatan/kader/cabang/" + id_periode + "/" + <?= json_encode($id_cabang) ?>,
         dataType: "json",
         success: function(response) {
-          console.log(response);
-          let jabatan = "<option selected disabled>-- Pilih Jabatan --</option>";
-          let kader = "<option selected disabled>-- Pilih Kader --</option>";
-          response['jabatan'].forEach((j) => {
-            jabatan += `<option value="${j.id_jabatan}">${j.nama_jabatan}</option>`;
-          });
-          response['kader'].forEach((k) => {
-            kader += `<option value="${k.nik}">${k.nama}</option>`;
-          });
-          $("#jabatan").html(jabatan);
-          $("#kader").html(kader);
+          // console.log(response);
+            let kader = "<option selected disabled>-- Pilih Kader --</option>";
+            response['kader'].forEach((k) => {
+              kader += `<option value="${k.nik}">${k.nama}</option>`;
+            });
+            $("#kader").html(kader);
+            let jabatan = "<option selected disabled>-- Pilih Jabatan --</option>";
+            response['jabatan'].forEach((j) => {
+              jabatan += `<option value="${j.id_jabatan}">${j.nama_jabatan}</option>`;
+            });
+            $("#jabatan").html(jabatan);
         }
       });
     });

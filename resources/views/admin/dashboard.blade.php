@@ -17,10 +17,57 @@
             </div>
             <div class="card-wrap">
               <div class="card-header">
-                <h4>Total Admin</h4>
+                <h4>Admin</h4>
               </div>
               <div class="card-body">
                 {{ $total_admin }}
+              </div>
+            </div>
+          </div>
+        </div>
+        @can('admin')
+          <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+              <div class="card-icon bg-primary">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="card-wrap">
+                <div class="card-header">
+                  <h4>Admin Daerah</h4>
+                </div>
+                <div class="card-body">
+                  {{ $total_admin_daerah }}
+                </div>
+              </div>
+            </div>
+          </div>
+        @endcan
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-primary">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Admin Cabang</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_admin_cabang }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <div class="card card-statistic-1">
+            <div class="card-icon bg-primary">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>Admin Ranting</h4>
+              </div>
+              <div class="card-body">
+                {{ $total_admin_ranting }}
               </div>
             </div>
           </div>
@@ -86,7 +133,7 @@
                 <h4>Total Admin</h4>
               </div>
               <div class="card-body">
-                {{ $total_admin }}
+                {{ $total_admin_cabang }}
               </div>
             </div>
           </div>
@@ -167,17 +214,39 @@
                 <div class="col-lg-9">
                   <div class="d-inline py-3">
                     <p class="mb-0 px-0 text-primary" style="font-size: 20px; font-weight: bold; line-height: 28px">
-                      <b class="text-uppercase">{{ $kader->nama }}</b> <b>(Admin)</b>
+                      <b class="text-uppercase">{{ $kader->nama }}</b>
+                      @php
+                        $admin_at = DB::table('users')
+                            ->where('kader_nik', $kader->nik)
+                            ->first()->admin_at;
+                        $kategori_user_id = DB::table('users')
+                            ->where('kader_nik', $kader->nik)
+                            ->first()->kategori_user_id;
+                      @endphp
+                      @if ($kategori_user_id == 2)
+                        <b>{{ $admin_at ? 'Super Admin' : '' }}</b>
+                      @endif
+                      @if ($kategori_user_id == 3)
+                        <b>{{ $admin_at ? '(Admin Daerah)' : '' }}</b>
+                      @endif
+                      @if ($kategori_user_id == 4)
+                        <b>{{ $admin_at? '(Admin Cabang ' .DB::table('cabang')->where('id_cabang', $admin_at)->first()->nama_cabang .')': '' }}</b>
+                      @endif
+                      @if ($kategori_user_id == 5)
+                        <b>{{ $admin_at? '(Admin Ranting ' .DB::table('ranting')->where('id_ranting', $admin_at)->first()->nama_ranting .')': '' }}</b>
+                      @endif
                     </p>
                     @if ($kader->daerah && !$kader->cabang && !$kader->ranting)
                       <p class="mb-0">
-                        <i class="fas fa-user"></i><span class="mx-3">Kader - Daerah {{ $kader->daerah->nama_daerah }}
+                        <i class="fas fa-user"></i><span class="mx-3">Kader - Daerah
+                          {{ $kader->daerah->nama_daerah }}
                         </span>
                       </p>
                     @endif
                     @if ($kader->daerah && $kader->cabang && !$kader->ranting)
                       <p class="mb-0">
-                        <i class="fas fa-user"></i><span class="mx-3">Kader - Cabang {{ $kader->cabang->nama_cabang }}
+                        <i class="fas fa-user"></i><span class="mx-3">Kader - Cabang
+                          {{ $kader->cabang->nama_cabang }}
                         </span>
                       </p>
                     @endif

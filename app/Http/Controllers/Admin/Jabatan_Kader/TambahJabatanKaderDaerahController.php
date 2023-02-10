@@ -20,7 +20,7 @@ class TambahJabatanKaderDaerahController extends Controller
     $kader_jabatan = collect([]);
     $periode = Periode::orderBy('created_at', 'desc')->get();
     foreach ($periode as $p) {
-      $jabatan = Jabatan::orderBy('created_at', 'asc')->get();
+      $jabatan = Jabatan::where('daerah_id_daerah', $id)->orderBy('created_at', 'asc')->get();
       foreach ($jabatan as $j) {
         $kader = KaderJabatan::where('periode_id_periode', $p->id_periode)->where('jabatan_id_jabatan', $j->id_jabatan)->get();
         foreach ($kader as $k) {
@@ -64,7 +64,10 @@ class TambahJabatanKaderDaerahController extends Controller
     // ambil data jabatan
     $nama_jabatan = Jabatan::where('id_jabatan', $request->jabatan)->first()->nama_jabatan;
 
-    return redirect('/jabatan/kader/daerah/' . $id)->with('message_pimp_daerah', 'Berhasil menambahkan ' . $request->nama . ' sebagai ' . $nama_jabatan . '.');
+    // ambil data periode
+    $periode = Periode::where('id_periode', $request->periode)->first()->periode;
+
+    return redirect('/jabatan/kader/daerah/' . $id)->with('message_pimp_daerah', 'Berhasil menambahkan ' . $request->nama . ' sebagai ' . $nama_jabatan . ' periode ' . $periode . '.');
   }
 
   public function show(Kader $kader)
@@ -74,12 +77,18 @@ class TambahJabatanKaderDaerahController extends Controller
     ]);
   }
 
-  public function destroy(Request $request, Kader $kader, $id)
+  public function destroy(Request $request, KaderJabatan $kader_jabatan, $id)
   {
-    // delete data di tabel kader_jabatan
-    KaderJabatan::where('kader_nik', $kader->nik)->delete();
+    // ambil data kader
+    $kader = Kader::where('nik', $kader_jabatan->kader_nik)->first();
 
-    return redirect('/jabatan/kader/daerah/' . $id)->with('message_delete_pimp_daerah', 'Berhasil menghapus ' . $kader->nama . ' sebagai ' . $request->jabatan . '.');
+    // ambil data periode
+    $periode = Periode::where('id_periode', $kader_jabatan->periode_id_periode)->first()->periode;
+
+    // delete data di tabel kader_jabatan
+    $kader_jabatan->delete();
+
+    return redirect('/jabatan/kader/daerah/' . $id)->with('message_delete_pimp_daerah', 'Berhasil menghapus ' . $kader->nama . ' sebagai ' . $request->jabatan . ' periode ' . $periode . '.');
   }
 
   public function get_jabatan(Periode $periode, Daerah $daerah)
@@ -97,7 +106,7 @@ class TambahJabatanKaderDaerahController extends Controller
     // data jabatan
     $jabatan_kosong = collect([]);
     // ambil semua jabatan
-    $jabatan = Jabatan::orderBy('created_at', 'asc')->get();
+    $jabatan = Jabatan::where('daerah_id_daerah', $daerah->id_daerah)->orderBy('created_at', 'asc')->get();
     foreach ($jabatan as $j) {
       if (!KaderJabatan::where('periode_id_periode', $periode->id_periode)->where('jabatan_id_jabatan', $j->id_jabatan)->first() || $j->multiple_kader == true) {
         $jabatan_kosong->push($j);

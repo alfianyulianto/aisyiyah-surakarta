@@ -15,11 +15,6 @@ class SettingsController extends Controller
 {
   public function index()
   {
-    // cek jika user bukan super admin
-    if (Auth::user()->kategori_user_id != 2) {
-      return abort(404);
-    }
-
     return view('admin.settings.index', [
       'ortom' => Ortom::orderBy('created_at', 'asc')->get(),
       'potensi' => Potensi::orderBy('potensi', 'asc')->get(),

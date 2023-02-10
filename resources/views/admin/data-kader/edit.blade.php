@@ -73,24 +73,43 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="cabang_id_cabang" class="form-label"><b>Cabang Aisyiyah</b></label>
-                          <select class="form-control form-control-lg select2" name="cabang_id_cabang"
-                            id="cabang_id_cabang">
-                            @if (old('cabang_id_cabang', $kader->cabang_id_cabang))
-                              <option value="">-- Pilih Cabang --</option>
-                              @foreach ($nama_cabang as $nc)
-                                @if (old('cabang_id_cabang', $kader->cabang_id_cabang) == $nc->id_cabang)
-                                  <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
-                                @else
+                          {{-- cek jika user berstatus admin --}}
+                          @php
+                            $user = DB::table('users')
+                                ->where('kader_nik', $kader->nik)
+                                ->where('kategori_user_id', '!=', 1)
+                                ->where('admin_at', '!=', null)
+                                ->first();
+                            // dd($user);
+                          @endphp
+                          @if ($user)
+                            <select class="form-control form-control-lg select2" name="cabang_id_cabang"
+                              id="cabang_id_cabang">
+                              <option disabled>-- Pilih Cabang --</option>
+                              <option value="{{ $kader->cabang->id_cabang }}" selected>
+                                {{ $kader->cabang->nama_cabang }}
+                              </option>
+                            </select>
+                          @else
+                            <select class="form-control form-control-lg select2" name="cabang_id_cabang"
+                              id="cabang_id_cabang">
+                              @if (old('cabang_id_cabang', $kader->cabang_id_cabang))
+                                <option value="">-- Pilih Cabang --</option>
+                                @foreach ($nama_cabang as $nc)
+                                  @if (old('cabang_id_cabang', $kader->cabang_id_cabang) == $nc->id_cabang)
+                                    <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
+                                  @else
+                                    <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
+                                  @endif
+                                @endforeach
+                              @else
+                                <option value="" selected>-- Pilih Cabang --</option>
+                                @foreach ($nama_cabang as $nc)
                                   <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
-                                @endif
-                              @endforeach
-                            @else
-                              <option value="" selected>-- Pilih Cabang --</option>
-                              @foreach ($nama_cabang as $nc)
-                                <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
-                              @endforeach
-                            @endif
-                          </select>
+                                @endforeach
+                              @endif
+                            </select>
+                          @endif
                           @error('cabang_id_cabang')
                             <div class="error-message">
                               {{ $message }}
@@ -360,7 +379,7 @@
         url: "/get/ranting/" + id_cabang,
         dataType: "json",
         success: (response) => {
-          // console.log(response);
+          console.log(response);
           let ranting;
           // cek jika id_ranting kosong
           if (!id_ranting) {

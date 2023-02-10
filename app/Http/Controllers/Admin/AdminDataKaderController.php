@@ -154,6 +154,7 @@ class AdminDataKaderController extends Controller
       'pendidikan_terakhir_id_pendidikan_terakhir' => $request->pendidikan_terakhir_id_pendidikan_terakhir,
       'no_ponsel' => $request->no_ponsel,
       'alamat_asal_ktp' => $request->alamat_asal_ktp,
+      'foto' => 'foto profil/avatar-3.png'
     ];
     // cek jika user melakukan cek list
     if (!$request->cek_alamat) {
@@ -412,9 +413,9 @@ class AdminDataKaderController extends Controller
   public function export()
   {
     // cek user apakah seorang super admin dan admin daerah
-    if (Auth::user()->kategori_user_id != 2 || Auth::user()->kategori_user_id != 3) {
-      return redirect('/admin');
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
+      return Excel::download(new KaderExport, 'Data Kader per ' . date('d-m-Y') . '.xlsx');
     }
-    return Excel::download(new KaderExport, 'Data Kader per ' . date('d-m-Y') . '.xlsx');
+    return redirect('/admin');
   }
 }
