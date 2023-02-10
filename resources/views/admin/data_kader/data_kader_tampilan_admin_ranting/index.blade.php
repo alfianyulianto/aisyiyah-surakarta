@@ -3,7 +3,8 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Profile Kader 'Aisyiyah</h1>
+      <h1>Data Kader Ranting
+        {{ DB::table('ranting')->where('id_ranting', Auth::user()->admin_at)->first()->nama_ranting }} Kota Surakarta</h1>
     </div>
 
     <div class="section-body">
@@ -31,15 +32,9 @@
                   </div>
                 </div>
               @endif
-              <a href="/data/kader/create" class="btn btn-icon icon-left btn-primary mb-3"><i
+              <a href="/data/kader/ranting/create" class="btn btn-icon icon-left btn-primary mb-3"><i
                   class="fas fa-user-plus"></i>
                 Tambah Kader</a>
-              @can('admin')
-                <div class="mb-3">
-                  <a href="/kader/export" class="btn btn-icon icon-left btn-warning mb-3"><i class='fas fa-file-excel'></i>
-                    Export Excel</a>
-                </div>
-              @endcan
               <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="scroll-x-profil-kader">
                   <thead>
@@ -81,13 +76,13 @@
                         <td>{{ $k->alamat_rumah_tinggal ?? '-' }}</td>
                         <td>{{ $k->no_ponsel }}</td>
                         <td>
-                          <a href="/data/kader/{{ $k->nik }}" class="btn btn-icon icon-left btn-primary"
+                          <a href="/data/kader/cabang/{{ $k->nik }}" class="btn btn-icon icon-left btn-primary"
                             target="_blank"><i class="far fa-eye"></i>
                             Detail</a>
-                          <a href="/data/kader/{{ $k->nik }}/edit" class="btn btn-icon icon-left btn-warning"><i
-                              class="far fa-edit"></i>
+                          <a href="/data/kader/ranting/{{ $k->nik }}/edit"
+                            class="btn btn-icon icon-left btn-warning"><i class="far fa-edit"></i>
                             Edit</a>
-                          <form action="/data/kader/{{ $k->nik }}" method="post" class="d-inline-block">
+                          <form action="/data/kader/ranting/{{ $k->nik }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-icon icon-left btn-danger delete"><i

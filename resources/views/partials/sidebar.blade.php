@@ -31,8 +31,8 @@
          <hr class="my-2">
          <li class="menu-header">Admin</li>
          <li
-           class="nav-item {{ Request::is('data/kader') || Request::is('data/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
-           <a href="/data/kader" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
+           class="nav-item {{ Request::is('data/kader/daerah') || Request::is('data/kader/daerah/*') ? 'active rounded-pill shadow-sm' : '' }}">
+           <a href="/data/kader/daerah" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
          </li>
          <li
            class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
@@ -81,8 +81,8 @@
          <hr class="mb-2">
          <li class="menu-header">Admin Cabang</li>
          <li
-           class="nav-item {{ Request::is('data/kader') || Request::is('data/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
-           <a href="/data/kader" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
+           class="nav-item {{ Request::is('data/kader/cabang') || Request::is('data/kader/cabang/*') ? 'active rounded-pill shadow-sm' : '' }}">
+           <a href="/data/kader/cabang" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
          </li>
          <li
            class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
@@ -125,8 +125,8 @@
          <hr class="mb-2">
          <li class="menu-header">Admin Ranting</li>
          <li
-           class="nav-item {{ Request::is('data/kader') || Request::is('data/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
-           <a href="/data/kader" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
+           class="nav-item {{ Request::is('data/kader/ranting') || Request::is('data/kader/ranting/*') ? 'active rounded-pill shadow-sm' : '' }}">
+           <a href="/data/kader/ranting" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
          </li>
          <li
            class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">

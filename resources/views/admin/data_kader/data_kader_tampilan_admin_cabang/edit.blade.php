@@ -3,7 +3,8 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Update Profile</h1>
+      <h1>Update Data Kader Cabang
+        {{ DB::table('cabang')->where('id_cabang', Auth::user()->admin_at)->first()->nama_cabang }} Kota Surakarta</h1>
     </div>
 
     <div class="section-body">
@@ -11,26 +12,16 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              @if (session('message_kader'))
-                <div class="alert alert-success alert-dismissible show fade">
-                  <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                      <span>&times;</span>
-                    </button>
-                    {{ session('message_kader') }}
-                  </div>
-                </div>
-              @endif
               <div class="row">
                 <div class="col-lg-10">
-                  <form action="/profil/update" method="post">
+                  <form action="/data/kader/cabang/{{ $kader->nik }}" method="post">
                     @csrf
                     @method('put')
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="nik" class="form-label"><b>NIK</b></label>
-                          <input type="text" class="form-control" name="nik" id="nik"
+                          <input type="number" class="form-control" name="nik" id="nik"
                             placeholder="Nomer Induk Kependudukan (cnth:3372******)" value="{{ old('nik', $kader->nik) }}"
                             autofocus>
                           @error('nik')
@@ -70,8 +61,7 @@
                         <div class="mb-3">
                           <label for="nama" class="form-label"><b>Nama Lengkap</b></label>
                           <input type="text" class="form-control" name="nama" id="nama"
-                            placeholder="Nama Lengkap (cnth:Alfian Yulianto)"
-                            value="{{ old('nama', $kader->nama), $kader->nama }}">
+                            placeholder="Nama Lengkap (cnth:Alfian Yulianto)" value="{{ old('nama', $kader->nama) }}">
                           @error('nama')
                             <div class="error-message">
                               {{ $message }}
@@ -84,35 +74,8 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="cabang_id_cabang" class="form-label"><b>Cabang Aisyiyah</b></label>
-                          {{-- cek jika user berstatus admin --}}
-                          @if (Auth::user()->admin_at)
-                            <select class="form-control form-control-lg select2" name="cabang_id_cabang"
-                              id="cabang_id_cabang">
-                              <option disabled>-- Pilih Cabang --</option>
-                              <option value="{{ Auth::user()->admin_at }}" selected>
-                                {{ DB::table('cabang')->where('id_cabang', Auth::user()->admin_at)->first()->nama_cabang }}
-                              </option>
-                            </select>
-                          @else
-                            <select class="form-control form-control-lg select2" name="cabang_id_cabang"
-                              id="cabang_id_cabang">
-                              @if (old('cabang_id_cabang', $kader->cabang_id_cabang))
-                                <option value="">-- Pilih Cabang --</option>
-                                @foreach ($nama_cabang as $nc)
-                                  @if (old('cabang_id_cabang', $kader->cabang_id_cabang) == $nc->id_cabang)
-                                    <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
-                                  @else
-                                    <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
-                                  @endif
-                                @endforeach
-                              @else
-                                <option selected value="">-- Pilih Cabang --</option>
-                                @foreach ($nama_cabang as $nc)
-                                  <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
-                                @endforeach
-                              @endif
-                            </select>
-                          @endif
+                          <input type="text" class="form-control" name="cabang_id_cabang" id="cabang_id_cabang"
+                            value="{{ old('cabang_id_cabang', $cabang->nama_cabang) }}" readonly>
                           @error('cabang_id_cabang')
                             <div class="error-message">
                               {{ $message }}
@@ -122,13 +85,24 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="mb-3">
-                          <input type="hidden" name="kader_ranting" id="kader_ranting"
-                            value="{{ old('ranting_id_ranting', $kader->ranting_id_ranting) }}">
                           <label for="ranting_id_ranting" class="form-label"><b>Ranting Aisyiyah</b></label>
                           <select class="form-control form-control-lg select2" name="ranting_id_ranting"
                             id="ranting_id_ranting">
-                            <option value="" selected disabled>-- Pilih Ranting --</option>
-                            <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
+                            @if (old('ranting_id_ranting', $kader->ranting_id_ranting))
+                              <option value="">-- Pilih Ranting --</option>
+                              @foreach ($nama_ranting as $nr)
+                                @if (old('ranting_id_ranting', $kader->ranting_id_ranting) == $nr->id_ranting)
+                                  <option value="{{ $nr->id_ranting }}" selected>{{ $nr->nama_ranting }}</option>
+                                @else
+                                  <option value="{{ $nr->id_ranting }}">{{ $nr->nama_ranting }}</option>
+                                @endif
+                              @endforeach
+                            @else
+                              <option value="" selected>-- Pilih Ranting --</option>
+                              @foreach ($nama_ranting as $nr)
+                                <option value="{{ $nr->id_ranting }}">{{ $nr->nama_ranting }}</option>
+                              @endforeach
+                            @endif
                           </select>
                           @error('ranting_id_ranting')
                             <div class="error-message">
@@ -191,25 +165,25 @@
                           <select class="form-control form-control-lg selectric " name="status_pernikahan"
                             id="status_pernikahan">
                             @if (old('status_pernikahan', $kader->status_pernikahan) == 'Belum Menikah')
-                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah" selected>Belum Menikah</option>
                               <option value="Menikah">Menikah</option>
                               <option value="Janda">Janda</option>
                             @endif
                             @if (old('status_pernikahan', $kader->status_pernikahan) == 'Menikah')
-                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah">Belum Menikah</option>
                               <option value="Menikah" selected>Menikah</option>
                               <option value="Janda">Janda</option>
                             @endif
                             @if (old('status_pernikahan', $kader->status_pernikahan) == 'Janda')
-                              <option disabled>-- Pilih ProvinStatussi --</option>
+                              <option disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah">Belum Menikah</option>
                               <option value="Menikah">Menikah</option>
                               <option value="Janda" selected>Janda</option>
                             @endif
                             @if (!old('status_pernikahan', $kader->status_pernikahan))
-                              <option selected disabled>-- Pilih ProvinStatussi --</option>
+                              <option selected disabled>-- Pilih Status Pernikahan --</option>
                               <option value="Belum Menikah">Belum Menikah</option>
                               <option value="Menikah">Menikah</option>
                               <option value="Janda">Janda</option>
@@ -240,7 +214,7 @@
                         <div class="mb-3">
                           <label for="pendidikan_terakhir_id_pendidikan_terakhir" class="form-label"><b>Pendidikan
                               Terakhir</b></label>
-                          <select class="form-control form-control-lg selectric "
+                          <select class="form-control form-control-lg selectric"
                             name="pendidikan_terakhir_id_pendidikan_terakhir"
                             id="pendidikan_terakhir_id_pendidikan_terakhir">
                             @if (old('pendidikan_terakhir_id_pendidikan_terakhir', $kader->pendidikan_terakhir_id_pendidikan_terakhir))
@@ -271,7 +245,7 @@
                       <div class="col-lg-6">
                         <div class="mb-3">
                           <label for="no_ponsel" class="form-label"><b>Nomer Handphone</b></label>
-                          <input type="text" class="form-control" name="no_ponsel" id="no_ponsel"
+                          <input type="number" class="form-control" name="no_ponsel" id="no_ponsel"
                             placeholder="Nomer Handphone (cnth: 081*****)"
                             value="{{ old('no_ponsel', $kader->no_ponsel) }}">
                           @error('no_ponsel')
@@ -331,7 +305,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mt-2">
-                      <button type="submit" class="btn btn-primary">Update Profil</button>
+                      <button type="submit" class="btn btn-primary">Add Kader</button>
                     </div>
                   </form>
                 </div>
@@ -343,65 +317,4 @@
     </div>
   </section>
   <script src="{{ url('') }}/js/autocomplete-ajax.js"></script>
-  <script>
-    // select cabang
-    $("select#cabang_id_cabang").on("change", function() {
-      let id_cabang = $(this).val();
-      if (id_cabang) {
-        $.ajax({
-          type: "get",
-          url: "/get/ranting/" + id_cabang,
-          dataType: "json",
-          success: (response) => {
-            console.log(response);
-            let ranting =
-              "<option value='' selected >-- Pilih Ranting --</option>";
-            response.forEach((i) => {
-              ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
-            });
-            $("select#ranting_id_ranting").html(ranting);
-          },
-        });
-      } else {
-        $("select#ranting_id_ranting").html(`
-          <option value='' selected disabled>-- Pilih Ranting --</option>
-          <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
-        `);
-      }
-    });
-    $("select#ranting_id_ranting").on("change", function() {
-      console.log($(this).val());
-    });
-  </script>
-  <script>
-    if ($("select#cabang_id_cabang").val()) {
-      let id_cabang = $("select#cabang_id_cabang").val();
-      let id_ranting = $("#kader_ranting").val();
-      console.log(id_cabang);
-      console.log(id_ranting);
-      $.ajax({
-        type: "get",
-        url: "/get/ranting/" + id_cabang,
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let ranting;
-          // cek jika id_ranting kosong
-          if (!id_ranting) {
-            ranting = "<option value='' selected>-- Pilih Ranting --</option>";
-          } else {
-            ranting = "<option value=''>-- Pilih Ranting --</option>";
-          }
-          response.forEach(i => {
-            if (i.id_ranting == id_ranting) {
-              ranting += `<option value="${i.id_ranting}" selected>${ i.nama_ranting }</option>`;
-            } else {
-              ranting += `<option value="${i.id_ranting}">${ i.nama_ranting }</option>`;
-            }
-          })
-          $("select#ranting_id_ranting").html(ranting);
-        }
-      });
-    }
-  </script>
 @endsection

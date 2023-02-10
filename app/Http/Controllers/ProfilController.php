@@ -19,7 +19,15 @@ class ProfilController extends Controller
 {
   public function edit()
   {
-    return view('profil', [
+    // cek jika user seorang adin
+    if (Auth::user()->admin_at) {
+      return view('profil_admin', [
+        'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
+        'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
+        'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
+      ]);
+    }
+    return view('profil_admin', [
       'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),

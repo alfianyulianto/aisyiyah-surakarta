@@ -100,7 +100,7 @@ class AdminDashboardController extends Controller
         'total_kader' => $total_kader,
         'total_ranting' => $total_ranting,
       ]);
-    } elseif (Auth::user()->ketegoori_user_id == 5) { // jika user seorag admin ranting
+    } elseif (Auth::user()->kategori_user_id == 5) { // jika user seorag admin ranting
       $total_kader = Kader::where('ranting_id_ranting', Auth::user()->admin_at)->count();
       return view('admin.dashboard', [
         'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),

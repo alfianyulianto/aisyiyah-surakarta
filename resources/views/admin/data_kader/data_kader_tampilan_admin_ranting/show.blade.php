@@ -123,18 +123,18 @@
               </div>
               <div class="row mt-3">
                 <div class="col-lg-12">
-                  <a href="/data/kader/{{ $kader->nik }}/edit"
+                  <a href="/data/kader/ranting/{{ $kader->nik }}/edit"
                     class="btn btn-icon rounded-pill icon-left btn-warning btn-width mx-auto"><i
                       class="fas fa-edit"></i>Edit Data Kader</a>
                 </div>
               </div>
               <div class="row mt-3">
                 <div class="col-lg-12">
-                  <form action="/data/kader/{{ $kader->nik }}" method="post" class="d-inline-block btn-width">
+                  <form action="/data/kader/ranting/{{ $kader->nik }}" method="post" class="d-inline-block btn-width">
                     @csrf
                     @method('delete')
                     <button type="submit"
-                      class="btn btn-icon rounded-pill icon-left btn-danger delete-cabang btn-width mx-auto delete"><i
+                      class="btn btn-icon rounded-pill icon-left btn-danger delete btn-width mx-auto delete"><i
                         class="far fa-trash-alt"></i> Hapus Data Kader</button>
                   </form>
                 </div>

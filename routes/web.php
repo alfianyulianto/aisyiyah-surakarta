@@ -4,9 +4,11 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDataCabangController;
 use App\Http\Controllers\Admin\AdminDataDaerahController;
 use App\Http\Controllers\Admin\AdminDataJabatanController;
-use App\Http\Controllers\Admin\AdminDataKaderController;
 use App\Http\Controllers\Admin\AdminDataPotensiKaderController;
 use App\Http\Controllers\Admin\AdminDataRantingController;
+use App\Http\Controllers\Admin\Data_Kader\DataKaderDaerahController;
+use App\Http\Controllers\Admin\Data_Kader\DataKaderCabangController;
+use App\Http\Controllers\Admin\Data_Kader\DataKaderRantingController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderCabangController;
 use App\Http\Controllers\Admin\Jabatan_Kader\TambahJabatanKaderDaerahController;
@@ -29,13 +31,9 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\Kader\KaderDashboardController;
 use App\Http\Controllers\Kader\KaderOrtomController;
 use App\Http\Controllers\Kader\KaderPotensiController;
-use App\Http\Controllers\PekerjaanController;
-use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\TempatLahirController;
 use App\Http\Controllers\UploadFotoController;
 use App\Models\Pekerjaan;
-use App\Models\Periode;
 use App\Models\TempatLahir;
 use Illuminate\Support\Facades\Route;
 
@@ -85,12 +83,25 @@ Route::get('/data/pekerjaan', function () {
 })->middleware('auth');
 
 // admin
+// admin {Fitur:Profil}
 Route::get('/profil', [ProfilController::class, 'edit'])->middleware('auth');
 Route::put('/profil/update', [ProfilController::class, 'update'])->middleware('auth');
-Route::resource('/data/kader', AdminDataKaderController::class)->middleware('admin');
-Route::get('/kader/export', [AdminDataKaderController::class, 'export'])->middleware('admin');
-Route::get('/get/kader/{kader:nik}', [AdminDataKaderController::class, 'get_kader'])->middleware('admin');
-Route::get('/get/ranting/{ranting:cabang_id_cabang}', [AdminDataKaderController::class, 'ranting'])->middleware('auth');
+
+// admin {Fitur:Data Kader Daerah}
+Route::resource('/data/kader/daerah', DataKaderDaerahController::class)->middleware('admin');
+Route::resource('/data/kader/daerah', DataKaderDaerahController::class)->middleware('admin');
+Route::get('/kader/export', [DataKaderDaerahController::class, 'export'])->middleware('admin');
+Route::get('/get/kader/{kader:nik}', [DataKaderDaerahController::class, 'get_kader'])->middleware('admin');
+Route::get('/get/ranting/kader/daerah/{ranting:cabang_id_cabang}', [DataKaderDaerahController::class, 'ranting'])->middleware('auth');
+// admin {Fitur:Data Kader Cabang}
+Route::resource('/data/kader/cabang', DataKaderCabangController::class)->middleware('admin');
+Route::get('/get/kader/{kader:nik}', [DataKaderCabangController::class, 'get_kader'])->middleware('admin');
+// admin {Fitur:Data Kader Ranting}
+Route::resource('/data/kader/ranting', DataKaderRantingController::class)->middleware('admin');
+Route::get('/get/kader/{kader:nik}', [DataKaderRantingController::class, 'get_kader'])->middleware('admin');
+Route::get('/get/ranting/kader/ranting/{ranting:cabang_id_cabang}', [DataKaderRantingController::class, 'ranting'])->middleware('auth');
+
+// admin {Fitur:Ortom Admin & Potensi Admin}
 Route::resource('/admin/ortom', OrtomAdminController::class)->middleware('admin');
 Route::resource('/admin/potensi', PotensiAdminController::class)->middleware('admin');
 

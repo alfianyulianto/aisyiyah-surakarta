@@ -13,7 +13,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-10">
-                  <form action="/data/kader" method="post">
+                  <form action="/data/kader/daerah" method="post">
                     @csrf
                     <div class="row">
                       <div class="col-lg-6">
@@ -322,7 +322,7 @@
       if (id_cabang) {
         $.ajax({
           type: "get",
-          url: "/get/ranting/" + id_cabang,
+          url: "/get/ranting/kader/daerah/" + id_cabang,
           dataType: "json",
           success: (response) => {
             console.log(response);
@@ -351,7 +351,7 @@
       let id_ranting = $("#kader_ranting").val();
       $.ajax({
         type: "get",
-        url: "/get/ranting/" + id_cabang,
+        url: "/get/ranting/kader/daerah/" + id_cabang,
         dataType: "json",
         success: (response) => {
           // console.log(response);

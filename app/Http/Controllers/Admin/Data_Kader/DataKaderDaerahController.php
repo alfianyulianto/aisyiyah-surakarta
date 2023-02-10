@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Data_Kader;
 
 use App\Exports\KaderExport;
 use App\Http\Controllers\Controller;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
-class AdminDataKaderController extends Controller
+class DataKaderDaerahController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -34,12 +34,15 @@ class AdminDataKaderController extends Controller
   {
     // cek jika ada super admin jangan di tampilkan di datatable
     $kader = collect([]);
-    $user = User::where('kategori_user_id', '!=', 2)->orderBy('created_at', 'desc')->get();
+    $user = User::where('kategori_user_id', 1)->orderBy('created_at', 'desc')->get();
     foreach ($user as $u) {
-      $kader->push(Kader::where('nik', $u->kader->nik)->first());
+      $cek_kader = Kader::where('daerah_id_daerah', Auth::user()->admin_at)->where('nik', $u->kader_nik)->first();
+      if ($cek_kader) {
+        $kader->push($cek_kader);
+      }
     }
 
-    return view('admin.data-kader.index', [
+    return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.index', [
       'kader' => $kader
     ]);
   }
@@ -51,7 +54,7 @@ class AdminDataKaderController extends Controller
    */
   public function create()
   {
-    return view('admin.data-kader.create', [
+    return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.create', [
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
@@ -166,7 +169,7 @@ class AdminDataKaderController extends Controller
     // insert ke tabel kader
     Kader::create($validatedData);
 
-    return redirect('/data/kader')->with('message_kader', 'Data ' . $request->nama . ' berhasil ditambahkan sebagai kader.');
+    return redirect('/data/kader/daerah')->with('message_kader', 'Data ' . $request->nama . ' berhasil ditambahkan sebagai kader.');
   }
 
   /**
@@ -175,15 +178,15 @@ class AdminDataKaderController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show(Kader $kader)
+  public function show($id)
   {
-    // cek jika ada super admin jangan di tampilkan
-    $user = User::where('kader_nik', $kader->nik)->first();
-    if ($user->kategori_user_id == 2) {
-      return abort(404);
+    // cek jika ada admin jangan di tampilkan
+    $user = User::where('kader_nik', $id)->first();
+    if ($user->admin_at) {
+      return abort(403);
     }
-    return view('admin.data-kader.show', [
-      'kader' => $kader,
+    return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.show', [
+      'kader' => Kader::where('nik', $id)->first(),
     ]);
   }
 
@@ -193,16 +196,16 @@ class AdminDataKaderController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit(Kader $kader)
+  public function edit($id)
   {
-    // cek jika ada super admin jangan di tampilkan
-    $user = User::where('kader_nik', $kader->nik)->first();
-    if ($user->kategori_user_id == 2) {
-      return abort(404);
+    // cek jika ada admin jangan di tampilkan
+    $user = User::where('kader_nik', $id)->first();
+    if ($user->admin_at) {
+      return abort(403);
     }
 
-    return view('admin.data-kader.edit', [
-      'kader' => $kader,
+    return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.edit', [
+      'kader' => Kader::where('nik', $id)->first(),
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
@@ -215,12 +218,12 @@ class AdminDataKaderController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Kader $kader)
+  public function update(Request $request, $id)
   {
-    // cek jika ada super admin jangan di tampilkan
-    $user = User::where('kader_nik', $kader->nik)->first();
+    // cek jika ada admin jangan di tampilkan
+    $user = User::where('kader_nik', $id)->first();
     if ($user->kategori_user_id == 2) {
-      return abort(404);
+      return abort(403);
     }
 
     $role = [
@@ -244,6 +247,8 @@ class AdminDataKaderController extends Controller
       $role['alamat_rumah_tinggal'] = ['required', 'min:15'];
     };
 
+    // ambil data kader
+    $kader = Kader::where('nik', $id)->first();
     // cek jika user tidak mengganti nik, no_kta, no_ktm
     if ($kader->nik != $request->nik) {
       $role['nik'] = ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'];
@@ -357,7 +362,7 @@ class AdminDataKaderController extends Controller
     // $kader->update($validatedData);
     $kader->update($validatedData);
 
-    return redirect('/data/kader')->with('message_kader', 'Data kader ' . $request->nama . ' berhasil diubah.');
+    return redirect('/data/kader/daerah')->with('message_kader', 'Data kader ' . $request->nama . ' berhasil diubah.');
   }
 
   /**
@@ -366,25 +371,25 @@ class AdminDataKaderController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Kader $kader)
+  public function destroy($id)
   {
-    return $kader;
-
     // cek jika ada super admin jangan di tampilkan
-    $user = User::where('kader_nik', $kader->nik)->first();
+    $user = User::where('kader_nik', $id)->first();
     if ($user->kategori_user_id == 2) {
       return abort(404);
     }
 
     // delete data di tabel kader_has_ortom
-    KaderOrtom::where('kader_nik', $kader->nik)->delete();
+    KaderOrtom::where('kader_nik', $id)->delete();
 
     // delete data di tabel kader_has_potensi
-    KaderPotensi::where('kader_nik', $kader->nik)->delete();
+    KaderPotensi::where('kader_nik', $id)->delete();
 
     // delete data di tabel kader_jabatan
-    KaderJabatan::where('kader_nik', $kader->nik)->delete();
+    KaderJabatan::where('kader_nik', $id)->delete();
 
+    // ambil data kader
+    $kader = Kader::where('nik', $id)->first();
     // cek apakah foto yang degunakan defult atau bukan
     if ($kader->foto != 'foto profil/avatar-3.png') {
       // hapus foto
@@ -395,9 +400,9 @@ class AdminDataKaderController extends Controller
     $kader->delete();
 
     // delete data di tabel user
-    User::where('kader_nik', $kader->nik)->delete();
+    User::where('kader_nik', $id)->delete();
 
-    return redirect('/data/kader')->with('message_delete_kader', 'Data kader ' . $kader->nama . ' berhasil dihapus.');
+    return redirect('/data/kader/daerah')->with('message_delete_kader', 'Data kader ' . $kader->nama . ' berhasil dihapus.');
   }
 
   public function ranting(Ranting $ranting)
