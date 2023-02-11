@@ -13,6 +13,9 @@
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap-social/bootstrap-social.css">
 
+  {{-- My CSS --}}
+  <link rel="stylesheet" href="{{ url('') }}/css/show-hide-password.css">
+
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css">
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css">
@@ -50,7 +53,7 @@
                   <div class="form-group">
                     <label for="no_ponsel">Nomer Ponsel</label>
                     <input type="number" class="form-control @error('no_ponsel') is-invalid @enderror" name="no_ponsel"
-                      id="no_ponsel" autofocus>
+                      id="no_ponsel" autofocus autocomplete="off">
                     @error('no_ponsel')
                       <div id="validationServerUsernameFeedback" class="invalid-feedback">
                         {{ $message }}
@@ -64,21 +67,13 @@
                     </div>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
                       id="password" autocomplete="pager">
+                    <span class="fas fa-eye field-icon toggle-password" style="font-size:17px;"></span>
                     @error('password')
                       <div id="validationServerUsernameFeedback" class="invalid-feedback">
                         {{ $message }}
                       </div>
                     @enderror
                   </div>
-
-                  {{-- <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
-                        id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
-                    </div>
-                  </div> --}}
-
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
                       Login
@@ -108,6 +103,9 @@
   <script src="{{ url('') }}/library/stisla/assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+
+  {{-- My Script --}}
+  <script src="{{ url('') }}/js/show-hide-password.js"></script>
 
   <!-- Template JS File -->
   <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script>

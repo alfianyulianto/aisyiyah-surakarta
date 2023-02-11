@@ -17,6 +17,9 @@
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
+  {{-- My CSS --}}
+  <link rel="stylesheet" href="{{ url('') }}/css/show-hide-password.css">
+
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css">
   <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css">
@@ -124,6 +127,7 @@
                     <div class="form-group col-lg-6">
                       <label for="password">Password</label>
                       <input type="password" class="form-control" name="password" id="password" autofocus>
+                      <span class="fas fa-eye field-icon toggle-password" style="font-size:17px;"></span>
                       @error('password')
                         <div class="error-message">
                           {{ $message }}
@@ -132,7 +136,8 @@
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="konfirmasi_password">Konfrimasi Password</label>
-                      <input type="password" class="form-control" name="konfirmasi_password" id="konfirmasi_password">
+                      <input type="password" class="form-control" name="konfirmasi_password"
+                        id="konfirmasi_password">
                       @error('konfirmasi_password')
                         <div class="error-message">
                           {{ $message }}
@@ -187,6 +192,9 @@
 
   <!-- JS Libraies -->
   <script src="{{ url('') }}/library/stisla/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+
+  {{-- My Script --}}
+  <script src="{{ url('') }}/js/show-hide-password.js"></script>
 
   <!-- Template JS File -->
   <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script>
@@ -262,9 +270,13 @@
       if (password === konfirmasi_password) {
         $("#not-matches").addClass("d-none");
         $("#matches").removeClass("d-none");
+        $("#konfirmasi_password").addClass("is-valid");
+        $("#konfirmasi_password").removeClass("is-invalid");
       } else {
         $("#not-matches").removeClass("d-none");
         $("#matches").addClass("d-none");
+        $("#konfirmasi_password").addClass("is-invalid");
+        $("#konfirmasi_password").removeClass("is-valid");
       }
     });
     // jika input konfirmasi_password keyup
@@ -275,9 +287,13 @@
       if (password === konfirmasi_password) {
         $("#matches").removeClass("d-none");
         $("#not-matches").addClass("d-none");
+        $("#konfirmasi_password").removeClass("is-invalid");
+        $("#konfirmasi_password").addClass("is-valid");
       } else {
         $("#not-matches").removeClass("d-none");
         $("#matches").addClass("d-none");
+        $("#konfirmasi_password").removeClass("is-valid");
+        $("#konfirmasi_password").addClass("is-invalid");
       }
     });
   </script>

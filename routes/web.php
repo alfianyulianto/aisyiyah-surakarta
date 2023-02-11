@@ -57,12 +57,12 @@ Route::post('/upload/foto', [UploadFotoController::class, 'upload_foto']);
 
 // auth
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 Route::get('/change/password', [ChangePasswordController::class, 'edit'])->middleware('auth');
-Route::put('/change/password', [ChangePasswordController::class, 'update']);
+Route::put('/change/password', [ChangePasswordController::class, 'update'])->middleware('auth');
 
 // tempat_lahir
 Route::get('/data/tempat/lahir', function () {

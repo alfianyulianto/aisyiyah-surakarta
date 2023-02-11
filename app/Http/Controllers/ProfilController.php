@@ -19,19 +19,34 @@ class ProfilController extends Controller
 {
   public function edit()
   {
-    // cek jika user seorang adin
-    if (Auth::user()->admin_at) {
-      return view('profil_admin', [
+    // cek user apakah seorang super admin atau admin daerah
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
+      return view('profil.profil_super_admin_or_admin_daerah', [
+        'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
+        'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
+        'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
+      ]);
+    } elseif (Auth::user()->kategori_user_id == 4) { // jika user seorang admin cabang
+      return view('profil.profil_admin_cabang', [
+        'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
+        'cabang' => Cabang::where('id_cabang', Auth::user()->admin_at)->first(),
+        'nama_ranting' => Ranting::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('nama_ranting', 'asc')->get(),
+        'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
+      ]);
+    } elseif (Auth::user()->kategori_user_id == 5) { // jika user seorang admin ranting
+      return view('profil.profil_admin_ranting', [
+        'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
+        'cabang' => Cabang::where('id_cabang', Ranting::where('id_ranting', Auth::user()->admin_at)->first()->cabang_id_cabang)->first(),
+        'ranting' => Ranting::where('id_ranting', Auth::user()->admin_at)->first(),
+        'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
+      ]);
+    } elseif (Auth::user()->kategori_user_id == 1) { // jika user seorang kader
+      return view('profil.profil_kader', [
         'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
         'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
         'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
       ]);
     }
-    return view('profil_admin', [
-      'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
-      'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
-      'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
-    ]);
   }
 
   public function update(Request $request)
@@ -113,8 +128,6 @@ class ProfilController extends Controller
       'no_kta' => $request->no_kta,
       'no_ktm' => $request->no_ktm,
       'nama' => $request->nama,
-      'cabang_id_cabang' => $request->cabang_id_cabang,
-      'ranting_id_ranting' => $request->ranting_id_ranting,
       'email' => $request->email,
       'tempat_lahir' => $request->tempat_lahir,
       'tanggal_lahir' => $request->tanggal_lahir,
@@ -124,6 +137,18 @@ class ProfilController extends Controller
       'no_ponsel' => $request->no_ponsel,
       'alamat_asal_ktp' => $request->alamat_asal_ktp,
     ];
+    // cek jika user seorang super admin atau admin daerah
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
+      $validatedData["cabang_id_cabang"] = $request->cabang_id_cabang;
+      $validatedData["ranting_id_ranting"] = $request->ranting_id_ranting;
+    } elseif (Auth::user()->kategori_user_id == 4) { // jika user admin cabang
+      $validatedData["cabang_id_cabang"] = Auth::user()->admin_at;
+      $validatedData["ranting_id_ranting"] = $request->ranting_id_ranting;
+    } elseif (Auth::user()->kategori_user_id == 5) { // jika user admin ranting
+      $validatedData["cabang_id_cabang"] = Ranting::where('id_ranting', Auth::user()->admin_at)->first()->cabang_id_cabang;
+      $validatedData["ranting_id_ranting"] = Auth::user()->admin_at;
+    }
+
     if (!$request->cek_alamat) {
       $validatedData['alamat_rumah_tinggal'] = $request->alamat_rumah_tinggal;
     } else {

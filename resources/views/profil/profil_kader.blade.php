@@ -339,7 +339,7 @@
       if (id_cabang) {
         $.ajax({
           type: "get",
-          url: "/get/ranting/" + id_cabang,
+          url: "/get/ranting/kader/daerah/" + id_cabang,
           dataType: "json",
           success: (response) => {
             console.log(response);
@@ -370,7 +370,7 @@
       console.log(id_ranting);
       $.ajax({
         type: "get",
-        url: "/get/ranting/" + id_cabang,
+        url: "/get/ranting/kader/daerah/" + id_cabang,
         dataType: "json",
         success: (response) => {
           console.log(response);
