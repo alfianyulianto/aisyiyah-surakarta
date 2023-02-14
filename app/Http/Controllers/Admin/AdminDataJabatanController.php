@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Daerah;
 use App\Models\Jabatan;
 use App\Models\KaderJabatan;
+use App\Models\Ranting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,11 +21,11 @@ class AdminDataJabatanController extends Controller
   {
     // cek user apakah seorang super admin atau admin-daerah
     if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
-      $jabatan = Jabatan::where('daerah_id_daerah', Daerah::get()->first()->id_daerah)->orderBy('created_at', 'asc')->get();
+      $jabatan = Jabatan::where('daerah_id_daerah', Daerah::get()->first()->id_daerah)->where('cabang_id_cabang', null)->where('ranting_id_ranting', null)->orderBy('created_at', 'asc')->get();
     } elseif (Auth::user()->kategori_user_id == 4) { // jika user seorang admin cabang
-      $jabatan = Jabatan::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get();
-    } elseif (Auth::user()->ketegori_user_id == 5) { // jika user seorag admin ranting
-      $jabatan = Jabatan::where('ranting_id_ranting', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get();
+      $jabatan = Jabatan::where('daerah_id_daerah', Daerah::get()->first()->id_daerah)->where('cabang_id_cabang', Auth::user()->admin_at)->where('ranting_id_ranting', null)->orderBy('created_at', 'asc')->get();
+    } elseif (Auth::user()->kategori_user_id == 5) { // jika user seorag admin ranting
+      $jabatan = Jabatan::where('daerah_id_daerah', Daerah::get()->first()->id_daerah)->where('cabang_id_cabang', Ranting::where('id_ranting', Auth::user()->admin_at)->first()->cabang_id_cabang)->where('ranting_id_ranting', Auth::user()->admin_at)->orderBy('created_at', 'asc')->get();
     };
     // $jabatan = Jabatan::orderBy('created_at', 'asc')->get();
     return view('admin.jabatan.index', [
@@ -59,9 +60,12 @@ class AdminDataJabatanController extends Controller
     // cek user apakah seorang super admin atau admin-daerah
     if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3) {
       $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
-    } else if (Auth::user()->ketegori_user_id == 4) { // jika user seorang admin cabang
+    } else if (Auth::user()->kategori_user_id == 4) { // jika user seorang admin cabang
+      $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
       $validated['cabang_id_cabang'] = Auth::user()->admin_at;
-    } else if (Auth::user()->ketegoori_user_id == 5) { // jika user seorag admin ranting
+    } else if (Auth::user()->kategori_user_id == 5) { // jika user seorag admin ranting
+      $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
+      $validated['cabang_id_cabang'] = Ranting::where('id_ranting', Auth::user()->admin_at)->first()->cabang_id_cabang;
       $validated['ranting_id_ranting'] = Auth::user()->admin_at;
     }
 

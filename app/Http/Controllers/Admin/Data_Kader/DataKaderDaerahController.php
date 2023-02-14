@@ -32,6 +32,13 @@ class DataKaderDaerahController extends Controller
    */
   public function index()
   {
+    // cek jika user merupakan admin daerah
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(403);
+    } elseif (Auth::user()->kategori_user_id == 5) {
+      return abort(403);
+    }
+
     // cek jika ada super admin jangan di tampilkan di datatable
     $kader = collect([]);
     $user = User::where('kategori_user_id', 1)->orderBy('created_at', 'desc')->get();
@@ -54,6 +61,13 @@ class DataKaderDaerahController extends Controller
    */
   public function create()
   {
+    // cek jika user merupakan admin daerah
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(403);
+    } elseif (Auth::user()->kategori_user_id == 5) {
+      return abort(403);
+    }
+
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.create', [
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
@@ -68,6 +82,13 @@ class DataKaderDaerahController extends Controller
    */
   public function store(Request $request)
   {
+    // cek jika user merupakan admin daerah
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(403);
+    } elseif (Auth::user()->kategori_user_id == 5) {
+      return abort(403);
+    }
+
     $role = [
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
       'no_kta' => ['nullable', 'numeric', 'unique:App\Models\Kader,no_kta'],
@@ -180,6 +201,13 @@ class DataKaderDaerahController extends Controller
    */
   public function show($id)
   {
+    // cek jika user merupakan admin daerah
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(403);
+    } elseif (Auth::user()->kategori_user_id == 5) {
+      return abort(403);
+    }
+
     // cek jika ada admin jangan di tampilkan
     $user = User::where('kader_nik', $id)->first();
     if ($user->admin_at) {
@@ -198,6 +226,13 @@ class DataKaderDaerahController extends Controller
    */
   public function edit($id)
   {
+    // cek jika user merupakan admin daerah
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(403);
+    } elseif (Auth::user()->kategori_user_id == 5) {
+      return abort(403);
+    }
+
     // cek jika ada admin jangan di tampilkan
     $user = User::where('kader_nik', $id)->first();
     if ($user->admin_at) {
@@ -220,6 +255,13 @@ class DataKaderDaerahController extends Controller
    */
   public function update(Request $request, $id)
   {
+    // cek jika user merupakan admin daerah
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(403);
+    } elseif (Auth::user()->kategori_user_id == 5) {
+      return abort(403);
+    }
+
     // cek jika ada admin jangan di tampilkan
     $user = User::where('kader_nik', $id)->first();
     if ($user->kategori_user_id == 2) {
@@ -373,6 +415,13 @@ class DataKaderDaerahController extends Controller
    */
   public function destroy($id)
   {
+    // cek jika user merupakan admin daerah
+    if (Auth::user()->kategori_user_id == 4) {
+      return abort(403);
+    } elseif (Auth::user()->kategori_user_id == 5) {
+      return abort(403);
+    }
+
     // cek jika ada super admin jangan di tampilkan
     $user = User::where('kader_nik', $id)->first();
     if ($user->kategori_user_id == 2) {

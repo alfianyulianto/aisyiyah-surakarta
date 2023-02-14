@@ -19,7 +19,7 @@
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <small class="d-block mt-0 mb-2" style="font-size:13px;">Pastikan file yang diupload dalam
-                            bentuk PNG atau JPG</small>
+                            bentuk JPG, JPEG atau PNG</small>
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" name="foto" id="foto">
                             <label class="custom-file-label" for="foto">Choose file</label>

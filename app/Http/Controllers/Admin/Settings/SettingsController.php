@@ -21,7 +21,6 @@ class SettingsController extends Controller
       'tempat_lahir' => TempatLahir::orderBy('tempat_lahir', 'asc')->get(),
       'pekerjaan' => Pekerjaan::orderBy('pekerjaan', 'asc')->get(),
       'periode' => Periode::orderBy('periode', 'asc')->get(),
-      'last_periode' => Periode::orderBy('created_at', 'asc')->get()->last()
     ]);
   }
 }

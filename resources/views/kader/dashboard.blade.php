@@ -10,7 +10,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-               @if (session('change_password'))
+              @if (session('change_password'))
                 <div class="alert alert-success alert-dismissible show fade">
                   <div class="alert-body">
                     <button class="close" data-dismiss="alert">
@@ -22,8 +22,9 @@
               @endif
               <div class="row mb-3 pr-0">
                 <div class="col-lg-3 mb-3">
-                  <img src="{{ url('') }}/img/avatar-3.png" class="rounded mx-auto d-block" alt=""
-                    width="200">
+                  <img
+                    src="{{ asset('storage/' .DB::table('kader')->where('nik', Auth::user()->kader_nik)->first()->foto) }}"
+                    class="rounded mx-auto d-block" alt="" width="200">
                 </div>
                 <div class="col-lg-9">
                   <div class="d-inline py-3">

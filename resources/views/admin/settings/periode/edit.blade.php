@@ -35,7 +35,7 @@
                         <div class="mb-3">
                           <label for="periode" class="form-label"><b>Periode</b></label>
                           <input type="text" class="form-control" name="periode" id="periode"
-                            placeholder="Masukan Periode (cnth:{{ $last_periode }})"
+                            placeholder="Masukan Periode (cnth:{{ $last_periode->periode }})"
                             value="{{ old('periode', $periode->periode) }}">
                           @error('periode')
                             <div class="error-message">

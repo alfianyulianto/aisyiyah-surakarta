@@ -334,7 +334,7 @@
   <script src="{{ url('') }}/js/autocomplete-ajax.js"></script>
   <script>
     // select cabang
-    $("select#cabang_id_cabang").on("change", function() {
+    $("#cabang_id_cabang").on("change", function() {
       let id_cabang = $(this).val();
       if (id_cabang) {
         $.ajax({

@@ -98,7 +98,7 @@ class TambahJabatanKaderRantingController extends Controller
     $user = User::where('kategori_user_id', 1)->where('admin_at', null)->get();
     foreach ($user as $u) {
       // cek apakah ada data kader di tabel kader_jabatan
-      if (Kader::where('nik', $u->kader_nik)->where('ranting_id_ranting', $ranting->id_ranting)->first() && !KaderJabatan::where('periode_id_periode', $periode->id_periode)->where('kader_nik', $u->kader_nik)->first()) {
+      if (Kader::where('nik', $u->kader_nik)->where('ranting_id_ranting', $ranting->id_ranting)->first() && !KaderJabatan::where('periode_id_periode', $periode->id_periode)->where('kader_nik', $u->kader_nik)->where('jabatan_at', $ranting->id_ranting)->first()) {
         $kader->push(Kader::where('nik', $u->kader_nik)->where('ranting_id_ranting', $ranting->id_ranting)->first());
       }
     }

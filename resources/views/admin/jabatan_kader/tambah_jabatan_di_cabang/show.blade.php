@@ -98,13 +98,14 @@
                 <div class="row mt-5">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover" id="scroll-x">
+                      <table class="table table-bordered table-hover" id="scroll-x-kader-jabatan">
                         <thead>
                           <tr>
                             <th class="text-center">
                               #
                             </th>
                             <th class="text-center">Jabatan</th>
+                            <th class="text-center">Tempat Jabatan</th>
                             <th class="text-center">Periode</th>
                           </tr>
                         </thead>
@@ -114,6 +115,9 @@
                               <td class="text-center">{{ $loop->iteration }}</td>
                               <td>
                                 {{ $kj->jabatan->nama_jabatan }}
+                              </td>
+                              <td>
+                                {{ DB::table('daerah')->where('id_daerah', $kj->jabatan_at)->first()->nama_daerah ??(DB::table('cabang')->where('id_cabang', $kj->jabatan_at)->first()->nama_cabang ??DB::table('ranting')->where('id_ranting', $kj->jabatan_at)->first()->nama_ranting) }}
                               </td>
                               <td>{{ $kj->periode->periode }}</td>
                             </tr>
@@ -128,7 +132,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover" id="scroll-x">
+                      <table class="table table-bordered table-hover" id="scroll-x-kader-ortom">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -157,7 +161,7 @@
                 <div class="row mt-4">
                   <div class="col-lg-12">
                     <div class="table-responsive">
-                      <table class="table table-bordered table-hover" id="scroll-x">
+                      <table class="table table-bordered table-hover" id="scroll-x-kader-potensi">
                         <thead>
                           <tr>
                             <th class="text-center">

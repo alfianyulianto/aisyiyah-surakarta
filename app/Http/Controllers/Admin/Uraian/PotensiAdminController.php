@@ -18,7 +18,7 @@ class PotensiAdminController extends Controller
   public function index()
   {
     return view('admin.uraian_potensi.index', [
-      'potensi' => KaderPotensi::orderBy('created_at', 'desc')->get()
+      'potensi' => KaderPotensi::where('kader_nik', Auth::user()->kader_nik)->orderBy('created_at', 'desc')->get()
     ]);
   }
 
@@ -49,8 +49,7 @@ class PotensiAdminController extends Controller
     ]);
 
     // tambah nik user
-    // $validated['kader_nik'] = Auth::user()->kader_nik;
-    $validated['kader_nik'] = '3372010107000002';
+    $validated['kader_nik'] = Auth::user()->kader_nik;
 
     // insert ke tabel kader_has_potensi
     KaderPotensi::create($validated);
@@ -80,7 +79,7 @@ class PotensiAdminController extends Controller
    */
   public function edit($id)
   {
-    return view('kader.potensi.edit', [
+    return view('admin.uraian_potensi.edit', [
       'kader_potensi' => KaderPotensi::where('id_kader_has_potensi', $id)->first(),
       'potensi' => Potensi::orderBy('created_at', 'asc')->get()
     ]);

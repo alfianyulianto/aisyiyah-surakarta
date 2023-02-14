@@ -29,7 +29,7 @@ class DataPeriodeController extends Controller
   public function create()
   {
     return view('admin.settings.periode.create', [
-      'last_periode' => Periode::get()->last()
+      'last_periode' => Periode::orderBy('periode', 'asc')->get()->last()
     ]);
   }
 
@@ -73,7 +73,7 @@ class DataPeriodeController extends Controller
   {
     return view('admin.settings.periode.edit', [
       'periode' => $periode,
-      'last_periode' => Periode::get()->last()
+      'last_periode' => Periode::orderBy('periode', 'asc')->get()->last()
     ]);
   }
 

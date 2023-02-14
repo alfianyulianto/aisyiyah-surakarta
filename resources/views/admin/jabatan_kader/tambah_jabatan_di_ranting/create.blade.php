@@ -57,7 +57,7 @@
                           <label for="jabatan" class="form-label"><b>Posisi Jabatan</b></label>
                           <select class="form-control form-control-lg select2" id="jabatan" name="jabatan">
                             <option selected disabled>-- Pilih Jabatan --</option>
-                            <option disabled>Tidak Ada Posisi Jabatan di Ranting {{ $nama_daerah }}</option>
+                            <option disabled>Tidak Ada Posisi Jabatan di Ranting {{ $nama_ranting }}</option>
                           </select>
                           @error('jabatan')
                             <div class="error-message">
@@ -73,7 +73,7 @@
                           <label for="kader" class="form-label"><b>Nama - NIK</b></label>
                           <select class="form-control form-control-lg select2" id="kader" name="kader">
                             <option selected disabled>-- Pilih Kader --</option>
-                            <option disabled>Tidak Ada Data Kader di Ranting {{ $nama_daerah }}</option>
+                            <option disabled>Tidak Ada Data Kader di Ranting {{ $nama_ranting }}</option>
                           </select>
                           @error('kader')
                             <div class="error-message">

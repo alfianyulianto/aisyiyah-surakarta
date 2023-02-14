@@ -1,11 +1,29 @@
 $(document).ready(function () {
     // DataTables
-    $("#scroll-x").DataTable({
+    $("#scroll-x-kader-ortom").DataTable({
         scrollX: true,
         columnDefs: [
             { width: "2%", targets: 0 },
             { width: "40%", targets: 1 },
             { width: "58%", targets: 2 },
+        ],
+    });
+    $("#scroll-x-kader-potensi").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: "2%", targets: 0 },
+            { width: "40%", targets: 1 },
+            { width: "58%", targets: 2 },
+        ],
+    });
+
+    $("#scroll-x-kader-jabatan").DataTable({
+        scrollX: true,
+        columnDefs: [
+            { width: "2%", targets: 0 },
+            { width: "40%", targets: 1 },
+            { width: "40%", targets: 2 },
+            { width: "17%", targets: 3 },
         ],
     });
 

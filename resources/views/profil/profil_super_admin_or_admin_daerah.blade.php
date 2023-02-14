@@ -334,7 +334,7 @@
   <script src="{{ url('') }}/js/autocomplete-ajax.js"></script>
   <script>
     // select cabang
-    $("select#cabang_id_cabang").on("change", function() {
+    $("#cabang_id_cabang").on("change", function() {
       let id_cabang = $(this).val();
       if (id_cabang) {
         $.ajax({
@@ -348,11 +348,11 @@
             response.forEach((i) => {
               ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
             });
-            $("select#ranting_id_ranting").html(ranting);
+            $("#ranting_id_ranting").html(ranting);
           },
         });
       } else {
-        $("select#ranting_id_ranting").html(`
+        $("#ranting_id_ranting").html(`
           <option value='' selected disabled>-- Pilih Ranting --</option>
           <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
         `);
@@ -363,8 +363,8 @@
     });
   </script>
   <script>
-    if ($("select#cabang_id_cabang").val()) {
-      let id_cabang = $("select#cabang_id_cabang").val();
+    if ($("#cabang_id_cabang").val()) {
+      let id_cabang = $("#cabang_id_cabang").val();
       let id_ranting = $("#kader_ranting").val();
       console.log(id_cabang);
       console.log(id_ranting);
@@ -388,7 +388,7 @@
               ranting += `<option value="${i.id_ranting}">${ i.nama_ranting }</option>`;
             }
           })
-          $("select#ranting_id_ranting").html(ranting);
+          $("#ranting_id_ranting").html(ranting);
         }
       });
     }

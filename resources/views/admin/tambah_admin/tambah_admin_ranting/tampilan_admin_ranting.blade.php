@@ -34,7 +34,7 @@
                     <tr>
                       <td>{{ $r->nama_ranting }}</td>
                       <td class="text-center">
-                        {{ DB::table('users')->where('kategori_user_id', 5)->where('admin_at', $c->id_ranting)->count() ?? 0 }}
+                        {{ DB::table('users')->where('kategori_user_id', 5)->where('admin_at', $r->id_ranting)->count() ?? 0 }}
                       </td>
                       <td>
                         <a href="/admin/ranting/{{ $r->id_ranting }}" target="_blank"

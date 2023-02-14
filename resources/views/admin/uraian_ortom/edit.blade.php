@@ -13,7 +13,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-8">
-                  <form action="/kader/ortom/{{ $kader_ortom->id_kader_has_ortom }}" method="post">
+                  <form action="/admin/ortom/{{ $kader_ortom->id_kader_has_ortom }}" method="post">
                     @csrf
                     @method('put')
                     <div class="row">
