@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\Uraian\PotensiAdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Kader\KaderDashboardController;
 use App\Http\Controllers\Kader\KaderOrtomController;
 use App\Http\Controllers\Kader\KaderPotensiController;
@@ -63,6 +64,8 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 Route::get('/change/password', [ChangePasswordController::class, 'edit'])->middleware('auth');
 Route::put('/change/password', [ChangePasswordController::class, 'update'])->middleware('auth');
+Route::get('/forgot/password', [ForgotPasswordController::class, 'edit'])->middleware('guest');
+Route::put('/forgot/password', [ForgotPasswordController::class, 'update'])->middleware('guest');
 
 // tempat_lahir
 Route::get('/data/tempat/lahir', function () {

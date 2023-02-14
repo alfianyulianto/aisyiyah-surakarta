@@ -36,14 +36,17 @@
               <div class="card-header">
                 <h4>Login</h4>
               </div>
-
               <div class="card-body">
-                @if (session('failed'))
-                  <div class="alert alert-danger alert-dismissible show fade">
+                @if (session('message_login'))
+                  <div class="alert alert-success alert-dismissible">
                     <div class="alert-body">
-                      <button class="close" data-dismiss="alert">
-                        <span>&times;</span>
-                      </button>
+                      {{ session('message_login') }}
+                    </div>
+                  </div>
+                @endif
+                @if (session('failed'))
+                  <div class="alert alert-danger alert-dismissible">
+                    <div class="alert-body">
                       {{ session('failed') }}
                     </div>
                   </div>
@@ -80,14 +83,16 @@
                     </button>
                   </div>
                 </form>
-
+                <div class="mt-2 text-muted">
+                  <a href="/forgot/password">Lupa password?</a>
+                </div>
               </div>
             </div>
             <div class="mt-5 text-muted text-center">
               Belum punya akun? <a href="/register">Buat akun</a>
             </div>
             <div class="simple-footer">
-              Copyright &copy; {{ date('Y') }} Alfian Yulianto
+              Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Alfian Yulianto
             </div>
           </div>
         </div>
