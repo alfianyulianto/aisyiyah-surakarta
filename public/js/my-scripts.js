@@ -67,10 +67,9 @@ $(document).ready(function () {
         scrollX: true,
         columnDefs: [
             { width: 5, targets: 0 },
-            { width: 105, targets: 1 },
-            { width: 375, targets: 2 },
-            { width: 145, targets: 3 },
-            { width: 160, targets: 4 },
+            { width: 155, targets: 1 },
+            { width: 385, targets: 2 },
+            { width: 280, targets: 3 },
         ],
     });
     // tampilan ranting
@@ -78,11 +77,10 @@ $(document).ready(function () {
         scrollX: true,
         columnDefs: [
             { width: 5, targets: 0 },
-            { width: 105, targets: 1 },
-            { width: 375, targets: 2 },
-            { width: 145, targets: 3 },
-            { width: 215, targets: 4 },
-            { width: 160, targets: 5 },
+            { width: 155, targets: 1 },
+            { width: 385, targets: 2 },
+            { width: 155, targets: 3 },
+            { width: 280, targets: 4 },
         ],
     });
     // tampilan data potensi kader {admin}

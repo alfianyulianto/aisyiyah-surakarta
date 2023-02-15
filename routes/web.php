@@ -124,12 +124,14 @@ Route::delete('/jabatan/kader/ranting//{kader_jabatan:id_kader_jabatan}/{ranting
 
 // admin {Fitur:Data Master}
 Route::resource('/data/daerah', AdminDataDaerahController::class)->middleware('admin');
-Route::get('/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'download'])->middleware('admin');
+Route::get('/sk/pimpinan/daerah/{SkPimpinan:id_sk_pimpinan}', [AdminDataDaerahController::class, 'download'])->middleware('admin');
 Route::post('/upload/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'upload_sk_pimpinan'])->middleware('admin');
 Route::resource('/data/cabang', AdminDataCabangController::class)->middleware('admin');
-Route::get('/sk/pimpinan/cabang/{cabang:id_cabang}', [AdminDataCabangController::class, 'download'])->middleware('admin');
+Route::get('/sk/pimpinan/cabang/{SkPimpinan:id_sk_pimpinan}', [AdminDataCabangController::class, 'download'])->middleware('admin');
+Route::post('/upload/sk/pimpinan/cabang/{cabang:id_cabang}', [AdminDataCabangController::class, 'upload_sk_pimpinan'])->middleware('admin');
 Route::resource('/data/ranting', AdminDataRantingController::class)->middleware('admin');
-Route::get('/sk/pimpinan/ranting/{ranting:id_ranting}', [AdminDataRantingController::class, 'download'])->middleware('admin');
+Route::get('/sk/pimpinan/ranting/{SkPimpinan:id_sk_pimpinan}', [AdminDataRantingController::class, 'download'])->middleware('admin');
+Route::post('/upload/sk/pimpinan/ranting/{ranting:id_ranting}', [AdminDataRantingController::class, 'upload_sk_pimpinan'])->middleware('admin');
 Route::get('/data/potensi/kader', [AdminDataPotensiKaderController::class, 'index'])->middleware('admin');
 Route::get('/data/potensi/kader/export', [AdminDataPotensiKaderController::class, 'export'])->middleware('admin');
 

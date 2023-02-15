@@ -71,14 +71,9 @@ class AdminDataRantingController extends Controller
       'cabang_id_cabang' => ['required'],
       'nama_ranting' => ['required', 'min:5'],
       'alamat_ranting' => ['required', 'min:10'],
-      'sk_pimp_ranting' => ['required', 'mimes:pdf'],
     ]);
 
     $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
-
-    // simpan file yang diupload
-    $file = $request->file('sk_pimp_ranting');
-    $validated['sk_pimp_ranting'] = $file->storeAs('sk pimpinan ranting',  'sk-pimpinan-ranting_' . $request->nama_daerah . '_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
 
     // insert ke table cabang
     Ranting::create($validated);
@@ -92,12 +87,13 @@ class AdminDataRantingController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Ranting $ranting)
   {
     return view('admin.ranting.upload_sk_pimpinan', [
       'periode' => Periode::orderBy('created_at', 'desc')->get(),
-      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', null)->where('ranting_id_ranting', $id)->orderBy('periode_id_periode', 'asc')->get(),
-      'id_ranting' => $id
+      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', null)->where('ranting_id_ranting', $ranting->id_ranting)->orderBy('periode_id_periode', 'asc')->paginate(5),
+      'id_ranting' => $ranting->id_ranting,
+      'nama_ranting' => $ranting->nama_ranting
     ]);
   }
 
@@ -128,7 +124,6 @@ class AdminDataRantingController extends Controller
       'id_ranting' => ['required', 'min:10', 'max:10'],
       'nama_ranting' => ['required', 'min:5'],
       'alamat_ranting' => ['required', 'min:10'],
-      'sk_pimp_ranting' => ['mimes:pdf']
     ];
 
     // cek apakah $request->id_ranting sama dengan id_ranting pada tabel ranting
@@ -143,15 +138,6 @@ class AdminDataRantingController extends Controller
 
     // cek validasi
     $validated = $request->validate($role);
-
-    // cek jika user mengupload ulang sk_pimp_ranting
-    if ($request->sk_pimp_ranting) {
-      // simpan file yang diupload
-      $file = $request->file('sk_pimp_ranting');
-      // hapus file sk_pimp_ranting dari tabel ranting
-      Storage::delete($ranting->sk_pimp_ranting);
-      $validated['sk_pimp_ranting'] = $file->storeAs('sk pimpinan ranting',  'sk-pimpinan-ranting_' . $request->nama_ranting . '_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
-    }
 
     // update data ke tabel ranting
     $ranting->update($validated);
@@ -184,8 +170,49 @@ class AdminDataRantingController extends Controller
 
     return redirect('/data/ranting')->with('message_delete_ranting', 'Data ranting ' . $ranting->nama_ranting . ' berhasil dihapus.');
   }
-  public function download(Ranting $ranting)
+
+  public function upload_sk_pimpinan(Request $request, Ranting $ranting)
   {
-    return Storage::download($ranting->sk_pimp_ranting);
+    $validated = $request->validate([
+      'periode' => ['required'],
+      'sk_pimp_ranting' => ['required', 'mimes:pdf']
+    ]);
+
+    // ambil data dari tabel sk_pimpinan
+    $sk_pimpinan = SkPimpinan::where('ranting_id_ranting', $ranting->id_ranting)->where('periode_id_periode', $request->periode)->first();
+    if ($sk_pimpinan) {
+      // hapus file sk_pimp_ranting dari tabel ranting
+      Storage::delete($sk_pimpinan->file_sk_pimpinan);
+      // hapus data di tabel sk_pimpinan
+      $sk_pimpinan->delete();
+    }
+
+    // buat data untuk di insert ke tabel
+    $validatedData = [
+      'id_sk_pimpinan' => 'sk-' . Str::random(4),
+      'ranting_id_ranting' => $ranting->id_ranting,
+      'periode_id_periode' => $request->periode,
+    ];
+
+    // ambil data periode
+    $periode = Periode::where('id_periode', $request->periode)->first()->periode;
+
+    $file = $request->file('sk_pimp_ranting');
+    // simpan file yang diupload
+    $validatedData['file_sk_pimpinan'] = $file->storeAs('sk pimpinan ranting',  'sk-pimpinan-ranting_' . $ranting->nama_ranting . '_' . 'periode_' . $periode . '_tgl_upload_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
+
+    // insert data ke tabel ranting
+    SkPimpinan::create($validatedData);
+
+    return redirect('/data/ranting/' . $ranting->id_ranting)->with('message_sk_pimp_ranting', 'Berhasil mengupload sk pimpinan ranting periode ' . $periode . '.');
+  }
+
+  public function download(SkPimpinan $SkPimpinan)
+  {
+    // jika bukan super admin atau admin ranting
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3 || Auth::user()->admin_at == $SkPimpinan->ranting_id_ranting) {
+      return Storage::download($SkPimpinan->file_sk_pimpinan);
+    }
+    return abort(403);
   }
 }

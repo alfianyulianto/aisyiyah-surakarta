@@ -18,7 +18,7 @@ return new class extends Migration
   public function up()
   {
     Schema::create('sk_pimpinan', function (Blueprint $table) {
-      $table->string('id_sk_pimpinaan')->primary();
+      $table->string('id_sk_pimpinan')->primary();
       $table->foreignIdFor(Daerah::class)->nullable();
       $table->foreignIdFor(Cabang::class)->nullable();
       $table->foreignIdFor(Ranting::class)->nullable();

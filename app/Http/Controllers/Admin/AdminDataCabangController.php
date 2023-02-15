@@ -68,14 +68,9 @@ class AdminDataCabangController extends Controller
       'id_cabang' => ['required', 'min:9', 'max:9', 'unique:App\Models\Cabang,id_cabang'],
       'nama_cabang' => ['required', 'min:5'],
       'alamat_cabang' => ['required', 'min:10'],
-      'sk_pimp_cabang' => ['required', 'mimes:pdf']
     ]);
 
     $validated['daerah_id_daerah'] = Daerah::get()->first()->id_daerah;
-
-    // simpan file yang diupload
-    $file = $request->file('sk_pimp_cabang');
-    $validated['sk_pimp_cabang'] = $file->storeAs('sk pimpinan cabang',  'sk-pimpinan-cabang_' . $request->nama_cabang . '_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
 
     // insert ke table cabang
     Cabang::create($validated);
@@ -89,12 +84,13 @@ class AdminDataCabangController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Cabang $cabang)
   {
     return view('admin.cabang.upload_sk_pimpinan', [
       'periode' => Periode::orderBy('created_at', 'desc')->get(),
-      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', $id)->where('ranting_id_ranting', null)->orderBy('periode_id_periode', 'asc')->get(),
-      'id_cabang' => $id
+      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', $cabang->id_cabang)->where('ranting_id_ranting', null)->orderBy('periode_id_periode', 'asc')->get(),
+      'id_cabang' => $cabang->id_cabang,
+      'nama_cabang' => $cabang->nama_cabang
     ]);
   }
 
@@ -124,7 +120,6 @@ class AdminDataCabangController extends Controller
       'id_cabang' => ['required', 'min:9', 'max:9'],
       'nama_cabang' => ['required', 'min:5'],
       'alamat_cabang' => ['required', 'min:10'],
-      'sk_pimp_cabang' => ['file']
     ];
 
     // cek apakah $request->id_cabang sama dengan id_cabang pada tabel cabang
@@ -139,15 +134,6 @@ class AdminDataCabangController extends Controller
 
     // cek validasi
     $validated = $request->validate($role);
-
-    // cek jika user mengupload ulang sk_pimp_cabang
-    if ($request->sk_pimp_cabang) {
-      // simpan file yang diupload
-      $file = $request->file('sk_pimp_cabang');
-      // hapus file sk_pimp_cabang dari tabel cabang
-      Storage::delete($cabang->sk_pimp_cabang);
-      $validated['sk_pimp_cabang'] = $file->storeAs('sk pimpinan cabang',  'sk-pimpinan-cabang_' . $request->nama_cabang . '_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
-    }
 
     // update data ke tabel cabang
     $cabang->update($validated);
@@ -187,8 +173,48 @@ class AdminDataCabangController extends Controller
     return redirect('/data/cabang')->with('message_delete_cabang', 'Data cabang ' . $cabang->nama_cabang . ' berhasil dihapus.');
   }
 
-  public function download(Cabang $cabang)
+  public function upload_sk_pimpinan(Request $request, Cabang $cabang)
   {
-    return Storage::download($cabang->sk_pimp_cabang);
+    $validated = $request->validate([
+      'periode' => ['required'],
+      'sk_pimp_cabang' => ['required', 'mimes:pdf']
+    ]);
+
+    // ambil data dari tabel sk_pimpinan
+    $sk_pimpinan = SkPimpinan::where('cabang_id_cabang', $cabang->id_cabang)->where('periode_id_periode', $request->periode)->first();
+    if ($sk_pimpinan) {
+      // hapus file sk_pimp_cabang dari tabel cabang
+      Storage::delete($sk_pimpinan->file_sk_pimpinan);
+      // hapus data di tabel sk_pimpinan
+      $sk_pimpinan->delete();
+    }
+
+    // buat data untuk di insert ke tabel
+    $validatedData = [
+      'id_sk_pimpinan' => 'sk-' . Str::random(4),
+      'cabang_id_cabang' => $cabang->id_cabang,
+      'periode_id_periode' => $request->periode,
+    ];
+
+    // ambil data periode
+    $periode = Periode::where('id_periode', $request->periode)->first()->periode;
+
+    $file = $request->file('sk_pimp_cabang');
+    // simpan file yang diupload
+    $validatedData['file_sk_pimpinan'] = $file->storeAs('sk pimpinan cabang',  'sk-pimpinan-cabang_' . $cabang->nama_cabang . '_' . 'periode_' . $periode . '_tgl_upload_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
+
+    // insert data ke tabel cabang
+    SkPimpinan::create($validatedData);
+
+    return redirect('/data/cabang/' . $cabang->id_cabang)->with('message_sk_pimp_cabang', 'Berhasil mengupload sk pimpinan cabang periode ' . $periode . '.');
+  }
+
+  public function download(SkPimpinan $SkPimpinan)
+  {
+    // jika bukan super admin atau admin cabang
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3 || Auth::user()->admin_at == $SkPimpinan->cabang_id_cabang) {
+      return Storage::download($SkPimpinan->file_sk_pimpinan);
+    }
+    return abort(403);
   }
 }

@@ -12,6 +12,16 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
+              @if (session('message_daerah'))
+                <div class="alert alert-success alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    {{ session('message_daerah') }}
+                  </div>
+                </div>
+              @endif
               <div class="table-responsive">
                 <table class="table table-bordered" id="scroll-x-daerah">
                   <thead>
@@ -25,13 +35,6 @@
                     <tr>
                       <td>{{ $daerah->nama_daerah }}</td>
                       <td>{{ $daerah->alamat_daerah }}</td>
-                      {{-- <td>
-                        <a href="/sk/pimpinan/daerah/{{ $daerah->id_daerah }}" class="text-decoration-none">
-                          <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
-                            <i class="fas fa-download"></i> download
-                          </div>
-                        </a>
-                      </td> --}}
                       <td>
                         <a href="/data/daerah/{{ $daerah->id_daerah }}" class="btn btn-icon icon-left btn-info"><i
                             class="fas fa-file-pdf"></i> sk pimpinan

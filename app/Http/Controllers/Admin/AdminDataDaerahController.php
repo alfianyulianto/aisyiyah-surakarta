@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Daerah;
 use App\Models\Periode;
 use App\Models\SkPimpinan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AdminDataDaerahController extends Controller
@@ -101,15 +103,6 @@ class AdminDataDaerahController extends Controller
     // cek validasi
     $validated = $request->validate($role);
 
-    // cek jika user mengupload ulang sk_pimp_daerah
-    if ($request->sk_pimp_daerah) {
-      // simpan file yang diupload
-      $file = $request->file('sk_pimp_daerah');
-      // hapus file sk_pimp_daerah dari tabel daerah
-      Storage::delete($daerah->sk_pimp_daerah);
-      $validated['sk_pimp_daerah'] = $file->storeAs('sk pimpinan daerah',  'sk-pimpinan-daerah_' . $request->nama_daerah . '_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
-    }
-
     // update data ke tabel daerah
     $daerah->update($validated);
 
@@ -134,27 +127,41 @@ class AdminDataDaerahController extends Controller
       'sk_pimp_daerah' => ['required', 'mimes:pdf']
     ]);
 
-    // cek jika user mengupload ulang sk_pimp_daerah
-    if ($request->sk_pimp_daerah) {
-      // simpan file yang diupload
-      $file = $request->file('sk_pimp_daerah');
+    // ambil data dari tabel sk_pimpinan
+    $sk_pimpinan = SkPimpinan::where('daerah_id_daerah', $daerah->id_daerah)->where('periode_id_periode', $request->periode)->first();
+    if ($sk_pimpinan) {
       // hapus file sk_pimp_daerah dari tabel daerah
-      Storage::delete($daerah->sk_pimp_daerah);
-      $validated['sk_pimp_daerah'] = $file->storeAs('sk pimpinan daerah',  'sk-pimpinan-daerah_' . $request->nama_daerah . '_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
+      Storage::delete($sk_pimpinan->file_sk_pimpinan);
+      // hapus data di tabel sk_pimpinan
+      $sk_pimpinan->delete();
     }
 
-    $validated['daerah_id_daerah'] = $daerah->id_daerah;
+    // buat data untuk di insert ke tabel
+    $validatedData = [
+      'id_sk_pimpinan' => 'sk-' . Str::random(4),
+      'daerah_id_daerah' => $daerah->id_daerah,
+      'periode_id_periode' => $request->periode,
+    ];
 
+    // ambil data periode
     $periode = Periode::where('id_periode', $request->periode)->first()->periode;
 
-    // update data ke tabel daerah
-    $daerah->update($validated);
+    $file = $request->file('sk_pimp_daerah');
+    // simpan file yang diupload
+    $validatedData['file_sk_pimpinan'] = $file->storeAs('sk pimpinan daerah',  'sk-pimpinan-daerah_' . $daerah->nama_daerah . '_' . 'periode_' . $periode . '_tgl_upload_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
 
-    return redirect('/data/daerah')->with('message_daerah', 'Berhasil mengupload sk pimpinan daerah periode ' . $periode . '.');
+    // insert data ke tabel daerah
+    SkPimpinan::create($validatedData);
+
+    return redirect('/data/daerah/' . $daerah->id_daerah)->with('message_sk_pimp_daerah', 'Berhasil mengupload sk pimpinan daerah periode ' . $periode . '.');
   }
 
-  public function download(Daerah $daerah)
+  public function download(SkPimpinan $SkPimpinan)
   {
-    return Storage::download($daerah->sk_pimp_daerah);
+    // jika bukan super admin atau admin daerah
+    if (Auth::user()->kategori_user_id == 2 || Auth::user()->kategori_user_id == 3 || Auth::user()->admin_at == $SkPimpinan->cabang_id_cabang) {
+      return Storage::download($SkPimpinan->file_sk_pimpinan);
+    }
+    return abort(403);
   }
 }

@@ -21,4 +21,9 @@ class Periode extends Model
   {
     return $this->hasMany(KaderJabatan::class);
   }
+
+  public function sk_pimpinan()
+  {
+    return $this->hasMany(SkPimpinan::class);
+  }
 }

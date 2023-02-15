@@ -16,4 +16,9 @@ class SkPimpinan extends Model
   protected $keyType = 'string';
 
   protected $fillable = ['id_sk_pimpinan', 'daerah_id_daerah', 'cabang_id_cabang', 'ranting_id_ranting', 'periode_id_periode', 'file_sk_pimpinan'];
+
+  public function periode()
+  {
+    return $this->belongsTo(Periode::class, 'periode_id_periode', 'id_periode');
+  }
 }

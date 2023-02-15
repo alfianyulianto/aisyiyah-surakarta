@@ -43,7 +43,6 @@
                       </th>
                       <th class="text-center">Nama Cabang</th>
                       <th class="text-center">Alamat Cabang</th>
-                      <th class="text-center">SK Pimpinan Cabang</th>
                       <th class="text-center">Aksi</th>
                     </tr>
                   </thead>
@@ -56,13 +55,9 @@
                         <td>{{ $c->nama_cabang }}</td>
                         <td>{{ $c->alamat_cabang }}</td>
                         <td>
-                          <a href="/sk/pimpinan/cabang/{{ $c->id_cabang }}" class="text-decoration-none">
-                            <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
-                              <i class="fas fa-download"></i> download
-                            </div>
+                          <a href="/data/cabang/{{ $c->id_cabang }}" class="btn btn-icon icon-left btn-info"><i
+                              class="fas fa-file-pdf"></i> sk pimpinan
                           </a>
-                        </td>
-                        <td>
                           <a href="/data/cabang/{{ $c->id_cabang }}/edit" class="btn btn-icon icon-left btn-warning"><i
                               class="far fa-edit"></i>
                             Edit</a>

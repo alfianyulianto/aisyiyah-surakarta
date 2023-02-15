@@ -43,7 +43,6 @@
                       </th>
                       <th class="text-center">Nama Ranting</th>
                       <th class="text-center">Alamat Ranting</th>
-                      <th class="text-center">SK Pimpinan Ranting</th>
                       <th class="text-center">Nama Cabang</th>
                       <th class="text-center">Aksi</th>
                     </tr>
@@ -56,15 +55,11 @@
                         </td>
                         <td>{{ $r->nama_ranting }}</td>
                         <td>{{ $r->alamat_ranting }}</td>
-                        <td>
-                          <a href="/sk/pimpinan/ranting/{{ $r->id_ranting }}" class="text-decoration-none">
-                            <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
-                              <i class="fas fa-download"></i> download
-                            </div>
-                          </a>
-                        </td>
                         <td>{{ $r->cabang->nama_cabang }}</td>
                         <td>
+                          <a href="/data/ranting/{{ $r->id_ranting }}" class="btn btn-icon icon-left btn-info"><i
+                              class="fas fa-file-pdf"></i> sk pimpinan
+                          </a>
                           <a href="/data/ranting/{{ $r->id_ranting }}/edit" class="btn btn-icon icon-left btn-warning"><i
                               class="far fa-edit"></i> Edit
                           </a>

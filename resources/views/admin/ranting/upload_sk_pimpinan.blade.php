@@ -4,7 +4,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Upload SK Pimpinan Daerah 'Aisyiyah Kota Surakarta </h1>
+      <h1>Upload SK Pimpinan Ranting {{ $nama_ranting }} Kota Surakarta </h1>
     </div>
 
     <div class="section-body">
@@ -12,19 +12,19 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              @if (session('message_sk_pimp_daerah'))
+              @if (session('message_sk_pimp_ranting'))
                 <div class="alert alert-success alert-dismissible show fade">
                   <div class="alert-body">
                     <button class="close" data-dismiss="alert">
                       <span>&times;</span>
                     </button>
-                    {{ session('message_sk_pimp_daerah') }}
+                    {{ session('message_sk_pimp_ranting') }}
                   </div>
                 </div>
               @endif
               <div class="row">
                 <div class="col-lg-6">
-                  <form action="/upload/sk/pimpinan/daerah/{{ $id_daerah }}" method="post"
+                  <form action="/upload/sk/pimpinan/ranting/{{ $id_ranting }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -52,8 +52,8 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
-                          <label for="sk_pimp_daerah" class="form-label">
-                            <b>SK Pimpinan Daerah @error('sk_pimp_daerah')
+                          <label for="sk_pimp_ranting" class="form-label">
+                            <b>SK Pimpinan Ranting @error('sk_pimp_ranting')
                                 <div class="text-danger d-inline error-message">*Silahkan upload ulang</div>
                               @enderror
                             </b>
@@ -61,11 +61,11 @@
                           <small class="d-block mt-0 mb-2" style="font-size:13px;">Pastikan file yang diupload dalam
                             bentuk PDF</small>
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="sk_pimp_daerah" id="sk_pimp_daerah">
-                            <label class="custom-file-label" for="sk_pimp_daerah">Choose file</label>
+                            <input type="file" class="custom-file-input" name="sk_pimp_ranting" id="sk_pimp_ranting">
+                            <label class="custom-file-label" for="sk_pimp_ranting">Choose file</label>
                           </div>
                           <div class="error-message">
-                            @error('sk_pimp_daerah')
+                            @error('sk_pimp_ranting')
                               <div class="error-message">
                                 {{ $message }}
                               </div>
@@ -75,7 +75,7 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mt-2">
-                      <button type="submit" class="btn btn-primary">Upload SK Pimpinan Daerah</button>
+                      <button type="submit" class="btn btn-primary">Upload SK Pimpinan Ranting</button>
                     </div>
                   </form>
                 </div>
@@ -85,7 +85,7 @@
                       <thead>
                         <tr>
                           <th class="text-center">Periode</th>
-                          <th class="text-center">SK Pimpinan Daerah</th>
+                          <th class="text-center">SK Pimpinan Ranting</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -93,7 +93,7 @@
                           <tr>
                             <td>{{ $s->periode->periode }}</td>
                             <td>
-                              <a href="/sk/pimpinan/daerah/{{ $s->id_sk_pimpinan }}" class="text-decoration-none">
+                              <a href="/sk/pimpinan/ranting/{{ $s->id_sk_pimpinan }}" class="text-decoration-none">
                                 <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
                                   <i class="fas fa-download"></i> download
                                 </div>
@@ -101,6 +101,7 @@
                             </td>
                           </tr>
                         @endforeach
+                        {{ $sk_pimpinan->links() }}
                       </tbody>
                     </table>
                   </div>
@@ -113,7 +114,7 @@
     </div>
   </section>
   <script>
-    $('#sk_pimp_daerah').on('change', function(e) {
+    $('#sk_pimp_ranting').on('change', function(e) {
       //get the file name
       var fileName = e.target.files[0].name;
       //replace the "Choose a file" label
