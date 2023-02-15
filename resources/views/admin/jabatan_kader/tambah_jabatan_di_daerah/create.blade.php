@@ -161,7 +161,7 @@
                         <td>{{ $kj->jabatan->nama_jabatan }}</td>
                         <td>{{ $kj->periode->periode }}</td>
                         <td>
-                          <a href="/data/jabatan/kader/daerah/{{ $kj->kader_nik }}" target="_blank"
+                          <a href="/data/jabatan/kader/daerah/{{ $kj->kader_nik }}"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
                           <form action="/jabatan/kader/daerah/{{ $kj->id_kader_jabatan }}/{{ $id_daerah }}"
                             method="post" class="d-inline-block">

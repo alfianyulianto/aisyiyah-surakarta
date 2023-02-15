@@ -17,7 +17,6 @@ return new class extends Migration
       $table->string('id_daerah')->primary();
       $table->string('nama_daerah');
       $table->text('alamat_daerah');
-      $table->string('sk_pimp_daerah');
       $table->timestamps();
     });
   }

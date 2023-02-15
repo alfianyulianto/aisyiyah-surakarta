@@ -73,12 +73,6 @@ Route::get('/data/tempat/lahir', function () {
   return $tempat_lahir;
 })->middleware('auth');
 
-// // periode
-// Route::get('/data/periode', function () {
-//   $periode = Periode::orderBy('created_at', 'desc')->get();
-//   return $periode;
-// })->middleware('auth');
-
 // pekerjaan
 Route::get('/data/pekerjaan', function () {
   $pekerjaan = Pekerjaan::orderBy('pekerjaan', 'asc')->get();
@@ -131,6 +125,7 @@ Route::delete('/jabatan/kader/ranting//{kader_jabatan:id_kader_jabatan}/{ranting
 // admin {Fitur:Data Master}
 Route::resource('/data/daerah', AdminDataDaerahController::class)->middleware('admin');
 Route::get('/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'download'])->middleware('admin');
+Route::post('/upload/sk/pimpinan/daerah/{daerah:id_daerah}', [AdminDataDaerahController::class, 'upload_sk_pimpinan'])->middleware('admin');
 Route::resource('/data/cabang', AdminDataCabangController::class)->middleware('admin');
 Route::get('/sk/pimpinan/cabang/{cabang:id_cabang}', [AdminDataCabangController::class, 'download'])->middleware('admin');
 Route::resource('/data/ranting', AdminDataRantingController::class)->middleware('admin');

@@ -21,7 +21,6 @@ return new class extends Migration
       $table->foreignIdFor(Cabang::class);
       $table->string('nama_ranting');
       $table->text('alamat_ranting');
-      $table->string('sk_pimp_ranting');
       $table->timestamps();
     });
   }

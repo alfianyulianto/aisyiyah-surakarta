@@ -12,18 +12,31 @@ use App\Models\Ranting;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TambahJabatanKaderRantingController extends Controller
 {
   public function create($id)
   {
+    // cek jika admin cabang bukan di ranting 
+    if (Auth::user()->kategori_user_id == 4) {
+      $ranting = Ranting::where('id_ranting', $id)->where('cabang_id_cabang', Auth::user()->admin_at)->first();
+      if (!$ranting) {
+        return abort(403);
+      }
+    }
+    // cek jika user bukan admin ranting
+    if (Auth::user()->admin_at != $id  && Auth::user()->kategori_user_id != 2 && Auth::user()->kategori_user_id != 3 && Auth::user()->kategori_user_id != 4) {
+      return abort(403);
+    }
+
     // data kader_jabatan
     $kader_jabatan = collect([]);
     $periode = Periode::orderBy('created_at', 'desc')->get();
     foreach ($periode as $p) {
       $jabatan = Jabatan::where('ranting_id_ranting', $id)->orderBy('created_at', 'asc')->get();
       foreach ($jabatan as $j) {
-        $kader = KaderJabatan::where('periode_id_periode', $p->id_periode)->where('jabatan_id_jabatan', $j->id_jabatan)->get();
+        $kader = KaderJabatan::where('periode_id_periode', $p->id_periode)->where('jabatan_id_jabatan', $j->id_jabatan)->where('jabatan_at', $id)->get();
         foreach ($kader as $k) {
           $kader_jabatan->push($k);
         }
@@ -39,6 +52,18 @@ class TambahJabatanKaderRantingController extends Controller
 
   public function store(Request $request, $id)
   {
+    // cek jika admin cabang bukan di ranting 
+    if (Auth::user()->kategori_user_id == 4) {
+      $ranting = Ranting::where('id_ranting', $id)->where('cabang_id_cabang', Auth::user()->admin_at)->first();
+      if (!$ranting) {
+        return abort(403);
+      }
+    }
+    // cek jika user bukan admin ranting
+    if (Auth::user()->admin_at != $id  && Auth::user()->kategori_user_id != 2 && Auth::user()->kategori_user_id != 3 && Auth::user()->kategori_user_id != 4) {
+      return abort(403);
+    }
+
     $validated = $request->validate([
       'jabatan' => ['required'],
       'periode' => ['required'],
@@ -71,6 +96,12 @@ class TambahJabatanKaderRantingController extends Controller
 
   public function show(Kader $kader)
   {
+    // cek jika user bukan user yang memiliki jabatan di ranting
+    $kader_jabatan = KaderJabatan::where('kader_nik', $kader->nik)->where('jabatan_at', Auth::user()->admin_at)->first();
+    if (!$kader_jabatan) {
+      return abort(403);
+    }
+
     return view('admin.jabatan_kader.tambah_jabatan_di_ranting.show', [
       'kader' => $kader
     ]);
@@ -78,6 +109,18 @@ class TambahJabatanKaderRantingController extends Controller
 
   public function destroy(Request $request, KaderJabatan $kader_jabatan, $id)
   {
+    // cek jika admin cabang bukan di ranting 
+    if (Auth::user()->kategori_user_id == 4) {
+      $ranting = Ranting::where('id_ranting', $id)->where('cabang_id_cabang', Auth::user()->admin_at)->first();
+      if (!$ranting) {
+        return abort(403);
+      }
+    }
+    // cek jika user bukan admin ranting
+    if (Auth::user()->admin_at != $id  && Auth::user()->kategori_user_id != 2 && Auth::user()->kategori_user_id != 3 && Auth::user()->kategori_user_id != 4) {
+      return abort(403);
+    }
+
     // ambil data kader
     $kader = Kader::where('nik', $kader_jabatan->kader_nik)->first();
 
@@ -94,8 +137,8 @@ class TambahJabatanKaderRantingController extends Controller
   {
     // data kader 
     $kader = collect([]);
-    // ambil data kader di tabel user berdasarkan field kader_admin yang bukan sebagai kategori_user_id = 1
-    $user = User::where('kategori_user_id', 1)->where('admin_at', null)->get();
+    // ambil data kader di tabel user berdasarkan field kader_admin yang bukan sebagai kategori_user_id sama dengan 2 (super admin)
+    $user = User::where('kategori_user_id', '!=', 2)->get();
     foreach ($user as $u) {
       // cek apakah ada data kader di tabel kader_jabatan
       if (Kader::where('nik', $u->kader_nik)->where('ranting_id_ranting', $ranting->id_ranting)->first() && !KaderJabatan::where('periode_id_periode', $periode->id_periode)->where('kader_nik', $u->kader_nik)->where('jabatan_at', $ranting->id_ranting)->first()) {

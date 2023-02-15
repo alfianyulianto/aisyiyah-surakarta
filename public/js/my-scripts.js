@@ -57,10 +57,9 @@ $(document).ready(function () {
     $("#scroll-x-daerah").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 150, targets: 0 },
-            { width: 495, targets: 1 },
-            { width: 145, targets: 2 },
-            { width: 60, targets: 3 },
+            { width: 165, targets: 0 },
+            { width: 520, targets: 1 },
+            { width: 200, targets: 2 },
         ],
     });
     // tampilan cabang

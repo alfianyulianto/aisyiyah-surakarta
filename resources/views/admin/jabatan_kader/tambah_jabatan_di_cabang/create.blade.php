@@ -160,10 +160,10 @@
                         <td>{{ $kj->jabatan->nama_jabatan }}</td>
                         <td>{{ $kj->periode->periode }}</td>
                         <td>
-                          <a href="/data/jabatan/kader/cabang/{{ $kj->kader_nik }}" target="_blank"
+                          <a href="/data/jabatan/kader/cabang/{{ $kj->kader_nik }}"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
-                          <form action="/jabatan/kader/cabang/{{ $kj->id_kader_jabatan }}/{{ $id_cabang }}" method="post"
-                            class="d-inline-block">
+                          <form action="/jabatan/kader/cabang/{{ $kj->id_kader_jabatan }}/{{ $id_cabang }}"
+                            method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
                             <input type="hidden" name="jabatan" id="jabatan"
@@ -193,16 +193,16 @@
         dataType: "json",
         success: function(response) {
           // console.log(response);
-            let kader = "<option selected disabled>-- Pilih Kader --</option>";
-            response['kader'].forEach((k) => {
-              kader += `<option value="${k.nik}">${k.nama}</option>`;
-            });
-            $("#kader").html(kader);
-            let jabatan = "<option selected disabled>-- Pilih Jabatan --</option>";
-            response['jabatan'].forEach((j) => {
-              jabatan += `<option value="${j.id_jabatan}">${j.nama_jabatan}</option>`;
-            });
-            $("#jabatan").html(jabatan);
+          let kader = "<option selected disabled>-- Pilih Kader --</option>";
+          response['kader'].forEach((k) => {
+            kader += `<option value="${k.nik}">${k.nama}</option>`;
+          });
+          $("#kader").html(kader);
+          let jabatan = "<option selected disabled>-- Pilih Jabatan --</option>";
+          response['jabatan'].forEach((j) => {
+            jabatan += `<option value="${j.id_jabatan}">${j.nama_jabatan}</option>`;
+          });
+          $("#jabatan").html(jabatan);
         }
       });
     });

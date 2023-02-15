@@ -19,7 +19,6 @@ return new class extends Migration
       $table->foreignIdFor(Daerah::class);
       $table->string('nama_cabang');
       $table->text('alamat_cabang');
-      $table->string('sk_pimp_cabang');
       $table->timestamps();
     });
   }

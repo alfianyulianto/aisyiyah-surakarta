@@ -18,7 +18,6 @@
                     <tr>
                       <th class="text-center">Nama Daerah</th>
                       <th class="text-center">Alamat Daerah</th>
-                      <th class="text-center">SK Pimpinan Daerah</th>
                       <th class="text-center">Aksi</th>
                     </tr>
                   </thead>
@@ -26,14 +25,17 @@
                     <tr>
                       <td>{{ $daerah->nama_daerah }}</td>
                       <td>{{ $daerah->alamat_daerah }}</td>
-                      <td>
+                      {{-- <td>
                         <a href="/sk/pimpinan/daerah/{{ $daerah->id_daerah }}" class="text-decoration-none">
                           <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
                             <i class="fas fa-download"></i> download
                           </div>
                         </a>
-                      </td>
+                      </td> --}}
                       <td>
+                        <a href="/data/daerah/{{ $daerah->id_daerah }}" class="btn btn-icon icon-left btn-info"><i
+                            class="fas fa-file-pdf"></i> sk pimpinan
+                        </a>
                         <a href="/data/daerah/{{ $daerah->id_daerah }}/edit" class="btn btn-icon icon-left btn-warning"><i
                             class="far fa-edit"></i> Edit
                         </a>

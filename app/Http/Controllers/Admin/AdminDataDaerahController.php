@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Daerah;
+use App\Models\Periode;
+use App\Models\SkPimpinan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,7 +52,11 @@ class AdminDataDaerahController extends Controller
    */
   public function show($id)
   {
-    abort(404);
+    return view('admin.daerah.upload_sk_pimpinan', [
+      'periode' => Periode::orderBy('created_at', 'desc')->get(),
+      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', $id)->where('cabang_id_cabang', null)->where('ranting_id_ranting', null)->orderBy('periode_id_periode', 'asc')->get(),
+      'id_daerah' => $id
+    ]);
   }
 
   /**
@@ -119,6 +125,32 @@ class AdminDataDaerahController extends Controller
   public function destroy($id)
   {
     abort(404);
+  }
+
+  public function upload_sk_pimpinan(Request $request, Daerah $daerah)
+  {
+    $validated = $request->validate([
+      'periode' => ['required'],
+      'sk_pimp_daerah' => ['required', 'mimes:pdf']
+    ]);
+
+    // cek jika user mengupload ulang sk_pimp_daerah
+    if ($request->sk_pimp_daerah) {
+      // simpan file yang diupload
+      $file = $request->file('sk_pimp_daerah');
+      // hapus file sk_pimp_daerah dari tabel daerah
+      Storage::delete($daerah->sk_pimp_daerah);
+      $validated['sk_pimp_daerah'] = $file->storeAs('sk pimpinan daerah',  'sk-pimpinan-daerah_' . $request->nama_daerah . '_' . date('d-m-Y') . '.' . $file->getClientOriginalExtension());
+    }
+
+    $validated['daerah_id_daerah'] = $daerah->id_daerah;
+
+    $periode = Periode::where('id_periode', $request->periode)->first()->periode;
+
+    // update data ke tabel daerah
+    $daerah->update($validated);
+
+    return redirect('/data/daerah')->with('message_daerah', 'Berhasil mengupload sk pimpinan daerah periode ' . $periode . '.');
   }
 
   public function download(Daerah $daerah)

@@ -140,11 +140,11 @@
                   <thead>
                     <tr>
                       <th class="text-center align-top">#</th>
-                      <th class="text-center align-top">Nama</th>
-                      <th class="text-center align-top">Jabatan</th>
                       <th class="text-center align-top">NIK</th>
                       <th class="text-center">No KTA Aisyiyah</th>
                       <th class="text-center">No KTA Muhammadiyah</th>
+                      <th class="text-center align-top">Nama</th>
+                      <th class="text-center align-top">Jabatan</th>
                       <th class="text-center align-top">Nomer Handphone</th>
                       <th class="text-center align-top">Aksi</th>
                     </tr>
@@ -153,14 +153,14 @@
                     @foreach ($kader_jabatan as $kj)
                       <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $kj->kader->nama }}</td>
-                        <td>{{ $kj->jabatan->nama_jabatan }}</td>
                         <td>{{ $kj->kader_nik }}</td>
                         <td>{{ $kj->kader->no_kta ? $kj->kader->no_kta : '-' }}</td>
                         <td>{{ $kj->kader->no_ktm ? $kj->kader->no_ktm : '-' }}</td>
+                        <td>{{ $kj->kader->nama }}</td>
+                        <td>{{ $kj->jabatan->nama_jabatan }}</td>
                         <td>{{ $kj->kader->no_ponsel }}</td>
                         <td>
-                          <a href="/data/jabatan/kader/ranting/{{ $kj->kader_nik }}" target="_blank"
+                          <a href="/data/jabatan/kader/ranting/{{ $kj->kader_nik }}"
                             class="btn btn-icon icon-left btn-primary"><i class="far fa-eye"></i> Show</a>
                           <form action="/jabatan/kader/ranting/{{ $kj->id_kader_jabatan }}/{{ $id_ranting }}"
                             method="post" class="d-inline-block">

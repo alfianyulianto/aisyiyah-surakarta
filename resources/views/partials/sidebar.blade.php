@@ -48,17 +48,17 @@
            </ul>
          </li>
          <li
-           class="nav-item dropdown {{ Request::is('data/daerah') || Request::is('data/cabang') || Request::is('data/ranting') || Request::is('data/potensi/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item dropdown {{ Request::is('data/daerah') || Request::is('data/daerah/*') || Request::is('data/cabang') || Request::is('data/cabang/*') || Request::is('data/ranting') || Request::is('data/ranting/*') || Request::is('data/potensi/kader') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-server"></i></i>
              <span>Data Master</span></a>
            <ul class="dropdown-menu">
-             <li class="{{ Request::is('data/daerah') ? 'active' : '' }}">
+             <li class="{{ Request::is('data/daerah') || Request::is('data/daerah/*') ? 'active' : '' }}">
                <a class="nav-link" href="/data/daerah">DataDaerah</a>
              </li>
-             <li class="{{ Request::is('data/cabang') ? 'active' : '' }}">
+             <li class="{{ Request::is('data/cabang') || Request::is('data/cabang/*') ? 'active' : '' }}">
                <a class="nav-link" href="/data/cabang">Data Cabang</a>
              </li>
-             <li class="{{ Request::is('data/ranting') ? 'active' : '' }}">
+             <li class="{{ Request::is('data/ranting') || Request::is('data/ranting/*') ? 'active' : '' }}">
                <a class="nav-link" href="/data/ranting">Data Ranting</a>
              </li>
              <li class="{{ Request::is('data/potensi/kader') ? 'active' : '' }}">
@@ -98,14 +98,14 @@
            </ul>
          </li>
          <li
-           class="nav-item dropdown {{ Request::is('data/daerah') || Request::is('data/cabang') || Request::is('data/ranting') || Request::is('data/potensi/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item dropdown {{ Request::is('data/cabang') || Request::is('data/cabang/*') || Request::is('data/ranting') || Request::is('data/ranting/*') || Request::is('data/potensi/kader') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-server"></i>
              <span>Data Master</span></a>
            <ul class="dropdown-menu">
-             <li class="{{ Request::is('data/cabang') ? 'active' : '' }}">
+             <li class="{{ Request::is('data/cabang') || Request::is('data/cabang/*') ? 'active' : '' }}">
                <a class="nav-link" href="/data/cabang">Data Cabang</a>
              </li>
-             <li class="{{ Request::is('data/ranting') ? 'active' : '' }}">
+             <li class="{{ Request::is('data/ranting') || Request::is('data/ranting/*') ? 'active' : '' }}">
                <a class="nav-link" href="/data/ranting">Data Ranting</a>
              </li>
              <li class="{{ Request::is('data/potensi/kader') ? 'active' : '' }}">
@@ -142,11 +142,11 @@
            </ul>
          </li>
          <li
-           class="nav-item dropdown {{ Request::is('data/daerah') || Request::is('data/cabang') || Request::is('data/ranting') || Request::is('data/potensi/kader') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item dropdown {{ Request::is('data/ranting') || Request::is('data/ranting/*') || Request::is('data/potensi/kader') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-server"></i>
              <span>Data Master</span></a>
            <ul class="dropdown-menu">
-             <li class="{{ Request::is('data/ranting') ? 'active' : '' }}">
+             <li class="{{ Request::is('data/ranting') || Request::is('data/ranting/*') ? 'active' : '' }}">
                <a class="nav-link" href="/data/ranting">Data Ranting</a>
              </li>
              <li class="{{ Request::is('data/potensi/kader') ? 'active' : '' }}">

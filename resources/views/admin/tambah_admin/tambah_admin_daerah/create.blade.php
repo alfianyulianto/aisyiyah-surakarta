@@ -40,7 +40,7 @@
                                 <option value="{{ $k->nik }}">{{ $k->nama }} - {{ $k->nik }}</option>
                               @endforeach
                             @else
-                              <option disabled>Tidak Ada Data Kader di {{ $nama_ranting }}</option>
+                              <option disabled>Tidak Ada Data Kader di {{ $nama_daerah }}</option>
                             @endif
                           </select>
                           @error('kader')

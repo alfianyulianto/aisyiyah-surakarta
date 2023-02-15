@@ -119,7 +119,7 @@
                               <td>
                                 {{ DB::table('daerah')->where('id_daerah', $kj->jabatan_at)->first()->nama_daerah ??(DB::table('cabang')->where('id_cabang', $kj->jabatan_at)->first()->nama_cabang ??DB::table('ranting')->where('id_ranting', $kj->jabatan_at)->first()->nama_ranting) }}
                               </td>
-                              <td>{{ $kj->periode }}</td>
+                              <td>{{ $kj->periode->periode }}</td>
                             </tr>
                           @endforeach
                         </tbody>

@@ -8,7 +8,9 @@ use App\Models\Daerah;
 use App\Models\Jabatan;
 use App\Models\Kader;
 use App\Models\KaderJabatan;
+use App\Models\Periode;
 use App\Models\Ranting;
+use App\Models\SkPimpinan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -89,7 +91,11 @@ class AdminDataCabangController extends Controller
    */
   public function show($id)
   {
-    abort(404);
+    return view('admin.cabang.upload_sk_pimpinan', [
+      'periode' => Periode::orderBy('created_at', 'desc')->get(),
+      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', $id)->where('ranting_id_ranting', null)->orderBy('periode_id_periode', 'asc')->get(),
+      'id_cabang' => $id
+    ]);
   }
 
   /**
