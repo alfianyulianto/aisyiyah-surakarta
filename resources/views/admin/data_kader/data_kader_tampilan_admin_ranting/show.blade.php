@@ -13,7 +13,7 @@
             <div class="card-body">
               <div class="row mb-3 pr-0">
                 <div class="col-lg-3 mb-3">
-                  <img src="{{ url('') }}/img/avatar-3.png" class="rounded mx-auto d-block" alt=""
+                  <img src="{{ asset('storage/' . $kader->foto) }}" class="rounded mx-auto d-block" alt=""
                     width="170">
                 </div>
                 <div class="col-lg-9">

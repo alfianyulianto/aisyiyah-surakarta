@@ -32,7 +32,7 @@ class TambahJabatanKaderRantingController extends Controller
 
     // data kader_jabatan
     $kader_jabatan = collect([]);
-    $periode = Periode::orderBy('created_at', 'desc')->get();
+    $periode = Periode::orderBy('periode', 'desc')->get();
     foreach ($periode as $p) {
       $jabatan = Jabatan::where('ranting_id_ranting', $id)->orderBy('created_at', 'asc')->get();
       foreach ($jabatan as $j) {
@@ -43,7 +43,7 @@ class TambahJabatanKaderRantingController extends Controller
       }
     }
     return view('admin.jabatan_kader.tambah_jabatan_di_ranting.create', [
-      'periode' => Periode::orderBy('created_at', 'desc')->get(),
+      'periode' => Periode::orderBy('periode', 'desc')->get(),
       'nama_ranting' => Ranting::where('id_ranting', $id)->first()->nama_ranting,
       'id_ranting' => $id,
       'kader_jabatan' => $kader_jabatan
