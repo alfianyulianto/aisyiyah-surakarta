@@ -65,7 +65,7 @@ class AdminDataCabangController extends Controller
     }
 
     $validated = $request->validate([
-      'id_cabang' => ['required', 'min:9', 'max:9', 'unique:App\Models\Cabang,id_cabang'],
+      'id_cabang' => ['required', 'unique:App\Models\Cabang,id_cabang'],
       'nama_cabang' => ['required', 'min:5'],
       'alamat_cabang' => ['required', 'min:10'],
     ]);
@@ -87,8 +87,8 @@ class AdminDataCabangController extends Controller
   public function show(Cabang $cabang)
   {
     return view('admin.cabang.upload_sk_pimpinan', [
-      'periode' => Periode::orderBy('created_at', 'desc')->get(),
-      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', $cabang->id_cabang)->where('ranting_id_ranting', null)->orderBy('periode_id_periode', 'asc')->get(),
+      'periode' => Periode::orderBy('periode', 'desc')->get(),
+      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', $cabang->id_cabang)->where('ranting_id_ranting', null)->orderBy('id_sk_pimpinan', 'desc')->paginate(5),
       'id_cabang' => $cabang->id_cabang,
       'nama_cabang' => $cabang->nama_cabang
     ]);
@@ -117,19 +117,14 @@ class AdminDataCabangController extends Controller
   public function update(Request $request, Cabang $cabang)
   {
     $role = [
-      'id_cabang' => ['required', 'min:9', 'max:9'],
+      'id_cabang' => ['required'],
       'nama_cabang' => ['required', 'min:5'],
       'alamat_cabang' => ['required', 'min:10'],
     ];
 
     // cek apakah $request->id_cabang sama dengan id_cabang pada tabel cabang
     if ($request->id_cabang != $cabang->id_cabang) {
-      $role['id_cabang'] = ['required', 'min:9', 'max:9', 'unique:App\Models\Cabang,id_cabang'];
-    }
-
-    // cek jika user mengganti nama cabang
-    if ($request->nama_cabang != $cabang->nama_cabang) {
-      $role['sk_pimp_cabang'] = ['required', 'mimes:pdf'];
+      $role['id_cabang'] = ['required', 'unique:App\Models\Cabang,id_cabang'];
     }
 
     // cek validasi
@@ -191,7 +186,7 @@ class AdminDataCabangController extends Controller
 
     // buat data untuk di insert ke tabel
     $validatedData = [
-      'id_sk_pimpinan' => 'sk-' . Str::random(4),
+      'id_sk_pimpinan' => 'sk-' . Str::lower(Str::random(8)),
       'cabang_id_cabang' => $cabang->id_cabang,
       'periode_id_periode' => $request->periode,
     ];

@@ -13,14 +13,14 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-8">
-                  <form action="/data/ranting" method="post" enctype="multipart/form-data">
+                  <form action="/data/ranting" method="post">
                     @csrf
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="mb-3">
                           <label for="id_ranting" class="form-label"><b>Id Ranting</b></label>
                           <input type="text" class="form-control" name="id_ranting" id="id_ranting"
-                            value="{{ 'rntng-' . Str::lower(Str::random(4)) }}" readonly>
+                            value="{{ 'rntng-' . Str::lower(Str::random(8)) }}" readonly>
                           @error('id_ranting')
                             <div class="error-message">
                               {{ $message }}
@@ -84,26 +84,6 @@
                               {{ $message }}
                             </div>
                           @enderror
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="mb-3">
-                          <label for="sk_pimp_ranting" class="form-label"><b>SK Pimpinan Ranting @error('sk_pimp_ranting')
-                                <div class="text-danger d-inline error-message">*Silahkan upload ulang</div>
-                              @enderror
-                            </b></label>
-                          <small class="d-block mt-0 mb-2" style="font-size:13px;">Pastikan file yang diupload dalam bentuk PDF</small>
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="sk_pimp_ranting" id="sk_pimp_ranting">
-                            <label class="custom-file-label" for="sk_pimp_ranting">Choose file</label>
-                            @error('sk_pimp_ranting')
-                              <div class="error-message" style="margin-top:11px">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
                         </div>
                       </div>
                     </div>

@@ -40,7 +40,7 @@ class DataOrtomController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_ortom' => ['required', 'min:9', 'max:9', 'unique:App\Models\Ortom,id_ortom'],
+      'id_ortom' => ['required', 'unique:App\Models\Ortom,id_ortom'],
       'nama_ortom' => ['required', 'min:5', 'string', 'unique:App\Models\Ortom,nama_ortom'],
     ]);
 
@@ -90,7 +90,7 @@ class DataOrtomController extends Controller
   public function update(Request $request, Ortom $ortom)
   {
     $role = [
-      'id_ortom' => ['required', 'min:9', 'max:9'],
+      'id_ortom' => ['required'],
       'nama_ortom' => ['required', 'min:5'],
     ];
 
@@ -101,7 +101,7 @@ class DataOrtomController extends Controller
 
     // cek jika user tidak mengganti id_ortom, nama ortom
     if ($ortom->id_ortom != $request->id_ortom) {
-      $role['id_ortom'] = ['required', 'min:9', 'max:9', 'unique:App\Models\Ortom,id_ortom'];
+      $role['id_ortom'] = ['required', 'unique:App\Models\Ortom,id_ortom'];
     } elseif ($ortom->nama_ortom != $validated['nama_ortom']) {
       $role['nama_ortom'] = ['required', 'min:5', 'string', 'unique:App\Models\Ortom,nama_ortom'];
     }

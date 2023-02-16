@@ -67,7 +67,7 @@ class AdminDataRantingController extends Controller
       return abort(404);
     }
     $validated = $request->validate([
-      'id_ranting' => ['required', 'min:10', 'max:10'],
+      'id_ranting' => ['required'],
       'cabang_id_cabang' => ['required'],
       'nama_ranting' => ['required', 'min:5'],
       'alamat_ranting' => ['required', 'min:10'],
@@ -91,7 +91,7 @@ class AdminDataRantingController extends Controller
   {
     return view('admin.ranting.upload_sk_pimpinan', [
       'periode' => Periode::orderBy('created_at', 'desc')->get(),
-      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', null)->where('ranting_id_ranting', $ranting->id_ranting)->orderBy('periode_id_periode', 'asc')->paginate(5),
+      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', null)->where('ranting_id_ranting', $ranting->id_ranting)->orderBy('id_sk_pimpinan', 'desc')->paginate(5),
       'id_ranting' => $ranting->id_ranting,
       'nama_ranting' => $ranting->nama_ranting
     ]);
@@ -121,19 +121,14 @@ class AdminDataRantingController extends Controller
   public function update(Request $request, Ranting $ranting)
   {
     $role = [
-      'id_ranting' => ['required', 'min:10', 'max:10'],
+      'id_ranting' => ['required'],
       'nama_ranting' => ['required', 'min:5'],
       'alamat_ranting' => ['required', 'min:10'],
     ];
 
     // cek apakah $request->id_ranting sama dengan id_ranting pada tabel ranting
     if ($request->id_ranting != $ranting->id_ranting) {
-      $role['id_ranting'] = ['required', 'min:10', 'max:10', 'unique:App\Models\Ranting,id_ranting'];
-    }
-
-    // cek jika user mengganti nama ranting
-    if ($request->nama_ranting != $ranting->nama_ranting) {
-      $role['sk_pimp_ranting'] = ['required', 'mimes:pdf'];
+      $role['id_ranting'] = ['required', 'unique:App\Models\Ranting,id_ranting'];
     }
 
     // cek validasi
@@ -189,7 +184,7 @@ class AdminDataRantingController extends Controller
 
     // buat data untuk di insert ke tabel
     $validatedData = [
-      'id_sk_pimpinan' => 'sk-' . Str::random(4),
+      'id_sk_pimpinan' => 'sk-' . Str::lower(Str::random(8)),
       'ranting_id_ranting' => $ranting->id_ranting,
       'periode_id_periode' => $request->periode,
     ];

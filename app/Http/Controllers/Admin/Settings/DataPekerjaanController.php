@@ -40,7 +40,7 @@ class DataPekerjaanController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_pekerjaan' => ['required', 'min:10', 'max:10', 'unique:App\Models\Pekerjaan,id_pekerjaan'],
+      'id_pekerjaan' => ['required', 'unique:App\Models\Pekerjaan,id_pekerjaan'],
       'pekerjaan' => ['required', 'min:5', 'string', 'unique:App\Models\Pekerjaan,pekerjaan'],
     ]);
 
@@ -89,7 +89,7 @@ class DataPekerjaanController extends Controller
   public function update(Request $request, Pekerjaan $pekerjaan)
   {
     $role = [
-      'id_pekerjaan' => ['required', 'min:10', 'max:10'],
+      'id_pekerjaan' => ['required'],
       'pekerjaan' => ['required', 'min:5', 'string'],
     ];
 
@@ -100,7 +100,7 @@ class DataPekerjaanController extends Controller
 
     // cek jika user tidak mengganti id_pekerjaan, pekerjaan
     if ($pekerjaan->id_pekerjaan != $request->id_pekerjaan) {
-      $role['id_pekerjaan'] = ['required', 'min:9', 'max:9', 'unique:App\Models\Pekerjaan,id_pekerjaan'];
+      $role['id_pekerjaan'] = ['required', 'unique:App\Models\Pekerjaan,id_pekerjaan'];
     } elseif ($pekerjaan->pekerjaan != $validated['pekerjaan']) {
       $role['pekerjaan'] = ['required', 'min:5', 'string', 'unique:App\Models\Pekerjaan,pekerjaan'];
     }

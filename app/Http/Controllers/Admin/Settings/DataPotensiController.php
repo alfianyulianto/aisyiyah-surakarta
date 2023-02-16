@@ -40,7 +40,7 @@ class DataPotensiController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_potensi' => ['required', 'min:9', 'max:9', 'unique:App\Models\Potensi,id_potensi'],
+      'id_potensi' => ['required', 'unique:App\Models\Potensi,id_potensi'],
       'potensi' => ['required', 'min:5', 'string', 'unique:App\Models\Potensi,potensi'],
     ]);
 
@@ -89,7 +89,7 @@ class DataPotensiController extends Controller
   public function update(Request $request, Potensi $potensi)
   {
     $role = [
-      'id_potensi' => ['required', 'min:9', 'max:9'],
+      'id_potensi' => ['required'],
       'potensi' => ['required', 'min:5', 'string'],
     ];
 
@@ -100,7 +100,7 @@ class DataPotensiController extends Controller
 
     // cek jika user tidak mengganti id_potensi, potensi
     if ($potensi->id_potensi != $request->id_potensi) {
-      $role['id_potensi'] = ['required', 'min:9', 'max:9', 'unique:App\Models\Potensi,id_potensi'];
+      $role['id_potensi'] = ['required', 'unique:App\Models\Potensi,id_potensi'];
     } elseif ($potensi->potensi != $validated['potensi']) {
       $role['potensi'] = ['required', 'min:5', 'string', 'unique:App\Models\Potensi,potensi'];
     }

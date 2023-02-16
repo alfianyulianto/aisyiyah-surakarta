@@ -42,7 +42,7 @@ class DataPeriodeController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_periode' => ['required', 'min:8', 'max:8', 'unique:App\Models\Periode,id_periode'],
+      'id_periode' => ['required', 'unique:App\Models\Periode,id_periode'],
       'periode' => ['required', 'min:5', 'string', 'unique:App\Models\Periode,periode'],
     ]);
 
@@ -87,13 +87,13 @@ class DataPeriodeController extends Controller
   public function update(Request $request, Periode $periode)
   {
     $role = [
-      'id_periode' => ['required', 'min:8', 'max:8', 'string'],
+      'id_periode' => ['required', 'string'],
       'periode' => ['required', 'min:5', 'string'],
     ];
 
     // cek jika user tidak mengganti id_periode, periode
     if ($periode->id_periode != $request->id_periode) {
-      $role['id_periode'] = ['required', 'min:9', 'max:9', 'unique:App\Models\Periode,id_periode'];
+      $role['id_periode'] = ['required', 'unique:App\Models\Periode,id_periode'];
     } elseif ($periode->periode != $request->periode) {
       $role['periode'] = ['required', 'min:5', 'string', 'unique:App\Models\Periode,periode'];
     }

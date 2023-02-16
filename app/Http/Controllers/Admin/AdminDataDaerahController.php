@@ -55,8 +55,8 @@ class AdminDataDaerahController extends Controller
   public function show($id)
   {
     return view('admin.daerah.upload_sk_pimpinan', [
-      'periode' => Periode::orderBy('created_at', 'desc')->get(),
-      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', $id)->where('cabang_id_cabang', null)->where('ranting_id_ranting', null)->orderBy('periode_id_periode', 'asc')->get(),
+      'periode' => Periode::orderBy('periode', 'desc')->get(),
+      'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', $id)->where('cabang_id_cabang', null)->where('ranting_id_ranting', null)->orderBy('id_sk_pimpinan', 'desc')->paginate(5),
       'id_daerah' => $id
     ]);
   }
@@ -87,17 +87,11 @@ class AdminDataDaerahController extends Controller
       'id_daerah' => ['required'],
       'nama_daerah' => ['required', 'min:5'],
       'alamat_daerah' => ['required', 'min:10'],
-      'sk_pimp_daerah' => ['mimes:pdf']
     ];
 
     // cek apakah $request->id_daerah sama dengan id_daerah pada tabel daerah
     if ($request->id_daerah != $daerah->id_daerah) {
       $role['id_daerah'] = ['required', 'unique:App\Models\Daerah,id_daerah'];
-    }
-
-    // cek jika user mengganti nama daerah
-    if ($request->nama_daerah != $daerah->nama_daerah) {
-      $role['sk_pimp_daerah'] = ['required', 'mimes:pdf'];
     }
 
     // cek validasi
@@ -138,7 +132,7 @@ class AdminDataDaerahController extends Controller
 
     // buat data untuk di insert ke tabel
     $validatedData = [
-      'id_sk_pimpinan' => 'sk-' . Str::random(4),
+      'id_sk_pimpinan' => 'sk-' .  Str::lower(Str::random(8)),
       'daerah_id_daerah' => $daerah->id_daerah,
       'periode_id_periode' => $request->periode,
     ];

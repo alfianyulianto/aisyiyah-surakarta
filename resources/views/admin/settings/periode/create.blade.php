@@ -20,7 +20,7 @@
                         <div class="mb-3">
                           <label for="id_periode" class="form-label"><b>Id Periode</b></label>
                           <input type="text" class="form-control" name="id_periode" id="id_periode"
-                            value="{{ 'prd-' . Str::random(4) }}" readonly>
+                            value="{{ 'prd-' . Str::lower(Str::random(8)) }}" readonly>
                           @error('id_periode')
                             <div class="error-message">
                               {{ $message }}

@@ -8,7 +8,8 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
+  <link rel="stylesheet" href="{{ url('') }}/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
   <!-- CSS Libraries -->
@@ -21,8 +22,10 @@
   <link rel="stylesheet" href="{{ url('') }}/css/show-hide-password.css">
 
   <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css">
-  <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css">
+  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css"> --}}
+  <link rel="stylesheet" href="{{ url('') }}/css/assets/style.css">
+  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css"> --}}
+  <link rel="stylesheet" href="{{ url('') }}/css/assets/components.css">
 
   {{-- My CSS --}}
   <link rel="stylesheet" href="{{ url('') }}/css/my-style.css">
@@ -186,22 +189,29 @@
       allowClear: true,
     });
   </script>
-  <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
-  <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script>
-  <script src="{{ url('') }}/library/stisla/assets/js/stisla.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script> --}}
+  <script src="{{ url('') }}/js/jquery.nicescroll.min.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script> --}}
+  <script src="{{ url('') }}/js/moment.min.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/assets/js/stisla.js"></script> --}}
+  <script src="{{ url('') }}/js/assets/stisla.js"></script>
 
   <!-- JS Libraies -->
-  <script src="{{ url('') }}/library/stisla/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script> --}}
+  <script src="{{ url('') }}/js/jquery.pwstrength.min.js"></script>
 
   {{-- My Script --}}
   <script src="{{ url('') }}/js/show-hide-password.js"></script>
 
   <!-- Template JS File -->
-  <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script>
-  <script src="{{ url('') }}/library/stisla/assets/js/custom.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script> --}}
+  <script src="{{ url('') }}/js/assets/scripts.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/assets/js/custom.js"></script> --}}
+  <script src="{{ url('') }}/js/assets/custom.js"></script>
 
   <!-- Page Specific JS File -->
-  <script src="{{ url('') }}/library/stisla/assets/js/page/auth-register.js"></script>
+  {{-- <script src="{{ url('') }}/library/stisla/assets/js/page/auth-register.js"></script> --}}
+  <script src="{{ url('') }}/js/assets/page/auth-register.js"></script>
   @if (old('cabang_id_cabang'))
     <script>
       // ranting

@@ -14,7 +14,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-8">
-                  <form action="/data/daerah/{{ $daerah->id_daerah }}" method="post" enctype="multipart/form-data">
+                  <form action="/data/daerah/{{ $daerah->id_daerah }}" method="post">
                     @csrf
                     @method('put')
                     <div class="row">

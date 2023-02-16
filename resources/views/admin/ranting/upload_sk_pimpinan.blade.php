@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="table-responsive">
-                    <table class="table table-bordered" id="scroll-x-sk-pimpinan">
+                    <table class="table table-bordered">
                       <thead>
                         <tr>
                           <th class="text-center">Periode</th>
@@ -101,9 +101,11 @@
                             </td>
                           </tr>
                         @endforeach
-                        {{ $sk_pimpinan->links() }}
                       </tbody>
                     </table>
+                  </div>
+                  <div class="row justify-content-center">
+                    {{ $sk_pimpinan->links() }}
                   </div>
                 </div>
               </div>

@@ -39,7 +39,7 @@ class DataTempatLahirController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_tempat_lahir' => ['required', 'min:12', 'max:12', 'unique:App\Models\TempatLahir,id_tempat_lahir'],
+      'id_tempat_lahir' => ['required', 'unique:App\Models\TempatLahir,id_tempat_lahir'],
       'tempat_lahir' => ['required', 'min:5', 'string', 'unique:App\Models\TempatLahir,tempat_lahir'],
     ]);
 
@@ -88,7 +88,7 @@ class DataTempatLahirController extends Controller
   public function update(Request $request, TempatLahir $lahir)
   {
     $role = [
-      'id_tempat_lahir' => ['required', 'min:12', 'max:12'],
+      'id_tempat_lahir' => ['required'],
       'tempat_lahir' => ['required', 'min:5', 'string'],
     ];
 
@@ -99,7 +99,7 @@ class DataTempatLahirController extends Controller
 
     // cek jika user tidak mengganti id_tempat_lahir, tempat_lahir
     if ($lahir->id_tempat_lahir != $request->id_tempat_lahir) {
-      $role['id_tempat_lahir'] = ['required', 'min:12', 'max:12', 'unique:App\Models\TempatLahir,id_tempat_lahir'];
+      $role['id_tempat_lahir'] = ['required', 'unique:App\Models\TempatLahir,id_tempat_lahir'];
     } elseif ($lahir->tempat_lahir != $validated['tempat_lahir']) {
       $role['tempat_lahir'] = ['required', 'min:5', 'string', 'unique:App\Models\TempatLahir,tempat_lahir'];
     }

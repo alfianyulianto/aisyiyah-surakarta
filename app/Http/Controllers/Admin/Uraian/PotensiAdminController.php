@@ -43,7 +43,7 @@ class PotensiAdminController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'id_kader_has_potensi' => ['required', 'max:9', 'min:9'],
+      'id_kader_has_potensi' => ['required'],
       'potensi_id_potensi' => ['required'],
       'potensi_kader_uraian' => ['required', 'min:10'],
     ]);
@@ -95,7 +95,7 @@ class PotensiAdminController extends Controller
   public function update(Request $request, $id)
   {
     $role = [
-      'id_kader_has_potensi' => ['required', 'max:9', 'min:9'],
+      'id_kader_has_potensi' => ['required'],
       'potensi_id_potensi' => ['required'],
       'potensi_kader_uraian' => ['required', 'min:10'],
     ];
@@ -103,7 +103,7 @@ class PotensiAdminController extends Controller
 
     // cek apakah $request->id_kader_has_potensi sama dengan id_kader_has_potensi pada tabel kader_has_potensi
     if ($request->id_kader_has_potensi != $id) {
-      $role['id_kader_has_potensi'] = ['required', 'max:11', 'min:11', 'unique:App\Models\KaderPotensi,id_kader_has_potensi'];
+      $role['id_kader_has_potensi'] = ['required', 'unique:App\Models\KaderPotensi,id_kader_has_potensi'];
     }
 
     $validated = $request->validate($role);
