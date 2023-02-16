@@ -21,7 +21,7 @@
                         <div class="mb-3">
                           <label for="id_cabang" class="form-label"><b>Id Cabang</b></label>
                           <input type="text" class="form-control" name="id_cabang" id="id_cabang"
-                            value="{{ 'cbng-' . Str::lower(Str::random(8)) }}" readonly>
+                            value="{{ 'cbng-' . Str::lower(Str::random(15)) }}" readonly>
                           @error('id_cabang')
                             <div class="error-message">
                               {{ $message }}

@@ -20,7 +20,7 @@
                         <div class="mb-3">
                           <label for="id_ortom" class="form-label"><b>Id Ortom</b></label>
                           <input type="text" class="form-control" name="id_ortom" id="id_ortom"
-                            value="{{ 'ortm-' . Str::lower(Str::random(8)) }}" readonly>
+                            value="{{ 'ortm-' . Str::lower(Str::random(15)) }}" readonly>
                           @error('id_ortom')
                             <div class="error-message">
                               {{ $message }}

@@ -59,7 +59,7 @@ class TambahJabatanKaderCabangController extends Controller
     ]);
 
     $validatedData = [
-      'id_kader_jabatan' => 'kdrjbtn-' . Str::random(8),
+      'id_kader_jabatan' => 'kdrjbtn-' . Str::random(15),
       'jabatan_id_jabatan' => $validated['jabatan'],
       'periode_id_periode' => $validated['periode'],
       'kader_nik' => $validated['kader'],

@@ -124,7 +124,7 @@ class DataKaderDaerahController extends Controller
       // insert ke tabel tempat_lahir
       $data_tempat_lahir = [
         'tempat_lahir' => $result_tempat_lahir,
-        'id_tempat_lahir' => 'pkrjn-' . Str::lower(Str::random(8))
+        'id_tempat_lahir' => 'pkrjn-' . Str::lower(Str::random(15))
       ];
       // insert ke tabel tempat_lahir
       TempatLahir::create($data_tempat_lahir);
@@ -141,7 +141,7 @@ class DataKaderDaerahController extends Controller
       // insert ke tabel pekerjaan
       $data_pekerjaan = [
         'pekerjaan' => $result_pekerjaan,
-        'id_pekerjaan' => 'pkrjn-' . Str::lower(Str::random(8))
+        'id_pekerjaan' => 'pkrjn-' . Str::lower(Str::random(15))
       ];
       // insert ke tabel pekerjaan
       Pekerjaan::create($data_pekerjaan);
@@ -318,7 +318,7 @@ class DataKaderDaerahController extends Controller
       // insert ke tabel tempat_lahir
       $data_tempat_lahir = [
         'tempat_lahir' => $result_tempat_lahir,
-        'id_tempat_lahir' => 'pkrjn-' . Str::lower(Str::random(8))
+        'id_tempat_lahir' => 'pkrjn-' . Str::lower(Str::random(15))
       ];
       // insert ke tabel tempat_lahir
       TempatLahir::create($data_tempat_lahir);
@@ -335,7 +335,7 @@ class DataKaderDaerahController extends Controller
       // insert ke tabel pekerjaan
       $data_pekerjaan = [
         'pekerjaan' => $result_pekerjaan,
-        'id_pekerjaan' => 'pkrjn-' . Str::lower(Str::random(8))
+        'id_pekerjaan' => 'pkrjn-' . Str::lower(Str::random(15))
       ];
       // insert ke tabel pekerjaan
       Pekerjaan::create($data_pekerjaan);
