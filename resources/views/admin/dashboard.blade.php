@@ -208,8 +208,9 @@
             <div class="card-body">
               <div class="row mb-3 pr-0">
                 <div class="col-lg-3 mb-3">
-                  <img src="{{ asset('storage/' .DB::table('kader')->where('nik', Auth::user()->kader_nik)->first()->foto) }}" class="rounded mx-auto d-block" alt=""
-                    width="200">
+                  <img
+                    src="{{ asset('storage/' .DB::table('kader')->where('nik', Auth::user()->kader_nik)->first()->foto) }}"
+                    class="rounded mx-auto d-block" alt="" width="200">
                 </div>
                 <div class="col-lg-9">
                   <div class="d-inline py-3">
@@ -287,39 +288,47 @@
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>KTA Aisyiyah</b></p>
-                  <p class="lh-none">{{ $kader->no_kta ? $kader->no_kta : '-' }}</p>
+                  <p class="lh-none">{{ $kader->no_kta ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>KTA Muhammadiyah</b></p>
-                  <p class="lh-none">{{ $kader->no_ktm ? $kader->no_ktm : '-' }}</p>
+                  <p class="lh-none">{{ $kader->no_ktm ?? '-' }}</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Tempat Tanggal Lahir</b></p>
-                  <p class="lh-none">{{ $kader->tempat_lahir }}, {{ $kader->tanggal_lahir }}</p>
+                  @php
+                    $tempat_lahir = $kader->tempat_lahir;
+                    $tanggal_lahir = Str::of($kader->tanggal_lahir)
+                        ->explode('-')
+                        ->reverse()
+                        ->join('-');
+                    $tempat_tanggal_lahir = $tempat_lahir . ', ' . $tanggal_lahir;
+                  @endphp
+                  <p class="lh-none">{{ $tempat_tanggal_lahir ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Alamat Asal (KTP)</b></p>
-                  <p class="lh-none">{{ $kader->alamat_asal_ktp }}</p>
+                  <p class="lh-none">{{ $kader->alamat_asal_ktp ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Alamat Rumah Tinggal</b></p>
-                  <p class="lh-none">{{ $kader->alamat_rumah_tinggal }}</p>
+                  <p class="lh-none">{{ $kader->alamat_rumah_tinggal ?? '-' }}</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Status Pernikahan</b></p>
-                  <p class="lh-none">{{ $kader->status_pernikahan }}</p>
+                  <p class="lh-none">{{ $kader->status_pernikahan ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Pekerjaan</b></p>
-                  <p class="lh-none">{{ $kader->pekerjaan }}</p>
+                  <p class="lh-none">{{ $kader->pekerjaan ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Pendidikan Terkahir</b></p>
-                  <p class="lh-none">{{ $kader->pendidikan_terakhir->pendidikan }}</p>
+                  <p class="lh-none">{{ $kader->pendidikan_terakhir->pendidikan ?? '-' }}</p>
                 </div>
               </div>
               <div class="row mt-3">

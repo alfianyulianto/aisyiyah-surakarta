@@ -21,7 +21,6 @@ class RegisterController extends Controller
 
   public function store(Request $request)
   {
-    return $request;
     $validated = $request->validate([
       'nik' => ['required', 'numeric', 'max_digits:16', 'min_digits:16', 'unique:App\Models\Kader,nik'],
       'no_ponsel' => ['required', 'numeric', 'max_digits:12', 'min_digits:12'],
@@ -38,7 +37,7 @@ class RegisterController extends Controller
       'no_ponsel' => $request->no_ponsel,
       'nama' => $request->nama,
       'password' => Hash::make($request->password),
-      'kategori_user' => 1,
+      'kategori_user_id' => 1,
     ];
     User::create($validatedDataUser);
 
@@ -52,7 +51,8 @@ class RegisterController extends Controller
       'cabang_id_cabang' => $request->cabang_id_cabang,
       'ranting_id_ranting' => $request->ranting_id_ranting,
       'user_id' => $id_user,
-      'no_ponsel' => $request->no_ponsel
+      'no_ponsel' => $request->no_ponsel,
+      'foto' => 'foto profil/avatar-3.png'
     ];
 
     // insert ke tabel kader

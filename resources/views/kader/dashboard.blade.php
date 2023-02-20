@@ -80,11 +80,11 @@
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>KTA Aisyiyah</b></p>
-                  <p class="lh-none">{{ $kader->no_kta ? $kader->no_kta : '-' }}</p>
+                  <p class="lh-none">{{ $kader->no_kta ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>KTA Muhammadiyah</b></p>
-                  <p class="lh-none">{{ $kader->no_ktm ? $kader->no_ktm : '-' }}</p>
+                  <p class="lh-none">{{ $kader->no_ktm ?? '-' }}</p>
                 </div>
               </div>
               <div class="row">

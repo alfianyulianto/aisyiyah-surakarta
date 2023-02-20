@@ -48,6 +48,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Redirect jika url root
+Route::get('/', function () {
+  if (Auth::user()) {
+    return redirect('/admin');
+  } else {
+    return redirect('/login');
+  }
+});
 
 // dashboard
 Route::get('/admin', [AdminDashboardController::class, 'index'])->middleware('admin');
