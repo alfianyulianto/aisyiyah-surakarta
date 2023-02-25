@@ -18,6 +18,7 @@ class KaderPotensiController extends Controller
   public function index()
   {
     return view('kader.potensi.index', [
+      'title' => 'Potensi Kader',
       'potensi' => KaderPotensi::where('kader_nik', Auth::user()->kader_nik)->orderBy('created_at', 'desc')->get()
     ]);
   }
@@ -30,6 +31,7 @@ class KaderPotensiController extends Controller
   public function create()
   {
     return view('kader.potensi.create', [
+      'title' => 'Create Potensi Kader',
       'potensi' => Potensi::orderBy('potensi', 'asc')->get()
     ]);
   }
@@ -80,6 +82,7 @@ class KaderPotensiController extends Controller
   public function edit($id)
   {
     return view('kader.potensi.edit', [
+      'title' => 'Edit Potensi Kader',
       'kader_potensi' => KaderPotensi::where('id_kader_has_potensi', $id)->first(),
       'potensi' => Potensi::orderBy('created_at', 'asc')->get()
     ]);

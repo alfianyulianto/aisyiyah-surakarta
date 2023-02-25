@@ -96,7 +96,7 @@
               Belum punya akun? <a href="/register">Buat akun</a>
             </div>
             <div class="simple-footer">
-              Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Alfian Yulianto
+              Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Pimpinan Daerah Aisyiyah Surakarta
             </div>
           </div>
         </div>

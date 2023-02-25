@@ -21,6 +21,7 @@ class AdminDataDaerahController extends Controller
   public function index()
   {
     return view('admin.daerah.index', [
+      'title' => 'Data Daerah',
       'daerah' => Daerah::get()->first()
     ]);
   }
@@ -55,6 +56,7 @@ class AdminDataDaerahController extends Controller
   public function show($id)
   {
     return view('admin.daerah.upload_sk_pimpinan', [
+      'title' => 'Data Daerah',
       'periode' => Periode::orderBy('periode', 'desc')->get(),
       'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', $id)->where('cabang_id_cabang', null)->where('ranting_id_ranting', null)->orderBy('id_sk_pimpinan', 'desc')->paginate(5),
       'id_daerah' => $id
@@ -70,6 +72,7 @@ class AdminDataDaerahController extends Controller
   public function edit(Daerah $daerah)
   {
     return view('admin.daerah.edit', [
+      'title' => 'Edit Data Daerah',
       'daerah' => $daerah
     ]);
   }

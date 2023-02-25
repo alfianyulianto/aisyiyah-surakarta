@@ -35,6 +35,7 @@ class TambahJabatanKaderCabangController extends Controller
       }
     }
     return view('admin.jabatan_kader.tambah_jabatan_di_cabang.create', [
+      'title' => 'Tambah Jabatan',
       'periode' => Periode::orderBy('periode', 'desc')->get(),
       'nama_cabang' => Cabang::where('id_cabang', $id)->first()->nama_cabang,
       'id_cabang' => $id,
@@ -88,6 +89,7 @@ class TambahJabatanKaderCabangController extends Controller
     }
 
     return view('admin.jabatan_kader.tambah_jabatan_di_cabang.show', [
+      'title' => 'Profil Kader',
       'kader' => $kader
     ]);
   }

@@ -28,7 +28,9 @@ class DataOrtomController extends Controller
    */
   public function create()
   {
-    return view('admin.settings.ortom.create');
+    return view('admin.settings.ortom.create', [
+      'title' => 'Create Ortom',
+    ]);
   }
 
   /**
@@ -76,6 +78,7 @@ class DataOrtomController extends Controller
   public function edit(Ortom $ortom)
   {
     return view('admin.settings.ortom.edit', [
+      'title' => 'Edit Ortom',
       'ortom' => $ortom
     ]);
   }

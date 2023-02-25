@@ -18,6 +18,7 @@ class KaderOrtomController extends Controller
   public function index()
   {
     return view('kader.ortom.index', [
+      'title' => 'Ortom Kader',
       'ortom' => KaderOrtom::where('kader_nik', Auth::user()->kader_nik)->orderBy('created_at', 'desc')->get()
     ]);
   }
@@ -30,6 +31,7 @@ class KaderOrtomController extends Controller
   public function create()
   {
     return view('kader.ortom.create', [
+      'title' => 'Create Ortom Kader',
       'ortom' => Ortom::orderBy('nama_ortom', 'asc')->get()
     ]);
   }
@@ -79,6 +81,7 @@ class KaderOrtomController extends Controller
   public function edit($id)
   {
     return view('kader.ortom.edit', [
+      'title' => 'Edit Ortom Kader',
       'kader_ortom' => KaderOrtom::where('id_kader_has_ortom', $id)->first(),
       'ortom' => Ortom::orderBy('nama_ortom', 'asc')->get()
     ]);

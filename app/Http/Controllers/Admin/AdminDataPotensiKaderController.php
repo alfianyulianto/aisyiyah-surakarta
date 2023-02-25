@@ -26,6 +26,7 @@ class AdminDataPotensiKaderController extends Controller
       }
     }
     return view('admin.potensi.index', [
+      'title' => 'Data Potensi Kader',
       'kader_potensi' => $kader_potensi
     ]);
   }

@@ -46,6 +46,7 @@ class DataKaderCabangController extends Controller
       }
     }
     return view('admin.data_kader.data_kader_tampilan_admin_cabang.index', [
+      'title' => 'Data Kader',
       'kader' => $kader,
     ]);
   }
@@ -65,6 +66,7 @@ class DataKaderCabangController extends Controller
     }
 
     return view('admin.data_kader.data_kader_tampilan_admin_cabang.create', [
+      'title' => 'Create Data Kader',
       'cabang' => Cabang::where('id_cabang', Auth::user()->admin_at)->first(),
       'nama_ranting' => Ranting::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('nama_ranting', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
@@ -217,6 +219,7 @@ class DataKaderCabangController extends Controller
     }
 
     return view('admin.data_kader.data_kader_tampilan_admin_cabang.show', [
+      'title' => 'Profil Kader',
       'kader' => Kader::where('nik', $id)->first(),
     ]);
   }
@@ -248,6 +251,7 @@ class DataKaderCabangController extends Controller
     }
 
     return view('admin.data_kader.data_kader_tampilan_admin_cabang.edit', [
+      'title' => 'Edit Data Kader',
       'kader' => Kader::where('nik', $id)->first(),
       'cabang' => Cabang::where('id_cabang', Auth::user()->admin_at)->first(),
       'nama_ranting' => Ranting::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('nama_ranting', 'asc')->get(),

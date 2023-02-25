@@ -28,7 +28,9 @@ class DataPotensiController extends Controller
    */
   public function create()
   {
-    return view('admin.settings.potensi.create');
+    return view('admin.settings.potensi.create', [
+      'title' => 'Create Potensi',
+    ]);
   }
 
   /**
@@ -75,6 +77,7 @@ class DataPotensiController extends Controller
   public function edit(Potensi $potensi)
   {
     return view('admin.settings.potensi.edit', [
+      'title' => 'Edit Periode',
       'potensi' => $potensi
     ]);
   }

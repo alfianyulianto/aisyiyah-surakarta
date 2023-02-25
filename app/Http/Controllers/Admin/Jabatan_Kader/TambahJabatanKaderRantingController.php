@@ -43,6 +43,7 @@ class TambahJabatanKaderRantingController extends Controller
       }
     }
     return view('admin.jabatan_kader.tambah_jabatan_di_ranting.create', [
+      'title' => 'Tambah Jabatan',
       'periode' => Periode::orderBy('periode', 'desc')->get(),
       'nama_ranting' => Ranting::where('id_ranting', $id)->first()->nama_ranting,
       'id_ranting' => $id,
@@ -103,6 +104,7 @@ class TambahJabatanKaderRantingController extends Controller
     }
 
     return view('admin.jabatan_kader.tambah_jabatan_di_ranting.show', [
+      'title' => 'Profil Kader',
       'kader' => $kader
     ]);
   }

@@ -18,6 +18,7 @@ class TambahAdminDaerahController extends Controller
       $kader->push(Kader::where('nik', $u->kader_nik)->first());
     }
     return view('admin.tambah_admin.tambah_admin_daerah.create', [
+      'title' => 'Tambah Admin',
       'kader' => $kader,
       'nama_daerah' => Daerah::get()->first()->nama_daerah,
       'id_daerah' => $id,
@@ -49,6 +50,7 @@ class TambahAdminDaerahController extends Controller
     }
 
     return view('admin.tambah_admin.tambah_admin_daerah.show', [
+      'title' => 'Profil Admin',
       'kader' => $kader,
       'id_daerah' => $id
     ]);

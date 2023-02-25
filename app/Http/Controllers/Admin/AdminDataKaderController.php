@@ -40,6 +40,7 @@ class AdminDataKaderController extends Controller
     }
 
     return view('admin.data-kader.index', [
+      'title' => 'Data Kader',
       'kader' => $kader
     ]);
   }
@@ -52,6 +53,7 @@ class AdminDataKaderController extends Controller
   public function create()
   {
     return view('admin.data-kader.create', [
+      'title' => 'Create Data Jabatan',
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
@@ -183,6 +185,7 @@ class AdminDataKaderController extends Controller
       return abort(404);
     }
     return view('admin.data-kader.show', [
+      'title' => 'Profil Kader',
       'kader' => $kader,
     ]);
   }
@@ -202,6 +205,7 @@ class AdminDataKaderController extends Controller
     }
 
     return view('admin.data-kader.edit', [
+      'title' => 'Edit Data Jabatan',
       'kader' => $kader,
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),

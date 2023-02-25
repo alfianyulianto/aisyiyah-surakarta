@@ -50,6 +50,7 @@ class DataKaderDaerahController extends Controller
     }
 
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.index', [
+      'title' => 'Data Kader',
       'kader' => $kader
     ]);
   }
@@ -69,6 +70,7 @@ class DataKaderDaerahController extends Controller
     }
 
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.create', [
+      'title' => 'Crete Data Kader',
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
@@ -214,6 +216,7 @@ class DataKaderDaerahController extends Controller
       return abort(403);
     }
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.show', [
+      'title' => 'Profil Kader',
       'kader' => Kader::where('nik', $id)->first(),
     ]);
   }
@@ -240,6 +243,7 @@ class DataKaderDaerahController extends Controller
     }
 
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.edit', [
+      'title' => 'Edit Data Kader',
       'kader' => Kader::where('nik', $id)->first(),
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),

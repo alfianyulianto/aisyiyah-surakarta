@@ -28,11 +28,13 @@ class AdminDataRantingController extends Controller
     // cek jika user seorang admin ranting
     if (Auth::user()->kategori_user_id == 4) {
       return view('admin.ranting.tampilan_admin_ranting', [
+        'title' => 'Data Ranting',
         'ranting' => Ranting::where('id_ranting', Auth::user()->kategori_user_id)->get(),
         'nama_ranting' => Ranting::where('id_ranting', Auth::user()->kategori_user_id)->first()->nama_ranting
       ]);
     }
     return view('admin.ranting.index', [
+      'title' => 'Data Ranting',
       'ranting' => Ranting::orderBy('cabang_id_cabang',  'asc')->get()
     ]);
   }
@@ -50,6 +52,7 @@ class AdminDataRantingController extends Controller
     }
 
     return view('admin.ranting.create', [
+      'title' => 'Create Data Ranting',
       'cabang' => Cabang::orderBy('nama_cabang', 'asc')->get()
     ]);
   }
@@ -90,6 +93,7 @@ class AdminDataRantingController extends Controller
   public function show(Ranting $ranting)
   {
     return view('admin.ranting.upload_sk_pimpinan', [
+      'title' => 'Data Ranting',
       'periode' => Periode::orderBy('created_at', 'desc')->get(),
       'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', null)->where('ranting_id_ranting', $ranting->id_ranting)->orderBy('id_sk_pimpinan', 'desc')->paginate(5),
       'id_ranting' => $ranting->id_ranting,
@@ -106,6 +110,7 @@ class AdminDataRantingController extends Controller
   public function edit(Ranting $ranting)
   {
     return view('admin.ranting.edit', [
+      'title' => 'Edit Data Ranting',
       'cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'ranting' => $ranting,
     ]);

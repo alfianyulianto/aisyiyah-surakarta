@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Aisyiyah Surakarta</title>
+  <title>Forgot Password &mdash;Aisyiyah Surakarta</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <!-- General CSS Files -->
@@ -112,7 +112,7 @@
               </div>
             </div>
             <div class="simple-footer">
-              Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Alfian Yulianto
+              Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Pimpinan Daerah Aisyiyah Surakarta
             </div>
           </div>
         </div>

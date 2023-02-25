@@ -16,6 +16,7 @@ class SettingsController extends Controller
   public function index()
   {
     return view('admin.settings.index', [
+      'title' => 'Settings',
       'ortom' => Ortom::orderBy('created_at', 'asc')->get(),
       'potensi' => Potensi::orderBy('potensi', 'asc')->get(),
       'tempat_lahir' => TempatLahir::orderBy('tempat_lahir', 'asc')->get(),

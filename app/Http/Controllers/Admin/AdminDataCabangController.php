@@ -28,11 +28,13 @@ class AdminDataCabangController extends Controller
     // cek jika user seorang admin cabang
     if (Auth::user()->kategori_user_id == 4) {
       return view('admin.cabang.tampilan_admin_cabang', [
+        'title' => 'Data Cabang',
         'cabang' => Cabang::where('id_cabang', Auth::user()->kategori_user_id)->get(),
         'nama_cabang' => Cabang::where('id_cabang', Auth::user()->kategori_user_id)->first()->nama_cabang
       ]);
     }
     return view('admin.cabang.index', [
+      'title' => 'Data Cabang',
       'cabang' => Cabang::orderBy('created_at', 'desc')->get()
     ]);
   }
@@ -48,7 +50,9 @@ class AdminDataCabangController extends Controller
     if (Auth::user()->kategori_user_id == 4) {
       return abort(404);
     }
-    return view('admin.cabang.create');
+    return view('admin.cabang.create', [
+      'title' => 'Create Data Cabang',
+    ]);
   }
 
   /**
@@ -65,6 +69,7 @@ class AdminDataCabangController extends Controller
     }
 
     $validated = $request->validate([
+      'title' => 'Create Data Cabang',
       'id_cabang' => ['required', 'unique:App\Models\Cabang,id_cabang'],
       'nama_cabang' => ['required', 'min:5'],
       'alamat_cabang' => ['required', 'min:10'],
@@ -87,6 +92,7 @@ class AdminDataCabangController extends Controller
   public function show(Cabang $cabang)
   {
     return view('admin.cabang.upload_sk_pimpinan', [
+      'title' => 'Data Cabang',
       'periode' => Periode::orderBy('periode', 'desc')->get(),
       'sk_pimpinan' => SkPimpinan::where('daerah_id_daerah', null)->where('cabang_id_cabang', $cabang->id_cabang)->where('ranting_id_ranting', null)->orderBy('id_sk_pimpinan', 'desc')->paginate(5),
       'id_cabang' => $cabang->id_cabang,
@@ -103,6 +109,7 @@ class AdminDataCabangController extends Controller
   public function edit(Cabang $cabang)
   {
     return view('admin.cabang.edit', [
+      'title' => 'Edit Data Cabang',
       'cabang' => $cabang
     ]);
   }

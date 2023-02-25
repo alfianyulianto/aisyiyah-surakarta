@@ -29,6 +29,7 @@ class AdminDataJabatanController extends Controller
     };
     // $jabatan = Jabatan::orderBy('created_at', 'asc')->get();
     return view('admin.jabatan.index', [
+      'title' => 'Data Jabatan',
       'nama_jabatan' => $jabatan
     ]);
   }
@@ -40,7 +41,9 @@ class AdminDataJabatanController extends Controller
    */
   public function create()
   {
-    return view('admin.jabatan.create');
+    return view('admin.jabatan.create', [
+      'title' => 'Create Data Jabatan',
+    ]);
   }
 
   /**
@@ -96,6 +99,7 @@ class AdminDataJabatanController extends Controller
   public function edit(Jabatan $jabatan)
   {
     return view('admin.jabatan.edit', [
+      'title' => 'Edit Data Jabatan',
       'jabatan' => $jabatan
     ]);
   }

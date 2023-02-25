@@ -20,6 +20,7 @@ class TambahAdminCabangController extends Controller
       }
     }
     return view('admin.tambah_admin.tambah_admin_cabang.create', [
+      'title' => 'Tambah Admin',
       'kader' => $kader,
       'nama_cabang' => Cabang::where('id_cabang', $id)->first()->nama_cabang,
       'id_cabang' => $id,
@@ -51,6 +52,7 @@ class TambahAdminCabangController extends Controller
     }
 
     return view('admin.tambah_admin.tambah_admin_cabang.show', [
+      'title' => 'Profil Admin',
       'kader' => $kader,
       'id_cabang' => $id,
       'nama_cabang' => Cabang::where('id_cabang', $id)->first()->nama_cabang

@@ -20,6 +20,7 @@ class TambahAdminRantingController extends Controller
       }
     }
     return view('admin.tambah_admin.tambah_admin_ranting.create', [
+      'title' => 'Tambah Admin',
       'kader' => $kader,
       'nama_ranting' => Ranting::where('id_ranting', $id)->first()->nama_ranting,
       'id_ranting' => $id,
@@ -52,6 +53,7 @@ class TambahAdminRantingController extends Controller
     }
 
     return view('admin.tambah_admin.tambah_admin_ranting.show', [
+      'title' => 'Profil Admin',
       'kader' => $kader,
       'id_ranting' => $id,
       'nama_ranting' => Ranting::where('id_ranting', $id)->first()->nama_ranting

@@ -35,6 +35,7 @@ class TambahJabatanKaderDaerahController extends Controller
       }
     }
     return view('admin.jabatan_kader.tambah_jabatan_di_daerah.create', [
+      'title' => 'Tambah Jabatan',
       'periode' => Periode::orderBy('periode', 'desc')->get(),
       'nama_daerah' => Daerah::get()->first()->nama_daerah,
       'id_daerah' => $id,
@@ -84,6 +85,7 @@ class TambahJabatanKaderDaerahController extends Controller
   public function show(Kader $kader)
   {
     return view('admin.jabatan_kader.tambah_jabatan_di_daerah.show', [
+      'title' => 'Profil Kader',
       'kader' => $kader
     ]);
   }

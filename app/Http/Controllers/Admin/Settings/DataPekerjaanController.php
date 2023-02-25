@@ -28,7 +28,9 @@ class DataPekerjaanController extends Controller
    */
   public function create()
   {
-    return view('admin.settings.pekerjaan.create');
+    return view('admin.settings.pekerjaan.create', [
+      'title' => 'Create Pekerjaan',
+    ]);
   }
 
   /**
@@ -75,6 +77,7 @@ class DataPekerjaanController extends Controller
   public function edit(Pekerjaan $pekerjaan)
   {
     return view('admin.settings.pekerjaan.edit', [
+      'title' => 'Edit Pekerjaan',
       'pekerjaan' => $pekerjaan
     ]);
   }

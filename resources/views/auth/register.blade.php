@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login &mdash; Aisyiyah Surakarta</title>
+  <title>Register &mdash; Aisyiyah Surakarta</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <!-- General CSS Files -->
@@ -166,7 +166,7 @@
               Sudah punya akun? <a href="/login">Login!</a>
             </div>
             <div class="simple-footer">
-              Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Alfian Yulianto
+              Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Pimpinan Daerah Aisyiyah Surakarta
             </div>
           </div>
         </div>

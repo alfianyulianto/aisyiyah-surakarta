@@ -14,7 +14,9 @@ class ChangePasswordController extends Controller
 {
   public function edit()
   {
-    return view('change_password');
+    return view('change_password', [
+      'title'=>'Change Password'
+    ]);
   }
 
   public function update(Request $request)

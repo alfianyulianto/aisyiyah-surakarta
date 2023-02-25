@@ -11,7 +11,9 @@ class UploadFotoController extends Controller
 {
   public function index()
   {
-    return view('upload_foto');
+    return view('upload_foto', [
+      'title' => 'Upload Foto',
+    ]);
   }
 
   public function upload_foto(Request $request)

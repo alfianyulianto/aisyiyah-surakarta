@@ -40,6 +40,7 @@ class AdminDashboardController extends Controller
       $total_cabang = Cabang::count();
       $total_ranting = Ranting::count();
       return view('admin.dashboard', [
+        'title' => 'Dashboard',
         'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
         'total_admin' => $total_admin,
         'total_admin_daerah' => $total_admin_daerah,
@@ -73,6 +74,7 @@ class AdminDashboardController extends Controller
       $total_cabang = Cabang::count();
       $total_ranting = Ranting::count();
       return view('admin.dashboard', [
+        'title' => 'Dashboard',
         'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
         'total_admin' => $total_admin,
         'total_admin_daerah' => $total_admin_daerah,
@@ -95,6 +97,7 @@ class AdminDashboardController extends Controller
       $total_kader = Kader::where('cabang_id_cabang', Auth::user()->admin_at)->count();
       $total_ranting = Ranting::where('cabang_id_cabang', Auth::user()->admin_at)->count();
       return view('admin.dashboard', [
+        'title' => 'Dashboard',
         'kader'  => Kader::where('nik', Auth::user()->kader_nik)->first(),
         'total_admin_cabang' => $total_admin_cabang,
         'total_kader' => $total_kader,
@@ -103,25 +106,10 @@ class AdminDashboardController extends Controller
     } elseif (Auth::user()->kategori_user_id == 5) { // jika user seorag admin ranting
       $total_kader = Kader::where('ranting_id_ranting', Auth::user()->admin_at)->count();
       return view('admin.dashboard', [
+        'title' => 'Dashboard',
         'kader' => Kader::where('nik', Auth::user()->kader_nik)->first(),
         'total_kader' => $total_kader
       ]);
     }
-
-    // $total_admin = 0;
-    // $kategori_user = KategoriUser::where('kategori_user', '!=', 'kader')->get();
-    // foreach ($kategori_user as $k) {
-    //   $total_admin += User::where('kategori_user_id', $k->id)->count();
-    // }
-    // $total_kader = Kader::count();
-    // $total_cabang = Cabang::count();
-    // $total_ranting = Ranting::count();
-    // return view('admin.dashboard', [
-    //   'kader' => Kader::get()->first(),
-    //   'total_admin' => $total_admin,
-    //   'total_kader' => $total_kader,
-    //   'total_cabang' => $total_cabang,
-    //   'total_ranting' => $total_ranting,
-    // ]);
   }
 }

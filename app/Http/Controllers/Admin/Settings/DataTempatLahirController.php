@@ -27,7 +27,9 @@ class DataTempatLahirController extends Controller
    */
   public function create()
   {
-    return view('admin.settings.tempat_lahir.create');
+    return view('admin.settings.tempat_lahir.create', [
+      'title' => 'Create Tempat Lahir',
+    ]);
   }
 
   /**
@@ -74,6 +76,7 @@ class DataTempatLahirController extends Controller
   public function edit(TempatLahir $lahir)
   {
     return view('admin.settings.tempat_lahir.edit', [
+      'title' => 'Edit Tempat Lahir',
       'tempat_lahir' => $lahir
     ]);
   }

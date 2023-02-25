@@ -12,6 +12,7 @@ class KaderDashboardController extends Controller
   public function index()
   {
     return view('kader.dashboard', [
+      'title' => 'Dashboard',
       'kader' => Kader::where('nik', Auth::user()->kader_nik)->first()
     ]);
   }
