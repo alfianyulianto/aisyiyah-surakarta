@@ -36,6 +36,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UploadFotoController;
 use App\Models\Pekerjaan;
 use App\Models\TempatLahir;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

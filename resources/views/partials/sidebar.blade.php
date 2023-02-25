@@ -35,14 +35,16 @@
            <a href="/data/kader/daerah" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
          </li>
          <li
-           class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('data/jabatan/create') || Request::is('data/jabatan/*/edit') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') || Request::is('data/jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                class="fas fa-th"></i><span>Jabatan</span></a>
            <ul class="dropdown-menu">
-             <li class="{{ Request::is('data/jabatan') ? 'active' : '' }}">
+             <li
+               class="{{ Request::is('data/jabatan') || Request::is('data/jabatan/create') || Request::is('data/jabatan/*/edit') ? 'active' : '' }}">
                <a class="nav-link" href="/data/jabatan">Data Jabatan</a>
              </li>
-             <li class="{{ Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active' : '' }}">
+             <li
+               class="{{ Request::is('jabatan/kader') || Request::is('jabatan/kader/*') || Request::is('data/jabatan/kader/*') ? 'active' : '' }}">
                <a class="nav-link" href="/jabatan/kader">Jabatan Kader</a>
              </li>
            </ul>
@@ -67,11 +69,12 @@
            </ul>
          </li>
          <li
-           class="nav-item {{ Request::is('tambah/admin') || Request::is('tambah/admin/daerah') || Request::is('tambah/admin/cabang') || Request::is('tambah/admin/ranting') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item {{ Request::is('tambah/admin') || Request::is('/admin/daerah/*') || Request::is('admin/cabang/*') || Request::is('admin/ranting/*') || Request::is('data/admin/*') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="/tambah/admin" class="nav-link"><i class="fas fa-user-cog"></i>
              <span>Tambah Admin</a>
          </li>
-         <li class="nav-item {{ Request::is('settings') ? 'active' : '' }}">
+         <li
+           class="nav-item {{ Request::is('settings') || Request::is('ortom/create') || Request::is('ortom/*/edit') || Request::is('potensi/create') || Request::is('potensi/*/edit') || Request::is('tempat/lahir/create') || Request::is('tempat/lahir/*/edit') || Request::is('pekerjaan/create') || Request::is('pekerjaan/*/edit') || Request::is('periode/create') || Request::is('periode/*/edit') ? 'active' : '' }}">
            <a href="/settings" class="nav-link"><i class="fas fa-cogs"></i></i><span>Setting</span></a>
          </li>
        @endcanany
@@ -85,14 +88,16 @@
            <a href="/data/kader/cabang" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
          </li>
          <li
-           class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('data/jabatan/create') || Request::is('data/jabatan/*/edit') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') || Request::is('data/jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                class="fas fa-th"></i><span>Jabatan</span></a>
            <ul class="dropdown-menu">
-             <li class="{{ Request::is('data/jabatan') ? 'active' : '' }}">
+             <li
+               class="{{ Request::is('data/jabatan') || Request::is('data/jabatan/create') || Request::is('data/jabatan/*/edit') || Request::is('data/jabatan/*') ? 'active' : '' }}">
                <a class="nav-link" href="/data/jabatan">Data Jabatan</a>
              </li>
-             <li class="{{ Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active' : '' }}">
+             <li
+               class="{{ Request::is('jabatan/kader') || Request::is('jabatan/kader/*') || Request::is('data/jabatan/kader/*') ? 'active' : '' }}">
                <a class="nav-link" href="/jabatan/kader">Jabatan Kader</a>
              </li>
            </ul>
@@ -114,7 +119,7 @@
            </ul>
          </li>
          <li
-           class="nav-item {{ Request::is('tambah/admin') || Request::is('tambah/admin/daerah') || Request::is('tambah/admin/cabang') || Request::is('tambah/admin/ranting') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item {{ Request::is('tambah/admin') || Request::is('/admin/daerah/*') || Request::is('admin/cabang/*') || Request::is('admin/ranting/*') || Request::is('data/admin/*') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="/tambah/admin" class="nav-link"><i class="fas fa-user-cog"></i>
              <span>Tambah Admin</a>
          </li>
@@ -129,14 +134,16 @@
            <a href="/data/kader/ranting" class="nav-link"><i class="fas fa-users"></i><span>Data Kader</span></a>
          </li>
          <li
-           class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item dropdown {{ Request::is('data/jabatan') || Request::is('data/jabatan/create') || Request::is('data/jabatan/*/edit') || Request::is('jabatan/kader') || Request::is('jabatan/kader/*') || Request::is('data/jabatan/kader/*') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                class="fas fa-th"></i><span>Jabatan</span></a>
            <ul class="dropdown-menu">
-             <li class="{{ Request::is('data/jabatan') ? 'active' : '' }}">
+             <li
+               class="{{ Request::is('data/jabatan') || Request::is('data/jabatan/create') || Request::is('data/jabatan/*/edit') ? 'active' : '' }}">
                <a class="nav-link" href="/data/jabatan">Data Jabatan</a>
              </li>
-             <li class="{{ Request::is('jabatan/kader') || Request::is('jabatan/kader/*') ? 'active' : '' }}">
+             <li
+               class="{{ Request::is('jabatan/kader') || Request::is('jabatan/kader/*') || Request::is('data/jabatan/kader/*') ? 'active' : '' }}">
                <a class="nav-link" href="/jabatan/kader">Jabatan Kader</a>
              </li>
            </ul>
@@ -155,7 +162,7 @@
            </ul>
          </li>
          <li
-           class="nav-item {{ Request::is('tambah/admin') || Request::is('tambah/admin/daerah') || Request::is('tambah/admin/cabang') || Request::is('tambah/admin/ranting') ? 'active rounded-pill shadow-sm' : '' }}">
+           class="nav-item {{ Request::is('tambah/admin') || Request::is('/admin/daerah/*') || Request::is('admin/cabang/*') || Request::is('admin/ranting/*') || Request::is('data/admin/*') ? 'active rounded-pill shadow-sm' : '' }}">
            <a href="/tambah/admin" class="nav-link"><i class="fas fa-user-cog"></i>
              <span>Tambah Admin</span></a>
          </li>

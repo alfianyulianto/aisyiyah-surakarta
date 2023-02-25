@@ -77,7 +77,7 @@ class DataPotensiController extends Controller
   public function edit(Potensi $potensi)
   {
     return view('admin.settings.potensi.edit', [
-      'title' => 'Edit Periode',
+      'title' => 'Edit Potensi',
       'potensi' => $potensi
     ]);
   }

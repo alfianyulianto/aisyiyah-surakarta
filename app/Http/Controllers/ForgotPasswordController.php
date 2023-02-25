@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller
 {
   public function edit()
   {
-    return view('forgot_password');
+    return view('auth.forgot_password');
   }
 
   public function update(Request $request)
