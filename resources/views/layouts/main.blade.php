@@ -66,7 +66,7 @@
       {{-- Footer --}}
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Alfian Yulianto
+          Copyright &copy; {{ date('Y') }} <div class="bullet"></div>Pimpinan Daerah Aisyiyah Surakarta
         </div>
       </footer>
     </div>
