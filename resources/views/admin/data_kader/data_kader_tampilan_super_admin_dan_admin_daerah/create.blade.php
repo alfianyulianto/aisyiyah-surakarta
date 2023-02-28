@@ -341,9 +341,6 @@
         `);
       }
     });
-    $("select#ranting_id_ranting").on("change", function() {
-      console.log($(this).val());
-    });
   </script>
   @if (old('cabang_id_cabang'))
     <script>

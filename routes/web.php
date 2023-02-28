@@ -71,6 +71,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+Route::get('/get/data/ranting/{ranting:cabang_id_cabang}', [RegisterController::class, 'ranting'])->middleware('guest');
 Route::get('/change/password', [ChangePasswordController::class, 'edit'])->middleware('auth');
 Route::put('/change/password', [ChangePasswordController::class, 'update'])->middleware('auth');
 Route::get('/forgot/password', [ForgotPasswordController::class, 'edit'])->middleware('guest');

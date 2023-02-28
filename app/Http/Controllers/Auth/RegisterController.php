@@ -10,6 +10,7 @@ use App\Models\Daerah;
 use App\Models\Ranting;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
       'nama' => ['required', 'string'],
       'cabang_id_cabang' => ['nullable'],
       'ranting_id_ranting' => ['nullable'],
-      'password' => ['required', 'min:8'],
+      'password' => ['required', 'min:8', Password::min(8)->letters()->mixedCase()],
       'konfirmasi_password' => ['required', 'min:8', 'same:password'],
     ]);
 
@@ -60,5 +61,11 @@ class RegisterController extends Controller
     Kader::create($validatedDataKader);
 
     return redirect('/login')->with('message_login', 'Registrasi berhasil! Silahkan login.');
+  }
+
+  public function ranting(Ranting $ranting)
+  {
+    $nama_ranting = Ranting::where('cabang_id_cabang', $ranting->cabang_id_cabang)->orderBy('nama_ranting', 'asc')->get();
+    return $nama_ranting;
   }
 }

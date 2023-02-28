@@ -92,7 +92,7 @@
                       <select class="form-control form-control-lg select2" name="cabang_id_cabang"
                         id="cabang_id_cabang">
                         @if (old('cabang_id_cabang'))
-                          <option></option>
+                          <option value="">-- Pilih Cabang --</option>
                           @foreach ($nama_cabang as $nc)
                             @if (old('cabang_id_cabang') == $nc->id_cabang)
                               <option value="{{ $nc->id_cabang }}" selected>{{ $nc->nama_cabang }}</option>
@@ -101,7 +101,7 @@
                             @endif
                           @endforeach
                         @else
-                          <option></option>
+                          <option value="" selected>-- Pilih Cabang --</option>
                           @foreach ($nama_cabang as $nc)
                             <option value="{{ $nc->id_cabang }}">{{ $nc->nama_cabang }}</option>
                           @endforeach
@@ -119,7 +119,8 @@
                       <label for="ranting_id_ranting" class="form-label">Ranting Aisyiyah</label>
                       <select class="form-control form-control-lg select2" name="ranting_id_ranting"
                         id="ranting_id_ranting">
-                        <option></option>
+                        <option value="" selected disabled>-- Pilih Ranting --</option>
+                        <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
                       </select>
                       @error('ranting_id_ranting')
                         <div class="error-message">
@@ -183,12 +184,12 @@
   <script>
     // select2
     $("#cabang_id_cabang").select2({
-      placeholder: "--Pilih Cabang--",
-      allowClear: true,
+      // placeholder: "--Pilih Cabang--",
+      // allowClear: true,
     });
     $("#ranting_id_ranting").select2({
-      placeholder: "--Pilih Ranting--",
-      allowClear: true,
+      // placeholder: "--Pilih Ranting--",
+      // allowClear: true,
     });
   </script>
   {{-- <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script> --}}
@@ -221,16 +222,16 @@
       let id_ranting = $("#kader_ranting").val();
       $.ajax({
         type: "get",
-        url: "/get/ranting/" + id_cabang,
+        url: "/get/data/ranting/" + id_cabang,
         dataType: "json",
         success: (response) => {
           // console.log(response);
           let ranting;
           // cek jika id_ranting kosong
           if (!id_ranting) {
-            ranting = "<option></option>";
+            ranting = "<option value='' selected>-- Pilih Ranting --</option>";
           } else {
-            ranting = "<option></option>";
+            ranting = "<option value=''>-- Pilih Ranting --</option>";
           }
           response.forEach(i => {
             if (i.id_ranting == id_ranting) {
@@ -248,20 +249,27 @@
     // select cabang
     $("select#cabang_id_cabang").on("change", function() {
       let id_cabang = $(this).val();
-      $.ajax({
-        type: "get",
-        url: "/get/ranting/" + id_cabang,
-        dataType: "json",
-        success: (response) => {
-          console.log(response);
-          let ranting =
-            "<option></option>";
-          response.forEach((i) => {
-            ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
-          });
-          $("select#ranting_id_ranting").html(ranting);
-        },
-      });
+      if (id_cabang) {
+        $.ajax({
+          type: "get",
+          url: "/get/data/ranting/" + id_cabang,
+          dataType: "json",
+          success: (response) => {
+            console.log(response);
+            let ranting =
+              "<option value='' selected>-- Pilih Ranting --</option>";
+            response.forEach((i) => {
+              ranting += `<option value="${i.id_ranting}">${i.nama_ranting}</option>`;
+            });
+            $("select#ranting_id_ranting").html(ranting);
+          },
+        });
+      } else {
+        $("select#ranting_id_ranting").html(`
+          <option value='' selected disabled>-- Pilih Ranting --</option>
+          <option disabled>Silahkan pilih cabang terlebih dahulu!</option>
+        `);
+      }
     });
 
     // password
