@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="{{ url('') }}/css/assets/style.css">
   {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/assets/components.css">
+
+  <link rel="shortcut icon" href="{{ url('') }}/img/logo-2.png">
 </head>
 
 <body>

@@ -46,6 +46,7 @@
   {{-- <script src="{{ url('') }}/library/stisla/node_modules/sweetalert/dist/sweetalert.min.js"></script> --}}
   <script src="{{ url('') }}/js/sweetalert.min.js"></script>
 
+  <link rel="shortcut icon" href="{{ url('') }}/img/logo-2.png">
 </head>
 
 <body>

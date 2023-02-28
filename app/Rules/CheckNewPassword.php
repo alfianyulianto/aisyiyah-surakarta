@@ -37,6 +37,6 @@ class CheckNewPassword implements Rule
    */
   public function message()
   {
-    return 'Password baru tidak boleh sama dengan password saat ini.';
+    return 'password baru tidak boleh sama dengan password saat ini.';
   }
 }

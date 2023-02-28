@@ -41,6 +41,6 @@ class CheckNik implements Rule
    */
   public function message()
   {
-    return 'NIK yang anda masukan tidak terdaftar!';
+    return 'nik yang anda masukan tidak terdaftar!';
   }
 }

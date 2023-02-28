@@ -41,6 +41,6 @@ class CheckNoPonsel implements Rule
    */
   public function message()
   {
-    return 'Nomer ponsel yang anda masukan tidak terdaftar!';
+    return 'nomer ponsel yang anda masukan tidak terdaftar!';
   }
 }

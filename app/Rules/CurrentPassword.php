@@ -37,6 +37,6 @@ class CurrentPassword implements Rule
    */
   public function message()
   {
-    return 'Password yang anda asukan tidak cocok dengan database.';
+    return 'password yang anda masukan tidak cocok dengan database.';
   }
 }

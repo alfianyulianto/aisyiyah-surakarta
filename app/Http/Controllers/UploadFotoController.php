@@ -19,7 +19,7 @@ class UploadFotoController extends Controller
   public function upload_foto(Request $request)
   {
     $validated = $request->validate([
-      'foto' => ['mimes:jpg,jpeg,png']
+      'foto' => ['required', 'mimes:jpg,jpeg,png']
     ]);
 
     // ambil data user sesuai dengan user yang login

@@ -29,6 +29,8 @@
 
   {{-- My CSS --}}
   <link rel="stylesheet" href="{{ url('') }}/css/my-style.css">
+
+  <link rel="shortcut icon" href="{{ url('') }}/img/logo-2.png">
 </head>
 
 <body>

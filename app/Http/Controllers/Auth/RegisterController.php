@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kader;
 use App\Models\Cabang;
+use App\Models\Daerah;
 use App\Models\Ranting;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -47,7 +48,7 @@ class RegisterController extends Controller
     $validatedDataKader = [
       'nik' => $request->nik,
       'nama' => $request->nama,
-      'daerah_id_daerah' => 'ska-1',
+      'daerah_id_daerah' => Daerah::get()->first()->id_daerah,
       'cabang_id_cabang' => $request->cabang_id_cabang,
       'ranting_id_ranting' => $request->ranting_id_ranting,
       'user_id' => $id_user,
