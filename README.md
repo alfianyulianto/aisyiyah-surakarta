@@ -4,7 +4,7 @@
 ```
 composer install
 ```
-## About Alona Attendance
+## About Aisyiyah Surakarta
 Aisyiyah Surakarta merupakan sebuah sistem yang diperuntukan untuk memetakan potensi kader Aisyiyah Kota Surakarta. Sistem ini dibangun menggunakan tamplate Stisla dengan framework Bootstrap, serta Laravel sebagai backend dan MySQL sebagai RDBMS.
 ## Jalankan seeder
 ```
@@ -12,13 +12,13 @@ php artisan migrate:fresh --seed
 ```
 ## Login
 - **Admin**
-No.Ponsel: 081217432366
-Password: password
-Role: Super Admin
+- No.Ponsel: 081217432366
+- Password: password
+- Role: Super Admin
 - **Pegawai**
-No.Ponsel: 085432657890
-Password: password
-Role: Kader Aisyiyah
+- No.Ponsel: 085432657890
+- Password: password
+- Role: Kader Aisyiyah
 
 
 
