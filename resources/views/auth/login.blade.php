@@ -7,21 +7,17 @@
   <title>Login &mdash; Aisyiyah Surakarta</title>
 
   <!-- General CSS Files -->
-  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
   <!-- CSS Libraries -->
-  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap-social/bootstrap-social.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/bootstrap-social.css">
 
   {{-- My CSS --}}
   <link rel="stylesheet" href="{{ url('') }}/css/show-hide-password.css">
 
   <!-- Template CSS -->
-  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/assets/style.css">
-  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/assets/components.css">
 
   <link rel="shortcut icon" href="{{ url('') }}/img/logo-2.png">
@@ -108,27 +104,18 @@
 
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script> --}}
   <script src="{{ url('') }}/js/bootstrap.min.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script> --}}
   <script src="{{ url('') }}/js/jquery.nicescroll.min.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script> --}}
   <script src="{{ url('') }}/js/moment.min.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/assets/js/stisla.js"></script> --}}
   <script src="{{ url('') }}/js/assets/stisla.js"></script>
-
-  <!-- JS Libraies -->
 
   {{-- My Script --}}
   <script src="{{ url('') }}/js/show-hide-password.js"></script>
 
   <!-- Template JS File -->
-  {{-- <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script> --}}
   <script src="{{ url('') }}/js/assets/scripts.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/assets/js/custom.js"></script> --}}
   <script src="{{ url('') }}/js/assets/custom.js"></script>
 
-  <!-- Page Specific JS File -->
 </body>
 
 </html>

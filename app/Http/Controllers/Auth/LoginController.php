@@ -21,22 +21,16 @@ class LoginController extends Controller
       'password' => ['required'],
     ]);
 
-    // cek apakah user admin atau kader
-    $user = User::where('no_ponsel', $request->no_ponsel)->first();
-    if ($user->kategori_user_id != 1) { // jika admin
-      if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-
-        // cek apakah seorang user admin atau kader biasa
-        return redirect()->intended('/admin');
-      }
-    }
-
-    if (Auth::attempt($credentials)) { // jika kader
+    if (Auth::attempt($credentials)) {
       $request->session()->regenerate();
-
+      // cek apakah user admin atau kader
+      $user = User::where('no_ponsel', $request->no_ponsel)->first();
       // cek apakah seorang user admin atau kader biasa
-      return redirect()->intended('/kader');
+      if ($user->kategori_user_id != 1) { // jika admin
+        return redirect()->intended('/admin');
+      } else {  // kader
+        return redirect()->intended('/kader');
+      }
     }
 
     return back()->with('failed', 'Login gagal! Masukan nomer handphone dan password yang benar.');

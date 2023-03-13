@@ -29,7 +29,7 @@
                             ->first()->kategori_user_id;
                       @endphp
                       @if ($kategori_user_id == 2)
-                        <b>{{ $admin_at ? 'Super Admin' : '' }}</b>
+                        <b>{{ $admin_at ? '(Super Admin)' : '' }}</b>
                       @endif
                       @if ($kategori_user_id == 3)
                         <b>{{ $admin_at ? '(Admin Daerah)' : '' }}</b>
@@ -110,15 +110,15 @@
               <div class="row">
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Status Pernikahan</b></p>
-                  <p class="lh-none">{{ $kader->status_pernikahan ?? '-'}}</p>
+                  <p class="lh-none">{{ $kader->status_pernikahan ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Pekerjaan</b></p>
-                  <p class="lh-none">{{ $kader->pekerjaan ?? '-'}}</p>
+                  <p class="lh-none">{{ $kader->pekerjaan ?? '-' }}</p>
                 </div>
                 <div class="col-lg-4">
                   <p class="mb-0"><b>Pendidikan Terkahir</b></p>
-                  <p class="lh-none">{{ $kader->pendidikan_terakhir->pendidikan ?? '-'}}</p>
+                  <p class="lh-none">{{ $kader->pendidikan_terakhir->pendidikan ?? '-' }}</p>
                 </div>
               </div>
               @if (!$kader->kader_memiliki_jabatan->isEmpty())

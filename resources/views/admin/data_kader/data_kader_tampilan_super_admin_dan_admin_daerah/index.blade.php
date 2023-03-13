@@ -88,7 +88,8 @@
                           <form action="/data/kader/daerah/{{ $k->nik }}" method="post" class="d-inline-block">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-icon icon-left btn-danger delete"><i
+                            <button type="submit" class="btn btn-icon icon-left btn-danger delete"
+                              data-nama="{{ $k->nama }}" data-nik="{{ $k->nik }}"><i
                                 class="far fa-trash-alt"></i>
                               Hapus</button>
                           </form>

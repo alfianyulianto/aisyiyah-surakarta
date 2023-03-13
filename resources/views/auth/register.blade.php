@@ -8,7 +8,6 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <!-- General CSS Files -->
-  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
@@ -22,9 +21,7 @@
   <link rel="stylesheet" href="{{ url('') }}/css/show-hide-password.css">
 
   <!-- Template CSS -->
-  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/style.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/assets/style.css">
-  {{-- <link rel="stylesheet" href="{{ url('') }}/library/stisla/assets/css/components.css"> --}}
   <link rel="stylesheet" href="{{ url('') }}/css/assets/components.css">
 
   {{-- My CSS --}}
@@ -78,7 +75,7 @@
                     <div class="form-group col-lg-6">
                       <label for="nama">Nama Lengkap</label>
                       <input type="text" class="form-control" name="nama" id="nama"
-                        value="{{ old('nama') }}" placeholder="Nama Lengkap (cnth:Alfian Yulianto)">
+                        value="{{ old('nama') }}" placeholder="Nama Lengkap (cnth:Siti Aisyiyah)">
                       @error('nama')
                         <div class="error-message">
                           {{ $message }}
@@ -179,41 +176,27 @@
 
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  {{-- <script src="https://code.jquery.com/jquery-3.6.3.js"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
   <script>
     // select2
-    $("#cabang_id_cabang").select2({
-      // placeholder: "--Pilih Cabang--",
-      // allowClear: true,
-    });
-    $("#ranting_id_ranting").select2({
-      // placeholder: "--Pilih Ranting--",
-      // allowClear: true,
-    });
+    $("#cabang_id_cabang").select2({});
+    $("#ranting_id_ranting").select2({});
   </script>
-  {{-- <script src="{{ url('') }}/library/stisla/node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script> --}}
   <script src="{{ url('') }}/js/jquery.nicescroll.min.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/node_modules/moment/min/moment.min.js"></script> --}}
   <script src="{{ url('') }}/js/moment.min.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/assets/js/stisla.js"></script> --}}
   <script src="{{ url('') }}/js/assets/stisla.js"></script>
 
   <!-- JS Libraies -->
-  {{-- <script src="{{ url('') }}/library/stisla/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script> --}}
   <script src="{{ url('') }}/js/jquery.pwstrength.min.js"></script>
 
   {{-- My Script --}}
   <script src="{{ url('') }}/js/show-hide-password.js"></script>
 
   <!-- Template JS File -->
-  {{-- <script src="{{ url('') }}/library/stisla/assets/js/scripts.js"></script> --}}
   <script src="{{ url('') }}/js/assets/scripts.js"></script>
-  {{-- <script src="{{ url('') }}/library/stisla/assets/js/custom.js"></script> --}}
   <script src="{{ url('') }}/js/assets/custom.js"></script>
 
   <!-- Page Specific JS File -->
-  {{-- <script src="{{ url('') }}/library/stisla/assets/js/page/auth-register.js"></script> --}}
   <script src="{{ url('') }}/js/assets/page/auth-register.js"></script>
   @if (old('cabang_id_cabang'))
     <script>

@@ -60,7 +60,7 @@
                         <div class="mb-3">
                           <label for="nama" class="form-label"><b>Nama Lengkap</b></label>
                           <input type="text" class="form-control" name="nama" id="nama"
-                            placeholder="Nama Lengkap (cnth:Alfian Yulianto)" value="{{ old('nama') }}">
+                            placeholder="Nama Lengkap (cnth:Siti Aisyiyah)" value="{{ old('nama') }}">
                           @error('nama')
                             <div class="error-message">
                               {{ $message }}
@@ -100,7 +100,7 @@
                         <div class="mb-3">
                           <label for="email" class="form-label"><b>Email</b></label>
                           <input type="email" class="form-control" name="email" id="email"
-                            placeholder="Email (cnth:alfianyulianto36@gmail.com)" value="{{ old('email') }}">
+                            placeholder="Email (cnth:sitiaisyiyah@gmail.com)" value="{{ old('email') }}">
                           @error('email')
                             <div class="error-message">
                               {{ $message }}

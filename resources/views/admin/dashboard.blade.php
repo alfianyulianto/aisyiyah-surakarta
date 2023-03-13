@@ -225,7 +225,7 @@
                             ->first()->kategori_user_id;
                       @endphp
                       @if ($kategori_user_id == 2)
-                        <b>{{ $admin_at ? 'Super Admin' : '' }}</b>
+                        <b>{{ $admin_at ? '(Super Admin)' : '' }}</b>
                       @endif
                       @if ($kategori_user_id == 3)
                         <b>{{ $admin_at ? '(Admin Daerah)' : '' }}</b>

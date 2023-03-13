@@ -35,8 +35,8 @@ $(document).ready(function () {
             { width: 100, targets: 2 },
             { width: 100, targets: 3 },
             { width: 185, targets: 4 },
-            { width: 135, targets: 5 },
-            { width: 135, targets: 6 },
+            { width: 125, targets: 5 },
+            { width: 125, targets: 6 },
             { width: 170, targets: 7 },
             { width: 200, targets: 8 },
             { width: 70, targets: 9 },
@@ -77,9 +77,9 @@ $(document).ready(function () {
         scrollX: true,
         columnDefs: [
             { width: 5, targets: 0 },
-            { width: 155, targets: 1 },
+            { width: 125, targets: 1 },
             { width: 385, targets: 2 },
-            { width: 155, targets: 3 },
+            { width: 125, targets: 3 },
             { width: 280, targets: 4 },
         ],
     });
@@ -162,7 +162,7 @@ $(document).ready(function () {
     $("#scroll-x-tambah-admin-daerah").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 250, targets: 0 },
+            { width: 180, targets: 0 },
             { width: 80, targets: 1 },
             { width: 100, targets: 2 },
         ],
@@ -171,7 +171,7 @@ $(document).ready(function () {
     $("#scroll-x-tambah-admin-cabang").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 250, targets: 0 },
+            { width: 180, targets: 0 },
             { width: 80, targets: 1 },
             { width: 100, targets: 2 },
         ],
@@ -180,7 +180,7 @@ $(document).ready(function () {
     $("#scroll-x-tambah-admin-ranting").DataTable({
         scrollX: true,
         columnDefs: [
-            { width: 250, targets: 0 },
+            { width: 180, targets: 0 },
             { width: 80, targets: 1 },
             { width: 100, targets: 2 },
         ],
