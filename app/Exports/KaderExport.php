@@ -41,7 +41,7 @@ class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting,
         'alamat_rumah_tinggal' => $value->alamat_rumah_tinggal,
         'status_pernikahan' => $value->status_pernikahan,
         'pekerjaan' => $value->pekerjaan,
-        'pendidikan_terakhir' => PendidikanTerakhir::where('id_pendidikan_terakhir', $value->pendidikan_terakhir_id_pendidikan_terakhir)->first()->pendidikan,
+        'pendidikan_terakhir' => PendidikanTerakhir::where('id_pendidikan_terakhir', $value->pendidikan_terakhir_id_pendidikan_terakhir)->first()->pendidikan ?? '-',
         'no_ponsel' => $value->no_ponsel,
       ];
       $data_kader->push($arr);
