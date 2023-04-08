@@ -96,7 +96,6 @@ Route::put('/profil/update', [ProfilController::class, 'update'])->middleware('a
 
 // admin {Fitur:Data Kader Daerah}
 Route::resource('/data/kader/daerah', DataKaderDaerahController::class)->middleware('admin');
-Route::resource('/data/kader/daerah', DataKaderDaerahController::class)->middleware('admin');
 Route::get('/kader/export', [DataKaderDaerahController::class, 'export'])->middleware('admin');
 Route::get('/get/kader/{kader:nik}', [DataKaderDaerahController::class, 'get_kader'])->middleware('admin');
 Route::get('/get/ranting/kader/daerah/{ranting:cabang_id_cabang}', [DataKaderDaerahController::class, 'ranting'])->middleware('auth');

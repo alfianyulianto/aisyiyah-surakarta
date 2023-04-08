@@ -48,6 +48,7 @@ class DataKaderDaerahController extends Controller
         $kader->push($cek_kader);
       }
     }
+    return $kader;
 
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.index', [
       'title' => 'Data Kader',
@@ -70,7 +71,7 @@ class DataKaderDaerahController extends Controller
     }
 
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.create', [
-      'title' => 'Crete Data Kader',
+      'title' => 'Create Data Kader',
       'nama_cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),
       'pendidikan_terakhir' => PendidikanTerakhir::orderBy('created_at', 'asc')->get(),
     ]);
