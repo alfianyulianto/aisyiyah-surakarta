@@ -13,7 +13,7 @@ php artisan migrate:fresh --seed
 ## Login
 - **Admin**
 - No.Ponsel: 081217432366
-- Password: password
+- Password: Iyan2000
 - Role: Super Admin
 - **Pegawai**
 - No.Ponsel: 085432657890
