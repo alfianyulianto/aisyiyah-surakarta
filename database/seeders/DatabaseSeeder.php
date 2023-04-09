@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
       'nama' => 'Alfian Yulianto',
       'no_ponsel' => '081217432366',
       'admin_at' => 'aisyiyah-surakarta',
-      'password' => Hash::make('password'),
+      'password' => Hash::make('Iyan2000'),
     ]);
     DB::table('users')->insert([
       'id' => '2',

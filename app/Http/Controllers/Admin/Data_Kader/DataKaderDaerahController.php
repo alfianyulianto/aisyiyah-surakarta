@@ -48,8 +48,6 @@ class DataKaderDaerahController extends Controller
         $kader->push($cek_kader);
       }
     }
-    return $kader;
-
     return view('admin.data_kader.data_kader_tampilan_super_admin_dan_admin_daerah.index', [
       'title' => 'Data Kader',
       'kader' => $kader

@@ -23,12 +23,11 @@ class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting,
    */
   public function collection()
   {
-    $kader = Kader::orderBy('cabang_id_cabang', 'asc')->get();
+    $kader = Kader::where('nik', '!=', '3372010107000002')->orderBy('cabang_id_cabang', 'asc')->get();
     $data_kader = collect([]);
     foreach ($kader as $key => $value) {
       $arr = [
         'no' => $key + 1,
-        'nik' => $value->nik,
         'no_kta' => $value->no_kta ?? '-',
         'no_ktm' => $value->no_ktm ?? '-',
         'daerah' => Daerah::where('id_daerah', $value->daerah_id_daerah)->first()->nama_daerah ?? '-',
@@ -53,7 +52,6 @@ class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting,
   {
     return [
       "Nomer",
-      "NIK",
       "No KTA 'Aisyiyah",
       "No KTA Muhammadiyah",
       "Daerah",
@@ -74,7 +72,7 @@ class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting,
   {
     return [
       'A' => NumberFormat::FORMAT_TEXT,
-      'B' => NumberFormat::FORMAT_NUMBER,
+      'B' => NumberFormat::FORMAT_TEXT,
       'C' => NumberFormat::FORMAT_TEXT,
       'D' => NumberFormat::FORMAT_TEXT,
       'E' => NumberFormat::FORMAT_TEXT,
@@ -87,14 +85,13 @@ class KaderExport implements FromCollection, WithHeadings, WithColumnFormatting,
       'L' => NumberFormat::FORMAT_TEXT,
       'M' => NumberFormat::FORMAT_TEXT,
       'N' => NumberFormat::FORMAT_TEXT,
-      'O' => NumberFormat::FORMAT_TEXT,
-      'P' => NumberFormat::FORMAT_NUMBER,
+      'O' => NumberFormat::FORMAT_NUMBER,
     ];
   }
   public function styles(Worksheet $sheet)
   {
     $jumlah_kader = Kader::all()->count();
-    $jumlah_kader += 1;
+    // $jumlah_kader += 1;
     $sheet->getStyle('1')->getAlignment()->setHorizontal('center');
     $sheet->getStyle('B1:B' . $jumlah_kader)->getAlignment()->setHorizontal('left');
     $sheet->getStyle('A1:A' . $jumlah_kader)->getAlignment()->setHorizontal('center');
