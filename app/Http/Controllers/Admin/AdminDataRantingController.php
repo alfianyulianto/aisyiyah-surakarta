@@ -26,14 +26,23 @@ class AdminDataRantingController extends Controller
   public function index()
   {
     // cek jika user seorang admin ranting
-    if (Auth::user()->kategori_user_id == 4) {
+    if (Auth::user()->kategori_user_id == 5) {
       return view('admin.ranting.tampilan_admin_ranting', [
         'title' => 'Data Ranting',
-        'ranting' => Ranting::where('id_ranting', Auth::user()->kategori_user_id)->get(),
-        'nama_ranting' => Ranting::where('id_ranting', Auth::user()->kategori_user_id)->first()->nama_ranting
+        'ranting' => Ranting::orderBy('cabang_id_cabang', 'asc')->get(),
+        'nama_ranting' => Ranting::where('id_ranting', Auth::user()->admin_at)->first()->nama_ranting
       ]);
     }
-    return view('admin.ranting.index', [
+    // cek jika user seorang admin cabang
+    if (Auth::user()->kategori_user_id == 4) {
+      return view('admin.ranting.tampilan_admin_cabang', [
+        'title' => 'Data Ranting',
+        'ranting' => Ranting::where('cabang_id_cabang', Auth::user()->admin_at)->get(),
+        'nama_cabang' => Cabang::where('id_cabang', Auth::user()->admin_at)->first()->nama_cabang
+      ]);
+    }
+
+    return view('admin.ranting.tampilan_super_admin_dan_admin_daerah', [
       'title' => 'Data Ranting',
       'ranting' => Ranting::orderBy('cabang_id_cabang',  'asc')->get()
     ]);
@@ -92,6 +101,9 @@ class AdminDataRantingController extends Controller
    */
   public function show(Ranting $ranting)
   {
+    if (Auth::user()->admin_at != $ranting->id_ranting) {
+      return abort(403);
+    }
     return view('admin.ranting.upload_sk_pimpinan', [
       'title' => 'Data Ranting',
       'periode' => Periode::orderBy('created_at', 'desc')->get(),
@@ -109,6 +121,9 @@ class AdminDataRantingController extends Controller
    */
   public function edit(Ranting $ranting)
   {
+    if (Auth::user()->admin_at != $ranting->id_ranting) {
+      return abort(403);
+    }
     return view('admin.ranting.edit', [
       'title' => 'Edit Data Ranting',
       'cabang' => Cabang::orderBy('nama_cabang', 'asc')->get(),

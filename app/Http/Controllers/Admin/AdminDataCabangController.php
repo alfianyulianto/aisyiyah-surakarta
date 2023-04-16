@@ -29,11 +29,11 @@ class AdminDataCabangController extends Controller
     if (Auth::user()->kategori_user_id == 4) {
       return view('admin.cabang.tampilan_admin_cabang', [
         'title' => 'Data Cabang',
-        'cabang' => Cabang::where('id_cabang', Auth::user()->kategori_user_id)->get(),
-        'nama_cabang' => Cabang::where('id_cabang', Auth::user()->kategori_user_id)->first()->nama_cabang
+        'cabang' => Cabang::where('id_cabang', Auth::user()->admin_at)->get(),
+        'nama_cabang' => Cabang::where('id_cabang', Auth::user()->admin_at)->first()->nama_cabang
       ]);
     }
-    return view('admin.cabang.index', [
+    return view('admin.cabang.tampilan_super_admin_dan_admin_daerah', [
       'title' => 'Data Cabang',
       'cabang' => Cabang::orderBy('created_at', 'desc')->get()
     ]);
@@ -91,6 +91,9 @@ class AdminDataCabangController extends Controller
    */
   public function show(Cabang $cabang)
   {
+    if (Auth::user()->adnim_at != $cabang->id_cabang) {
+      return abort(403);
+    }
     return view('admin.cabang.upload_sk_pimpinan', [
       'title' => 'Data Cabang',
       'periode' => Periode::orderBy('periode', 'desc')->get(),
@@ -108,6 +111,9 @@ class AdminDataCabangController extends Controller
    */
   public function edit(Cabang $cabang)
   {
+    if (Auth::user()->admin_at != $cabang->id_cabang) {
+      return abort(403);
+    }
     return view('admin.cabang.edit', [
       'title' => 'Edit Data Cabang',
       'cabang' => $cabang

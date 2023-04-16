@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Cabang {{ $nama_cabang }} Daerah Aisyiyah Kota Surakarta</h1>
+      <h1>Data Ranting Cabang {{ $nama_cabang }} Pimpinan Daerah Aisyiyah Kota Surakarta</h1>
     </div>
 
     <div class="section-body">
@@ -11,13 +11,13 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              @if (session('message_cabang'))
+              @if (session('message_ranting'))
                 <div class="alert alert-success alert-dismissible show fade">
                   <div class="alert-body">
                     <button class="close" data-dismiss="alert">
                       <span>&times;</span>
                     </button>
-                    {{ session('message_cabang') }}
+                    {{ session('message_ranting') }}
                   </div>
                 </div>
               @endif
@@ -28,26 +28,26 @@
                       <th class="text-center">
                         #
                       </th>
-                      <th class="text-center">Nama Cabang</th>
-                      <th class="text-center">Alamat Cabang</th>
+                      <th class="text-center">Nama Ranting</th>
+                      <th class="text-center">Alamat Ranting</th>
                       <th class="text-center">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($cabang as $c)
+                    @foreach ($ranting as $r)
                       <tr>
                         <td>
                           {{ $loop->iteration }}
                         </td>
-                        <td>{{ $c->nama_cabang }}</td>
-                        <td>{{ $c->alamat_cabang }}</td>
+                        <td>{{ $r->nama_ranting }}</td>
+                        <td>{{ $r->alamat_ranting }}</td>
                         <td>
-                          <a href="/data/cabang/{{ $c->id_cabang }}" class="btn btn-icon icon-left btn-info"><i
+                          <a href="/data/ranting/{{ $r->id_ranting }}" class="btn btn-icon icon-left btn-info"><i
                               class="fas fa-file-pdf"></i> sk pimpinan
                           </a>
-                          <a href="/data/cabang/{{ $c->id_cabang }}/edit" class="btn btn-icon icon-left btn-warning"><i
-                              class="far fa-edit"></i>
-                            Edit</a>
+                          <a href="/data/ranting/{{ $r->id_ranting }}/edit" class="btn btn-icon icon-left btn-warning"><i
+                              class="far fa-edit"></i> Edit
+                          </a>
                         </td>
                       </tr>
                     @endforeach
@@ -60,5 +60,5 @@
       </div>
     </div>
   </section>
-  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-cabang.js"></script>
+  <script src="{{ url('') }}/js/sweetalert/sweetalert-delete-ranting.js"></script>
 @endsection

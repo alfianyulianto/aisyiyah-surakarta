@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Data Cabang 'Aisyiyah Kota Surakarta</h1>
+      <h1>Data Cabang Pimpinan Daerah 'Aisyiyah Kota Surakarta</h1>
     </div>
 
     <div class="section-body">

@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Pimpinan Ranting {{ $nama_ranting }} Kota Surakarta</h1>
+      <h1>Ranting {{ $nama_ranting }} Pimpinan Daerah Aisyiyah Kota Surakarta</h1>
     </div>
 
     <div class="section-body">
@@ -22,7 +22,7 @@
                 </div>
               @endif
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x-ranting">
+                <table class="table table-bordered table-hover" id="scroll-x-cabang">
                   <thead>
                     <tr>
                       <th class="text-center">
@@ -30,8 +30,6 @@
                       </th>
                       <th class="text-center">Nama Ranting</th>
                       <th class="text-center">Alamat Ranting</th>
-                      <th class="text-center">SK Pimpinan Ranting</th>
-                      <th class="text-center">Nama Cabang</th>
                       <th class="text-center">Aksi</th>
                     </tr>
                   </thead>
@@ -44,14 +42,9 @@
                         <td>{{ $r->nama_ranting }}</td>
                         <td>{{ $r->alamat_ranting }}</td>
                         <td>
-                          <a href="/sk/pimpinan/ranting/{{ $r->id_ranting }}" class="text-decoration-none">
-                            <div class="border border-info btn-outline-info text-info rounded-pill text-center py-1">
-                              <i class="fas fa-download"></i> download
-                            </div>
+                          <a href="/data/ranting/{{ $r->id_ranting }}" class="btn btn-icon icon-left btn-info"><i
+                              class="fas fa-file-pdf"></i> sk pimpinan
                           </a>
-                        </td>
-                        <td>{{ $r->cabang->nama_cabang }}</td>
-                        <td>
                           <a href="/data/ranting/{{ $r->id_ranting }}/edit" class="btn btn-icon icon-left btn-warning"><i
                               class="far fa-edit"></i> Edit
                           </a>

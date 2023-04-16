@@ -77,10 +77,9 @@ $(document).ready(function () {
         scrollX: true,
         columnDefs: [
             { width: 5, targets: 0 },
-            { width: 125, targets: 1 },
+            { width: 155, targets: 1 },
             { width: 385, targets: 2 },
-            { width: 125, targets: 3 },
-            { width: 280, targets: 4 },
+            { width: 280, targets: 3 },
         ],
     });
     // tampilan data potensi kader {admin}

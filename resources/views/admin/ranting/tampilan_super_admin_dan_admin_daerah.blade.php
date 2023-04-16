@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Data Ranting 'Aisyiyah Kota Surakarta</h1>
+      <h1>Data Ranting {{ $nama_ranting }} Pimpinan Daerah 'Aisyiyah Kota Surakarta</h1>
     </div>
 
     <div class="section-body">
@@ -35,7 +35,7 @@
                   class="fas fa-user-plus"></i>
                 Tambah Ranting</a>
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="scroll-x-ranting">
+                <table class="table table-bordered table-hover" id="scroll-x-cabang">
                   <thead>
                     <tr>
                       <th class="text-center">
