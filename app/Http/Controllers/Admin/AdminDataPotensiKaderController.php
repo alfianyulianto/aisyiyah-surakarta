@@ -25,6 +25,30 @@ class AdminDataPotensiKaderController extends Controller
         }
       }
     }
+    // cek apakah user admin cabang
+    if (Auth::user()->kategori_user_id == 4) {
+      $kader_potensi = collect([]);
+      $kader = Kader::where('cabang_id_cabang', Auth::user()->admin_at)->orderBy('ranting_id_ranting', 'asc')->get();
+      foreach ($kader as $k) {
+        $cek_kader_potensi = KaderPotensi::where('kader_nik', $k->nik)->first();
+        if ($cek_kader_potensi) {
+          $kader_potensi->push($cek_kader_potensi);
+        }
+      }
+    }
+
+     // cek apakah user admin ranting
+    if (Auth::user()->kategori_user_id == 5) {
+      $kader_potensi = collect([]);
+      $kader = Kader::where('ranting_id_ranting', Auth::user()->admin_at)->orderBy('ranting_id_ranting', 'asc')->get();
+      foreach ($kader as $k) {
+        $cek_kader_potensi = KaderPotensi::where('kader_nik', $k->nik)->first();
+        if ($cek_kader_potensi) {
+          $kader_potensi->push($cek_kader_potensi);
+        }
+      }
+    }
+
     return view('admin.potensi.index', [
       'title' => 'Data Potensi Kader',
       'kader_potensi' => $kader_potensi
